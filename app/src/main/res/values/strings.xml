@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">srmmobile</string>
+    <string name="server_client_id">527371133243-9tr4gvi7vic5g3b3p5fr10dtrgs4kvgo.apps.googleusercontent.com</string>
+    <string name="auth_code_fmt">Auth Code: %s</string>
     <string name="navigation_drawer_open">Open Navigation Drawer</string>
     <string name="navigation_drawer_close">Close Navigation Drawer</string>
 </resources>

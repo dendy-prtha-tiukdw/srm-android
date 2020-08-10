@@ -29,6 +29,7 @@ import id.ukdw.srmmobile.model.User;
 import id.ukdw.srmmobile.model.network.Post;
 import id.ukdw.srmmobile.model.network.RetrofitBuilder;
 import id.ukdw.srmmobile.model.network.SrmApi;
+import id.ukdw.srmmobile.views.LoginActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,12 +42,13 @@ import static androidx.core.app.ActivityCompat.startActivityForResult;
  */
 
 public class LoginViewModel extends ViewModel {
-    private Context context;
     public static final String TAG = "ServerAuthCodeActivity";
     public MutableLiveData<String> AuthCode = new MutableLiveData<>();
     String authCode;
+    String serverClientId = "527371133243-9tr4gvi7vic5g3b3p5fr10dtrgs4kvgo.apps.googleusercontent.com";
+    private Context context;
     private MutableLiveData<User> userMutableLiveData;
-
+    private GoogleSignInClient mGoogleSignInClient;
 
 
     public MutableLiveData<User> getUser() {
@@ -57,7 +59,6 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void validateServerClientID() {
-        String serverClientId = "527371133243-9tr4gvi7vic5g3b3p5fr10dtrgs4kvgo.apps.googleusercontent.com";
         String suffix = ".apps.googleusercontent.com";
         if (!serverClientId.trim().endsWith( suffix )) {
             String message = "Invalid server client ID in strings.xml, must end with " + suffix;
@@ -65,19 +66,14 @@ public class LoginViewModel extends ViewModel {
         }
     }
 
-    public void getAuthCode(GoogleSignInClient signInIntent) {
-        Intent signInIntent1 = signInIntent.getSignInIntent();
-        prosesAuthCode( signInIntent1 );
-    }
 
-    public void prosesAuthCode(Intent signInIntent) {
-        Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent( signInIntent );
+    public void prosesAuthCode(Task<GoogleSignInAccount> Task) {
         try {
-            GoogleSignInAccount account = task.getResult( ApiException.class );
+            GoogleSignInAccount account = Task.getResult( ApiException.class );
             authCode = account.getServerAuthCode();
 
             System.out.println( authCode );
-            //LoginPost(authCode);
+
 
             // TODO(developer): send code to server and exchange for access/refresh/ID tokens
         } catch (ApiException e) {
@@ -96,26 +92,20 @@ public class LoginViewModel extends ViewModel {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
                 if (!response.isSuccessful()) {
-                    System.out.println(response.code());
+                    System.out.println( response.code() );
                     return;
                 }
-                System.out.println(response.code());
+                System.out.println( response.code() );
                 List<Post> posts = (List<Post>) response.body();
-//                for (Post post : posts) {
-//                    String content = "";
-//                    content += "ID: " + post.getId() + "\n";
-//
-//                }
+
             }
 
             @Override
             public void onFailure(Call<Post> call, Throwable t) {
-                System.out.println(t.getMessage());
+                System.out.println( t.getMessage() );
             }
         } );
     }
-
-
 
 
 }

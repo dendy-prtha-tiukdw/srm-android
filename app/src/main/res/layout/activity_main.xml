@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <variable
-            name="LoginViewModel"
-            type="id.ukdw.srmmobile.viewmodels.LoginViewModel" />
-    </data>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,8 +15,7 @@
             android:layout_height="wrap_content"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:padding="8dp"
-            android:text="@={LoginViewModel.EmailAddress}" />
+            android:padding="8dp"/>
 
         <EditText
             android:id="@+id/inPassword"
@@ -30,15 +23,13 @@
             android:layout_height="wrap_content"
             android:hint="Password"
             android:inputType="textPassword"
-            android:padding="8dp"
-            android:text="@={LoginViewModel.Password}" />
+            android:padding="8dp"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:onClick="@{(v) -> LoginViewModel.onClick(v)}"
-            android:text="LOGIN" />
+            android:text="LOGIN"/>
 
         <TextView
             android:id="@+id/lblEmailAnswer"

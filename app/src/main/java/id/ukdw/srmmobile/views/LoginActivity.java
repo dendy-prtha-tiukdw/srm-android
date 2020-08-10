@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -17,14 +18,15 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.Scope;
 
 import id.ukdw.srmmobile.R;
-import id.ukdw.srmmobile.databinding.ActivityMainBinding;
+import id.ukdw.srmmobile.databinding.ActivityLoginBinding;
 import id.ukdw.srmmobile.model.User;
 import id.ukdw.srmmobile.viewmodels.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {
     SignInButton SignIn;
     private LoginViewModel loginViewModel;
-    private ActivityMainBinding binding;
+    private ActivityLoginBinding binding;
+    private static final int RC_GET_AUTH_CODE = 9003;
     private GoogleSignInClient mGoogleSignInClient;
 
     @Override
@@ -39,6 +41,8 @@ public class LoginActivity extends AppCompatActivity {
 
         loginViewModel.validateServerClientID();
 
+
+
         String serverClientId = getString( R.string.server_client_id );
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder( GoogleSignInOptions.DEFAULT_SIGN_IN )
                 .requestScopes( new Scope( Scopes.DRIVE_APPFOLDER ) )
@@ -46,14 +50,20 @@ public class LoginActivity extends AppCompatActivity {
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient( this, gso );
+        //final Intent signInIntent = mGoogleSignInClient.getSignInIntent();
 
 
         SignIn.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginViewModel.getAuthCode();
+                loginViewModel.getAuthCode(mGoogleSignInClient);
             }
         } );
+
+
+
+
+//        loginViewModel.getUser().observe(  );
 
 
     }

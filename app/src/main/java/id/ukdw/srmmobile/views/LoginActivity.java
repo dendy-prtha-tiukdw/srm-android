@@ -7,14 +7,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -22,13 +15,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.tasks.Task;
 
 import id.ukdw.srmmobile.R;
 import id.ukdw.srmmobile.databinding.ActivityLoginBinding;
-import id.ukdw.srmmobile.model.User;
 import id.ukdw.srmmobile.viewmodels.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {
@@ -43,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         loginViewModel = ViewModelProviders.of( this ).get( LoginViewModel.class );
-        binding = DataBindingUtil.setContentView( LoginActivity.this, R.layout.activity_login );
+        binding = DataBindingUtil.setContentView( LoginActivity.this, R.layout.activity_login);
         binding.setLifecycleOwner( this );
         binding.setLoginViewModel( loginViewModel );
 
@@ -51,8 +42,6 @@ public class LoginActivity extends AppCompatActivity {
         SignUp = findViewById(R.id.sign_up_button);
 
         loginViewModel.validateServerClientID();
-
-
 
         String serverClientId = getString( R.string.server_client_id );
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder( GoogleSignInOptions.DEFAULT_SIGN_IN )
@@ -70,10 +59,6 @@ public class LoginActivity extends AppCompatActivity {
                 Intent signInIntent1 = mGoogleSignInClient.getSignInIntent();
                 startActivityForResult( signInIntent1, RC_GET_AUTH_CODE );
 
-                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                startActivity(intent);
-
-
             }
         } );
 
@@ -83,10 +68,8 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(intent);
 
-
             }
         } );
-
     }
 
     @Override

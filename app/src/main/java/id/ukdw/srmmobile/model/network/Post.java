@@ -7,4 +7,5 @@ public class Post {
     public Post(String authCode) {
         this.authCode = authCode;
     }
+
 }

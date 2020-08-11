@@ -79,6 +79,8 @@ public class LoginActivity extends AppCompatActivity {
             // [START get_auth_code]
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent( data );
             loginViewModel.prosesAuthCode(task);
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            startActivity(intent);
             // [END get_auth_code]
         }
     }

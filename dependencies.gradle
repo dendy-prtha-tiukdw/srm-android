@@ -1,0 +1,87 @@
+ext {
+    //Android
+    androidMinSdkVersion = 24
+    androidTargetSdkVersion = 29
+    androidCompileSdkVersion = 29
+
+    //androidx lib
+    appcompatXVersion = '1.1.0'
+    constraintXLayout = "1.1.3"
+
+    //Libraries
+    materialDesignVersion = "1.2.0"
+    androidArchLifecycleVersion = '1.1.1'
+    googlePlayAuth = '18.1.0'
+    retrofit = "2.4.0"
+    googleApiClient = "1.30.5"
+    googleApiServicePeople = "v1-rev99-1.22.0"
+    customBtnGSignIn = "1.1.0"
+    lombok = "1.18.12"
+    glideVersion = "4.11.0"
+    circleImageVersion = "2.2.0"
+
+    //Testing
+    jUnitVersion = '4.12'
+    junitTestExtVersion = '1.1.1'
+    espressoVersion = '3.2.0'
+    testRuleVersion = '1.2.0'
+    uiAutomatorVersion = '2.2.0'
+
+    def androidxLibs = [
+            appCompat        : [group: 'androidx.appcompat', name: 'appcompat', version: appcompatXVersion],
+            androidXAnnotation        : [group: 'androidx.annotation', name: 'annotation', version: appcompatXVersion],
+            constraintXLayout        : [group: 'androidx.constraintlayout', name: 'constraintlayout', version: constraintXLayout],
+    ]
+
+    def libs = [
+            materialDesign     : [group: 'com.google.android.material', name: 'material', version: materialDesignVersion],
+            googlePlayAuth     : [group: 'com.google.android.gms', name: 'play-services-auth', version: googlePlayAuth],
+            retrofit           : [group: 'com.squareup.retrofit2', name: 'retrofit', version: retrofit],
+            retrofitConvGson   : [group: 'com.squareup.retrofit2', name: 'converter-gson', version: retrofit],
+            customBtnGSignIn   : [group: 'com.shobhitpuri.custombuttons', name: 'google-signin', version: customBtnGSignIn],
+            googleApiClient   : [group: 'com.google.api-client', name: 'google-api-client', version: googleApiClient],
+            googleApiClientAndro   : [group: 'com.google.api-client', name: 'google-api-client-android', version: googleApiClient],
+            googleApiServicePeople   : [group: 'com.google.apis', name: 'google-api-services-people', version: googleApiServicePeople],
+            androidArchExtension      : [group: 'android.arch.lifecycle', name: 'extensions', version: androidArchLifecycleVersion],
+            androidArchCompiler: [group: 'android.arch.lifecycle', name: 'compiler', version: androidArchLifecycleVersion],
+            lombokCompiler     : [group: 'org.projectlombok', name: 'lombok', version: lombok],
+            lombokCompile     : [group: 'org.projectlombok', name: 'lombok', version: lombok],
+            circleImage       : [group: 'de.hdodenhof', name: 'circleimageview', version: circleImageVersion],
+            glide             : [group: 'com.github.bumptech.glide', name: 'glide', version: glideVersion],
+            glideCompiler     : [group: 'com.github.bumptech.glide', name: 'compiler', version: glideVersion],
+    ]
+
+    def testLibs = [
+            junit       : [group: 'junit', name: 'junit', version: jUnitVersion],
+            junitTestExt: [group: 'androidx.test.ext', name: 'junit', version: junitTestExtVersion],
+            espressoCore: [group: 'androidx.test.espresso', name: 'espresso-core', version: espressoVersion],
+            testRule    : [group: 'androidx.test', name: 'rules', version: testRuleVersion],
+            uiAutomator : [group: 'androidx.test.uiautomator', name: 'uiautomator', version: uiAutomatorVersion]
+    ]
+
+    appDependencies = [
+            [configuration: "implementation", dependency: androidxLibs.appCompat],
+            [configuration: "implementation", dependency: androidxLibs.constraintXLayout],
+            [configuration: "implementation", dependency: libs.googlePlayAuth],
+            [configuration: "implementation", dependency: libs.androidArchExtension],
+            [configuration: "implementation", dependency: libs.materialDesign],
+            [configuration: "implementation", dependency: libs.retrofit],
+            [configuration: "implementation", dependency: libs.retrofitConvGson],
+            [configuration: "implementation", dependency: libs.customBtnGSignIn],
+            [configuration: "implementation", dependency: libs.googleApiClient],
+            [configuration: "implementation", dependency: libs.googleApiClientAndro],
+            [configuration: "implementation", dependency: libs.googleApiServicePeople],
+            [configuration: "implementation", dependency: libs.glide],
+            [configuration: "implementation", dependency: libs.circleImage],
+            [configuration: "compileOnly", dependency: libs.lombokCompile],
+            [configuration: "annotationProcessor", dependency: libs.lombokCompiler],
+            [configuration: "annotationProcessor", dependency: libs.androidArchCompiler],
+            [configuration: "annotationProcessor", dependency: libs.glideCompiler],
+            [configuration: "testImplementation", dependency: testLibs.junit],
+            [configuration: "androidTestImplementation", dependency: testLibs.espressoCore],
+            [configuration: "androidTestImplementation", dependency: testLibs.junitTestExt],
+            [configuration: "androidTestImplementation", dependency: testLibs.testRule],
+            [configuration: "androidTestImplementation", dependency: testLibs.uiAutomator],
+            [configuration: "androidTestImplementation", dependency: androidxLibs.androidXAnnotation],
+    ]
+}

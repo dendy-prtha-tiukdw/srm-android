@@ -43,7 +43,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 .requestServerAuthCode( serverClientId )
                 .requestEmail()
                 .build();
-        mGoogleSignInClient = GoogleSignIn.getClient( this, gso );
+        mGoogleSignInClient = GoogleSignIn.getClient( this, gso);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -92,6 +92,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.appbar_menu,menu);
+        return true;
+    }
+
     private void signOut() {
         mGoogleSignInClient.signOut()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
@@ -114,19 +121,5 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 });
     }
 
-    @Override
-    public void onBackPressed() {
-        if(drawer.isDrawerOpen(GravityCompat.START)){
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.drawer_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 }

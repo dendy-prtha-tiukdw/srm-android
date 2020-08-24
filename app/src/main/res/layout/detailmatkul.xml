@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFF"
+    android:orientation="vertical"
+    android:id="@+id/detailmatakuliah">
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_gravity="end"
+        android:background="#000"/>
+
+    <ImageView
+        android:id="@+id/prevPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginTop="-250dp"
+        android:layout_marginBottom="45dp"
+        android:paddingLeft="30dp"
+        android:src="@drawable/ic_back"/>
+
+    <TextView
+        android:id="@+id/judulKelas"
+        android:layout_width="339dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="10dp"
+        android:paddingLeft="50dp"
+        android:text="Administrasi Sistem"
+        android:textColor="#FFF"
+        android:textSize="40dp" />
+
+    <TextView
+        android:id="@+id/Deskripsi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="30dp"
+        android:paddingLeft="30dp"
+        android:text="Deskripsi"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:id="@+id/isiDeskripsi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:textSize="17sp"
+        android:text="Pada matakuliah ini, Mahasiswa akan diajarkan mengenai Administrasi Sistem."/>
+
+
+</LinearLayout>

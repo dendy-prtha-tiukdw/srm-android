@@ -4,4 +4,13 @@
     <string name="auth_code_fmt">Auth Code: %s</string>
     <string name="navigation_drawer_open">Open Navigation Drawer</string>
     <string name="navigation_drawer_close">Close Navigation Drawer</string>
+    <string name="mahasiswa">Mahasiswa</string>
+    <string-array name="spinnerItems">
+        <item>Teknik Komputer (A)</item>
+        <item>Teknik Komputer (B)</item>
+        <item>Teknik Komputer (C)</item>
+        <item>Algoritma Pemrograman (A)</item>
+        <item>Algoritma Pemrograman (B)</item>
+        <item>Algoritma Pemrograman (C)</item>
+    </string-array>
 </resources>

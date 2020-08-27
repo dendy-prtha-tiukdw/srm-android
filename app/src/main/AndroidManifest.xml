@@ -28,14 +28,24 @@
         </activity>
         <activity
             android:name=".views.HomeActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
         <activity
             android:name=".views.SignUpActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        </activity>
 
         <activity
             android:name=".views.detailKelas_activity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".views.TambahPengumuman"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustPan">
+
+        </activity>
     </application>
+
 
 </manifest>

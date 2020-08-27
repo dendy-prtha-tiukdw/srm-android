@@ -7,7 +7,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitBuilder {
-    private static final String BASE_URL = "isi disina url API";
+    private static final String BASE_URL = "https://apps.dw.fti.ukdw.ac.id/srm/";
 
     private static Retrofit getRetrofitInstance() {
         Gson gson = new GsonBuilder().setLenient().create();

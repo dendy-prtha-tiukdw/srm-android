@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="SignUpViewModel"
+            type="id.ukdw.srmmobile.viewmodels.SignUpViewModel" />
+    </data>
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/topwave"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="107dp"
         android:background="@drawable/group_9" />
 
     <ImageView
@@ -18,40 +27,55 @@
         android:layout_gravity="center"
         android:background="@drawable/logo" />
 
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/radioGroup">
+        <RadioButton
+            android:id="@+id/radio_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radioSatu" />
+        <RadioButton
+            android:id="@+id/radio_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radioDua" />
+        <RadioButton
+            android:id="@+id/radio_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radioTiga" />
+    </RadioGroup>
+
     <TextView
         android:id="@+id/LogoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="SRM"
+        android:text="@string/SRM"
         android:textSize="35sp"/>
 
 
     <EditText
         android:id="@+id/editTextNIM"
-        android:layout_width="285dp"
+        android:layout_width="348dp"
         android:layout_height="48dp"
+        android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="NIM"
-        android:importantForAutofill="no"
-        android:inputType="number"
-        android:layout_gravity="center"/>
+        android:hint="@string/hint_edittext_signup"
+        android:importantForAutofill="no" />
 
-    <Button
+    <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_up_button"
-        android:text="Sign Up"
-        android:layout_width="100dp"
-        android:layout_height="55dp"
+        android:layout_width="152dp"
+        android:layout_height="74dp"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:visibility="visible" />
 
 
-    <ImageView
-        android:id="@+id/botwave"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/group_8" />
-
 </LinearLayout>
+</layout>

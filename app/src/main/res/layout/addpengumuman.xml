@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:scrollbars="vertical"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    tools:Context=".TambahPengumuman"
+    android:background="@drawable/gradient_add_pengumuman">
+
+    <ImageView
+        android:id="@+id/prevPage"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="45dp"
+        android:paddingLeft="20dp"
+        android:src="@drawable/ic_back" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tambah Pengumuman"
+        android:textSize="25dp"
+        android:textColor="#FFF"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="-80dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Judul Pengumuman"
+        android:textSize="20sp"
+        android:textColor="#FFF"
+        android:layout_marginLeft="34dp"
+        android:layout_marginTop="40dp"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/editTextJudul"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="1dp"
+        android:ems="10"
+        android:hint="Judul Pengumuman"
+        android:textColor="#FFF"
+        android:textColorHint="#FFF"
+        android:imeOptions="actionDone"
+        android:importantForAutofill="no"
+        android:backgroundTint="#FFF"
+        android:inputType="text"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pilih Kelas"
+        android:textSize="20sp"
+        android:layout_marginLeft="34dp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textColor="#FFF"/>
+
+    <Spinner
+        android:id="@+id/pilihKelas"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/border_spinner"
+        android:entries="@array/spinnerItems"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Deskripsi Pengumuman"
+        android:textSize="20sp"
+        android:layout_marginLeft="34dp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textColor="#FFF"/>
+
+    <EditText
+        android:id="@+id/editTextDeskripsi"
+        android:layout_width="300dp"
+        android:layout_height="152dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/border_edittext"
+        android:ems="10"
+        android:hint="Deskripsi Pengumuman"
+        android:textSize="15sp"
+        android:textColorHint="#FFF"
+        android:gravity="top|left"
+        android:imeOptions="actionDone"
+        android:importantForAutofill="no"
+        android:inputType="textMultiLine"
+        android:paddingLeft="13dp"
+        android:paddingTop="10dp"
+        android:textColor="#FFF"
+        android:scrollbars="vertical"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center"
+        android:text="TAMBAH PENGUMUMAN" />
+
+
+
+</LinearLayout>
+

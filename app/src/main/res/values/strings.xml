@@ -14,4 +14,13 @@
     <string name="radioSatu">Mahasiswa</string>
     <string name="radioDua">Dosen</string>
     <string name="radioTiga">Staff</string>
+    <string name="mahasiswa">Mahasiswa</string>
+    <string-array name="spinnerItems">
+        <item>Teknik Komputer (A)</item>
+        <item>Teknik Komputer (B)</item>
+        <item>Teknik Komputer (C)</item>
+        <item>Algoritma Pemrograman (A)</item>
+        <item>Algoritma Pemrograman (B)</item>
+        <item>Algoritma Pemrograman (C)</item>
+    </string-array>
 </resources>

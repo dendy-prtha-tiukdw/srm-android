@@ -4,4 +4,14 @@
     <string name="auth_code_fmt">Auth Code: %s</string>
     <string name="navigation_drawer_open">Open Navigation Drawer</string>
     <string name="navigation_drawer_close">Close Navigation Drawer</string>
+    <string name="hint_edittext_signup">Masukkan NIM atau Nomor Kepegawaian</string>
+    <string name="SRM">SRM</string>
+    <string name="suffix">.apps.googleusercontent.com</string>
+    <string name="provider">google</string>
+    <string name="message">Invalid server client ID in strings.xml, must end with </string>
+    <string name="gagal">gagal</string>
+    <string name="berhasil">berhasil</string>
+    <string name="radioSatu">Mahasiswa</string>
+    <string name="radioDua">Dosen</string>
+    <string name="radioTiga">Staff</string>
 </resources>

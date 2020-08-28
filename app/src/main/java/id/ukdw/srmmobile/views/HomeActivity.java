@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +32,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout drawer;
     private GoogleSignInClient mGoogleSignInClient;
+    private String role;
+    private String mahasiswa;
+    private String staff;
+    private String dosen;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,7 +48,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 .requestServerAuthCode( serverClientId )
                 .requestEmail()
                 .build();
-        mGoogleSignInClient = GoogleSignIn.getClient( this, gso);
+        mGoogleSignInClient = GoogleSignIn.getClient( this, gso );
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -62,12 +67,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     new PengumumanFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_pengumuman);
         }
+
+        mahasiswa = getString(R.string.mahasiswa);
     }
 
+    //sidebar
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()){
             case R.id.nav_pengumuman:
+                checkRole();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new PengumumanFragment()).commit();
                 break;
@@ -92,11 +101,23 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    //Customize Icon Appbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.appbar_menu,menu);
+        inflater.inflate(R.menu.appbar_menu, menu);
         return true;
+    }
+
+    //Onclick on each icon Appbar
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.addPengumuman:
+                Intent intent = new Intent(HomeActivity.this, TambahPengumuman.class);
+                startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void signOut() {
@@ -121,5 +142,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 });
     }
 
-
+    private void checkRole(){
+        if(role != mahasiswa){
+            findViewById(R.id.addPengumuman).setVisibility(View.VISIBLE);
+        } else {
+            findViewById(R.id.addPengumuman).setVisibility(View.GONE);
+        }
+    }
 }

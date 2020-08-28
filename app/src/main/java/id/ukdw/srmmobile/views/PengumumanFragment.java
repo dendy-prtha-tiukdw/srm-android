@@ -12,44 +12,55 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import id.ukdw.srmmobile.R;
 
 public class PengumumanFragment extends Fragment {
     View v;
-
-    public PengumumanFragment() {
-    }
-
+//    PengumumanAdapter pengumumanAdapter;
     RecyclerView recyclerView;
-    List<RecyclerViewModel> itemList;
+    RecyclerView.Adapter mAdapter;
+    ArrayList<RecyclerViewModelPengumuman> itemList;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_pengumuman, container, false);
-
         recyclerView = v.findViewById(R.id.recyclerPengumuman);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        PengumumanAdapter pengumumanAdapter = new PengumumanAdapter(getContext(),initData());
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(pengumumanAdapter);
 
-        recyclerView.setAdapter(new PengumumanAdapter(initData()));
+        pengumumanAdapter.setOnItemClickListener(new PengumumanAdapter.OnItemListener() {
+            @Override
+            public void onItemClick(int position) {
+
+            }
+
+            @Override
+            public void onDeleteClick(int position) {
+                removeItem(position);
+            }
+        });
 
         return v;
     }
 
-    private List<RecyclerViewModel> initData(){
+    private ArrayList<RecyclerViewModelPengumuman> initData(){
         itemList=new ArrayList<>();
-        itemList.add(new RecyclerViewModel(R.drawable.ic_news_admin, "Pengumuman"));
-        itemList.add(new RecyclerViewModel(R.drawable.ic_news_admin, "Pengumuman"));
-        itemList.add(new RecyclerViewModel(R.drawable.ic_news_admin, "Pengumuman"));
-        itemList.add(new RecyclerViewModel(R.drawable.ic_news_admin, "Pengumuman"));
-        itemList.add(new RecyclerViewModel(R.drawable.ic_news_admin, "Pengumuman"));
-        itemList.add(new RecyclerViewModel(R.drawable.ic_news_admin, "Pengumuman"));
-        itemList.add(new RecyclerViewModel(R.drawable.ic_news_admin, "Pengumuman"));
+        itemList.add(new RecyclerViewModelPengumuman( "Tugas Adsis Minggu 11", "12 September 2020"));
+        itemList.add(new RecyclerViewModelPengumuman( "Tugas Adsis Minggu 11", "12 September 2020"));
+        itemList.add(new RecyclerViewModelPengumuman( "Tugas Adsis Minggu 11", "12 September 2020"));
+        itemList.add(new RecyclerViewModelPengumuman( "Tugas Adsis Minggu 11", "12 September 2020"));
+        itemList.add(new RecyclerViewModelPengumuman( "Tugas Adsis Minggu 11", "12 September 2020"));
+        itemList.add(new RecyclerViewModelPengumuman( "Tugas Adsis Minggu 11", "12 September 2020"));
 
         return itemList;
     }
 
+    public void removeItem(int position){
+        itemList.remove(position);
+        mAdapter.notifyItemRemoved(position);
+    }
 }

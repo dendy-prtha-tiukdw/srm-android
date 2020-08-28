@@ -60,51 +60,52 @@ public class LoginViewModel extends ViewModel {
 
     public void validateServerClientID() {
         String suffix = ".apps.googleusercontent.com";
-        if (!serverClientId.trim().endsWith( suffix )) {
+        if (!serverClientId.trim().endsWith(suffix)) {
             String message = "Invalid server client ID in strings.xml, must end with " + suffix;
-            Log.w( TAG, message );
+            Log.w(TAG, message);
         }
     }
 
 
     public void prosesAuthCode(Task<GoogleSignInAccount> Task) {
         try {
-            GoogleSignInAccount account = Task.getResult( ApiException.class );
+            GoogleSignInAccount account = Task.getResult(ApiException.class);
             authCode = account.getServerAuthCode();
 
-            System.out.println( authCode );
+            System.out.println(authCode);
 
 
             // TODO(developer): send code to server and exchange for access/refresh/ID tokens
         } catch (ApiException e) {
-            Log.w( TAG, "Sign-in failed", e );
+            Log.w(TAG, "Sign-in failed", e);
 
         }
 
     }
 
     private void LoginPost(String authCode) {
-        Post post = new Post( authCode );
+        /*
+        Post post = new Post(authCode);
         SrmApi srmApi = RetrofitBuilder.getAPIService();
-        Call<Post> loginresponse = srmApi.LoginPost( post );
-        loginresponse.enqueue( new Callback<Post>() {
+        Call<Post> loginresponse = srmApi.LoginPost(post);
+        loginresponse.enqueue(new Callback<Post>() {
 
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
                 if (!response.isSuccessful()) {
-                    System.out.println( response.code() );
+                    System.out.println(response.code());
                     return;
                 }
-                System.out.println( response.code() );
+                System.out.println(response.code());
                 List<Post> posts = (List<Post>) response.body();
 
             }
 
             @Override
             public void onFailure(Call<Post> call, Throwable t) {
-                System.out.println( t.getMessage() );
+                System.out.println(t.getMessage());
             }
-        } );
+        });*/
     }
 
 

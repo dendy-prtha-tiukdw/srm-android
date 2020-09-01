@@ -90,7 +90,8 @@ public class AppModule {
     @Singleton
     GoogleSignInOptions provideGoogleSignInClient() {
         return new GoogleSignInOptions.Builder( GoogleSignInOptions.DEFAULT_SIGN_IN )
-                .requestScopes( new Scope( Scopes.DRIVE_APPFOLDER ) )
+                .requestScopes( new Scope( Scopes.DRIVE_APPFOLDER ) ,
+                        new Scope(AppConstants.SCOPE_GOOGLE_CALENDAR))
                 .requestServerAuthCode( AppConstants.GOOGLE_SERVER_CLIENT_ID )
                 .requestEmail()
                 .build();

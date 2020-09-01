@@ -32,6 +32,8 @@ public final class AppConstants {
 
     public static final String GOOGLE_SERVER_CLIENT_ID = "527371133243-9tr4gvi7vic5g3b3p5fr10dtrgs4kvgo.apps.googleusercontent.com";
 
+    public static final String SCOPE_GOOGLE_CALENDAR = "https://www.googleapis.com/auth/calendar";
+
     public static final String BASE_URL = "https://apps.dw.fti.ukdw.ac.id/srm/";
 
     private AppConstants() {

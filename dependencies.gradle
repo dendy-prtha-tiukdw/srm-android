@@ -19,6 +19,10 @@ ext {
     lombok = "1.18.12"
     glideVersion = "4.11.0"
     circleImageVersion = "2.2.0"
+    // dependency injection
+    dagger2Version = '2.16'
+    rxjava2Version = '2.1.9'
+    rxandroidVersion = '2.0.2'
 
     //Testing
     jUnitVersion = '4.12'
@@ -48,7 +52,11 @@ ext {
             lombokCompile     : [group: 'org.projectlombok', name: 'lombok', version: lombok],
             circleImage       : [group: 'de.hdodenhof', name: 'circleimageview', version: circleImageVersion],
             glide             : [group: 'com.github.bumptech.glide', name: 'glide', version: glideVersion],
+            dagger2           : [group: 'com.google.dagger', name: 'dagger', version: dagger2Version],
+            rxjava2           : [group: 'io.reactivex.rxjava2', name: 'rxjava', version: rxjava2Version],
+            rxjava2android    : [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: rxandroidVersion],
             glideCompiler     : [group: 'com.github.bumptech.glide', name: 'compiler', version: glideVersion],
+            dagger2Compiler   : [group: 'com.google.dagger', name: 'dagger-compiler', version: dagger2Version],
     ]
 
     def testLibs = [
@@ -73,10 +81,14 @@ ext {
             [configuration: "implementation", dependency: libs.googleApiServicePeople],
             [configuration: "implementation", dependency: libs.glide],
             [configuration: "implementation", dependency: libs.circleImage],
+            [configuration: "implementation", dependency: libs.dagger2],
+            [configuration: "implementation", dependency: libs.rxjava2],
+            [configuration: "implementation", dependency: libs.rxjava2android],
             [configuration: "compileOnly", dependency: libs.lombokCompile],
             [configuration: "annotationProcessor", dependency: libs.lombokCompiler],
             [configuration: "annotationProcessor", dependency: libs.androidArchCompiler],
             [configuration: "annotationProcessor", dependency: libs.glideCompiler],
+            [configuration: "annotationProcessor", dependency: libs.dagger2Compiler],
             [configuration: "testImplementation", dependency: testLibs.junit],
             [configuration: "androidTestImplementation", dependency: testLibs.espressoCore],
             [configuration: "androidTestImplementation", dependency: testLibs.junitTestExt],

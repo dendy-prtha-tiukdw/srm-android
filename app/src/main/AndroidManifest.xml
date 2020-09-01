@@ -2,9 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="id.ukdw.srmmobile">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".SrmMobileApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".views.LoginActivity"
+            android:name=".ui.login.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,25 +24,25 @@
         </activity>
 
         <activity
-            android:name=".views.SilentSignInActivity"
+            android:name=".ui.SilentSignInActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
         <activity
-            android:name=".views.HomeActivity"
+            android:name=".ui.HomeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
-            android:name=".views.SignUpActivity"
+            android:name=".ui.SignUpActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         </activity>
 
         <activity
-            android:name=".views.detailKelas_activity"
+            android:name=".ui.detailKelas_activity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
-            android:name=".views.TambahPengumuman"
+            android:name=".ui.TambahPengumuman"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="adjustPan">
 

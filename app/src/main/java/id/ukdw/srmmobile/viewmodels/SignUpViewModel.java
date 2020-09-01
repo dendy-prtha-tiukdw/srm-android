@@ -12,11 +12,10 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
 import id.ukdw.srmmobile.R;
-import id.ukdw.srmmobile.model.User;
-import id.ukdw.srmmobile.model.network.Post;
-import id.ukdw.srmmobile.model.network.ResourceProvider;
-import id.ukdw.srmmobile.model.network.RetrofitBuilder;
-import id.ukdw.srmmobile.model.network.SrmApi;
+import id.ukdw.srmmobile.data.model.api.Post;
+import id.ukdw.srmmobile.data.model.network.ResourceProvider;
+import id.ukdw.srmmobile.data.model.network.RetrofitBuilder;
+import id.ukdw.srmmobile.data.remote.SrmApi;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,7 +29,7 @@ public class SignUpViewModel extends ViewModel {
     String authCode;
     public Context context ;
 
-    private MutableLiveData<User> userMutableLiveData;
+    //private MutableLiveData<User> userMutableLiveData;
     private GoogleSignInClient mGoogleSignInClient;
     String nomorInduk;
     String role;
@@ -42,12 +41,13 @@ public class SignUpViewModel extends ViewModel {
 
     }
 
+    /*
     public MutableLiveData<User> getUser() {
         if (userMutableLiveData == null) {
             userMutableLiveData = new MutableLiveData<>();
         }
         return userMutableLiveData;
-    }
+    }*/
 
     public MutableLiveData<Boolean> getStatus() {
         if(status == null) {

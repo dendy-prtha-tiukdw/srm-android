@@ -11,7 +11,8 @@
         android:layout_marginStart="35dp"
         android:layout_marginEnd="35dp"
         android:id="@+id/cardPengumuman"
-        android:layout_marginBottom="30dp">
+        android:layout_marginBottom="30dp"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"

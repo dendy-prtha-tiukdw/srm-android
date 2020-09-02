@@ -13,22 +13,24 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import id.ukdw.srmmobile.R;
 
-public class KelasFragment extends Fragment  {
+public class KelasFragment extends Fragment {
     View v;
 
     public KelasFragment() {
     }
 
     RecyclerView recyclerView;
-    ArrayList <RecyclerViewModelKelas> itemList;
+    ArrayList<RecyclerViewModelKelas> itemList;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_kelas, container, false);
+
         recyclerView = v.findViewById(R.id.recyclerKelas);
         recyclerView.setHasFixedSize(true);
         KelasAdapter kelasAdapter = new KelasAdapter(getContext(),initData());
@@ -45,6 +47,7 @@ public class KelasFragment extends Fragment  {
                 startActivity( intent );
             }
         } );
+
         return v;
     }
 
@@ -59,7 +62,5 @@ public class KelasFragment extends Fragment  {
 
         return itemList;
     }
-
-
 
 }

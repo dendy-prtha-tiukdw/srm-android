@@ -12,13 +12,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
 import id.ukdw.srmmobile.R;
-import id.ukdw.srmmobile.data.model.api.Post;
 import id.ukdw.srmmobile.data.model.network.ResourceProvider;
-import id.ukdw.srmmobile.data.model.network.RetrofitBuilder;
-import id.ukdw.srmmobile.data.remote.SrmApi;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class SignUpViewModel extends ViewModel {
 
@@ -89,11 +83,12 @@ public class SignUpViewModel extends ViewModel {
     }
 
     private void signUpPost(String authCode, String nomorInduk, String role) {
-
+ /*
         Post post = new Post( provider,authCode,nomorInduk,role );
+
         SrmApi srmApi = RetrofitBuilder.getAPIService();
         System.out.println("POST : " + post);
-        Call<Post> signUp = srmApi.SignUpPost( post );
+        Call<Post> signUp = srmApi.signUpPost( post );
         signUp.enqueue( new Callback<Post>() {
 
             @Override
@@ -118,7 +113,7 @@ public class SignUpViewModel extends ViewModel {
                 System.out.println( t.getMessage() );
             }
 
-        } );
+        } );*/
 
     }
 }

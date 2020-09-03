@@ -36,6 +36,10 @@ public final class AppConstants {
 
     public static final String BASE_URL = "https://apps.dw.fti.ukdw.ac.id/srm/";
 
+    public static final int RETROFIT_CONNECTION_TIMEOUT = 10;
+
+    public static final int RETROFIT_READ_TIMEOUT = 30;
+
     private AppConstants() {
         // This utility class is not publicly instantiable
     }

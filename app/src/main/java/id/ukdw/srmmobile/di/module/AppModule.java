@@ -18,6 +18,8 @@ import id.ukdw.srmmobile.data.local.db.AppDbHelper;
 import id.ukdw.srmmobile.data.local.db.DbHelper;
 import id.ukdw.srmmobile.data.local.prefs.AppPreferencesHelper;
 import id.ukdw.srmmobile.data.local.prefs.PreferencesHelper;
+import id.ukdw.srmmobile.data.remote.ApiHelper;
+import id.ukdw.srmmobile.data.remote.AppRetrofitBuilder;
 import id.ukdw.srmmobile.di.DatabaseInfo;
 import id.ukdw.srmmobile.di.PreferenceInfo;
 import id.ukdw.srmmobile.utils.AppConstants;
@@ -47,7 +49,7 @@ public class AppModule {
     @Singleton
     AppDatabase provideAppDatabase(@DatabaseInfo String dbName, Context context) {
         //return Room.databaseBuilder(context, AppDatabase.class, dbName).fallbackToDestructiveMigration()
-          //      .build();
+        //      .build();
         return new AppDatabase();
     }
 
@@ -82,6 +84,12 @@ public class AppModule {
     }
 
     @Provides
+    @Singleton
+    ApiHelper provideRetrofitBuilder(AppRetrofitBuilder retrofitBuilder) {
+        return retrofitBuilder;
+    }
+
+    @Provides
     SchedulerProvider provideSchedulerProvider() {
         return new AppSchedulerProvider();
     }
@@ -89,11 +97,12 @@ public class AppModule {
     @Provides
     @Singleton
     GoogleSignInOptions provideGoogleSignInClient() {
-        return new GoogleSignInOptions.Builder( GoogleSignInOptions.DEFAULT_SIGN_IN )
-                .requestScopes( new Scope( Scopes.DRIVE_APPFOLDER ) ,
+        return new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestScopes(new Scope(Scopes.DRIVE_APPFOLDER),
                         new Scope(AppConstants.SCOPE_GOOGLE_CALENDAR))
-                .requestServerAuthCode( AppConstants.GOOGLE_SERVER_CLIENT_ID )
+                .requestServerAuthCode(AppConstants.GOOGLE_SERVER_CLIENT_ID)
                 .requestEmail()
                 .build();
     }
+
 }

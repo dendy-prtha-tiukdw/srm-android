@@ -89,11 +89,12 @@ public class SignUpViewModel extends ViewModel {
     }
 
     private void signUpPost(String authCode, String nomorInduk, String role) {
-
+ /*
         Post post = new Post( provider,authCode,nomorInduk,role );
+
         SrmApi srmApi = RetrofitBuilder.getAPIService();
         System.out.println("POST : " + post);
-        Call<Post> signUp = srmApi.SignUpPost( post );
+        Call<Post> signUp = srmApi.signUpPost( post );
         signUp.enqueue( new Callback<Post>() {
 
             @Override
@@ -118,7 +119,7 @@ public class SignUpViewModel extends ViewModel {
                 System.out.println( t.getMessage() );
             }
 
-        } );
+        } );*/
 
     }
 }

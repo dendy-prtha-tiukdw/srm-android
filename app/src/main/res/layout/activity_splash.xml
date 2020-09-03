@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="id.ukdw.srmmobile.ui.login.LoginActivity">
+    tools:context="com.mindorks.framework.mvvm.ui.splash.SplashActivity">
 
     <data>
 
-        <import type="android.view.View" />
-
         <variable
-            name="loginViewModel"
-            type="id.ukdw.srmmobile.ui.login.LoginViewModel" />
+            name="splashViewModel"
+            type="id.ukdw.srmmobile.ui.splash.SplashViewModel" />
+
     </data>
 
     <LinearLayout
@@ -38,7 +37,6 @@
                 android:layout_height="@dimen/logo_height"
                 android:layout_gravity="center"
                 android:background="@drawable/logo" />
-
             <TextView
                 android:id="@+id/LogoText"
                 android:layout_width="wrap_content"
@@ -46,24 +44,7 @@
                 android:layout_gravity="center"
                 android:text="SRM"
                 android:textSize="35sp" />
-
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/sign_in_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:visibility="visible" />
-
-            <Button
-                android:visibility="gone"
-                android:id="@+id/sign_up_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/google_sign_up" />
         </LinearLayout>
-
 
         <ImageView
             android:id="@+id/botwave"

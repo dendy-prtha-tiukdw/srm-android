@@ -8,7 +8,9 @@ import dagger.Provides;
 import id.ukdw.srmmobile.ViewModelProviderFactory;
 import id.ukdw.srmmobile.data.DataManager;
 import id.ukdw.srmmobile.ui.base.BaseActivity;
+import id.ukdw.srmmobile.ui.home.HomeViewModel;
 import id.ukdw.srmmobile.ui.login.LoginViewModel;
+import id.ukdw.srmmobile.ui.splash.SplashViewModel;
 import id.ukdw.srmmobile.utils.rx.SchedulerProvider;
 
 /**
@@ -34,5 +36,19 @@ public class ActivityModule {
         Supplier<LoginViewModel> supplier = () -> new LoginViewModel(dataManager, schedulerProvider);
         ViewModelProviderFactory<LoginViewModel> factory = new ViewModelProviderFactory<>(LoginViewModel.class, supplier);
         return new ViewModelProvider(activity, factory).get(LoginViewModel.class);
+    }
+
+    @Provides
+    SplashViewModel provideSplashViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
+        Supplier<SplashViewModel> supplier = () -> new SplashViewModel(dataManager, schedulerProvider);
+        ViewModelProviderFactory<SplashViewModel> factory = new ViewModelProviderFactory<>(SplashViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(SplashViewModel.class);
+    }
+
+    @Provides
+    HomeViewModel provideHomeViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
+        Supplier<HomeViewModel> supplier = () -> new HomeViewModel(dataManager, schedulerProvider);
+        ViewModelProviderFactory<HomeViewModel> factory = new ViewModelProviderFactory<>(HomeViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(HomeViewModel.class);
     }
 }

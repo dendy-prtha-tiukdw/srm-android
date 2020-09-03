@@ -51,6 +51,12 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public void updateTokenInfo(String accessToken, String idToken) {
+        setAccessToken(accessToken);
+        setIdToken(idToken);
+    }
+
+    @Override
     public String getAccessToken() {
         return mPreferencesHelper.getAccessToken();
     }

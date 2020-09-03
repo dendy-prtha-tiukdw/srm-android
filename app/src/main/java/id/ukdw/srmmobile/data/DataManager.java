@@ -44,4 +44,8 @@ public interface DataManager extends DbHelper, PreferencesHelper {
             String imageUrl,
             String role);
 
+    void updateTokenInfo(
+            String accessToken,
+            String idToken);
+
 }

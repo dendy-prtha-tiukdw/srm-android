@@ -11,10 +11,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.Task;
 
 import id.ukdw.srmmobile.R;
-import id.ukdw.srmmobile.SrmMobileApplication;
 import id.ukdw.srmmobile.databinding.ActivityLoginBinding;
 import id.ukdw.srmmobile.di.component.ActivityComponent;
-import id.ukdw.srmmobile.ui.HomeActivity;
+import id.ukdw.srmmobile.ui.home.HomeActivity;
 import id.ukdw.srmmobile.ui.base.BaseActivity;
 
 /**

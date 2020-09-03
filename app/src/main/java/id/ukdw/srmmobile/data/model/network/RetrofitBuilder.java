@@ -22,7 +22,7 @@ public class RetrofitBuilder {
         return mRetrofitInstance;
     }
 
-    public static SrmApi getAPIService() {
+    public static SrmApi getApiService() {
         return getRetrofitInstance().create(SrmApi.class);
     }
 

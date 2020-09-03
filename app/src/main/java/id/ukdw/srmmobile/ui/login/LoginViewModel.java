@@ -41,7 +41,8 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                     @Override
                     public void onResponse(Call<ResponseWrapper<LoginResponse>> call,
                                            Response<ResponseWrapper<LoginResponse>> response) {
-                        /*todo : add flow control to check if code is OK or not. then extract the body to further process*/
+                        /*todo : add flow control to check if code is OK or not. then extract the body to further process
+                        *  Need to check if refresh token is exist. If not user need to relogin by invalidate using access token*/
                         if (response.body() != null) {
                             LoginResponse loginResponse = response.body().getData();
                             //safe to shared preferances
@@ -55,7 +56,7 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                                     loginResponse.getEmail(),
                                     loginResponse.getImageUrl(),
                                     loginResponse.getRole()
-                                    );
+                            );
                             setIsLoading(false);
                             getNavigator().openHomeActivity();
                             Log.i(TAG, "onResponse: " + response.body().getData());

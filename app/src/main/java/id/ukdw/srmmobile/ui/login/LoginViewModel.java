@@ -3,12 +3,9 @@ package id.ukdw.srmmobile.ui.login;
 import android.util.Log;
 
 import id.ukdw.srmmobile.data.DataManager;
-import id.ukdw.srmmobile.data.model.api.Post;
 import id.ukdw.srmmobile.data.model.api.request.LoginRequest;
 import id.ukdw.srmmobile.data.model.api.response.LoginResponse;
 import id.ukdw.srmmobile.data.model.api.response.ResponseWrapper;
-import id.ukdw.srmmobile.data.model.network.RetrofitBuilder;
-import id.ukdw.srmmobile.data.remote.AuthApi;
 import id.ukdw.srmmobile.utils.rx.SchedulerProvider;
 import id.ukdw.srmmobile.ui.base.BaseViewModel;
 import retrofit2.Call;
@@ -35,15 +32,15 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
 
     public void onGoogleLoginClick(String serverAuthCode) {
         setIsLoading(true);
-        RetrofitBuilder.getAuthApi().
-                loginPost(new LoginRequest("google", serverAuthCode)).
+        getDataManager().getAuthApi()
+                .loginPost(new LoginRequest("google", serverAuthCode)).
                 enqueue(new Callback<ResponseWrapper<LoginResponse>>() {
                     @Override
                     public void onResponse(Call<ResponseWrapper<LoginResponse>> call,
                                            Response<ResponseWrapper<LoginResponse>> response) {
                         /*todo : add flow control to check if code is OK or not. then extract the body to further process
-                        *  Need to check if refresh token is exist. If not user need to relogin by invalidate using access token*/
-                        if (response.body() != null) {
+                         *  Need to check if refresh token is exist. If not user need to relogin by invalidate using access token*/
+                        if (response.isSuccessful()) {
                             LoginResponse loginResponse = response.body().getData();
                             //safe to shared preferances
                             getDataManager().updateUserInfo(
@@ -57,11 +54,12 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                                     loginResponse.getImageUrl(),
                                     loginResponse.getRole()
                             );
-                            setIsLoading(false);
                             getNavigator().openHomeActivity();
                             Log.i(TAG, "onResponse: " + response.body().getData());
+                        }else {
+                            Log.e(TAG, "onResponse: " + response.message());
                         }
-
+                        setIsLoading(false);
                     }
 
                     @Override

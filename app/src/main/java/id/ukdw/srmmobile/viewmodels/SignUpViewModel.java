@@ -12,13 +12,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
 import id.ukdw.srmmobile.R;
-import id.ukdw.srmmobile.data.model.api.Post;
 import id.ukdw.srmmobile.data.model.network.ResourceProvider;
-import id.ukdw.srmmobile.data.model.network.RetrofitBuilder;
-import id.ukdw.srmmobile.data.remote.SrmApi;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class SignUpViewModel extends ViewModel {
 

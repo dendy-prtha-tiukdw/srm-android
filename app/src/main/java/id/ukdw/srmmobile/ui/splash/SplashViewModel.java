@@ -3,12 +3,9 @@ package id.ukdw.srmmobile.ui.splash;
 import android.util.Log;
 
 import id.ukdw.srmmobile.data.DataManager;
-import id.ukdw.srmmobile.data.model.api.request.LoginRequest;
 import id.ukdw.srmmobile.data.model.api.request.RefreshAccessTokenRequest;
-import id.ukdw.srmmobile.data.model.api.response.LoginResponse;
 import id.ukdw.srmmobile.data.model.api.response.RefreshAccessTokenResponse;
 import id.ukdw.srmmobile.data.model.api.response.ResponseWrapper;
-import id.ukdw.srmmobile.data.model.network.RetrofitBuilder;
 import id.ukdw.srmmobile.ui.base.BaseViewModel;
 import id.ukdw.srmmobile.utils.rx.SchedulerProvider;
 import retrofit2.Call;
@@ -33,7 +30,7 @@ public class SplashViewModel extends BaseViewModel<SplashNavigator> {
     }
 
     public void decideNextActivity() {
-        setIsLoading(false);
+        setIsLoading(true);
         int loggedInMode = getDataManager().getCurrentUserLoggedInMode();
         if (loggedInMode == DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT.getType()) {
             getNavigator().openLoginActivity();
@@ -42,30 +39,42 @@ public class SplashViewModel extends BaseViewModel<SplashNavigator> {
 
             //safeguard. if refresh token null then we ask user to relogin.
             if (refreshToken == null) {
+                getDataManager().clearUserInfo();
                 getNavigator().openLoginActivity();
                 return;
             }
-            RetrofitBuilder.getAuthApi().
+            getDataManager().getAuthApi().
                     refreshAccessTokenPost(new RefreshAccessTokenRequest(refreshToken)).
                     enqueue(new Callback<ResponseWrapper<RefreshAccessTokenResponse>>() {
                         @Override
                         public void onResponse(Call<ResponseWrapper<RefreshAccessTokenResponse>> call,
                                                Response<ResponseWrapper<RefreshAccessTokenResponse>> response) {
-                            if (response.body() != null) {
+                            //If the request was successfully delivered but there was a server problem you can check response.isSuccessful().
+                            if (response.isSuccessful()) {
                                 RefreshAccessTokenResponse refreshAccessTokenResponse = response.body().getData();
                                 //safe to shared preferances
                                 getDataManager().updateTokenInfo(
                                         refreshAccessTokenResponse.getAccessToken(),
                                         refreshAccessTokenResponse.getIdToken()
                                 );
-                                setIsLoading(false);
                                 getNavigator().openMainActivity();
                                 Log.i(TAG, "onResponse: " + response.body().getData());
+                            } else {
+                                // If it returns false, check response.code() and handle the error.
+                                switch (response.code()) {
+                                    default:
+                                        Log.e(TAG, "onResponse: " + response.message());
+                                        break;
+                                }
+                                getDataManager().clearUserInfo();
+                                getNavigator().openLoginActivity();
                             }
+                            setIsLoading(false);
                         }
 
                         @Override
                         public void onFailure(Call<ResponseWrapper<RefreshAccessTokenResponse>> call, Throwable t) {
+                            //onFailure() is called if and only if there were problems with the client.
                             setIsLoading(false);
                         }
                     });

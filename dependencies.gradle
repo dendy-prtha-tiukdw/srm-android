@@ -23,6 +23,7 @@ ext {
     dagger2Version = '2.16'
     rxjava2Version = '2.1.9'
     rxandroidVersion = '2.0.2'
+    okhttpLoggingInterceptorVersion = '4.2.1'
 
     //Testing
     jUnitVersion = '4.12'
@@ -32,31 +33,32 @@ ext {
     uiAutomatorVersion = '2.2.0'
 
     def androidxLibs = [
-            appCompat        : [group: 'androidx.appcompat', name: 'appcompat', version: appcompatXVersion],
-            androidXAnnotation        : [group: 'androidx.annotation', name: 'annotation', version: appcompatXVersion],
-            constraintXLayout        : [group: 'androidx.constraintlayout', name: 'constraintlayout', version: constraintXLayout],
+            appCompat         : [group: 'androidx.appcompat', name: 'appcompat', version: appcompatXVersion],
+            androidXAnnotation: [group: 'androidx.annotation', name: 'annotation', version: appcompatXVersion],
+            constraintXLayout : [group: 'androidx.constraintlayout', name: 'constraintlayout', version: constraintXLayout],
     ]
 
     def libs = [
-            materialDesign     : [group: 'com.google.android.material', name: 'material', version: materialDesignVersion],
-            googlePlayAuth     : [group: 'com.google.android.gms', name: 'play-services-auth', version: googlePlayAuth],
-            retrofit           : [group: 'com.squareup.retrofit2', name: 'retrofit', version: retrofit],
-            retrofitConvGson   : [group: 'com.squareup.retrofit2', name: 'converter-gson', version: retrofit],
-            customBtnGSignIn   : [group: 'com.shobhitpuri.custombuttons', name: 'google-signin', version: customBtnGSignIn],
-            googleApiClient   : [group: 'com.google.api-client', name: 'google-api-client', version: googleApiClient],
-            googleApiClientAndro   : [group: 'com.google.api-client', name: 'google-api-client-android', version: googleApiClient],
-            googleApiServicePeople   : [group: 'com.google.apis', name: 'google-api-services-people', version: googleApiServicePeople],
-            androidArchExtension      : [group: 'android.arch.lifecycle', name: 'extensions', version: androidArchLifecycleVersion],
-            androidArchCompiler: [group: 'android.arch.lifecycle', name: 'compiler', version: androidArchLifecycleVersion],
-            lombokCompiler     : [group: 'org.projectlombok', name: 'lombok', version: lombok],
-            lombokCompile     : [group: 'org.projectlombok', name: 'lombok', version: lombok],
-            circleImage       : [group: 'de.hdodenhof', name: 'circleimageview', version: circleImageVersion],
-            glide             : [group: 'com.github.bumptech.glide', name: 'glide', version: glideVersion],
-            dagger2           : [group: 'com.google.dagger', name: 'dagger', version: dagger2Version],
-            rxjava2           : [group: 'io.reactivex.rxjava2', name: 'rxjava', version: rxjava2Version],
-            rxjava2android    : [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: rxandroidVersion],
-            glideCompiler     : [group: 'com.github.bumptech.glide', name: 'compiler', version: glideVersion],
-            dagger2Compiler   : [group: 'com.google.dagger', name: 'dagger-compiler', version: dagger2Version],
+            materialDesign        : [group: 'com.google.android.material', name: 'material', version: materialDesignVersion],
+            googlePlayAuth        : [group: 'com.google.android.gms', name: 'play-services-auth', version: googlePlayAuth],
+            retrofit              : [group: 'com.squareup.retrofit2', name: 'retrofit', version: retrofit],
+            retrofitConvGson      : [group: 'com.squareup.retrofit2', name: 'converter-gson', version: retrofit],
+            customBtnGSignIn      : [group: 'com.shobhitpuri.custombuttons', name: 'google-signin', version: customBtnGSignIn],
+            googleApiClient       : [group: 'com.google.api-client', name: 'google-api-client', version: googleApiClient],
+            googleApiClientAndro  : [group: 'com.google.api-client', name: 'google-api-client-android', version: googleApiClient],
+            googleApiServicePeople: [group: 'com.google.apis', name: 'google-api-services-people', version: googleApiServicePeople],
+            androidArchExtension  : [group: 'android.arch.lifecycle', name: 'extensions', version: androidArchLifecycleVersion],
+            androidArchCompiler   : [group: 'android.arch.lifecycle', name: 'compiler', version: androidArchLifecycleVersion],
+            lombokCompiler        : [group: 'org.projectlombok', name: 'lombok', version: lombok],
+            lombokCompile         : [group: 'org.projectlombok', name: 'lombok', version: lombok],
+            circleImage           : [group: 'de.hdodenhof', name: 'circleimageview', version: circleImageVersion],
+            glide                 : [group: 'com.github.bumptech.glide', name: 'glide', version: glideVersion],
+            dagger2               : [group: 'com.google.dagger', name: 'dagger', version: dagger2Version],
+            rxjava2               : [group: 'io.reactivex.rxjava2', name: 'rxjava', version: rxjava2Version],
+            rxjava2android        : [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: rxandroidVersion],
+            glideCompiler         : [group: 'com.github.bumptech.glide', name: 'compiler', version: glideVersion],
+            dagger2Compiler       : [group: 'com.google.dagger', name: 'dagger-compiler', version: dagger2Version],
+            okhttp3Logging        : [group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: okhttpLoggingInterceptorVersion],
     ]
 
     def testLibs = [
@@ -84,6 +86,7 @@ ext {
             [configuration: "implementation", dependency: libs.dagger2],
             [configuration: "implementation", dependency: libs.rxjava2],
             [configuration: "implementation", dependency: libs.rxjava2android],
+            [configuration: "implementation", dependency: libs.okhttp3Logging],
             [configuration: "compileOnly", dependency: libs.lombokCompile],
             [configuration: "annotationProcessor", dependency: libs.lombokCompiler],
             [configuration: "annotationProcessor", dependency: libs.androidArchCompiler],

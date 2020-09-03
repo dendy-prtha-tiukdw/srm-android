@@ -8,6 +8,7 @@ import androidx.databinding.library.baseAdapters.BR;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
 import id.ukdw.srmmobile.R;
@@ -50,8 +51,13 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult( requestCode, resultCode, data );
         if (requestCode == RC_GET_AUTH_CODE) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent( data );
-            mViewModel.onGoogleLoginClick(task.getResult().getServerAuthCode());
+            try {
+                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent( data );
+                mViewModel.onGoogleLoginClick(task.getResult().getServerAuthCode());
+            }catch (Exception ex){
+
+            }
+
         }
     }
 

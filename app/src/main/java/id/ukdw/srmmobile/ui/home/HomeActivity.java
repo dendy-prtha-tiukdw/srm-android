@@ -43,6 +43,7 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
     private String mahasiswa;
     private String staff;
     private String dosen;
+    boolean drawerOpened = false;
 
     ActionBarDrawerToggle mDrawerToggle;
 
@@ -70,15 +71,15 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
 
         mDrawerToggle = new ActionBarDrawerToggle(this, getViewDataBinding().drawerLayout,
                 getViewDataBinding().toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             public void onDrawerClosed(View view) {
                 supportInvalidateOptionsMenu();
-                //drawerOpened = false;
+                drawerOpened = false;
             }
 
             public void onDrawerOpened(View drawerView) {
                 supportInvalidateOptionsMenu();
-                //drawerOpened = true;
+                drawerOpened = true;
             }
         };
         mDrawerToggle.setDrawerIndicatorEnabled(true);
@@ -104,7 +105,7 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
                             new KalenderFragment()).commit();
                     break;
                 case R.id.nav_signOut:
-                    signOut();
+                    mViewModel.logOut();
                     break;
             }
             getViewDataBinding().drawerLayout.closeDrawer(GravityCompat.START);
@@ -126,10 +127,6 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
                     new PengumumanFragment()).commit();
             getViewDataBinding().navView.setCheckedItem(R.id.nav_pengumuman);
         }
-    }
-
-    private void signOut() {
-
     }
 
     @Override

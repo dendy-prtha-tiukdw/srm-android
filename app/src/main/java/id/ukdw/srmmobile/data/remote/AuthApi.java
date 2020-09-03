@@ -1,8 +1,7 @@
 package id.ukdw.srmmobile.data.remote;
 
-
-import id.ukdw.srmmobile.data.model.api.Post;
 import id.ukdw.srmmobile.data.model.api.request.LoginRequest;
+import id.ukdw.srmmobile.data.model.api.request.LogoutRequest;
 import id.ukdw.srmmobile.data.model.api.request.RefreshAccessTokenRequest;
 import id.ukdw.srmmobile.data.model.api.request.SignupRequest;
 import id.ukdw.srmmobile.data.model.api.response.LoginResponse;
@@ -24,4 +23,6 @@ public interface AuthApi {
     @POST("auth/refreshAccessToken")
     Call<ResponseWrapper<RefreshAccessTokenResponse>> refreshAccessTokenPost(@Body RefreshAccessTokenRequest request);
 
+    @POST("auth/signout")
+    Call<ResponseWrapper> signOutPost(@Body LogoutRequest request);
 }

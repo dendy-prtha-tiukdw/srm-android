@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="#FFF"
-    tools:context=".ui.HomeActivity"
+    tools:context=".ui.home.HomeActivity"
     android:orientation="vertical">
 
     <TextView

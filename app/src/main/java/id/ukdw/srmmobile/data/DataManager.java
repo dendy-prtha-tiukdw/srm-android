@@ -2,6 +2,7 @@ package id.ukdw.srmmobile.data;
 
 import id.ukdw.srmmobile.data.local.db.DbHelper;
 import id.ukdw.srmmobile.data.local.prefs.PreferencesHelper;
+import id.ukdw.srmmobile.data.remote.ApiHelper;
 
 /**
  * Project: srmmobile
@@ -13,7 +14,7 @@ import id.ukdw.srmmobile.data.local.prefs.PreferencesHelper;
  * <p>
  * Description : DataManager
  */
-public interface DataManager extends DbHelper, PreferencesHelper {
+public interface DataManager extends DbHelper, PreferencesHelper, ApiHelper {
 
     enum LoggedInMode {
 
@@ -43,5 +44,11 @@ public interface DataManager extends DbHelper, PreferencesHelper {
             String email,
             String imageUrl,
             String role);
+
+    void updateTokenInfo(
+            String accessToken,
+            String idToken);
+
+    void clearUserInfo();
 
 }

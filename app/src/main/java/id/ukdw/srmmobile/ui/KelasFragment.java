@@ -51,6 +51,14 @@ public class KelasFragment extends Fragment {
         return v;
     }
 
+    public void onResume() {
+        super.onResume();
+
+        // Set title bar
+        ((HomeActivity) getActivity())
+                .setActionBarTitle("Daftar Kelas");
+    }
+
     private ArrayList<RecyclerViewModelKelas> initData(){
         itemList=new ArrayList<>();
         itemList.add(new RecyclerViewModelKelas("Administrasi Sistem (A)", "Detail Matakuliah"));

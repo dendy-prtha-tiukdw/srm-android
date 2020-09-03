@@ -59,6 +59,14 @@ public class PengumumanFragment extends Fragment {
         return itemList;
     }
 
+    public void onResume() {
+        super.onResume();
+
+        // Set title bar
+        ((HomeActivity) getActivity())
+                .setActionBarTitle("Pengumuman");
+    }
+
     public void removeItem(int position){
         itemList.remove(position);
         mAdapter.notifyItemRemoved(position);

@@ -18,4 +18,12 @@ public class KalenderFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_kalender, container, false);
     }
+
+    public void onResume() {
+        super.onResume();
+
+        // Set title bar
+        ((HomeActivity) getActivity())
+                .setActionBarTitle("Kalender");
+    }
 }

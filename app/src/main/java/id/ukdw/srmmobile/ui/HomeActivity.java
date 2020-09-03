@@ -131,6 +131,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 });
     }
 
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
+    }
+
     private void revokeAccess() {
         mGoogleSignInClient.revokeAccess()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {

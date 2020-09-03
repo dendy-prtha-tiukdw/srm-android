@@ -39,4 +39,12 @@ public class ProfilFragment extends Fragment {
                 .into(imageView);
     }
 
+    public void onResume() {
+        super.onResume();
+
+        // Set title bar
+        ((HomeActivity) getActivity())
+                .setActionBarTitle("Profil");
+    }
+
 }

@@ -25,6 +25,12 @@
                 android:layout_height="130dp"
                 android:background="#000"/>
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_marginTop="-130dp"
+                android:background="@drawable/border_recyclerview" />
+
         </LinearLayout>
 
         <TextView

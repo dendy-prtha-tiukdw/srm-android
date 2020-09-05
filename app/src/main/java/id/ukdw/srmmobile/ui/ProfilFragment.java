@@ -13,6 +13,8 @@ import com.bumptech.glide.Glide;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import id.ukdw.srmmobile.R;
+import id.ukdw.srmmobile.ui.home.HomeActivity;
+import id.ukdw.srmmobile.ui.home.HomeViewModel;
 
 public class ProfilFragment extends Fragment {
 

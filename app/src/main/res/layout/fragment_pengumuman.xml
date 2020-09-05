@@ -4,23 +4,8 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="#2D2D2D"
-    tools:context=".ui.HomeActivity"
+    tools:context=".ui.home.HomeActivity"
     android:orientation="vertical">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="35sp"
-        android:layout_marginTop="30dp"
-        android:text="Pengumuman"
-        android:textSize="30sp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Daftar Pengumuman terbaru"
-        android:layout_marginStart="35sp"
-        android:layout_marginBottom="20dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:paddingTop="30dp"

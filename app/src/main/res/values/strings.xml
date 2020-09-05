@@ -25,4 +25,15 @@
         <item>Algoritma Pemrograman (B)</item>
         <item>Algoritma Pemrograman (C)</item>
     </string-array>
+
+    <string name="user_name">Dummy Name</string>
+    <string name="user_email">Dummy.Name@ti.ukdw.ac.id</string>
+    <string name="user_role">Mahasiswa</string>
+    <string name="user_nim">71170243</string>
+
+    <string name="judul_kelas">Administrasi Sistem</string>
+
+    <string name="judul_pengumuman"> Tugas Adsis Minggu 11 </string>
+    <string name="tanggal_pengumuman"> 12 September 2020 </string>
+
 </resources>

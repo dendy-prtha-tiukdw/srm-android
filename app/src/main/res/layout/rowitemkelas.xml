@@ -37,7 +37,7 @@
             android:id="@+id/judulKelas"
             android:layout_width="270dp"
             android:layout_height="wrap_content"
-            android:text="Administrasi Sistem (A)"
+            android:text="@string/judul_kelas"
             android:textSize="20dp"
             android:paddingTop="35dp"
             android:paddingLeft="30dp"

@@ -40,8 +40,8 @@ public class detailKelas_activity extends AppCompatActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(detailKelas_activity.this, HomeActivity.class);
-                startActivity(intent);
+              //  Intent intent = new Intent(detailKelas_activity.this, HomeActivity.class);
+               // startActivity(intent);
             }
         });
 

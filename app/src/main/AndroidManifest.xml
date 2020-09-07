@@ -17,29 +17,36 @@
         <activity android:name=".ui.detailkelas.LihatTugasActivity" />
         <activity
             android:name=".ui.login.LoginActivity"
+        <activity android:name=".ui.splash.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.SilentSignInActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".ui.login.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity
-            android:name=".ui.HomeActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:name=".ui.home.HomeActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
         <activity
             android:name=".ui.SignUpActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        </activity>
+
         <activity
             android:name=".ui.detailkelas.detailKelas_activity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".ui.TambahPengumuman"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan">
+
+        </activity>
     </application>
+
 
 </manifest>

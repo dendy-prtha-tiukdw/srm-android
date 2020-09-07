@@ -7,6 +7,7 @@ import javax.inject.Singleton;
 
 import id.ukdw.srmmobile.data.local.db.DbHelper;
 import id.ukdw.srmmobile.data.local.prefs.PreferencesHelper;
+import id.ukdw.srmmobile.data.remote.ApiHelper;
 import id.ukdw.srmmobile.data.remote.AuthApi;
 
 /**
@@ -25,13 +26,14 @@ public class AppDataManager implements DataManager {
     private final Context mContext;
     private final DbHelper mDbHelper;
     private final PreferencesHelper mPreferencesHelper;
-
+    private final ApiHelper mApiHelper;
 
     @Inject
-    public AppDataManager(Context context, DbHelper dbHelper, PreferencesHelper preferencesHelper) {
+    public AppDataManager(Context context, DbHelper dbHelper, PreferencesHelper preferencesHelper, ApiHelper apiHelper) {
         mContext = context;
         mDbHelper = dbHelper;
         mPreferencesHelper = preferencesHelper;
+        mApiHelper = apiHelper;
     }
 
 
@@ -48,6 +50,25 @@ public class AppDataManager implements DataManager {
         setCurrentUserEmail(email);
         setCurrentUserImageURL(imageUrl);
         setCurrentUserRole(role);
+    }
+
+    @Override
+    public void updateTokenInfo(String accessToken, String idToken) {
+        setAccessToken(accessToken);
+        setIdToken(idToken);
+    }
+
+    @Override
+    public void clearUserInfo() {
+        setAccessToken(null);
+        setIdToken(null);
+        setRefreshToken(null);
+        setCurrentNoInduk(null);
+        setCurrentUserLoggedInMode(DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT);
+        setCurrentUserName(null);
+        setCurrentUserEmail(null);
+        setCurrentUserImageURL(null);
+        setCurrentUserRole(null);
     }
 
     @Override
@@ -139,5 +160,10 @@ public class AppDataManager implements DataManager {
     @Override
     public void setCurrentUserLoggedInMode(LoggedInMode mode) {
         mPreferencesHelper.setCurrentUserLoggedInMode(mode);
+    }
+
+    @Override
+    public AuthApi getAuthApi() {
+        return mApiHelper.getAuthApi();
     }
 }

@@ -13,22 +13,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import id.ukdw.srmmobile.R;
+import id.ukdw.srmmobile.ui.home.HomeActivity;
+import id.ukdw.srmmobile.ui.home.HomeViewModel;
 
-public class KelasFragment extends Fragment  {
+public class KelasFragment extends Fragment {
     View v;
 
     public KelasFragment() {
     }
 
     RecyclerView recyclerView;
-    ArrayList <RecyclerViewModelKelas> itemList;
+    ArrayList<RecyclerViewModelKelas> itemList;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_kelas, container, false);
+
         recyclerView = v.findViewById(R.id.recyclerKelas);
         recyclerView.setHasFixedSize(true);
         KelasAdapter kelasAdapter = new KelasAdapter(getContext(),initData());
@@ -45,7 +49,16 @@ public class KelasFragment extends Fragment  {
                 startActivity( intent );
             }
         } );
+
         return v;
+    }
+
+    public void onResume() {
+        super.onResume();
+
+        // Set title bar
+        ((HomeActivity) getActivity())
+                .setActionBarTitle("Daftar Kelas");
     }
 
     private ArrayList<RecyclerViewModelKelas> initData(){
@@ -59,7 +72,5 @@ public class KelasFragment extends Fragment  {
 
         return itemList;
     }
-
-
 
 }

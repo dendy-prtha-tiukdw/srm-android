@@ -2,20 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF"
+    android:background="@drawable/gradientmahasiswa"
     android:orientation="vertical">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="190dp"
-        android:background="@drawable/gradientmahasiswa"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/fotoProfil"
         android:layout_width="180dp"
         android:layout_height="150dp"
         android:src="@drawable/ic_launcher_background"
-        android:layout_marginTop="-80dp"
+        android:layout_marginTop="150dp"
         android:layout_gravity="center"/>
 
     <TextView
@@ -23,7 +18,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/profileName"
         android:gravity="center"
-        android:text="DummyName"
+        android:text="@string/user_name"
+        android:textColor="#fff"
         android:layout_marginTop="15dp"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -34,7 +30,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/profileRole"
         android:gravity="center"
-        android:text="Mahasiswa"
+        android:text="@string/user_role"
+        android:textColor="#fff"
         android:textSize="14sp"
         android:layout_gravity="center"/>
 
@@ -43,18 +40,20 @@
         android:layout_height="wrap_content"
         android:id="@+id/profileNim"
         android:gravity="center"
-        android:text="71170243"
+        android:text="@string/user_nim"
+        android:textColor="#fff"
         android:textSize="14sp"
         android:layout_gravity="center"/>
 
     <TextView
+        android:id="@+id/profileEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/profileEmail"
+        android:layout_gravity="center"
         android:gravity="center"
-        android:text="DummyName@ti.ukdw.ac.id"
+        android:text="@string/user_email"
+        android:textColor="#fff"
         android:textSize="15sp"
-        android:textStyle="bold"
-        android:layout_gravity="center"/>
+        android:textStyle="bold" />
 
 </LinearLayout>

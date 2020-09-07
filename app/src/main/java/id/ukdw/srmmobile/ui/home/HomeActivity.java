@@ -165,4 +165,9 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
             findViewById(R.id.addPengumuman).setVisibility(View.GONE);
         }
     }
+
+    public void setActionBarTitle(String title){
+        getSupportActionBar().setTitle(title);
+    }
+
 }

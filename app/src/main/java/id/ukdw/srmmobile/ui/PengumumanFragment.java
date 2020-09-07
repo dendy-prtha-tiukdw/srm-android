@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import id.ukdw.srmmobile.R;
+import id.ukdw.srmmobile.ui.home.HomeActivity;
+import id.ukdw.srmmobile.ui.home.HomeViewModel;
 
 public class PengumumanFragment extends Fragment {
     View v;
@@ -57,6 +59,14 @@ public class PengumumanFragment extends Fragment {
         itemList.add(new RecyclerViewModelPengumuman( "Tugas Adsis Minggu 11", "12 September 2020"));
 
         return itemList;
+    }
+
+    public void onResume() {
+        super.onResume();
+
+        // Set title bar
+        ((HomeActivity) getActivity())
+                .setActionBarTitle("Pengumuman");
     }
 
     public void removeItem(int position){

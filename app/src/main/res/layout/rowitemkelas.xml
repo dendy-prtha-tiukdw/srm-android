@@ -25,13 +25,19 @@
                 android:layout_height="130dp"
                 android:background="#000"/>
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_marginTop="-130dp"
+                android:background="@drawable/border_recyclerview" />
+
         </LinearLayout>
 
         <TextView
             android:id="@+id/judulKelas"
             android:layout_width="270dp"
             android:layout_height="wrap_content"
-            android:text="Administrasi Sistem (A)"
+            android:text="@string/judul_kelas"
             android:textSize="20dp"
             android:paddingTop="35dp"
             android:paddingLeft="30dp"
@@ -57,5 +63,6 @@
             android:src="@drawable/ic_nextwhite"/>
 
     </androidx.cardview.widget.CardView>
-
 </LinearLayout>
+
+

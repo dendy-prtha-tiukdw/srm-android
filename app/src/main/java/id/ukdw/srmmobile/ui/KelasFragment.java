@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import id.ukdw.srmmobile.R;
+import id.ukdw.srmmobile.ui.detailkelas.detailKelas_activity;
 
 public class KelasFragment extends Fragment  {
     View v;

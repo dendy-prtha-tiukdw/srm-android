@@ -1,55 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/detailmatakuliah"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#FFF"
-    android:orientation="vertical"
-    android:id="@+id/detailmatakuliah">
-
-    <ImageView
-        android:id="@+id/background"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_gravity="end"
-        android:background="#000"/>
+    android:layout_height="match_parent"
+    android:background="#2d2d2d"
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/prevPage"
-        android:layout_width="wrap_content"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:layout_marginTop="-250dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="45dp"
-        android:paddingLeft="30dp"
-        android:src="@drawable/ic_back"/>
+        android:paddingLeft="20dp"
+        android:src="@drawable/ic_back" />
 
     <TextView
-        android:id="@+id/judulKelas"
-        android:layout_width="339dp"
-        android:layout_height="150dp"
-        android:layout_marginBottom="10dp"
-        android:paddingLeft="50dp"
-        android:text="Administrasi Sistem"
-        android:textColor="#FFF"
-        android:textSize="40dp" />
-
-    <TextView
-        android:id="@+id/Deskripsi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="30dp"
-        android:paddingLeft="30dp"
-        android:text="Deskripsi"
-        android:textSize="30sp"/>
-
-    <TextView
-        android:id="@+id/isiDeskripsi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        android:textSize="17sp"
-        android:text="Pada matakuliah ini, Mahasiswa akan diajarkan mengenai Administrasi Sistem."/>
+        android:text="Tambah Pengumuman"
+        android:textSize="25dp"
+        android:textColor="#FFF"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="-80dp"
+        android:textStyle="bold"/>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/lihat_tugas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="#8E36D9"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/pengumuman" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="5dp"
+                android:text="Lihat Tugas"
+                android:textColor="#fff"
+                android:textSize="28dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/lihat_pengumuman"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="#8E36D9"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/pengumuman" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="5dp"
+                android:text="Lihat Pengumuman"
+                android:textColor="#fff"
+                android:textSize="28dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 
 </LinearLayout>

@@ -23,6 +23,7 @@ ext {
     dagger2Version = '2.16'
     rxjava2Version = '2.1.9'
     rxandroidVersion = '2.0.2'
+    rxjava2Adapter = '2.4.0'
     okhttpLoggingInterceptorVersion = '4.2.1'
 
     //Testing
@@ -55,6 +56,7 @@ ext {
             glide                 : [group: 'com.github.bumptech.glide', name: 'glide', version: glideVersion],
             dagger2               : [group: 'com.google.dagger', name: 'dagger', version: dagger2Version],
             rxjava2               : [group: 'io.reactivex.rxjava2', name: 'rxjava', version: rxjava2Version],
+            rxjava2Adapter        : [group: 'com.squareup.retrofit2', name: 'adapter-rxjava2', version: rxjava2Adapter ],
             rxjava2android        : [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: rxandroidVersion],
             glideCompiler         : [group: 'com.github.bumptech.glide', name: 'compiler', version: glideVersion],
             dagger2Compiler       : [group: 'com.google.dagger', name: 'dagger-compiler', version: dagger2Version],
@@ -86,6 +88,7 @@ ext {
             [configuration: "implementation", dependency: libs.dagger2],
             [configuration: "implementation", dependency: libs.rxjava2],
             [configuration: "implementation", dependency: libs.rxjava2android],
+            [configuration: "implementation", dependency: libs.rxjava2Adapter],
             [configuration: "implementation", dependency: libs.okhttp3Logging],
             [configuration: "compileOnly", dependency: libs.lombokCompile],
             [configuration: "annotationProcessor", dependency: libs.lombokCompiler],

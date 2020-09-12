@@ -7,6 +7,11 @@ import id.ukdw.srmmobile.data.model.api.request.LogoutRequest;
 import id.ukdw.srmmobile.data.model.api.response.ResponseWrapper;
 import id.ukdw.srmmobile.ui.base.BaseViewModel;
 import id.ukdw.srmmobile.utils.rx.SchedulerProvider;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,28 +34,32 @@ public class HomeViewModel extends BaseViewModel<HomeNavigator> {
     }
 
     public void logOut() {
-        setIsLoading(true);
         getDataManager().getAuthApi()
                 .signOutPost(new LogoutRequest(getDataManager().getAccessToken()))
-                .enqueue(new Callback<ResponseWrapper>() {
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(new Observer<ResponseWrapper>() {
                     @Override
-                    public void onResponse(Call<ResponseWrapper> call, Response<ResponseWrapper> response) {
-                        if (response.isSuccessful()) {
-                            getDataManager().clearUserInfo();
-                            getNavigator().openLoginActivity();
-                        } else {
-                            switch (response.code()) {
-                                default:
-                                    Log.e(TAG, "onResponse: " + response.errorBody());
-                                    break;
-                            }
-                        }
+                    public void onSubscribe(Disposable d) {
+                        setIsLoading(true);
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseWrapper> call, Throwable t) {
-                        //show error message as dialog box / Toast
+                    public void onNext(ResponseWrapper responseWrapper) {
+                        getDataManager().clearUserInfo();
+                        getNavigator().openLoginActivity();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        getNavigator().handleError(e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
+
     }
 }

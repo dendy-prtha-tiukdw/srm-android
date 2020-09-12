@@ -15,8 +15,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.detailkelas.LihatPengumuman"></activity>
         <activity android:name=".ui.detailkelas.LihatTugasActivity" />
-        <activity
-            android:name=".ui.login.LoginActivity"
+
         <activity android:name=".ui.splash.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

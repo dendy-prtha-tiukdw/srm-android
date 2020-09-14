@@ -51,4 +51,10 @@ public interface DataManager extends DbHelper, PreferencesHelper, ApiHelper {
 
     void clearUserInfo();
 
+    void profileUserInfo(
+            String nomorInduk,
+            String name,
+            String email,
+            String jenisKelamin,
+            String imageProfile);
 }

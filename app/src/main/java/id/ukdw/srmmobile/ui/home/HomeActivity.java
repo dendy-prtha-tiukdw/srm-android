@@ -15,7 +15,6 @@ import androidx.databinding.library.baseAdapters.BR;
 
 import id.ukdw.srmmobile.R;
 import id.ukdw.srmmobile.databinding.ActivityHomeBinding;
-
 import id.ukdw.srmmobile.di.component.ActivityComponent;
 import id.ukdw.srmmobile.ui.KalenderFragment;
 import id.ukdw.srmmobile.ui.kelas.KelasFragment;
@@ -44,6 +43,7 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
     private String staff;
     private String dosen;
     boolean drawerOpened = false;
+
 
     ActionBarDrawerToggle mDrawerToggle;
 

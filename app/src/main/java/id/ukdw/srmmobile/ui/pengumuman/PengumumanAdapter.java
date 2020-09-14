@@ -45,7 +45,7 @@ public class PengumumanAdapter extends RecyclerView.Adapter<PengumumanAdapter.Vi
 //            public void onClick(View v) {
 //
 //                myDialog = new Dialog(mContext);
-//                myDialog.setContentView(R.layout.detailmatkul);
+//                myDialog.setContentView(R.layout.activity_detail_kelas);
 //                myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
 //
 //                TextView namaKelas = (TextView)myDialog.findViewById(R.id.judulKelas);

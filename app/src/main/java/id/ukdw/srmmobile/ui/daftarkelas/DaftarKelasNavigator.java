@@ -1,5 +1,9 @@
 package id.ukdw.srmmobile.ui.daftarkelas;
 
+import java.util.List;
+
+import id.ukdw.srmmobile.data.model.api.response.KelasResponse;
+
 /**
  * Project: srmmobile
  * Package: id.ukdw.srmmobile.ui.daftarkelas
@@ -11,4 +15,8 @@ package id.ukdw.srmmobile.ui.daftarkelas;
  * Description : DaftarKelasNavigator
  */
 public interface DaftarKelasNavigator {
+
+    void handleError(Throwable throwable);
+
+    void updateListDaftarKelas(List<KelasResponse> kelasList);
 }

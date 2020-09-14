@@ -8,6 +8,7 @@ import dagger.Provides;
 import id.ukdw.srmmobile.ViewModelProviderFactory;
 import id.ukdw.srmmobile.data.DataManager;
 import id.ukdw.srmmobile.ui.base.BaseActivity;
+import id.ukdw.srmmobile.ui.detailkelas.DetailKelasViewModel;
 import id.ukdw.srmmobile.ui.home.HomeViewModel;
 import id.ukdw.srmmobile.ui.login.LoginViewModel;
 import id.ukdw.srmmobile.ui.splash.SplashViewModel;
@@ -50,5 +51,12 @@ public class ActivityModule {
         Supplier<HomeViewModel> supplier = () -> new HomeViewModel(dataManager, schedulerProvider);
         ViewModelProviderFactory<HomeViewModel> factory = new ViewModelProviderFactory<>(HomeViewModel.class, supplier);
         return new ViewModelProvider(activity, factory).get(HomeViewModel.class);
+    }
+
+    @Provides
+    DetailKelasViewModel provideDetailKelasViewModel(DataManager dataManager, SchedulerProvider schedulerProvider){
+        Supplier<DetailKelasViewModel> supplier = () -> new DetailKelasViewModel( dataManager,schedulerProvider );
+        ViewModelProviderFactory<DetailKelasViewModel> factory = new ViewModelProviderFactory<>( DetailKelasViewModel.class, supplier );
+        return new ViewModelProvider( activity, factory ).get( DetailKelasViewModel.class );
     }
 }

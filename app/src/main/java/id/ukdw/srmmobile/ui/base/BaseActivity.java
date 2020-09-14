@@ -19,7 +19,6 @@ import javax.inject.Inject;
 
 import id.ukdw.srmmobile.SrmMobileApplication;
 import id.ukdw.srmmobile.di.component.ActivityComponent;
-//import id.ukdw.srmmobile.di.component.DaggerActivityComponent;
 import id.ukdw.srmmobile.di.component.DaggerActivityComponent;
 import id.ukdw.srmmobile.di.module.ActivityModule;
 import id.ukdw.srmmobile.ui.login.LoginActivity;

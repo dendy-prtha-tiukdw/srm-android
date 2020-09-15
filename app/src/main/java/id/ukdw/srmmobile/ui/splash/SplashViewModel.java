@@ -1,16 +1,14 @@
 package id.ukdw.srmmobile.ui.splash;
 
-import android.util.Log;
-
 import id.ukdw.srmmobile.data.DataManager;
 import id.ukdw.srmmobile.data.model.api.request.RefreshAccessTokenRequest;
 import id.ukdw.srmmobile.data.model.api.response.RefreshAccessTokenResponse;
 import id.ukdw.srmmobile.data.model.api.response.ResponseWrapper;
 import id.ukdw.srmmobile.ui.base.BaseViewModel;
 import id.ukdw.srmmobile.utils.rx.SchedulerProvider;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Project: srmmobile
@@ -30,7 +28,7 @@ public class SplashViewModel extends BaseViewModel<SplashNavigator> {
     }
 
     public void decideNextActivity() {
-        setIsLoading(true);
+
         int loggedInMode = getDataManager().getCurrentUserLoggedInMode();
         if (loggedInMode == DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT.getType()) {
             getNavigator().openLoginActivity();
@@ -43,38 +41,34 @@ public class SplashViewModel extends BaseViewModel<SplashNavigator> {
                 getNavigator().openLoginActivity();
                 return;
             }
-            getDataManager().getAuthApi().
-                    refreshAccessTokenPost(new RefreshAccessTokenRequest(refreshToken)).
-                    enqueue(new Callback<ResponseWrapper<RefreshAccessTokenResponse>>() {
+            getDataManager()
+                    .getAuthApi().refreshAccessTokenPost(new RefreshAccessTokenRequest(refreshToken))
+                    .subscribeOn(getSchedulerProvider().io()).observeOn(getSchedulerProvider().ui()).
+                    subscribe(new Observer<ResponseWrapper<RefreshAccessTokenResponse>>() {
                         @Override
-                        public void onResponse(Call<ResponseWrapper<RefreshAccessTokenResponse>> call,
-                                               Response<ResponseWrapper<RefreshAccessTokenResponse>> response) {
-                            //If the request was successfully delivered but there was a server problem you can check response.isSuccessful().
-                            if (response.isSuccessful()) {
-                                RefreshAccessTokenResponse refreshAccessTokenResponse = response.body().getData();
-                                //safe to shared preferances
-                                getDataManager().updateTokenInfo(
-                                        refreshAccessTokenResponse.getAccessToken(),
-                                        refreshAccessTokenResponse.getIdToken()
-                                );
-                                getNavigator().openMainActivity();
-                                Log.i(TAG, "onResponse: " + response.body().getData());
-                            } else {
-                                // If it returns false, check response.code() and handle the error.
-                                switch (response.code()) {
-                                    default:
-                                        Log.e(TAG, "onResponse: " + response.message());
-                                        break;
-                                }
-                                getDataManager().clearUserInfo();
-                                getNavigator().openLoginActivity();
-                            }
-                            setIsLoading(false);
+                        public void onSubscribe(Disposable d) {
+                            setIsLoading(true);
                         }
 
                         @Override
-                        public void onFailure(Call<ResponseWrapper<RefreshAccessTokenResponse>> call, Throwable t) {
-                            //onFailure() is called if and only if there were problems with the client.
+                        public void onNext(ResponseWrapper<RefreshAccessTokenResponse> refreshAccessTokenResponseResponseWrapper) {
+                            RefreshAccessTokenResponse refreshAccessTokenResponse = refreshAccessTokenResponseResponseWrapper.getData();
+                            //safe to shared preferances
+                            getDataManager().updateTokenInfo(
+                                    refreshAccessTokenResponse.getAccessToken(),
+                                    refreshAccessTokenResponse.getIdToken()
+                            );
+                            getNavigator().openMainActivity();
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            getNavigator().openLoginActivity();
+                        }
+
+                        @Override
+                        public void onComplete() {
                             setIsLoading(false);
                         }
                     });

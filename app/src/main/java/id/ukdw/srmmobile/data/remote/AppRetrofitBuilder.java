@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static id.ukdw.srmmobile.utils.AppConstants.BASE_URL;
@@ -35,6 +36,7 @@ public class AppRetrofitBuilder implements ApiHelper {
                         .readTimeout(RETROFIT_READ_TIMEOUT, TimeUnit.SECONDS)
                         .addInterceptor(interceptor)
                         .build())
+                .addCallAdapterFactory( RxJava2CallAdapterFactory.create() )
                 .build();
     }
 

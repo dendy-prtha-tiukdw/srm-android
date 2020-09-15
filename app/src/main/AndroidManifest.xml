@@ -13,6 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.detailkelas.LihatPengumuman"></activity>
+        <activity android:name=".ui.detailkelas.LihatTugasActivity" />
+
         <activity android:name=".ui.splash.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -34,9 +37,8 @@
         </activity>
 
         <activity
-            android:name=".ui.detailKelas_activity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
+            android:name=".ui.detailkelas.detailKelas_activity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".ui.TambahPengumuman"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"

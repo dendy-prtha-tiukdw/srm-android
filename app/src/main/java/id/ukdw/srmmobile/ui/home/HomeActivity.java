@@ -18,7 +18,7 @@ import id.ukdw.srmmobile.databinding.ActivityHomeBinding;
 
 import id.ukdw.srmmobile.di.component.ActivityComponent;
 import id.ukdw.srmmobile.ui.KalenderFragment;
-import id.ukdw.srmmobile.ui.KelasFragment;
+import id.ukdw.srmmobile.ui.kelas.KelasFragment;
 import id.ukdw.srmmobile.ui.PengumumanFragment;
 import id.ukdw.srmmobile.ui.ProfilFragment;
 import id.ukdw.srmmobile.ui.TambahPengumuman;
@@ -154,6 +154,7 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
 
     @Override
     public void openLoginActivity() {
+        getSrmMobileApplication().getGoogleSignInClient().signOut();
         startActivity(LoginActivity.newIntent(this));
         finish();
     }

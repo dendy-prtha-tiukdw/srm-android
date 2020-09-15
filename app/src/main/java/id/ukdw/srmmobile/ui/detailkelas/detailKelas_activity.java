@@ -1,4 +1,4 @@
-package id.ukdw.srmmobile.ui;
+package id.ukdw.srmmobile.ui.detailkelas;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,9 +8,11 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 
 import id.ukdw.srmmobile.R;
+import id.ukdw.srmmobile.ui.RecyclerViewModelKelas;
 
 public class detailKelas_activity extends AppCompatActivity {
     ImageView imageView;
@@ -31,8 +33,6 @@ public class detailKelas_activity extends AppCompatActivity {
         textJudul = findViewById(R.id.judulKelas);
         textJudul.setText(Judul);
 
-        textDetail= findViewById( R.id.Deskripsi);
-        textDetail.setText(Detail);
 
         imageView = findViewById(R.id.prevPage);
 
@@ -43,5 +43,17 @@ public class detailKelas_activity extends AppCompatActivity {
                // startActivity(intent);
             }
         });
+
+        CardView lihatTugas = findViewById( R.id.lihat_tugas );
+        CardView lihatPengumuman = findViewById( R.id.lihat_pengumuman );
+
+
+        lihatTugas.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent keTugas = new Intent( detailKelas_activity.this, LihatTugasActivity.class  );
+
+            }
+        } );
     }
 }

@@ -1,4 +1,4 @@
-package id.ukdw.srmmobile.ui;
+package id.ukdw.srmmobile.ui.kelas;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import id.ukdw.srmmobile.R;
+import id.ukdw.srmmobile.ui.RecyclerViewModelKelas;
+import id.ukdw.srmmobile.ui.detailkelas.detailKelas_activity;
 import id.ukdw.srmmobile.ui.home.HomeActivity;
-import id.ukdw.srmmobile.ui.home.HomeViewModel;
 
 public class KelasFragment extends Fragment {
     View v;

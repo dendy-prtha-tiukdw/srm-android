@@ -1,4 +1,4 @@
-package id.ukdw.srmmobile.ui.profil;
+package id.ukdw.srmmobile.ui.profile;
 
 import id.ukdw.srmmobile.data.DataManager;
 import id.ukdw.srmmobile.data.model.api.request.ProfilRequest;
@@ -12,21 +12,21 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class ProfilViewModel extends BaseViewModel {
-    private static final String TAG = ProfilViewModel.class.getSimpleName();
+public class ProfileViewModel extends BaseViewModel<ProfileNavigator> {
+    private static final String TAG = ProfileViewModel.class.getSimpleName();
 
-    public ProfilViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
+    public ProfileViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
     }
 
-    public String onFragmentProfil(){
+    public String onFragmentProfil() {
         setIsLoading(true);
         String idToken = getDataManager().getIdToken();
 
         Observable<ResponseWrapper<ProfilResponse>> profilObservable = getDataManager().getAuthApi()
                 .profilGet(new ProfilRequest(idToken));
-        profilObservable.subscribeOn( Schedulers.io() );
-        profilObservable.observeOn(AndroidSchedulers.mainThread() );
+        profilObservable.subscribeOn(Schedulers.io());
+        profilObservable.observeOn(AndroidSchedulers.mainThread());
         profilObservable.subscribe(new Observer<ResponseWrapper<ProfilResponse>>() {
             @Override
             public void onSubscribe(Disposable d) {

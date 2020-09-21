@@ -12,7 +12,6 @@ import androidx.cardview.widget.CardView;
 
 
 import id.ukdw.srmmobile.R;
-import id.ukdw.srmmobile.ui.RecyclerViewModelKelas;
 
 public class detailKelas_activity extends AppCompatActivity {
     ImageView imageView;

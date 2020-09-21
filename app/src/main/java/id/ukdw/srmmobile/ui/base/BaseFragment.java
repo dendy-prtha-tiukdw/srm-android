@@ -16,7 +16,10 @@ import androidx.fragment.app.Fragment;
 import javax.inject.Inject;
 
 //import id.ukdw.srmmobile.di.component.DaggerFragmentComponent;
+import id.ukdw.srmmobile.SrmMobileApplication;
+import id.ukdw.srmmobile.di.component.DaggerFragmentComponent;
 import id.ukdw.srmmobile.di.component.FragmentComponent;
+import id.ukdw.srmmobile.di.module.FragmentModule;
 
 /**
  * Project: srmmobile
@@ -118,14 +121,10 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
 
 
     private FragmentComponent getBuildComponent() {
-        /*
         return DaggerFragmentComponent.builder()
                 .appComponent(((SrmMobileApplication) (getContext().getApplicationContext())).appComponent)
                 .fragmentModule(new FragmentModule(this))
                 .build();
-
-         */
-        return null;
     }
 
     public interface Callback {

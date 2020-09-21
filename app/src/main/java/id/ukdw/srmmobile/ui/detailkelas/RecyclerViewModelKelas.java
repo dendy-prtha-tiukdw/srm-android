@@ -1,4 +1,4 @@
-package id.ukdw.srmmobile.ui;
+package id.ukdw.srmmobile.ui.detailkelas;
 
 import android.os.Parcel;
 import android.os.Parcelable;

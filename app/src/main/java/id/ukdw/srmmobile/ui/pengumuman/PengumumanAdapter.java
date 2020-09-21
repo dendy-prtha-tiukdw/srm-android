@@ -1,4 +1,4 @@
-package id.ukdw.srmmobile.ui;
+package id.ukdw.srmmobile.ui.pengumuman;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import id.ukdw.srmmobile.R;
+import id.ukdw.srmmobile.ui.pengumuman.PengumumanFragment;
 
 public class TambahPengumuman extends AppCompatActivity {
     EditText editJudul;
@@ -52,8 +53,8 @@ public class TambahPengumuman extends AppCompatActivity {
         prevpage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TambahPengumuman.this, PengumumanFragment.class);
-                startActivity(intent);
+               /* Intent intent = new Intent(TambahPengumuman.this, PengumumanFragment.class);
+                startActivity(intent);*/
             }
         });
 

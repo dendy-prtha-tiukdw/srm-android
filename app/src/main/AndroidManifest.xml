@@ -39,12 +39,12 @@
         <activity
             android:name=".ui.detailkelas.detailKelas_activity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity
+       <!-- <activity
             android:name=".ui.TambahPengumuman"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="adjustPan">
 
-        </activity>
+        </activity>-->
     </application>
 
 

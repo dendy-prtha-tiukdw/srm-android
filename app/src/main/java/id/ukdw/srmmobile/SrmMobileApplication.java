@@ -1,6 +1,7 @@
 package id.ukdw.srmmobile;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -30,6 +31,10 @@ public class SrmMobileApplication extends Application {
     @Inject
     GoogleSignInOptions googleSignInOptions;
 
+    public static SrmMobileApplication get(Context context) {
+        return (SrmMobileApplication) context.getApplicationContext();
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -55,5 +60,9 @@ public class SrmMobileApplication extends Application {
 
     public GoogleSignInClient getGoogleSignInClient(){
         return mGoogleSignInClient;
+    }
+
+    public AppComponent getComponent(){
+        return appComponent;
     }
 }

@@ -15,13 +15,11 @@ import androidx.databinding.library.baseAdapters.BR;
 
 import id.ukdw.srmmobile.R;
 import id.ukdw.srmmobile.databinding.ActivityHomeBinding;
-
 import id.ukdw.srmmobile.di.component.ActivityComponent;
-import id.ukdw.srmmobile.ui.KalenderFragment;
-import id.ukdw.srmmobile.ui.kelas.KelasFragment;
-import id.ukdw.srmmobile.ui.PengumumanFragment;
-import id.ukdw.srmmobile.ui.ProfilFragment;
-import id.ukdw.srmmobile.ui.TambahPengumuman;
+import id.ukdw.srmmobile.ui.calendar.KalenderFragment;
+import id.ukdw.srmmobile.ui.daftarkelas.DaftarKelasFragment;
+import id.ukdw.srmmobile.ui.pengumuman.PengumumanFragment;
+import id.ukdw.srmmobile.ui.profile.ProfileFragment;
 import id.ukdw.srmmobile.ui.base.BaseActivity;
 import id.ukdw.srmmobile.ui.login.LoginActivity;
 
@@ -44,6 +42,7 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
     private String staff;
     private String dosen;
     boolean drawerOpened = false;
+
 
     ActionBarDrawerToggle mDrawerToggle;
 
@@ -89,16 +88,13 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
         getViewDataBinding().navView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.nav_pengumuman:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new PengumumanFragment()).commit();
+                    showFragmentPengumuman();
                     break;
                 case R.id.nav_daftar_kelas:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new KelasFragment()).commit();
+                    showFragmentDaftarKelas();
                     break;
                 case R.id.nav_profile:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new ProfilFragment()).commit();
+                    showFragmentProfile();
                     break;
                 case R.id.nav_calendar:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -113,6 +109,22 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
         });
     }
 
+    private void showFragmentPengumuman() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                PengumumanFragment.newInstance()).commit();
+
+    }
+
+    private void showFragmentDaftarKelas() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                DaftarKelasFragment.newInstance()).commit();
+    }
+
+    private void showFragmentProfile() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                ProfileFragment.newInstance()).commit();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,8 +135,7 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         prepareSideNav();
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new PengumumanFragment()).commit();
+            showFragmentPengumuman();
             getViewDataBinding().navView.setCheckedItem(R.id.nav_pengumuman);
         }
     }
@@ -139,11 +150,11 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
     //Onclick on each icon Appbar
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
+       /* switch (item.getItemId()) {
             case R.id.addPengumuman:
                 Intent intent = new Intent(this, TambahPengumuman.class);
                 startActivity(intent);
-        }
+        }*/
         return super.onOptionsItemSelected(item);
     }
 
@@ -167,7 +178,7 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
         }
     }
 
-    public void setActionBarTitle(String title){
+    public void setActionBarTitle(String title) {
         getSupportActionBar().setTitle(title);
     }
 

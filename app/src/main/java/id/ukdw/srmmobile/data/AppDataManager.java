@@ -72,6 +72,11 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public void profileUserInfo(String nomorInduk, String name, String email, String jenisKelamin, String imageProfile) {
+
+    }
+
+    @Override
     public String getAccessToken() {
         return mPreferencesHelper.getAccessToken();
     }

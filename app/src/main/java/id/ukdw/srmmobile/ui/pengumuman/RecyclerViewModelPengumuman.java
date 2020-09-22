@@ -1,4 +1,4 @@
-package id.ukdw.srmmobile.ui;
+package id.ukdw.srmmobile.ui.pengumuman;
 
 public class RecyclerViewModelPengumuman {
 

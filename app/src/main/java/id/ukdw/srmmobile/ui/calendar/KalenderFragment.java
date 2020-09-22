@@ -1,4 +1,4 @@
-package id.ukdw.srmmobile.ui;
+package id.ukdw.srmmobile.ui.calendar;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

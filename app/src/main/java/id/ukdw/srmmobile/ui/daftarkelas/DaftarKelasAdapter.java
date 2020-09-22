@@ -1,4 +1,4 @@
-package id.ukdw.srmmobile.ui.kelas;
+package id.ukdw.srmmobile.ui.daftarkelas;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import id.ukdw.srmmobile.R;
-import id.ukdw.srmmobile.ui.RecyclerViewModelKelas;
+import id.ukdw.srmmobile.ui.detailkelas.RecyclerViewModelKelas;
 
-public class KelasAdapter extends RecyclerView.Adapter<KelasAdapter.ViewHolder> {
+public class DaftarKelasAdapter extends RecyclerView.Adapter<DaftarKelasAdapter.ViewHolder> {
 
     Context mContext;
     ArrayList<RecyclerViewModelKelas> mItemListKelas;
@@ -24,25 +24,25 @@ public class KelasAdapter extends RecyclerView.Adapter<KelasAdapter.ViewHolder> 
         void onItemClick(int position);
     }
 
-    public void setOnItemClickListener (KelasAdapter.OnItemListener listener){
+    public void setOnItemClickListener (DaftarKelasAdapter.OnItemListener listener){
         mlistener = listener;
     }
 
-    public KelasAdapter(Context mContext, ArrayList<RecyclerViewModelKelas> mItemListKelas) {
+    public DaftarKelasAdapter(Context mContext, ArrayList<RecyclerViewModelKelas> mItemListKelas) {
         this.mContext = mContext;
         this.mItemListKelas = mItemListKelas;
     }
 
     @NonNull
     @Override
-    public KelasAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DaftarKelasAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.rowitemkelas, parent, false);
         ViewHolder viewHolder = new ViewHolder(v,mlistener);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull KelasAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DaftarKelasAdapter.ViewHolder holder, int position) {
         holder.judulItem.setText(mItemListKelas.get(position).getJudul());
         holder.detailItem.setText(mItemListKelas.get(position).getDetail());
     }

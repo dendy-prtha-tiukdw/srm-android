@@ -7,12 +7,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.library.baseAdapters.BR;
 
+import com.bumptech.glide.Glide;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 import id.ukdw.srmmobile.R;
 import id.ukdw.srmmobile.databinding.ActivityHomeBinding;
 import id.ukdw.srmmobile.di.component.ActivityComponent;
@@ -37,14 +41,11 @@ import id.ukdw.srmmobile.ui.login.LoginActivity;
 public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewModel> implements HomeNavigator {
     private static final String TAG = HomeActivity.class.getSimpleName();
     private ActivityHomeBinding activityHomeBinding;
-    private String role;
-    private String mahasiswa;
-    private String staff;
-    private String dosen;
     boolean drawerOpened = false;
-
-
     ActionBarDrawerToggle mDrawerToggle;
+    TextView navTextViewName;
+    TextView navTextViewEmail;
+    CircleImageView navImageProfile;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, HomeActivity.class);
@@ -68,6 +69,11 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
     //prepare side nav
     private void prepareSideNav() {
 
+        View header = getViewDataBinding().navView.getHeaderView(0);
+        navTextViewName = header.findViewById(R.id.navTxtName);
+        navTextViewEmail = header.findViewById(R.id.navTxtEmail);
+        navImageProfile = header.findViewById(R.id.navImgProfile);
+        
         mDrawerToggle = new ActionBarDrawerToggle(this, getViewDataBinding().drawerLayout,
                 getViewDataBinding().toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
@@ -130,6 +136,7 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
         super.onCreate(savedInstanceState);
         activityHomeBinding = getViewDataBinding();
         mViewModel.setNavigator(this);
+        mViewModel.setContext(this);
         setSupportActionBar(getViewDataBinding().toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -138,6 +145,7 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
             showFragmentPengumuman();
             getViewDataBinding().navView.setCheckedItem(R.id.nav_pengumuman);
         }
+        mViewModel.setUpSideNavProfile();
     }
 
     @Override
@@ -170,12 +178,24 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
         finish();
     }
 
+    @Override
+    public void onSetNavProfile(String name, String email, String imgUrl) {
+        navTextViewName.setText(name);
+        navTextViewEmail.setText(email);
+        Glide.with(this)
+                .load(imgUrl)
+                .circleCrop()
+                .centerCrop()
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(navImageProfile);
+    }
+
     private void checkRole() {
-        if (role != mahasiswa) {
+      /*  if (role != mahasiswa) {
             findViewById(R.id.addPengumuman).setVisibility(View.VISIBLE);
         } else {
             findViewById(R.id.addPengumuman).setVisibility(View.GONE);
-        }
+        }*/
     }
 
     public void setActionBarTitle(String title) {

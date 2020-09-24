@@ -14,17 +14,17 @@ import id.ukdw.srmmobile.data.DataManager;
  */
 public interface PreferencesHelper {
 
-    String getAccessToken();
+    String getCurrentAccessToken();
 
     void setAccessToken(String accessToken);
 
-    String getIdToken();
+    String getCurrentIdToken();
 
-    void setIdToken(String idToken);
+    void setCurrentIdToken(String idToken);
 
-    String getRefreshToken();
+    String getCurrentRefreshToken();
 
-    void setRefreshToken(String refreshToken);
+    void setCurrentRefreshToken(String refreshToken);
 
     String getCurrentNoInduk();
 
@@ -49,8 +49,4 @@ public interface PreferencesHelper {
     int getCurrentUserLoggedInMode();
 
     void setCurrentUserLoggedInMode(DataManager.LoggedInMode mode);
-
-
-
-
 }

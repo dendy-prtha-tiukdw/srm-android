@@ -15,4 +15,6 @@ public interface HomeNavigator {
     void handleError(Throwable throwable);
 
     void openLoginActivity();
+
+    void onSetNavProfile(String name, String email, String imgUrl);
 }

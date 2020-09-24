@@ -1,6 +1,7 @@
 package id.ukdw.srmmobile.ui.profile;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -9,7 +10,6 @@ import androidx.databinding.library.baseAdapters.BR;
 
 import com.bumptech.glide.Glide;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import id.ukdw.srmmobile.R;
 import id.ukdw.srmmobile.databinding.FragmentProfilBinding;
 import id.ukdw.srmmobile.di.component.FragmentComponent;
@@ -19,11 +19,9 @@ import id.ukdw.srmmobile.ui.home.HomeActivity;
 public class ProfileFragment extends BaseFragment<FragmentProfilBinding, ProfileViewModel>
         implements ProfileNavigator {
 
-    CircleImageView imageView;
-    String link;
+    private static final String TAG = ProfileFragment.class.getSimpleName();
 
     private FragmentProfilBinding fragmentProfilBinding;
-
 
     public static ProfileFragment newInstance() {
         Bundle args = new Bundle();
@@ -43,17 +41,21 @@ public class ProfileFragment extends BaseFragment<FragmentProfilBinding, Profile
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mViewModel.setNavigator(this);
+        mViewModel.setContext(getBaseActivity());
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         fragmentProfilBinding = getViewDataBinding();
-        imageView = (CircleImageView) view.findViewById(R.id.fotoProfil);
-        Glide.with(this)
-                .load(link)
-                .circleCrop()
-                .centerCrop()
-                .placeholder(R.drawable.ic_launcher_background)
-                .into(imageView);
+        mViewModel.getProfile();
+        mViewModel.testGoogleCalendar();
     }
+
+
 
     @Override
     public void performDependencyInjection(FragmentComponent buildComponent) {
@@ -67,4 +69,17 @@ public class ProfileFragment extends BaseFragment<FragmentProfilBinding, Profile
                 .setActionBarTitle("Profil");
     }
 
+    @Override
+    public void onGetProfileCompleted(String nama, String nim, String jenisKelamin, String email, String ulrImage) {
+        fragmentProfilBinding.profileName.setText(nama);
+        fragmentProfilBinding.profileNim.setText(nim);
+        fragmentProfilBinding.profileJenisKelamin.setText(jenisKelamin);
+        fragmentProfilBinding.profileEmail.setText(email);
+        Glide.with(this)
+                .load(ulrImage)
+                .circleCrop()
+                .centerCrop()
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(fragmentProfilBinding.fotoProfil);
+    }
 }

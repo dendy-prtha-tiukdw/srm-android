@@ -61,8 +61,4 @@ public class SrmMobileApplication extends Application {
     public GoogleSignInClient getGoogleSignInClient(){
         return mGoogleSignInClient;
     }
-
-    public AppComponent getComponent(){
-        return appComponent;
-    }
 }

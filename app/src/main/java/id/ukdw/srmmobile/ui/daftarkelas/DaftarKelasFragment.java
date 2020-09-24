@@ -67,6 +67,7 @@ public class DaftarKelasFragment extends BaseFragment<FragmentDaftarKelasBinding
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewModel.setNavigator(this);
+        mViewModel.setContext(getBaseActivity());
     }
 
     @Override

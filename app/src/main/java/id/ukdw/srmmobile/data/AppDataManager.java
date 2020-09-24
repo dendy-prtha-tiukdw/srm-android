@@ -9,6 +9,7 @@ import id.ukdw.srmmobile.data.local.db.DbHelper;
 import id.ukdw.srmmobile.data.local.prefs.PreferencesHelper;
 import id.ukdw.srmmobile.data.remote.ApiHelper;
 import id.ukdw.srmmobile.data.remote.AuthApi;
+import id.ukdw.srmmobile.data.remote.UserApi;
 
 /**
  * Project: srmmobile
@@ -29,7 +30,8 @@ public class AppDataManager implements DataManager {
     private final ApiHelper mApiHelper;
 
     @Inject
-    public AppDataManager(Context context, DbHelper dbHelper, PreferencesHelper preferencesHelper, ApiHelper apiHelper) {
+    public AppDataManager(Context context, DbHelper dbHelper, PreferencesHelper preferencesHelper,
+                          ApiHelper apiHelper) {
         mContext = context;
         mDbHelper = dbHelper;
         mPreferencesHelper = preferencesHelper;
@@ -42,8 +44,8 @@ public class AppDataManager implements DataManager {
                                String nomorInduk, LoggedInMode loggedInMode, String nama,
                                String email, String imageUrl, String role) {
         setAccessToken(accessToken);
-        setIdToken(idToken);
-        setRefreshToken(refreshToken);
+        setCurrentIdToken(idToken);
+        setCurrentRefreshToken(refreshToken);
         setCurrentNoInduk(nomorInduk);
         setCurrentUserLoggedInMode(loggedInMode);
         setCurrentUserName(nama);
@@ -55,14 +57,14 @@ public class AppDataManager implements DataManager {
     @Override
     public void updateTokenInfo(String accessToken, String idToken) {
         setAccessToken(accessToken);
-        setIdToken(idToken);
+        setCurrentIdToken(idToken);
     }
 
     @Override
     public void clearUserInfo() {
         setAccessToken(null);
-        setIdToken(null);
-        setRefreshToken(null);
+        setCurrentIdToken(null);
+        setCurrentRefreshToken(null);
         setCurrentNoInduk(null);
         setCurrentUserLoggedInMode(DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT);
         setCurrentUserName(null);
@@ -77,8 +79,8 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public String getAccessToken() {
-        return mPreferencesHelper.getAccessToken();
+    public String getCurrentAccessToken() {
+        return mPreferencesHelper.getCurrentAccessToken();
     }
 
     @Override
@@ -88,23 +90,23 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public String getIdToken() {
-        return mPreferencesHelper.getIdToken();
+    public String getCurrentIdToken() {
+        return mPreferencesHelper.getCurrentIdToken();
     }
 
     @Override
-    public void setIdToken(String idToken) {
-        mPreferencesHelper.setIdToken(idToken);
+    public void setCurrentIdToken(String idToken) {
+        mPreferencesHelper.setCurrentIdToken(idToken);
     }
 
     @Override
-    public String getRefreshToken() {
-        return mPreferencesHelper.getRefreshToken();
+    public String getCurrentRefreshToken() {
+        return mPreferencesHelper.getCurrentRefreshToken();
     }
 
     @Override
-    public void setRefreshToken(String refreshToken) {
-        mPreferencesHelper.setRefreshToken(refreshToken);
+    public void setCurrentRefreshToken(String refreshToken) {
+        mPreferencesHelper.setCurrentRefreshToken(refreshToken);
     }
 
     @Override
@@ -170,5 +172,9 @@ public class AppDataManager implements DataManager {
     @Override
     public AuthApi getAuthApi() {
         return mApiHelper.getAuthApi();
+    }
+
+    public UserApi getUserApi(String accessToken, String refreshToken) {
+        return mApiHelper.getUserApi(accessToken, refreshToken);
     }
 }

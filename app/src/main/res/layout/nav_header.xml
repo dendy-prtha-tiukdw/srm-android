@@ -8,20 +8,26 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:orientation="vertical">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/navImgProfile"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_round"/>
-    
+        android:layout_weight="60"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_launcher_background"/>
+
     <TextView
+        android:id="@+id/navTxtName"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="20"
         android:paddingTop="8dp"
         android:text="@string/user_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
     <TextView
+        android:id="@+id/navTxtEmail"
+        android:layout_weight="20"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:text="@string/user_email"/>
 
 

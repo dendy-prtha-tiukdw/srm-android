@@ -42,7 +42,7 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
-    public void setAccessToken(String accessToken) {
+    public void setCurrentAccessToken(String accessToken) {
         mPrefs.edit().putString(PREF_KEY_ACCESS_TOKEN, accessToken).apply();
     }
 

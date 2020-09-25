@@ -16,7 +16,7 @@ public interface PreferencesHelper {
 
     String getCurrentAccessToken();
 
-    void setAccessToken(String accessToken);
+    void setCurrentAccessToken(String accessToken);
 
     String getCurrentIdToken();
 

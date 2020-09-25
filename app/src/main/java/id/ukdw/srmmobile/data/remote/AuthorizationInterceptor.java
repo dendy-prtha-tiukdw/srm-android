@@ -2,6 +2,7 @@ package id.ukdw.srmmobile.data.remote;
 
 import android.util.Log;
 
+import org.apache.http.HttpHeaders;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -10,6 +11,7 @@ import id.ukdw.srmmobile.data.local.prefs.PreferencesHelper;
 import id.ukdw.srmmobile.data.model.api.request.RefreshAccessTokenRequest;
 import id.ukdw.srmmobile.data.model.api.response.RefreshAccessTokenResponse;
 import id.ukdw.srmmobile.data.model.api.response.ResponseWrapper;
+import id.ukdw.srmmobile.utils.HttpStatus;
 import id.ukdw.srmmobile.utils.rx.SchedulerProvider;
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -44,20 +46,21 @@ public class AuthorizationInterceptor implements Interceptor {
     @NotNull
     @Override
     public Response intercept(@NotNull Chain chain) throws IOException {
-        Request request = chain.request().newBuilder().addHeader("Authorization", "Bearer " + mPreferencesHelper.getCurrentAccessToken()).build();
+        Request request = chain.request().newBuilder().addHeader(HttpHeaders.AUTHORIZATION, "Bearer " + mPreferencesHelper.getCurrentAccessToken()).build();
         // try the request
         Response response = chain.proceed(request);
 
         //warning for infinite loop
-        //will change to code 400 latter
-        if (response.code() == 500) {
-            Log.e(TAG, "intercept: errorrrrr");
+        //will change to code 401 latter
+        if (response.code() == HttpStatus.UNAUTHORIZED.value()) {
+            Log.w(TAG, "intercept: access token already outdated. Refreshing it now.");
             ResponseWrapper<RefreshAccessTokenResponse> refreshResponse = authApi
                     .refreshAccessTokenPost(new RefreshAccessTokenRequest(mPreferencesHelper.getCurrentRefreshToken()))
                     .blockingLast();
-            mPreferencesHelper.setAccessToken(refreshResponse.getData().getAccessToken());
+            mPreferencesHelper.setCurrentAccessToken(refreshResponse.getData().getAccessToken());
             mPreferencesHelper.setCurrentIdToken(refreshResponse.getData().getIdToken());
-            request = chain.request().newBuilder().addHeader("Authorization", "Bearer " + mPreferencesHelper.getCurrentAccessToken()).build();
+            request = chain.request().newBuilder().addHeader(HttpHeaders.AUTHORIZATION,
+                    "Bearer " + mPreferencesHelper.getCurrentAccessToken()).build();
             response = chain.proceed(request);
         }
 

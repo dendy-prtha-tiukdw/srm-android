@@ -43,7 +43,7 @@ public class AppDataManager implements DataManager {
     public void updateUserInfo(String accessToken, String idToken, String refreshToken,
                                String nomorInduk, LoggedInMode loggedInMode, String nama,
                                String email, String imageUrl, String role) {
-        setAccessToken(accessToken);
+        setCurrentAccessToken(accessToken);
         setCurrentIdToken(idToken);
         setCurrentRefreshToken(refreshToken);
         setCurrentNoInduk(nomorInduk);
@@ -56,13 +56,13 @@ public class AppDataManager implements DataManager {
 
     @Override
     public void updateTokenInfo(String accessToken, String idToken) {
-        setAccessToken(accessToken);
+        setCurrentAccessToken(accessToken);
         setCurrentIdToken(idToken);
     }
 
     @Override
     public void clearUserInfo() {
-        setAccessToken(null);
+        setCurrentAccessToken(null);
         setCurrentIdToken(null);
         setCurrentRefreshToken(null);
         setCurrentNoInduk(null);
@@ -84,9 +84,9 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public void setAccessToken(String accessToken) {
-        mPreferencesHelper.setAccessToken(accessToken);
-        //mApiHelper.getApiHeader().getProtectedApiHeader().setAccessToken(accessToken);
+    public void setCurrentAccessToken(String accessToken) {
+        mPreferencesHelper.setCurrentAccessToken(accessToken);
+        //mApiHelper.getApiHeader().getProtectedApiHeader().setCurrentAccessToken(accessToken);
     }
 
     @Override

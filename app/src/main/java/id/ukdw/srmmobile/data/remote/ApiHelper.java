@@ -15,4 +15,6 @@ import io.reactivex.Single;
 public interface ApiHelper {
 
     AuthApi getAuthApi();
+
+    UserApi getUserApi(String accessToken, String refreshToken);
 }

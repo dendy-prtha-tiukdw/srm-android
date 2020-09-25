@@ -37,32 +37,32 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
-    public String getAccessToken() {
+    public String getCurrentAccessToken() {
         return mPrefs.getString(PREF_KEY_ACCESS_TOKEN, null);
     }
 
     @Override
-    public void setAccessToken(String accessToken) {
+    public void setCurrentAccessToken(String accessToken) {
         mPrefs.edit().putString(PREF_KEY_ACCESS_TOKEN, accessToken).apply();
     }
 
     @Override
-    public String getIdToken() {
+    public String getCurrentIdToken() {
         return mPrefs.getString(PREF_KEY_ID_TOKEN, null);
     }
 
     @Override
-    public void setIdToken(String idToken) {
+    public void setCurrentIdToken(String idToken) {
         mPrefs.edit().putString(PREF_KEY_ID_TOKEN, idToken).apply();
     }
 
     @Override
-    public String getRefreshToken() {
+    public String getCurrentRefreshToken() {
         return mPrefs.getString(PREF_KEY_REFRESH_TOKEN, null);
     }
 
     @Override
-    public void setRefreshToken(String refreshToken) {
+    public void setCurrentRefreshToken(String refreshToken) {
         mPrefs.edit().putString(PREF_KEY_REFRESH_TOKEN, refreshToken).apply();
     }
 

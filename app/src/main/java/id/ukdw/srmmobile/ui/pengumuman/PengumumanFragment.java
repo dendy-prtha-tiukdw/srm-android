@@ -70,6 +70,7 @@ public class PengumumanFragment extends BaseFragment<FragmentPengumumanBinding, 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewModel.setNavigator(this);
+        mViewModel.setContext(getBaseActivity());
     }
 
     private ArrayList<RecyclerViewModelPengumuman> initData() {

@@ -3,6 +3,7 @@ package id.ukdw.srmmobile.ui.login;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.databinding.library.baseAdapters.BR;
 
@@ -29,6 +30,7 @@ import id.ukdw.srmmobile.ui.base.BaseActivity;
  */
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel>
         implements LoginNavigator {
+    private static final String TAG = LoginActivity.class.getSimpleName();
     private static final int RC_GET_AUTH_CODE = 9003;
     private ActivityLoginBinding mActivityLoginBinding;
 
@@ -41,23 +43,22 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         super.onCreate(savedInstanceState);
         mActivityLoginBinding = getViewDataBinding();
         mViewModel.setNavigator(this);
+        mViewModel.setContext(this);
         mActivityLoginBinding.signInButton.setOnClickListener(v -> {
-            //getSrmMobileApplication().getGoogleSignInClient().getSignInIntent();
             startActivityForResult(getSrmMobileApplication().getGoogleSignInClient().getSignInIntent(), RC_GET_AUTH_CODE);
         });
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult( requestCode, resultCode, data );
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_GET_AUTH_CODE) {
             try {
-                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent( data );
+                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
                 mViewModel.onGoogleLoginClick(task.getResult().getServerAuthCode());
-            }catch (Exception ex){
-
+            } catch (Exception ex) {
+                Log.e(TAG, "onActivityResult: " + ex.getMessage());
             }
-
         }
     }
 

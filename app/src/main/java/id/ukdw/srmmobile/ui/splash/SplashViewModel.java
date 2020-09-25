@@ -1,12 +1,13 @@
 package id.ukdw.srmmobile.ui.splash;
 
+import android.util.Log;
+
 import id.ukdw.srmmobile.data.DataManager;
 import id.ukdw.srmmobile.data.model.api.request.RefreshAccessTokenRequest;
 import id.ukdw.srmmobile.data.model.api.response.RefreshAccessTokenResponse;
 import id.ukdw.srmmobile.data.model.api.response.ResponseWrapper;
 import id.ukdw.srmmobile.ui.base.BaseViewModel;
 import id.ukdw.srmmobile.utils.rx.SchedulerProvider;
-import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
@@ -33,7 +34,7 @@ public class SplashViewModel extends BaseViewModel<SplashNavigator> {
         if (loggedInMode == DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT.getType()) {
             getNavigator().openLoginActivity();
         } else {
-            String refreshToken = getDataManager().getRefreshToken();
+            String refreshToken = getDataManager().getCurrentRefreshToken();
 
             //safeguard. if refresh token null then we ask user to relogin.
             if (refreshToken == null) {
@@ -64,6 +65,7 @@ public class SplashViewModel extends BaseViewModel<SplashNavigator> {
 
                         @Override
                         public void onError(Throwable e) {
+                            Log.e(TAG, "onError: " + e.getMessage());
                             getNavigator().openLoginActivity();
                         }
 

@@ -5,8 +5,12 @@ import lombok.Data;
 @Data
 public class ProfilResponse {
     private String nomorInduk;
-    private String nama;
+
+    private String name;
+
     private String email;
+
+    private String imageUrl;
+
     private String jenisKelamin;
-    private String imageProfile;
 }

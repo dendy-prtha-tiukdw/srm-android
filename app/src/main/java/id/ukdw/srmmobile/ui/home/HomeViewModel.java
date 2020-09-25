@@ -1,20 +1,12 @@
 package id.ukdw.srmmobile.ui.home;
 
-import android.util.Log;
-
 import id.ukdw.srmmobile.data.DataManager;
 import id.ukdw.srmmobile.data.model.api.request.LogoutRequest;
 import id.ukdw.srmmobile.data.model.api.response.ResponseWrapper;
 import id.ukdw.srmmobile.ui.base.BaseViewModel;
 import id.ukdw.srmmobile.utils.rx.SchedulerProvider;
-import io.reactivex.Observable;
 import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Project: srmmobile
@@ -35,7 +27,7 @@ public class HomeViewModel extends BaseViewModel<HomeNavigator> {
 
     public void logOut() {
         getDataManager().getAuthApi()
-                .signOutPost(new LogoutRequest(getDataManager().getAccessToken()))
+                .signOutPost(new LogoutRequest(getDataManager().getCurrentAccessToken()))
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(new Observer<ResponseWrapper>() {
@@ -60,6 +52,10 @@ public class HomeViewModel extends BaseViewModel<HomeNavigator> {
 
                     }
                 });
+    }
 
+    public void setUpSideNavProfile() {
+        getNavigator().onSetNavProfile(getDataManager().getCurrentUserName(),
+                getDataManager().getCurrentUserEmail(), getDataManager().getCurrentUserImageURL());
     }
 }

@@ -25,6 +25,7 @@ ext {
     rxandroidVersion = '2.0.2'
     rxjava2Adapter = '2.4.0'
     okhttpLoggingInterceptorVersion = '4.2.1'
+    googleCalendarClientVersion = 'v3-rev411-1.25.0'
 
     //Testing
     jUnitVersion = '4.12'
@@ -61,6 +62,7 @@ ext {
             glideCompiler         : [group: 'com.github.bumptech.glide', name: 'compiler', version: glideVersion],
             dagger2Compiler       : [group: 'com.google.dagger', name: 'dagger-compiler', version: dagger2Version],
             okhttp3Logging        : [group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: okhttpLoggingInterceptorVersion],
+            googleCalendarClient  : [group: 'com.google.apis', name: 'google-api-services-calendar', version: googleCalendarClientVersion],
     ]
 
     def testLibs = [
@@ -90,6 +92,7 @@ ext {
             [configuration: "implementation", dependency: libs.rxjava2android],
             [configuration: "implementation", dependency: libs.rxjava2Adapter],
             [configuration: "implementation", dependency: libs.okhttp3Logging],
+            [configuration: "implementation", dependency: libs.googleCalendarClient],
             [configuration: "compileOnly", dependency: libs.lombokCompile],
             [configuration: "annotationProcessor", dependency: libs.lombokCompiler],
             [configuration: "annotationProcessor", dependency: libs.androidArchCompiler],

@@ -11,4 +11,6 @@ package id.ukdw.srmmobile.ui.profile;
  * Description : ProfileNavigator
  */
 public interface ProfileNavigator {
+
+    void onGetProfileCompleted(String nama, String nim, String jenisKelamin,String email, String ulrImage);
 }

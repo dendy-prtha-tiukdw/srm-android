@@ -1,5 +1,7 @@
 package id.ukdw.srmmobile.ui.base;
 
+import android.content.Context;
+
 import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.ViewModel;
 
@@ -30,6 +32,8 @@ public abstract class BaseViewModel<N> extends ViewModel {
     private CompositeDisposable mCompositeDisposable;
 
     private WeakReference<N> mNavigator;
+
+    private WeakReference<Context> mContext;
 
     public BaseViewModel(DataManager dataManager,
                          SchedulerProvider schedulerProvider) {
@@ -66,6 +70,14 @@ public abstract class BaseViewModel<N> extends ViewModel {
 
     public void setNavigator(N navigator) {
         this.mNavigator = new WeakReference<>(navigator);
+    }
+
+    public Context getContext() {
+        return mContext.get();
+    }
+
+    public void setContext(Context context) {
+        this.mContext = new WeakReference<>(context);
     }
 
     public SchedulerProvider getSchedulerProvider() {

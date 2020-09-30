@@ -45,7 +45,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         mViewModel.setNavigator(this);
         mViewModel.setContext(this);
         mActivityLoginBinding.signInButton.setOnClickListener(v -> {
-            startActivityForResult(getSrmMobileApplication().getGoogleSignInClient().getSignInIntent(), RC_GET_AUTH_CODE);
+            startActivityForResult(mViewModel.getGoogleSignInClient().getSignInIntent(), RC_GET_AUTH_CODE);
         });
     }
 

@@ -173,7 +173,7 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
 
     @Override
     public void openLoginActivity() {
-        getSrmMobileApplication().getGoogleSignInClient().signOut();
+        mViewModel.getGoogleSignInClient().signOut();
         startActivity(LoginActivity.newIntent(this));
         finish();
     }

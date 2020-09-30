@@ -5,6 +5,8 @@ import android.content.Context;
 import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.ViewModel;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+
 import java.lang.ref.WeakReference;
 
 import id.ukdw.srmmobile.data.DataManager;
@@ -29,6 +31,8 @@ public abstract class BaseViewModel<N> extends ViewModel {
 
     private final SchedulerProvider mSchedulerProvider;
 
+    private final GoogleSignInClient googleSignInClient;
+
     private CompositeDisposable mCompositeDisposable;
 
     private WeakReference<N> mNavigator;
@@ -36,10 +40,12 @@ public abstract class BaseViewModel<N> extends ViewModel {
     private WeakReference<Context> mContext;
 
     public BaseViewModel(DataManager dataManager,
-                         SchedulerProvider schedulerProvider) {
+                         SchedulerProvider schedulerProvider,
+                         GoogleSignInClient googleSignInClient) {
         this.mDataManager = dataManager;
         this.mSchedulerProvider = schedulerProvider;
         this.mCompositeDisposable = new CompositeDisposable();
+        this.googleSignInClient = googleSignInClient;
     }
 
     @Override
@@ -54,6 +60,10 @@ public abstract class BaseViewModel<N> extends ViewModel {
 
     public DataManager getDataManager() {
         return mDataManager;
+    }
+
+    public GoogleSignInClient getGoogleSignInClient() {
+        return googleSignInClient;
     }
 
     public ObservableBoolean getIsLoading() {

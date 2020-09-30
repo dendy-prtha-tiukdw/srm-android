@@ -1,10 +1,5 @@
 package id.ukdw.srmmobile.ui.daftarkelas;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-
-import java.util.List;
-
 import id.ukdw.srmmobile.data.DataManager;
 import id.ukdw.srmmobile.data.model.api.request.KelasRequest;
 import id.ukdw.srmmobile.data.model.api.request.ProfilRequest;
@@ -28,10 +23,8 @@ import io.reactivex.disposables.Disposable;
  * Description : DaftarKelasViewModel
  */
 public class DaftarKelasViewModel extends BaseViewModel<DaftarKelasNavigator> {
-
-
-    public DaftarKelasViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
-        super( dataManager, schedulerProvider );
+    public DaftarKelasViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
+        super(dataManager, schedulerProvider, googleSignInClient);
     }
 
     public void getListKelas() {

@@ -3,6 +3,8 @@ package id.ukdw.srmmobile.di.module;
 import androidx.core.util.Supplier;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+
 import dagger.Module;
 import dagger.Provides;
 import id.ukdw.srmmobile.ViewModelProviderFactory;
@@ -32,22 +34,22 @@ public class FragmentModule {
     }
 
     @Provides
-    ProfileViewModel provideAboutViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
-        Supplier<ProfileViewModel> supplier = () -> new ProfileViewModel(dataManager, schedulerProvider);
+    ProfileViewModel provideAboutViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
+        Supplier<ProfileViewModel> supplier = () -> new ProfileViewModel(dataManager, schedulerProvider, googleSignInClient);
         ViewModelProviderFactory<ProfileViewModel> factory = new ViewModelProviderFactory<>(ProfileViewModel.class, supplier);
         return new ViewModelProvider(fragment, factory).get(ProfileViewModel.class);
     }
 
     @Provides
-    DaftarKelasViewModel provideDaftarKelasViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
-        Supplier<DaftarKelasViewModel> supplier = () -> new DaftarKelasViewModel(dataManager, schedulerProvider);
+    DaftarKelasViewModel provideDaftarKelasViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
+        Supplier<DaftarKelasViewModel> supplier = () -> new DaftarKelasViewModel(dataManager, schedulerProvider, googleSignInClient);
         ViewModelProviderFactory<DaftarKelasViewModel> factory = new ViewModelProviderFactory<>(DaftarKelasViewModel.class, supplier);
         return new ViewModelProvider(fragment, factory).get(DaftarKelasViewModel.class);
     }
 
     @Provides
-    PengumumanViewModel providePengumumanViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
-        Supplier<PengumumanViewModel> supplier = () -> new PengumumanViewModel(dataManager, schedulerProvider);
+    PengumumanViewModel providePengumumanViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
+        Supplier<PengumumanViewModel> supplier = () -> new PengumumanViewModel(dataManager, schedulerProvider, googleSignInClient);
         ViewModelProviderFactory<PengumumanViewModel> factory = new ViewModelProviderFactory<>(PengumumanViewModel.class, supplier);
         return new ViewModelProvider(fragment, factory).get(PengumumanViewModel.class);
     }

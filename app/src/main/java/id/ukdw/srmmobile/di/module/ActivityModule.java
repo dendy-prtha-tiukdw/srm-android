@@ -3,6 +3,8 @@ package id.ukdw.srmmobile.di.module;
 import androidx.core.util.Supplier;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+
 import dagger.Module;
 import dagger.Provides;
 import id.ukdw.srmmobile.ViewModelProviderFactory;
@@ -33,22 +35,22 @@ public class ActivityModule {
     }
 
     @Provides
-    LoginViewModel provideLoginViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
-        Supplier<LoginViewModel> supplier = () -> new LoginViewModel(dataManager, schedulerProvider);
+    LoginViewModel provideLoginViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
+        Supplier<LoginViewModel> supplier = () -> new LoginViewModel(dataManager, schedulerProvider, googleSignInClient);
         ViewModelProviderFactory<LoginViewModel> factory = new ViewModelProviderFactory<>(LoginViewModel.class, supplier);
         return new ViewModelProvider(activity, factory).get(LoginViewModel.class);
     }
 
     @Provides
-    SplashViewModel provideSplashViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
-        Supplier<SplashViewModel> supplier = () -> new SplashViewModel(dataManager, schedulerProvider);
+    SplashViewModel provideSplashViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
+        Supplier<SplashViewModel> supplier = () -> new SplashViewModel(dataManager, schedulerProvider, googleSignInClient);
         ViewModelProviderFactory<SplashViewModel> factory = new ViewModelProviderFactory<>(SplashViewModel.class, supplier);
         return new ViewModelProvider(activity, factory).get(SplashViewModel.class);
     }
 
     @Provides
-    HomeViewModel provideHomeViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
-        Supplier<HomeViewModel> supplier = () -> new HomeViewModel(dataManager, schedulerProvider);
+    HomeViewModel provideHomeViewModel(DataManager dataManager, SchedulerProvider schedulerProvider , GoogleSignInClient googleSignInClient) {
+        Supplier<HomeViewModel> supplier = () -> new HomeViewModel(dataManager, schedulerProvider, googleSignInClient);
         ViewModelProviderFactory<HomeViewModel> factory = new ViewModelProviderFactory<>(HomeViewModel.class, supplier);
         return new ViewModelProvider(activity, factory).get(HomeViewModel.class);
     }

@@ -3,6 +3,7 @@ package id.ukdw.srmmobile.di.component;
 import dagger.Component;
 import id.ukdw.srmmobile.di.module.ActivityModule;
 import id.ukdw.srmmobile.di.scope.ActivityScope;
+import id.ukdw.srmmobile.ui.detailkelas.DetailKelasActivity;
 import id.ukdw.srmmobile.ui.home.HomeActivity;
 import id.ukdw.srmmobile.ui.login.LoginActivity;
 import id.ukdw.srmmobile.ui.splash.SplashActivity;
@@ -25,4 +26,6 @@ public interface ActivityComponent {
     void inject(HomeActivity activity);
 
     void inject(SplashActivity splashActivity);
+
+    void inject(DetailKelasActivity detailKelasActivity);
 }

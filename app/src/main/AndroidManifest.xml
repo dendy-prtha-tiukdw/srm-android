@@ -39,7 +39,7 @@
         </activity>
 
         <activity
-            android:name=".ui.detailkelas.detailKelas_activity"
+            android:name=".ui.detailkelas.DetailKelasActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
        <!-- <activity
             android:name=".ui.TambahPengumuman"

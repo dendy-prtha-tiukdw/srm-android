@@ -59,6 +59,7 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                     @Override
                     public void onError(Throwable e) {
                         getNavigator().handleError(e);
+
                     }
 
                     @Override

@@ -9,15 +9,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import id.ukdw.srmmobile.R;
-import id.ukdw.srmmobile.ui.detailkelas.RecyclerViewModelKelas;
 
 public class DaftarKelasAdapter extends RecyclerView.Adapter<DaftarKelasAdapter.ViewHolder> {
 
     Context mContext;
-    ArrayList<RecyclerViewModelKelas> mItemListKelas;
+    List<RecyclerViewModelKelas> mItemListKelas;
     private OnItemListener mlistener;
 
     public interface OnItemListener{
@@ -28,7 +27,7 @@ public class DaftarKelasAdapter extends RecyclerView.Adapter<DaftarKelasAdapter.
         mlistener = listener;
     }
 
-    public DaftarKelasAdapter(Context mContext, ArrayList<RecyclerViewModelKelas> mItemListKelas) {
+    public DaftarKelasAdapter(Context mContext, List<RecyclerViewModelKelas> mItemListKelas) {
         this.mContext = mContext;
         this.mItemListKelas = mItemListKelas;
     }

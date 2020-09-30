@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="id.ukdw.srmmobile.ui.detailkelas.DetailKelasActivity">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="detailkelas"
+            type="id.ukdw.srmmobile.ui.detailkelas.DetailKelasActivity" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/detailmatakuliah"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#2d2d2d"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/prevPage"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="45dp"
+            android:paddingLeft="20dp"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/namaMatkul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="-80dp"
+            android:text="Detail Kelas"
+            android:textColor="#FFF"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="50dp"
+            android:text="Detail Kelas"
+            android:textColor="#FFF"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/Group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="10dp"
+            android:text="Detail Kelas"
+            android:textColor="#FFF"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="10dp"
+            android:text="Detail Kelas"
+            android:textColor="#FFF"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/sesi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="10dp"
+            android:text="Detail Kelas"
+            android:textColor="#FFF"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="10dp"
+            android:text="Detail Kelas"
+            android:textColor="#FFF"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/dosenPengajar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="10dp"
+            android:text="Detail Kelas"
+            android:textColor="#FFF"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+
+
+    </LinearLayout>
+</layout>

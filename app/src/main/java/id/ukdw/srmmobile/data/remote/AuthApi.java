@@ -29,4 +29,8 @@ public interface AuthApi {
 
     @POST("auth/signout")
     Observable<ResponseWrapper> signOutPost(@Body LogoutRequest request);
+
+    @GET("auth/profil")
+    Observable<ResponseWrapper<ProfilResponse>> profilGet(@Body ProfilRequest request);
+
 }

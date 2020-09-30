@@ -8,26 +8,28 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+
 import java.util.ArrayList;
+import java.util.List;
 
 import id.ukdw.srmmobile.BR;
 import id.ukdw.srmmobile.R;
+import id.ukdw.srmmobile.data.model.api.response.KelasResponse;
 import id.ukdw.srmmobile.databinding.FragmentDaftarKelasBinding;
 import id.ukdw.srmmobile.di.component.FragmentComponent;
-import id.ukdw.srmmobile.ui.detailkelas.RecyclerViewModelKelas;
 import id.ukdw.srmmobile.ui.base.BaseFragment;
-import id.ukdw.srmmobile.ui.detailkelas.detailKelas_activity;
+import id.ukdw.srmmobile.ui.detailkelas.DetailKelasActivity;
 import id.ukdw.srmmobile.ui.home.HomeActivity;
 
 public class DaftarKelasFragment extends BaseFragment<FragmentDaftarKelasBinding, DaftarKelasViewModel>
         implements DaftarKelasNavigator {
 
-    ArrayList<RecyclerViewModelKelas> itemList;
+    List<RecyclerViewModelKelas> itemList;
 
     public static DaftarKelasFragment newInstance() {
         Bundle args = new Bundle();
         DaftarKelasFragment fragment = new DaftarKelasFragment();
-        fragment.setArguments(args);
+        fragment.setArguments( args );
         return fragment;
     }
 
@@ -44,55 +46,62 @@ public class DaftarKelasFragment extends BaseFragment<FragmentDaftarKelasBinding
     @Nullable
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        super.onViewCreated( view, savedInstanceState );
 
-        getViewDataBinding().recyclerKelas.setHasFixedSize(true);
-        DaftarKelasAdapter daftarKelasAdapter = new DaftarKelasAdapter(getContext(), initData());
-        getViewDataBinding().recyclerKelas.setLayoutManager(new LinearLayoutManager(getActivity()));
-        getViewDataBinding().recyclerKelas.setAdapter(daftarKelasAdapter);
 
-        daftarKelasAdapter.setOnItemClickListener(new DaftarKelasAdapter.OnItemListener() {
-            @Override
-            public void onItemClick(int position) {
-                Intent intent;
-                intent = new Intent(getActivity(), detailKelas_activity.class);
-                System.out.println("TESTSTSDADA" + itemList.get(position));
-                intent.putExtra("RecyclerViewModelKelas", itemList.get(position));
-                startActivity(intent);
-            }
-        });
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mViewModel.setNavigator(this);
-        mViewModel.setContext(getBaseActivity());
+        super.onCreate( savedInstanceState );
+        mViewModel.setNavigator( this );
+        mViewModel.setContext( getBaseActivity() );
     }
 
     @Override
     public void performDependencyInjection(FragmentComponent buildComponent) {
-        buildComponent.inject(this);
+        buildComponent.inject( this );
+        mViewModel.getListKelas();
     }
 
     public void onResume() {
         super.onResume();
 
-        // Set title bar
         ((HomeActivity) getActivity())
-                .setActionBarTitle("Daftar Kelas");
+                .setActionBarTitle( "Daftar Kelas" );
     }
 
-    private ArrayList<RecyclerViewModelKelas> initData() {
+
+    @Override
+    public void handleError(Throwable throwable) {
+
+    }
+
+    @Override
+    public void updateListDaftarKelas(List<KelasResponse> kelasList) {
         itemList = new ArrayList<>();
-        itemList.add(new RecyclerViewModelKelas("Administrasi Sistem (A)", "Detail Matakuliah"));
-        itemList.add(new RecyclerViewModelKelas("Teknik Komputer (B)", "Detail Matakuliah"));
-        itemList.add(new RecyclerViewModelKelas("Jaringan Nirkabel (C)", "Detail Matakuliah"));
-        itemList.add(new RecyclerViewModelKelas("Pendidikan Pancasila (B)", "Detail Matakuliah"));
-        itemList.add(new RecyclerViewModelKelas("Pemrograman Web (D)", "Detail Matakuliah"));
-        itemList.add(new RecyclerViewModelKelas("Sistem Basis Data (A)", "Detail Matakuliah"));
 
-        return itemList;
+        for (KelasResponse kelasresponse : kelasList) {
+            itemList.add( new RecyclerViewModelKelas( kelasresponse.getNamaMatakuliah()+ " " + kelasresponse.getGroup(), kelasresponse.getHari()+ " "+ kelasresponse.getJam() ) );
+
+        }
+
+        getViewDataBinding().recyclerKelas.setHasFixedSize( true );
+        DaftarKelasAdapter daftarKelasAdapter = new DaftarKelasAdapter( getContext(), itemList );
+        getViewDataBinding().recyclerKelas.setLayoutManager( new LinearLayoutManager( getActivity() ) );
+        getViewDataBinding().recyclerKelas.setAdapter( daftarKelasAdapter );
+
+        daftarKelasAdapter.setOnItemClickListener( new DaftarKelasAdapter.OnItemListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent;
+                intent = new Intent( getActivity(), DetailKelasActivity.class );
+                intent.putExtra( "RecyclerViewModelKelas", itemList.get( position ) );
+                startActivity( intent );
+            }
+        } );
+
+
+
     }
-
 }

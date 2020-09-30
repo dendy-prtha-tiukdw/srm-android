@@ -67,22 +67,10 @@ public class DaftarKelasFragment extends BaseFragment<FragmentDaftarKelasBinding
     public void onResume() {
         super.onResume();
 
-        // Set title bar
         ((HomeActivity) getActivity())
                 .setActionBarTitle( "Daftar Kelas" );
     }
 
-//    private ArrayList<RecyclerViewModelKelas> initData() {
-//
-//        itemList.add( new RecyclerViewModelKelas( "Administrasi Sistem (A)", "Detail Matakuliah" ) );
-//        itemList.add( new RecyclerViewModelKelas( "Teknik Komputer (B)", "Detail Matakuliah" ) );
-//        itemList.add( new RecyclerViewModelKelas( "Jaringan Nirkabel (C)", "Detail Matakuliah" ) );
-//        itemList.add( new RecyclerViewModelKelas( "Pendidikan Pancasila (B)", "Detail Matakuliah" ) );
-//        itemList.add( new RecyclerViewModelKelas( "Pemrograman Web (D)", "Detail Matakuliah" ) );
-//        itemList.add( new RecyclerViewModelKelas( "Sistem Basis Data (A)", "Detail Matakuliah" ) );
-//
-//        return itemList;
-//    }
 
     @Override
     public void handleError(Throwable throwable) {
@@ -112,7 +100,6 @@ public class DaftarKelasFragment extends BaseFragment<FragmentDaftarKelasBinding
             public void onItemClick(int position) {
                 Intent intent;
                 intent = new Intent( getActivity(), DetailKelasActivity.class );
-                System.out.println( "TESTSTSDADA" + itemList.get( position ) );
                 intent.putExtra( "RecyclerViewModelKelas", itemList.get( position ) );
                 startActivity( intent );
             }

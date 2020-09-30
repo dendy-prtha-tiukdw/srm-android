@@ -37,7 +37,7 @@ public class DaftarKelasViewModel extends BaseViewModel<DaftarKelasNavigator> {
     public void getListKelas() {
 
         getDataManager().getUserApi( getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken() )
-                .listKelasGet( )
+                .listKelasGet()
                 .subscribeOn( getSchedulerProvider().io() )
                 .observeOn( getSchedulerProvider().ui() )
                 .subscribe( new Observer<ResponseWrapper<List<KelasResponse>>>() {
@@ -49,17 +49,7 @@ public class DaftarKelasViewModel extends BaseViewModel<DaftarKelasNavigator> {
 
                     @Override
                     public void onNext(ResponseWrapper<List<KelasResponse>> listResponseWrapper) {
-//                        for (KelasResponse kelasresponse : listResponseWrapper.getData()) {
-//
-//                            System.out.println(kelasresponse.getNamaMataKuliah());
-//                            System.out.println(kelasresponse.getHari() );
-//                            System.out.println(kelasresponse.getSesi() );
-////                            itemList.add( new RecyclerViewModelKelas( kelasresponse.getNamaMataKuliah()+ " " + kelasresponse.getGroup(), "" ) );
-//
-//                        }
-//                        KelasResponse kelasResponse = (KelasResponse) listResponseWrapper.getData();
-                        System.out.println("test nama mattkul di view model :  " +listResponseWrapper.getData().get( 0 ).getNamaMatakuliah());
-                        System.out.println("test jam di view model : " +listResponseWrapper.getData().get( 0 ).getJam());
+
                         getNavigator().updateListDaftarKelas( listResponseWrapper.getData() );
 
 

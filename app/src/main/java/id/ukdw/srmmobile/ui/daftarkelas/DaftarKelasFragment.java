@@ -82,10 +82,6 @@ public class DaftarKelasFragment extends BaseFragment<FragmentDaftarKelasBinding
         itemList = new ArrayList<>();
 
         for (KelasResponse kelasresponse : kelasList) {
-
-            System.out.println(kelasList.get( 0 ).getNamaMatakuliah() );
-            System.out.println(kelasresponse.getHari() );
-            System.out.println(kelasresponse.getJam() );
             itemList.add( new RecyclerViewModelKelas( kelasresponse.getNamaMatakuliah()+ " " + kelasresponse.getGroup(), kelasresponse.getHari()+ " "+ kelasresponse.getJam() ) );
 
         }

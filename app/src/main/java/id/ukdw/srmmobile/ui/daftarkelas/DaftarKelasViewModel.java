@@ -43,7 +43,7 @@ public class DaftarKelasViewModel extends BaseViewModel<DaftarKelasNavigator> {
                 .subscribe( new Observer<ResponseWrapper<List<KelasResponse>>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        System.out.println();
+                        setIsLoading( true );
 
                     }
 

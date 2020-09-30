@@ -1,5 +1,7 @@
 package id.ukdw.srmmobile.ui.pengumuman;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+
 import id.ukdw.srmmobile.data.DataManager;
 import id.ukdw.srmmobile.ui.base.BaseViewModel;
 import id.ukdw.srmmobile.utils.rx.SchedulerProvider;
@@ -15,7 +17,7 @@ import id.ukdw.srmmobile.utils.rx.SchedulerProvider;
  * Description : PengumumanViewModel
  */
 public class PengumumanViewModel extends BaseViewModel<PengumumanNavigator> {
-    public PengumumanViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
-        super(dataManager, schedulerProvider);
+    public PengumumanViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
+        super(dataManager, schedulerProvider, googleSignInClient);
     }
 }

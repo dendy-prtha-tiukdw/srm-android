@@ -3,12 +3,6 @@ package id.ukdw.srmmobile;
 import android.app.Application;
 import android.content.Context;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-
-import javax.inject.Inject;
-
 import id.ukdw.srmmobile.di.component.AppComponent;
 import id.ukdw.srmmobile.di.component.DaggerAppComponent;
 
@@ -24,12 +18,8 @@ import id.ukdw.srmmobile.di.component.DaggerAppComponent;
  */
 public class SrmMobileApplication extends Application {
 
+    private static final String TAG = SrmMobileApplication.class.getSimpleName();
     public AppComponent appComponent;
-
-    private GoogleSignInClient mGoogleSignInClient;
-
-    @Inject
-    GoogleSignInOptions googleSignInOptions;
 
     public static SrmMobileApplication get(Context context) {
         return (SrmMobileApplication) context.getApplicationContext();
@@ -38,8 +28,6 @@ public class SrmMobileApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
-
         appComponent = DaggerAppComponent.builder()
                 .application(this)
                 .build();
@@ -55,11 +43,6 @@ public class SrmMobileApplication extends Application {
         }
 
         CalligraphyConfig.initDefault(mCalligraphyConfig);*/
-        mGoogleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
-    }
-
-    public GoogleSignInClient getGoogleSignInClient(){
-        return mGoogleSignInClient;
     }
 
     public AppComponent getComponent(){

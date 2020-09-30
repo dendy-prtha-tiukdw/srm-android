@@ -2,6 +2,8 @@ package id.ukdw.srmmobile.di.component;
 
 import android.app.Application;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+
 import javax.inject.Singleton;
 
 import dagger.BindsInstance;
@@ -30,6 +32,8 @@ public interface AppComponent {
     DataManager getDataManager();
 
     SchedulerProvider getSchedulerProvider();
+
+    GoogleSignInClient getGoogleSignInClient();
 
     @Component.Builder
     interface Builder {

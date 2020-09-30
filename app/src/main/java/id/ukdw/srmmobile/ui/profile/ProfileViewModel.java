@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
@@ -33,8 +34,8 @@ import static id.ukdw.srmmobile.utils.AppConstants.SCOPE_GOOGLE_CALENDAR;
 public class ProfileViewModel extends BaseViewModel<ProfileNavigator> {
     private static final String TAG = ProfileViewModel.class.getSimpleName();
 
-    public ProfileViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
-        super(dataManager, schedulerProvider);
+    public ProfileViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
+        super(dataManager, schedulerProvider, googleSignInClient);
     }
 
     public void getProfile() {

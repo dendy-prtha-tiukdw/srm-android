@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "614499159286",
+    "firebase_url": "https://srm-notifications-2b16f.firebaseio.com",
+    "project_id": "srm-notifications-2b16f",
+    "storage_bucket": "srm-notifications-2b16f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:614499159286:android:6337445765b9a53f9c30d7",
+        "android_client_info": {
+          "package_name": "id.ukdw.srmmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "614499159286-65eorqtmlhi95ra4abv9qtbqth37atdo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrSvFZtOgFhGLMnQTLikq44ySR6Y6SPIQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "614499159286-65eorqtmlhi95ra4abv9qtbqth37atdo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

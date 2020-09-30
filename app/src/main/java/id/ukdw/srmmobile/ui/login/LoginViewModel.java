@@ -1,7 +1,13 @@
 package id.ukdw.srmmobile.ui.login;
 
+import android.util.Log;
+
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.firebase.iid.FirebaseInstanceId;
+
 import id.ukdw.srmmobile.data.DataManager;
 import id.ukdw.srmmobile.data.model.api.request.LoginRequest;
+import id.ukdw.srmmobile.data.model.api.request.UpdateFcmRequest;
 import id.ukdw.srmmobile.data.model.api.response.LoginResponse;
 import id.ukdw.srmmobile.data.model.api.response.ResponseWrapper;
 import id.ukdw.srmmobile.utils.rx.SchedulerProvider;
@@ -22,13 +28,12 @@ import io.reactivex.disposables.Disposable;
 public class LoginViewModel extends BaseViewModel<LoginNavigator> {
     private static final String TAG = LoginViewModel.class.getSimpleName();
 
-    public LoginViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
-        super(dataManager, schedulerProvider);
+    public LoginViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
+        super(dataManager, schedulerProvider, googleSignInClient);
 
     }
 
     public void onGoogleLoginClick(String serverAuthCode) {
-
         getDataManager().getAuthApi()
                 .loginPost(new LoginRequest("google", serverAuthCode))
                 .subscribeOn(getSchedulerProvider().io())
@@ -53,6 +58,7 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                                 loginResponse.getImageUrl(),
                                 loginResponse.getRole()
                         );
+                        getFcmToken();
                         getNavigator().openHomeActivity();
                     }
 
@@ -65,6 +71,52 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                     @Override
                     public void onComplete() {
                         setIsLoading(false);
+                    }
+                });
+    }
+
+    private void getFcmToken() {
+        FirebaseInstanceId.getInstance()
+                .getInstanceId()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Log.w(TAG, "getInstanceId failed", task.getException());
+                        return;
+                    }
+
+                    // Get new Instance ID token
+                    String token = task.getResult().getToken();
+
+                    // Log and toast
+                    Log.d(TAG, "InstanceID Token: " + token);
+                    updateFcmToken(token);
+                });
+    }
+
+    private void updateFcmToken(String fcmToken){
+        getDataManager().getUserApi(getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken())
+                .updateFcmToken(new UpdateFcmRequest(fcmToken))
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(new Observer<ResponseWrapper<Boolean>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(ResponseWrapper<Boolean> fcmResponseWrapper) {
+                        Log.d(TAG, "InstanceID Token: " + fcmResponseWrapper.getData());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "onError: " + e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        //setIsLoading(false);
                     }
                 });
     }

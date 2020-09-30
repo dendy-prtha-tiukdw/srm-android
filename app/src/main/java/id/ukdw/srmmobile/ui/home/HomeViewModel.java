@@ -1,5 +1,7 @@
 package id.ukdw.srmmobile.ui.home;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+
 import id.ukdw.srmmobile.data.DataManager;
 import id.ukdw.srmmobile.data.model.api.request.LogoutRequest;
 import id.ukdw.srmmobile.data.model.api.response.ResponseWrapper;
@@ -21,8 +23,8 @@ import io.reactivex.disposables.Disposable;
 public class HomeViewModel extends BaseViewModel<HomeNavigator> {
     private static final String TAG = HomeViewModel.class.getSimpleName();
 
-    public HomeViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
-        super(dataManager, schedulerProvider);
+    public HomeViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
+        super(dataManager, schedulerProvider, googleSignInClient);
     }
 
     public void logOut() {

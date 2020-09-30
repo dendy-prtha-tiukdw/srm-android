@@ -3,6 +3,8 @@ package id.ukdw.srmmobile.di.module;
 import android.app.Application;
 import android.content.Context;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.Scope;
@@ -96,7 +98,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    GoogleSignInOptions provideGoogleSignInClient() {
+    GoogleSignInOptions provideGoogleSignInOptions() {
         return new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestScopes(new Scope(Scopes.DRIVE_APPFOLDER),
                         new Scope(AppConstants.SCOPE_GOOGLE_CALENDAR))
@@ -105,4 +107,9 @@ public class AppModule {
                 .build();
     }
 
+    @Provides
+    @Singleton
+    GoogleSignInClient provideGoogleSignInClient(Application application, GoogleSignInOptions googleSignInOptions){
+        return GoogleSignIn.getClient(application, googleSignInOptions);
+    }
 }

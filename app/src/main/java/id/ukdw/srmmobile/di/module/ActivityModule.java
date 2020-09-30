@@ -56,8 +56,8 @@ public class ActivityModule {
     }
 
     @Provides
-    DetailKelasViewModel provideDetailKelasViewModel(DataManager dataManager, SchedulerProvider schedulerProvider){
-        Supplier<DetailKelasViewModel> supplier = () -> new DetailKelasViewModel( dataManager,schedulerProvider );
+    DetailKelasViewModel provideDetailKelasViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient){
+        Supplier<DetailKelasViewModel> supplier = () -> new DetailKelasViewModel( dataManager,schedulerProvider, googleSignInClient);
         ViewModelProviderFactory<DetailKelasViewModel> factory = new ViewModelProviderFactory<>( DetailKelasViewModel.class, supplier );
         return new ViewModelProvider( activity, factory ).get( DetailKelasViewModel.class );
     }

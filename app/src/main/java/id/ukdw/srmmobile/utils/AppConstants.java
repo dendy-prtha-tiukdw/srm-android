@@ -34,9 +34,7 @@ public final class AppConstants {
 
     public static final String SCOPE_GOOGLE_CALENDAR = "https://www.googleapis.com/auth/calendar";
 
-    //public static final String BASE_URL = "https://apps.dw.fti.ukdw.ac.id/srm/";
-
-    public static final String BASE_URL = "http://192.168.1.102:8080/";
+    public static final String BASE_URL = "https://apps.dw.fti.ukdw.ac.id/srm/";
 
     public static final int RETROFIT_CONNECTION_TIMEOUT = 10;
 

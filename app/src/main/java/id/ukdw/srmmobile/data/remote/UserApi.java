@@ -2,8 +2,6 @@ package id.ukdw.srmmobile.data.remote;
 
 
 import java.util.List;
-
-import id.ukdw.srmmobile.data.model.api.request.KelasRequest;
 import id.ukdw.srmmobile.data.model.api.request.ProfilRequest;
 import id.ukdw.srmmobile.data.model.api.request.UpdateFcmRequest;
 import id.ukdw.srmmobile.data.model.api.response.KelasResponse;

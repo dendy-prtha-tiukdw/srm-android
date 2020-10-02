@@ -5,6 +5,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import java.util.List;
 
 import id.ukdw.srmmobile.data.DataManager;
+import id.ukdw.srmmobile.data.model.api.request.DetailKelasRequest;
+import id.ukdw.srmmobile.data.model.api.response.DetailKelasResponse;
 import id.ukdw.srmmobile.data.model.api.response.KelasResponse;
 import id.ukdw.srmmobile.data.model.api.response.ResponseWrapper;
 import id.ukdw.srmmobile.ui.base.BaseViewModel;
@@ -29,23 +31,20 @@ public class DaftarKelasViewModel extends BaseViewModel<DaftarKelasNavigator> {
 
     public void getListKelas() {
 
-        getDataManager().getUserApi( getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken() )
-                .listKelasGet()
-                .subscribeOn( getSchedulerProvider().io() )
-                .observeOn( getSchedulerProvider().ui() )
-                .subscribe( new Observer<ResponseWrapper<List<KelasResponse>>>() {
+        getDataManager().getUserApi(getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken())
+                .getListKelas()
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(new Observer<ResponseWrapper<List<KelasResponse>>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        setIsLoading( true );
+                        setIsLoading(true);
 
                     }
 
                     @Override
                     public void onNext(ResponseWrapper<List<KelasResponse>> listResponseWrapper) {
-
-                        getNavigator().updateListDaftarKelas( listResponseWrapper.getData() );
-
-
+                        getNavigator().updateListDaftarKelas(listResponseWrapper.getData());
                     }
 
                     @Override
@@ -57,7 +56,6 @@ public class DaftarKelasViewModel extends BaseViewModel<DaftarKelasNavigator> {
                     public void onComplete() {
 
                     }
-                } );
+                });
     }
-
 }

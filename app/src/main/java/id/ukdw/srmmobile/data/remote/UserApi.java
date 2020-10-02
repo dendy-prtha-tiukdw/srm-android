@@ -4,11 +4,10 @@ package id.ukdw.srmmobile.data.remote;
 import java.util.List;
 
 import id.ukdw.srmmobile.data.model.api.request.DetailKelasRequest;
-import id.ukdw.srmmobile.data.model.api.request.KelasRequest;
 import id.ukdw.srmmobile.data.model.api.request.PesertaKelasRequest;
 import id.ukdw.srmmobile.data.model.api.request.ProfilRequest;
 import id.ukdw.srmmobile.data.model.api.request.UpdateFcmRequest;
-import id.ukdw.srmmobile.data.model.api.response.DetailkelasResponse;
+import id.ukdw.srmmobile.data.model.api.response.DetailKelasResponse;
 import id.ukdw.srmmobile.data.model.api.response.KelasResponse;
 import id.ukdw.srmmobile.data.model.api.response.PesertaKelasResponse;
 import id.ukdw.srmmobile.data.model.api.response.ProfilResponse;
@@ -23,15 +22,15 @@ public interface UserApi {
     Observable<ResponseWrapper<ProfilResponse>> getProfile(@Body ProfilRequest request);
 
     @GET("user/kelas")
-    Observable<ResponseWrapper<List<KelasResponse>>> listKelasGet();
+    Observable<ResponseWrapper<List<KelasResponse>>> getListKelas();
 
     @POST("user/updatefcmtoken")
     Observable<ResponseWrapper<Boolean>> updateFcmToken(@Body UpdateFcmRequest request);
 
-    @POST("/kelas/daftarKelas")
-    Observable<ResponseWrapper<DetailkelasResponse>> detailKelas(@Body DetailKelasRequest request);
+    @POST("kelas/detail")
+    Observable<ResponseWrapper<DetailKelasResponse>> detailKelas(@Body DetailKelasRequest request);
 
-    @POST("/kelas/mahasiswa/list")
+    @POST("kelas/mahasiswa/list")
     Observable<ResponseWrapper<List<PesertaKelasResponse>>> getPesertaKelas (@Body PesertaKelasRequest request);
 
     

@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class DetailkelasResponse {
+public class DetailKelasResponse {
 
     String namaMatakuliah;
     String group;
@@ -14,6 +14,4 @@ public class DetailkelasResponse {
     String semester;
     String sesi;
     List<String> namaDosen;
-
-
 }

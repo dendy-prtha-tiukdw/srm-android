@@ -3,29 +3,29 @@ package id.ukdw.srmmobile.ui.detailkelas;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ListView;
 
-import androidx.annotation.Nullable;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.List;
 
 import id.ukdw.srmmobile.BR;
 import id.ukdw.srmmobile.R;
+import id.ukdw.srmmobile.data.model.api.response.DetailKelasResponse;
 import id.ukdw.srmmobile.data.model.api.response.PesertaKelasResponse;
 import id.ukdw.srmmobile.databinding.ActivityDetailKelasBinding;
 import id.ukdw.srmmobile.di.component.ActivityComponent;
 import id.ukdw.srmmobile.ui.base.BaseActivity;
 import id.ukdw.srmmobile.ui.daftarkelas.RecyclerViewModelKelas;
-import id.ukdw.srmmobile.ui.login.LoginActivity;
 
 public class DetailKelasActivity extends BaseActivity<ActivityDetailKelasBinding, DetailKelasViewModel>
-implements DetailKelasNavigator{
+        implements DetailKelasNavigator {
 
     private ActivityDetailKelasBinding activityDetailKelasBinding;
-    ListView listView;
+    DetailKelasResponse detailkelasResponse;
+    List<PesertaKelasResponse> pesertaKelas;
 
-
+    public static final String DETAIL_KELAS_DATA = "DETAIL_KELAS_DATA";
 
     public static Intent newIntent(Context context) {
         return new Intent(context, DetailKelasActivity.class);
@@ -34,7 +34,7 @@ implements DetailKelasNavigator{
 
     @Override
     public int getBindingVariable() {
-        return BR.detailkelas;
+        return BR.detailKelasViewModel;
     }
 
     @Override
@@ -43,10 +43,9 @@ implements DetailKelasNavigator{
     }
 
 
-
     @Override
     public void performDependencyInjection(ActivityComponent buildComponent) {
-        buildComponent.inject( this );
+        buildComponent.inject(this);
 
     }
 
@@ -54,15 +53,12 @@ implements DetailKelasNavigator{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityDetailKelasBinding = getViewDataBinding();
-        mViewModel.setNavigator( this );
-        mViewModel.setContext( this );
-        Intent intent = getIntent();
-        RecyclerViewModelKelas recyclerViewModelKelas = intent.getParcelableExtra( "RecyclerViewModelKelas" );
-        mViewModel.getDetailKelas( recyclerViewModelKelas.getJudul1(),recyclerViewModelKelas.getDetail1(),recyclerViewModelKelas.getSemester(),recyclerViewModelKelas.getTahunAjaran() );
-        mViewModel.getPesertaKelas( recyclerViewModelKelas.getJudul1(),recyclerViewModelKelas.getDetail1(),recyclerViewModelKelas.getSemester(),recyclerViewModelKelas.getTahunAjaran() );
-
+        mViewModel.setNavigator(this);
+        mViewModel.setContext(this);
+        RecyclerViewModelKelas recyclerViewModelKelas = (RecyclerViewModelKelas) getIntent().getSerializableExtra(DETAIL_KELAS_DATA);
+        mViewModel.getDetailKelas(recyclerViewModelKelas.getNamaMakul(), recyclerViewModelKelas.getGroup(), recyclerViewModelKelas.getSemester(), recyclerViewModelKelas.getTahunAjaran());
+        mViewModel.getPesertaKelas(recyclerViewModelKelas.getNamaMakul(), recyclerViewModelKelas.getGroup(), recyclerViewModelKelas.getSemester(), recyclerViewModelKelas.getTahunAjaran());
     }
-
 
 
     @Override
@@ -71,15 +67,27 @@ implements DetailKelasNavigator{
     }
 
     @Override
-    public void onGetDetailKelasCompleted(String namaMatakuliah, String group, String hari, String jam, String semester, String tahunAjaran, List<String> namaDosen) {
-        activityDetailKelasBinding.namaMatkul.setText( namaMatakuliah + " "+ group );
-        activityDetailKelasBinding.sesi.setText( hari + " "+ jam );
-        activityDetailKelasBinding.tahunAjaran.setText( semester +" "+tahunAjaran );
+    public void onGetDetailKelasCompleted(DetailKelasResponse detailkelasResponse) {
+        this.detailkelasResponse = detailkelasResponse;
+        activityDetailKelasBinding.txtNamaMakul.setText(detailkelasResponse.getNamaMatakuliah() +
+                " " + detailkelasResponse.getGroup());
+        for (int i = 0; i < detailkelasResponse.getNamaDosen().size(); i++) {
+            activityDetailKelasBinding.txtPengajar.append(" " + detailkelasResponse.getNamaDosen().get(i));
+            if (i + 1 < detailkelasResponse.getNamaDosen().size()) {
+                activityDetailKelasBinding.txtPengajar.append("\n");
+            }
+        }
 
+        activityDetailKelasBinding.txtPeriode.append(" Semester " + detailkelasResponse.getSemester() + " " + detailkelasResponse.getTahunAjaran());
+        activityDetailKelasBinding.txtWaktu.append(" " + detailkelasResponse.getHari() + " " + detailkelasResponse.getSesi());
     }
 
     @Override
     public void onGetPesertaKelasCompleted(List<PesertaKelasResponse> pesertaKelasResponses) {
-
+        this.pesertaKelas = pesertaKelasResponses;
+        DaftarPesertaKelasAdapter daftarPesertaKelasAdapter = new DaftarPesertaKelasAdapter(this, pesertaKelasResponses);
+        getViewDataBinding().recyclerPesertaKelas.setHasFixedSize(true);
+        getViewDataBinding().recyclerPesertaKelas.setLayoutManager(new LinearLayoutManager(this));
+        getViewDataBinding().recyclerPesertaKelas.setAdapter(daftarPesertaKelasAdapter);
     }
 }

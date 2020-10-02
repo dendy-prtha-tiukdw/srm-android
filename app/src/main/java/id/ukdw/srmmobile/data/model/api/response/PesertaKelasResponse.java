@@ -4,8 +4,11 @@ import lombok.Data;
 
 @Data
 public class PesertaKelasResponse {
-
     String nim;
     String nama;
 
+    public PesertaKelasResponse() {
+        this.nim = "";
+        this.nama = "";
+    }
 }

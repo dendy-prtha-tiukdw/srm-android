@@ -1,4 +1,4 @@
-package id.ukdw.srmmobile.ui.detailkelas;
+package id.ukdw.srmmobile.ui.tugaskelas;
 
 import androidx.appcompat.app.AppCompatActivity;
 

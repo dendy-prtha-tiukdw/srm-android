@@ -36,5 +36,8 @@
 
     <string name="judul_pengumuman"> Tugas Adsis Minggu 11 </string>
     <string name="tanggal_pengumuman"> 12 September 2020 </string>
+    <string name="title_periode">Periode</string>
+    <string name="title_pengajar">Pengajar</string>
+    <string name="title_waktu">Waktu</string>
 
 </resources>

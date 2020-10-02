@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="id.ukdw.srmmobile.ui.detailkelas.DetailKelasActivity">
 
@@ -9,8 +8,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="detailkelas"
-            type="id.ukdw.srmmobile.ui.detailkelas.DetailKelasActivity" />
+            name="detailKelasViewModel"
+            type="id.ukdw.srmmobile.ui.detailkelas.DetailKelasViewModel" />
     </data>
 
     <LinearLayout
@@ -20,60 +19,103 @@
         android:background="#2d2d2d"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/prevPage"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="45dp"
-            android:paddingLeft="20dp"
-            android:src="@drawable/ic_back" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.35"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/namaMatkul"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="-80dp"
-            android:text="Detail Kelas"
-            android:textColor="#FFF"
-            android:textSize="30dp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/txtNamaMakul"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Makul"
+                android:textColor="#FFF"
+                android:textSize="22dp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/sesi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="50dp"
-            android:text="Nama Matakuliah"
-            android:textColor="#FFF"
-            android:textSize="30dp"
-            android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tahunAjaran"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="10dp"
-            android:text="DEA"
-            android:textColor="#FFF"
-            android:textSize="30dp"
-            android:textStyle="bold" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.20"
+                    android:text="@string/title_pengajar"
+                    android:textColor="#FFF"
+                    android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/txtPengajar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.80"
+                    android:text=":"
+                    android:textColor="#FFF"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-        <ListView
-            android:id="@+id/namaDosen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <ListView
-            android:id="@+id/pesertaKelas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.20"
+                    android:text="@string/title_waktu"
+                    android:textColor="#FFF"
+                    android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/txtWaktu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.80"
+                    android:text=":"
+                    android:textColor="#FFF"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.20"
+                    android:text="@string/title_periode"
+                    android:textColor="#FFF"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtPeriode"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.80"
+                    android:text=":"
+                    android:textColor="#FFF"
+                    android:textStyle="bold" />
+            </LinearLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tambahkan ke jadwal minggu depan"
+                android:hint="Menambahkan jadwal perkuliahan untuk minggu depan pada GCalendar Anda "/>
+
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerPesertaKelas"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.65" />
     </LinearLayout>
+
 </layout>

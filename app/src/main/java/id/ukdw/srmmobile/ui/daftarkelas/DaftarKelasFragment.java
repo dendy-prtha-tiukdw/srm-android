@@ -82,7 +82,7 @@ public class DaftarKelasFragment extends BaseFragment<FragmentDaftarKelasBinding
         itemList = new ArrayList<>();
 
         for (KelasResponse kelasresponse : kelasList) {
-            itemList.add( new RecyclerViewModelKelas( kelasresponse.getNamaMatakuliah()+ " " + kelasresponse.getGroup(), kelasresponse.getHari()+ " "+ kelasresponse.getJam() ) );
+            itemList.add( new RecyclerViewModelKelas( kelasresponse.getNamaMatakuliah(), kelasresponse.getGroup(), kelasresponse.getHari(), kelasresponse.getJam(), kelasresponse.getTahunAjaran(),kelasresponse.getSemester() ) );
 
         }
 
@@ -98,6 +98,7 @@ public class DaftarKelasFragment extends BaseFragment<FragmentDaftarKelasBinding
                 intent = new Intent( getActivity(), DetailKelasActivity.class );
                 intent.putExtra( "RecyclerViewModelKelas", itemList.get( position ) );
                 startActivity( intent );
+
             }
         } );
 

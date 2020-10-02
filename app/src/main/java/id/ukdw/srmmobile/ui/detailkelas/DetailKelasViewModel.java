@@ -1,8 +1,12 @@
 package id.ukdw.srmmobile.ui.detailkelas;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+
 import id.ukdw.srmmobile.data.DataManager;
 import id.ukdw.srmmobile.data.model.api.request.DetailKelasRequest;
+import id.ukdw.srmmobile.data.model.api.request.PesertaKelasRequest;
 import id.ukdw.srmmobile.data.model.api.response.DetailkelasResponse;
+import id.ukdw.srmmobile.data.model.api.response.PesertaKelasResponse;
 import id.ukdw.srmmobile.data.model.api.response.ResponseWrapper;
 import id.ukdw.srmmobile.ui.base.BaseViewModel;
 import id.ukdw.srmmobile.utils.rx.SchedulerProvider;
@@ -10,8 +14,8 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 public class DetailKelasViewModel extends BaseViewModel<DetailKelasNavigator> {
-    public DetailKelasViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
-        super( dataManager, schedulerProvider );
+    public DetailKelasViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
+        super( dataManager, schedulerProvider,googleSignInClient );
     }
 
     public void getDetailKelas (String Matkul, String Group, String Semester,String tahunAjaran){
@@ -39,6 +43,36 @@ public class DetailKelasViewModel extends BaseViewModel<DetailKelasNavigator> {
 
                         );
                         setIsLoading( false );
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                } );
+    }
+
+    public void getPesertaKelas (String Matkul, String Group, String Semester,String tahunAjaran){
+        getDataManager().getUserApi( getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken() )
+                .getPesertaKelas( new PesertaKelasRequest( Group,Matkul,Semester,tahunAjaran ) )
+                .subscribeOn( getSchedulerProvider().io() )
+                .observeOn( getSchedulerProvider().ui() )
+                .subscribe( new Observer<ResponseWrapper<PesertaKelasResponse>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(ResponseWrapper<PesertaKelasResponse> pesertaKelasResponseResponseWrapper) {
+                        getNavigator().onGetPesertaKelasCompleted(pesertaKelasResponseResponseWrapper.getData());
+
 
                     }
 

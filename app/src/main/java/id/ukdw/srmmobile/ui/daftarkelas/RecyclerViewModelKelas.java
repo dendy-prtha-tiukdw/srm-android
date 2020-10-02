@@ -6,15 +6,23 @@ import android.os.Parcelable;
 public class  RecyclerViewModelKelas implements Parcelable {
     String Judul;
     String Detail;
+    String hari;
+    String jam;
+    String tahunAjaran;
+    String semester;
 
     protected RecyclerViewModelKelas(Parcel in) {
         Judul = in.readString();
         Detail = in.readString();
     }
 
-    public RecyclerViewModelKelas(String Judul, String Detail) {
+    public RecyclerViewModelKelas(String Judul, String Detail, String hari, String jam, String tahunAjaran, String semester) {
         this.Judul = Judul;
         this.Detail = Detail;
+        this.hari = hari;
+        this.jam = jam;
+        this.tahunAjaran = tahunAjaran;
+        this.semester = semester;
     }
 
     public static final Creator<RecyclerViewModelKelas> CREATOR = new Creator<RecyclerViewModelKelas>() {
@@ -30,6 +38,10 @@ public class  RecyclerViewModelKelas implements Parcelable {
     };
 
     public String getJudul(){
+        return Judul + " "+ Detail;
+    }
+
+    public String getJudul1(){
         return Judul;
     }
 
@@ -38,7 +50,19 @@ public class  RecyclerViewModelKelas implements Parcelable {
     }
 
     public String getDetail() {
-        return Detail;
+        return  hari + " " + jam;
+    }
+
+    public String getTahunAjaran() {
+        return tahunAjaran;
+    }
+
+    public String getSemester() {
+        return semester;
+    }
+
+    public String getDetail1() {
+        return  Detail;
     }
 
     public void setDetail(String Detail) {

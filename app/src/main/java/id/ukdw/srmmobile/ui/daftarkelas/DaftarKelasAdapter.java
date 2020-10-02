@@ -42,8 +42,8 @@ public class DaftarKelasAdapter extends RecyclerView.Adapter<DaftarKelasAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull DaftarKelasAdapter.ViewHolder holder, int position) {
-        holder.judulItem.setText(mItemListKelas.get(position).getJudul());
-        holder.detailItem.setText(mItemListKelas.get(position).getDetail());
+        holder.judulItem.setText(mItemListKelas.get(position).getNamaMakul());
+        holder.detailItem.setText(mItemListKelas.get(position).getGroup());
     }
 
     @Override
@@ -59,17 +59,14 @@ public class DaftarKelasAdapter extends RecyclerView.Adapter<DaftarKelasAdapter.
 
             judulItem = itemView.findViewById(R.id.judulKelas);
             detailItem = itemView.findViewById(R.id.detailKelas);
-            itemView.setOnClickListener( new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mlistener != null){
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION){
-                            mlistener.onItemClick( position );
-                        }
+            itemView.setOnClickListener(viewOnclick -> {
+                if (mlistener != null){
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION){
+                        mlistener.onItemClick( position );
                     }
                 }
-            } );
+            });
         }
     }
 }

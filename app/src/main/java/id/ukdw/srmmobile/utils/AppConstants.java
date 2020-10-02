@@ -36,6 +36,8 @@ public final class AppConstants {
 
     public static final String BASE_URL = "https://apps.dw.fti.ukdw.ac.id/srm/";
 
+    //public static final String BASE_URL = "http://192.168.137.1:8080";
+
     public static final int RETROFIT_CONNECTION_TIMEOUT = 10;
 
     public static final int RETROFIT_READ_TIMEOUT = 30;

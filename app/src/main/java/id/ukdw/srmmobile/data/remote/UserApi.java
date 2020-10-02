@@ -32,7 +32,7 @@ public interface UserApi {
     Observable<ResponseWrapper<DetailkelasResponse>> detailKelas(@Body DetailKelasRequest request);
 
     @POST("/kelas/mahasiswa/list")
-    Observable<ResponseWrapper<PesertaKelasResponse>> getPesertaKelas (@Body PesertaKelasRequest request);
+    Observable<ResponseWrapper<List<PesertaKelasResponse>>> getPesertaKelas (@Body PesertaKelasRequest request);
 
     
 }

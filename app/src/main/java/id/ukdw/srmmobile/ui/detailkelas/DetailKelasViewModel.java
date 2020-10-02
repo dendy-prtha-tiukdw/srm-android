@@ -2,6 +2,8 @@ package id.ukdw.srmmobile.ui.detailkelas;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 
+import java.util.List;
+
 import id.ukdw.srmmobile.data.DataManager;
 import id.ukdw.srmmobile.data.model.api.request.DetailKelasRequest;
 import id.ukdw.srmmobile.data.model.api.request.PesertaKelasRequest;
@@ -63,18 +65,17 @@ public class DetailKelasViewModel extends BaseViewModel<DetailKelasNavigator> {
                 .getPesertaKelas( new PesertaKelasRequest( Group,Matkul,Semester,tahunAjaran ) )
                 .subscribeOn( getSchedulerProvider().io() )
                 .observeOn( getSchedulerProvider().ui() )
-                .subscribe( new Observer<ResponseWrapper<PesertaKelasResponse>>() {
+                .subscribe( new Observer<ResponseWrapper<List<PesertaKelasResponse>>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(ResponseWrapper<PesertaKelasResponse> pesertaKelasResponseResponseWrapper) {
-                        getNavigator().onGetPesertaKelasCompleted(pesertaKelasResponseResponseWrapper.getData());
-
-
+                    public void onNext(ResponseWrapper<List<PesertaKelasResponse>> listResponseWrapper) {
+                        getNavigator().onGetPesertaKelasCompleted( listResponseWrapper.getData() );
                     }
+
 
                     @Override
                     public void onError(Throwable e) {

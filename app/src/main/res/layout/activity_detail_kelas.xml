@@ -4,7 +4,6 @@
     tools:context="id.ukdw.srmmobile.ui.detailkelas.DetailKelasActivity">
 
     <data>
-
         <import type="android.view.View" />
 
         <variable
@@ -104,6 +103,12 @@
                     android:textColor="#FFF"
                     android:textStyle="bold" />
             </LinearLayout>
+            <Button
+                android:id="@+id/btPengumumanDetailKelas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lihat Pengumuman"/>
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

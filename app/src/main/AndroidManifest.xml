@@ -32,7 +32,7 @@
             android:value="fcm_default_channel" />
         <!-- [END fcm_default_channel] -->
 
-        <activity android:name=".ui.detailkelas.LihatPengumuman"></activity>
+        <activity android:name=".ui.detailkelas.DetailKelasPengumumanActivity"></activity>
         <activity android:name=".ui.tugaskelas.LihatTugasActivity" />
 
         <activity

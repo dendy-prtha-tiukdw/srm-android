@@ -10,6 +10,7 @@ import dagger.Provides;
 import id.ukdw.srmmobile.ViewModelProviderFactory;
 import id.ukdw.srmmobile.data.DataManager;
 import id.ukdw.srmmobile.ui.base.BaseActivity;
+import id.ukdw.srmmobile.ui.detailkelas.DetailKelasPengumumanViewModel;
 import id.ukdw.srmmobile.ui.detailkelas.DetailKelasViewModel;
 import id.ukdw.srmmobile.ui.home.HomeViewModel;
 import id.ukdw.srmmobile.ui.login.LoginViewModel;
@@ -36,29 +37,37 @@ public class ActivityModule {
 
     @Provides
     LoginViewModel provideLoginViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
-        Supplier<LoginViewModel> supplier = () -> new LoginViewModel(dataManager, schedulerProvider, googleSignInClient);
-        ViewModelProviderFactory<LoginViewModel> factory = new ViewModelProviderFactory<>(LoginViewModel.class, supplier);
-        return new ViewModelProvider(activity, factory).get(LoginViewModel.class);
+        Supplier<LoginViewModel> supplier = () -> new LoginViewModel( dataManager, schedulerProvider, googleSignInClient );
+        ViewModelProviderFactory<LoginViewModel> factory = new ViewModelProviderFactory<>( LoginViewModel.class, supplier );
+        return new ViewModelProvider( activity, factory ).get( LoginViewModel.class );
     }
 
     @Provides
     SplashViewModel provideSplashViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
-        Supplier<SplashViewModel> supplier = () -> new SplashViewModel(dataManager, schedulerProvider, googleSignInClient);
-        ViewModelProviderFactory<SplashViewModel> factory = new ViewModelProviderFactory<>(SplashViewModel.class, supplier);
-        return new ViewModelProvider(activity, factory).get(SplashViewModel.class);
+        Supplier<SplashViewModel> supplier = () -> new SplashViewModel( dataManager, schedulerProvider, googleSignInClient );
+        ViewModelProviderFactory<SplashViewModel> factory = new ViewModelProviderFactory<>( SplashViewModel.class, supplier );
+        return new ViewModelProvider( activity, factory ).get( SplashViewModel.class );
     }
 
     @Provides
-    HomeViewModel provideHomeViewModel(DataManager dataManager, SchedulerProvider schedulerProvider , GoogleSignInClient googleSignInClient) {
-        Supplier<HomeViewModel> supplier = () -> new HomeViewModel(dataManager, schedulerProvider, googleSignInClient);
-        ViewModelProviderFactory<HomeViewModel> factory = new ViewModelProviderFactory<>(HomeViewModel.class, supplier);
-        return new ViewModelProvider(activity, factory).get(HomeViewModel.class);
+    HomeViewModel provideHomeViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
+        Supplier<HomeViewModel> supplier = () -> new HomeViewModel( dataManager, schedulerProvider, googleSignInClient );
+        ViewModelProviderFactory<HomeViewModel> factory = new ViewModelProviderFactory<>( HomeViewModel.class, supplier );
+        return new ViewModelProvider( activity, factory ).get( HomeViewModel.class );
     }
 
     @Provides
-    DetailKelasViewModel provideDetailKelasViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient){
-        Supplier<DetailKelasViewModel> supplier = () -> new DetailKelasViewModel( dataManager,schedulerProvider, googleSignInClient);
+    DetailKelasViewModel provideDetailKelasViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
+        Supplier<DetailKelasViewModel> supplier = () -> new DetailKelasViewModel( dataManager, schedulerProvider, googleSignInClient );
         ViewModelProviderFactory<DetailKelasViewModel> factory = new ViewModelProviderFactory<>( DetailKelasViewModel.class, supplier );
         return new ViewModelProvider( activity, factory ).get( DetailKelasViewModel.class );
     }
+
+    @Provides
+    DetailKelasPengumumanViewModel provideDetailKelasPengumumanViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
+        Supplier<DetailKelasPengumumanViewModel> supplier = () -> new DetailKelasPengumumanViewModel( dataManager, schedulerProvider, googleSignInClient );
+        ViewModelProviderFactory<DetailKelasPengumumanViewModel> factory = new ViewModelProviderFactory<>( DetailKelasPengumumanViewModel.class, supplier );
+        return new ViewModelProvider( activity, factory ).get( DetailKelasPengumumanViewModel.class );
+    }
+
 }

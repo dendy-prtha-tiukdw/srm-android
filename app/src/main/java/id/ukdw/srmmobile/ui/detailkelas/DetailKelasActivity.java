@@ -3,6 +3,7 @@ package id.ukdw.srmmobile.ui.detailkelas;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -58,6 +59,18 @@ public class DetailKelasActivity extends BaseActivity<ActivityDetailKelasBinding
         RecyclerViewModelKelas recyclerViewModelKelas = (RecyclerViewModelKelas) getIntent().getSerializableExtra(DETAIL_KELAS_DATA);
         mViewModel.getDetailKelas(recyclerViewModelKelas.getNamaMakul(), recyclerViewModelKelas.getGroup(), recyclerViewModelKelas.getSemester(), recyclerViewModelKelas.getTahunAjaran());
         mViewModel.getPesertaKelas(recyclerViewModelKelas.getNamaMakul(), recyclerViewModelKelas.getGroup(), recyclerViewModelKelas.getSemester(), recyclerViewModelKelas.getTahunAjaran());
+        getViewDataBinding().btPengumumanDetailKelas.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent movePengumuman = new Intent( DetailKelasActivity.this, DetailKelasPengumumanActivity.class );
+                movePengumuman.putExtra( "namaMakul", recyclerViewModelKelas.getNamaMakul() );
+                movePengumuman.putExtra( "group", recyclerViewModelKelas.getGroup() );
+                movePengumuman.putExtra( "semester", recyclerViewModelKelas.getSemester() );
+                movePengumuman.putExtra( "tahunAjaran", recyclerViewModelKelas.getTahunAjaran() );
+                startActivity( movePengumuman );
+            }
+        } );
+
     }
 
 

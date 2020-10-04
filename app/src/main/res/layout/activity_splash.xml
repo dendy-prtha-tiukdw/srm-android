@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="splashViewModel"
             type="id.ukdw.srmmobile.ui.splash.SplashViewModel" />
@@ -37,6 +39,7 @@
                 android:layout_height="@dimen/logo_height"
                 android:layout_gravity="center"
                 android:background="@drawable/logo" />
+
             <TextView
                 android:id="@+id/LogoText"
                 android:layout_width="wrap_content"
@@ -44,6 +47,14 @@
                 android:layout_gravity="center"
                 android:text="SRM"
                 android:textSize="35sp" />
+
+            <androidx.core.widget.ContentLoadingProgressBar
+                android:id="@+id/address_looking_up"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="@{splashViewModel.isLoading ? View.VISIBLE : View.GONE}" />
         </LinearLayout>
 
         <ImageView

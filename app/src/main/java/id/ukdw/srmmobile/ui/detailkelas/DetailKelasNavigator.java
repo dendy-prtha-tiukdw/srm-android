@@ -12,4 +12,6 @@ public interface DetailKelasNavigator {
     void onGetDetailKelasCompleted(DetailKelasResponse detailkelasResponse);
 
     void onGetPesertaKelasCompleted(List<PesertaKelasResponse> pesertaKelasResponses);
+
+    void onSchedulingClassCompleted();
 }

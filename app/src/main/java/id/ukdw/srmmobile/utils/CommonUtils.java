@@ -58,7 +58,7 @@ public final class CommonUtils {
     }
 
     public static ProgressDialog showLoadingDialog(Context context) {
-        /*
+
         ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.show();
         if (progressDialog.getWindow() != null) {
@@ -69,7 +69,5 @@ public final class CommonUtils {
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
         return progressDialog;
-         */
-        return null;
     }
 }

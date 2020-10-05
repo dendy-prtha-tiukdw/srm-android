@@ -79,7 +79,7 @@ public class SplashViewModel extends BaseViewModel<SplashNavigator> {
 
                         @Override
                         public void onComplete() {
-                            setIsLoading(false);
+                            //setIsLoading(false);
                         }
                     });
         }
@@ -126,7 +126,7 @@ public class SplashViewModel extends BaseViewModel<SplashNavigator> {
 
                     @Override
                     public void onComplete() {
-                        //setIsLoading(false);
+                        setIsLoading(false);
                     }
                 });
     }

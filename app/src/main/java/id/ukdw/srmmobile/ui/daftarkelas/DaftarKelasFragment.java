@@ -60,6 +60,7 @@ public class DaftarKelasFragment extends BaseFragment<FragmentDaftarKelasBinding
     @Override
     public void performDependencyInjection(FragmentComponent buildComponent) {
         buildComponent.inject(this);
+        getBaseActivity().showLoading();
         mViewModel.getListKelas();
     }
 
@@ -98,5 +99,6 @@ public class DaftarKelasFragment extends BaseFragment<FragmentDaftarKelasBinding
             RecyclerViewModelKelas kelas = itemList.get(position);
             startActivity(DetailKelasActivity.newIntent(getBaseActivity()).putExtra(DETAIL_KELAS_DATA, kelas));
         });
+        getBaseActivity().hideLoading();
     }
 }

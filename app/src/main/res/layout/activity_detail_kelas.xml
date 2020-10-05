@@ -52,15 +52,22 @@
                     android:id="@+id/txtPengajar"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.80"
+                    android:layout_weight="0.65"
                     android:text=":"
                     android:textColor="#FFF"
                     android:textStyle="bold" />
+                <ImageButton
+                    android:id="@+id/imgSchedule"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.15"
+                    android:src="@mipmap/ic_calendar"
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -108,19 +115,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Lihat Pengumuman"/>
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Tambahkan ke jadwal minggu depan"
-                android:hint="Menambahkan jadwal perkuliahan untuk minggu depan pada GCalendar Anda "/>
-
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerPesertaKelas"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.65" />
+        <FrameLayout
+            android:id="@+id/progressBarHolder"
+            android:animateLayoutChanges="true"
+            android:visibility="gone"
+            android:alpha="0.4"
+            android:background="#000000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:layout_gravity="center" />
+        </FrameLayout>
     </LinearLayout>
 
 </layout>

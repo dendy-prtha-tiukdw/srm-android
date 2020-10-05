@@ -20,4 +20,6 @@ public class PengumumanViewModel extends BaseViewModel<PengumumanNavigator> {
     public PengumumanViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
         super(dataManager, schedulerProvider, googleSignInClient);
     }
+
+
 }

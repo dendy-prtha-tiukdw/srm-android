@@ -12,4 +12,6 @@ package id.ukdw.srmmobile.ui.pengumuman;
  */
 
 public interface PengumumanNavigator {
+    void onGetListPengumuman();
+
 }

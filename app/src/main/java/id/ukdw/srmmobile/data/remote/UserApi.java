@@ -5,12 +5,14 @@ import java.util.List;
 
 import id.ukdw.srmmobile.data.model.api.request.DetailKelasRequest;
 import id.ukdw.srmmobile.data.model.api.request.PengumumanDetailKelasRequest;
+import id.ukdw.srmmobile.data.model.api.request.PengumumanRequest;
 import id.ukdw.srmmobile.data.model.api.request.PesertaKelasRequest;
 import id.ukdw.srmmobile.data.model.api.request.ProfilRequest;
 import id.ukdw.srmmobile.data.model.api.request.UpdateFcmRequest;
 import id.ukdw.srmmobile.data.model.api.response.DetailKelasResponse;
 import id.ukdw.srmmobile.data.model.api.response.KelasResponse;
 import id.ukdw.srmmobile.data.model.api.response.PengumumanDetailKelasResponse;
+import id.ukdw.srmmobile.data.model.api.response.PengumumanResponse;
 import id.ukdw.srmmobile.data.model.api.response.PesertaKelasResponse;
 import id.ukdw.srmmobile.data.model.api.response.ProfilResponse;
 import id.ukdw.srmmobile.data.model.api.response.ResponseWrapper;
@@ -37,6 +39,9 @@ public interface UserApi {
 
     @POST("pengumuman/list")
     Observable<ResponseWrapper<List<PengumumanDetailKelasResponse>>> getPengumumanDetailKelas (@Body PengumumanDetailKelasRequest request);
+
+    @POST("endpoint pengumuman")
+    Observable<ResponseWrapper<List<PengumumanResponse>>> getPengumumanList (@Body PengumumanRequest request);
 
     
 }

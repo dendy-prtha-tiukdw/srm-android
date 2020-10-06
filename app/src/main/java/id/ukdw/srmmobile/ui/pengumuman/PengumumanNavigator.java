@@ -1,5 +1,9 @@
 package id.ukdw.srmmobile.ui.pengumuman;
 
+import java.util.List;
+
+import id.ukdw.srmmobile.data.model.api.response.PengumumanResponse;
+
 /**
  * Project: srmmobile
  * Package: id.ukdw.srmmobile.ui.pengumuman
@@ -12,6 +16,6 @@ package id.ukdw.srmmobile.ui.pengumuman;
  */
 
 public interface PengumumanNavigator {
-    void onGetListPengumuman();
+    void onGetListPengumuman(List<PengumumanResponse> pengumumanResponseList);
 
 }

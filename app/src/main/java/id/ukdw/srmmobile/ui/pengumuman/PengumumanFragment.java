@@ -45,20 +45,19 @@ public class PengumumanFragment extends BaseFragment<FragmentPengumumanBinding, 
         super.onCreate( savedInstanceState );
         mViewModel.setNavigator( this );
         mViewModel.setContext( getBaseActivity() );
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated( view, savedInstanceState );
-
-
     }
 
     @Override
     public void performDependencyInjection(FragmentComponent buildComponent) {
         buildComponent.inject( this );
         getBaseActivity().showLoading();
-        mViewModel.setContext( getBaseActivity() );
+        mViewModel.getListPengumuman();
     }
 
     public void onResume() {
@@ -70,11 +69,15 @@ public class PengumumanFragment extends BaseFragment<FragmentPengumumanBinding, 
 
 
     @Override
-    public void onGetListPengumuman() {
-//        getViewDataBinding().recyclerPengumuman.setHasFixedSize( true );
-//        PengumumanAdapter pengumumanAdapter = new PengumumanAdapter( getContext(), initData() );
-//        getViewDataBinding().recyclerPengumuman.setLayoutManager( new LinearLayoutManager( getActivity() ) );
-//        getViewDataBinding().recyclerPengumuman.setAdapter( pengumumanAdapter );
+    public void onGetListPengumuman(List<PengumumanResponse> pengumumanResponseList) {
+        itemList = pengumumanResponseList;
+        PengumumanAdapter pengumumanAdapter = new PengumumanAdapter( getContext(), pengumumanResponseList  );
+        getViewDataBinding().recyclerPengumuman.setHasFixedSize(true);
+        getViewDataBinding().recyclerPengumuman.setLayoutManager(new LinearLayoutManager(getActivity()));
+        getViewDataBinding().recyclerPengumuman.setAdapter(pengumumanAdapter);
+
+        getBaseActivity().hideLoading();
+
 
     }
 }

@@ -4,71 +4,43 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import id.ukdw.srmmobile.R;
+import id.ukdw.srmmobile.data.model.api.response.PengumumanResponse;
 
 public class PengumumanAdapter extends RecyclerView.Adapter<PengumumanAdapter.ViewHolder> {
 
-    Context mContext;
-    ArrayList<RecyclerViewModelPengumuman> mItemListPengumuman;
-    private OnItemListener mlistener;
+    private Context mContext;
+    private List<PengumumanResponse> mItemListPengumuman;
 
-    public interface OnItemListener{
-        void onItemClick(int position);
-        void onDeleteClick(int position);
-    }
 
-    public void setOnItemClickListener (OnItemListener listener){
-        mlistener = listener;
-    }
-
-    public PengumumanAdapter(Context mContext, ArrayList<RecyclerViewModelPengumuman> mItemListPengumuman) {
+    public PengumumanAdapter(Context mContext, List<PengumumanResponse> mItemListPengumuman) {
         this.mContext = mContext;
         this.mItemListPengumuman= mItemListPengumuman;
     }
 
     @NonNull
     @Override
-    public PengumumanAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.rowitempengumuman, parent, false);
-        ViewHolder viewHolder = new ViewHolder(v, mlistener);
-
-//        viewHolder.item_daftar_kelas.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                myDialog = new Dialog(mContext);
-//                myDialog.setContentView(R.layout.activity_detail_kelas);
-//                myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
-//
-//                TextView namaKelas = (TextView)myDialog.findViewById(R.id.judulKelas);
-//                TextView deskripsi = (TextView)myDialog.findViewById(R.id.Deskripsi);
-//                TextView isiDeskripsi = (TextView)myDialog.findViewById(R.id.isiDeskripsi);
-//                ImageView backButton = (ImageView)myDialog.findViewById(R.id.prevPage);
-//                ImageView background = (ImageView)myDialog.findViewById(R.id.background);
-//                namaKelas.setText(mItemListKelas.get(viewHolder.getAdapterPosition()).getJudul());
-//                isiDeskripsi.setText(mItemListKelas.get(viewHolder.getAdapterPosition()).getDetail());
-//
-//                Toast.makeText(mContext, "Test Click" + String.valueOf(viewHolder.getAdapterPosition()),Toast.LENGTH_SHORT).show();
-//                myDialog.show();
-//            }
-//        });
-        return viewHolder;
+        return new ViewHolder( v );
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PengumumanAdapter.ViewHolder viewHolder, int position) {
-        //RecyclerViewModelKelas recyclerViewModelKelas = mItemListKelas.get( position );
-        RecyclerViewModelPengumuman currentItem = mItemListPengumuman.get(position);
-        viewHolder.judulPengumuman.setText(currentItem.getJudulPengumuman());
-        viewHolder.tanggalPengumuman.setText(currentItem.getTanggalPengumuman());
+    public void onBindViewHolder(@NonNull PengumumanAdapter.ViewHolder holder, int position) {
+        holder.Judul.setText( mItemListPengumuman.get( position ).getNamaMatakuliah()+" "+ mItemListPengumuman.get( position ).getGroup() );
+        holder.NamaDosen.setText( mItemListPengumuman.get( position ).getNamaDosen() );
+        holder.tanggal.setText( mItemListPengumuman.get( position ).getTanggalInput() );
+        holder.Detail.setText( mItemListPengumuman.get( position ).getPengumuman() );
+
+
     }
 
     @Override
@@ -76,45 +48,15 @@ public class PengumumanAdapter extends RecyclerView.Adapter<PengumumanAdapter.Vi
         return mItemListPengumuman.size();
     }
 
+
     public class ViewHolder extends RecyclerView.ViewHolder {
-        //LinearLayout item_daftar_kelas;
-        TextView judulPengumuman, tanggalPengumuman;
-        ImageView mDelete;
-
-        public ViewHolder(@NonNull View itemView, final OnItemListener mlistener) {
-            super(itemView);
-            //item_daftar_kelas = (LinearLayout) itemView.findViewById(R.id.daftarkelas_item);
-
-            judulPengumuman = itemView.findViewById(R.id.judulPengumuman);
-            tanggalPengumuman = itemView.findViewById(R.id.tanggalPengumuman);
-            mDelete = itemView.findViewById(R.id.deletePengumuman);
-
-            itemView.setOnClickListener( new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    if (mlistener != null){
-                        int position = getAdapterPosition();
-                        System.out.println("CEK SINI CEK ITEMVIEW = " + position);
-                        if (position != RecyclerView.NO_POSITION){
-                            mlistener.onItemClick(position);
-                        }
-                    }
-                }
-            });
-
-            mDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mlistener != null){
-                        int position = getAdapterPosition();
-                        System.out.println("CEK SINI CEK MDELETE = " + position);
-                        if (position != RecyclerView.NO_POSITION){
-                            mlistener.onDeleteClick(position);
-                        }
-                    }
-                }
-            });
+        TextView NamaDosen, Judul, Detail,tanggal;
+        public ViewHolder(View v) {
+            super( v );
+            NamaDosen = (TextView) v.findViewById( R.id.NamaDosenPengumuman );
+            Judul = (TextView) v.findViewById( R.id.groupPengumuman );
+            Detail = (TextView) v.findViewById( R.id.detailPengumuman );
+            tanggal = (TextView) v.findViewById( R.id.tanggalPengumuman );
         }
     }
 }

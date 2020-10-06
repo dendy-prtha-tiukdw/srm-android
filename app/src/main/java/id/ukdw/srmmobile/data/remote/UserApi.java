@@ -11,6 +11,7 @@ import id.ukdw.srmmobile.data.model.api.request.UpdateFcmRequest;
 import id.ukdw.srmmobile.data.model.api.response.DetailKelasResponse;
 import id.ukdw.srmmobile.data.model.api.response.KelasResponse;
 import id.ukdw.srmmobile.data.model.api.response.PengumumanDetailKelasResponse;
+import id.ukdw.srmmobile.data.model.api.response.PengumumanResponse;
 import id.ukdw.srmmobile.data.model.api.response.PesertaKelasResponse;
 import id.ukdw.srmmobile.data.model.api.response.ProfilResponse;
 import id.ukdw.srmmobile.data.model.api.response.ResponseWrapper;
@@ -37,6 +38,9 @@ public interface UserApi {
 
     @POST("pengumuman/list")
     Observable<ResponseWrapper<List<PengumumanDetailKelasResponse>>> getPengumumanDetailKelas (@Body PengumumanDetailKelasRequest request);
+
+    @GET("user/pengumuman")
+    Observable<ResponseWrapper<List<PengumumanResponse>>> getPengumumanList ();
 
     
 }

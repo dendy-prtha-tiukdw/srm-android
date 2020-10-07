@@ -12,7 +12,7 @@ package id.ukdw.srmmobile.utils;
  */
 public final class AppConstants {
 
-    public static final int API_STATUS_CODE_LOCAL_ERROR = 0;
+    public static final String CLIENT_TYPE = "mobile_app";
 
     public static final String DB_NAME = "srm.db";
 

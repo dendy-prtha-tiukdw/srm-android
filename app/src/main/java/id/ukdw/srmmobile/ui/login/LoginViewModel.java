@@ -5,11 +5,14 @@ import android.util.Log;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import java.util.Objects;
+
 import id.ukdw.srmmobile.data.DataManager;
 import id.ukdw.srmmobile.data.model.api.request.LoginRequest;
 import id.ukdw.srmmobile.data.model.api.request.UpdateFcmRequest;
 import id.ukdw.srmmobile.data.model.api.response.LoginResponse;
 import id.ukdw.srmmobile.data.model.api.response.ResponseWrapper;
+import id.ukdw.srmmobile.utils.AppConstants;
 import id.ukdw.srmmobile.utils.rx.SchedulerProvider;
 import id.ukdw.srmmobile.ui.base.BaseViewModel;
 import io.reactivex.Observer;
@@ -35,7 +38,7 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
 
     public void onGoogleLoginClick(String serverAuthCode) {
         getDataManager().getAuthApi()
-                .loginPost(new LoginRequest("google", serverAuthCode))
+                .loginPost(new LoginRequest(serverAuthCode, AppConstants.CLIENT_TYPE))
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(new Observer<ResponseWrapper<LoginResponse>>() {
@@ -85,7 +88,7 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                     }
 
                     // Get new Instance ID token
-                    String token = task.getResult().getToken();
+                    String token = Objects.requireNonNull(task.getResult()).getToken();
 
                     // Log and toast
                     Log.d(TAG, "InstanceID Token: " + token);
@@ -93,7 +96,7 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                 });
     }
 
-    private void updateFcmToken(String fcmToken){
+    private void updateFcmToken(String fcmToken) {
         getDataManager().getUserApi(getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken())
                 .updateFcmToken(new UpdateFcmRequest(fcmToken))
                 .subscribeOn(getSchedulerProvider().io())

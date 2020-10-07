@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public class LoginRequest {
-    private String provider;
     private String serverAuthCode;
+    private String clientType;
 
-    public LoginRequest(String provider, String authCode) {
-        this.provider = provider;
+    public LoginRequest(String authCode, String clientType) {
         this.serverAuthCode = authCode;
+        this.clientType = clientType;
     }
 }

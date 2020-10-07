@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-       <!-- <variable
-            name="daftarKelasViewModel"
-            type="id.ukdw.srmmobile.ui.daftarkelas.DaftarKelasViewModel" />-->
+       <variable
+            name="kalenderViewModel"
+            type="id.ukdw.srmmobile.ui.calendar.KalenderViewModel" />
     </data>
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/holo_green_dark">
-
-        <TextView
-            android:layout_width="wrap_content"
+        android:background="#2D2D2D"
+        android:orientation="vertical">
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Fragment Kalender"
-            android:textSize="30sp"
-            android:layout_centerInParent="true"/>
-
-    </RelativeLayout>
+            android:id="@+id/recyclerKalender"/>
+    </LinearLayout>
 </layout>

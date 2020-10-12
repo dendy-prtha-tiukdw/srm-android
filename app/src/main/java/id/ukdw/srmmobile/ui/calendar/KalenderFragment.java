@@ -64,7 +64,7 @@ public class KalenderFragment extends BaseFragment<FragmentKalenderBinding, Kale
     @Override
     public void performDependencyInjection(FragmentComponent buildComponent) {
         buildComponent.inject( this );
-//        getBaseActivity().showLoading();
+        getBaseActivity().showLoading();
 
     }
 
@@ -99,6 +99,7 @@ public class KalenderFragment extends BaseFragment<FragmentKalenderBinding, Kale
                     Start
             ) );
         }
+        getBaseActivity().hideLoading();
 
     }
 }

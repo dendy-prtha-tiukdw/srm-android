@@ -18,12 +18,12 @@
     <string name="drawer_open">Buka</string>
     <string name="drawer_close">Tutup</string>
     <string-array name="spinnerItems">
-        <item>Teknik Komputer (A)</item>
-        <item>Teknik Komputer (B)</item>
-        <item>Teknik Komputer (C)</item>
-        <item>Algoritma Pemrograman (A)</item>
-        <item>Algoritma Pemrograman (B)</item>
-        <item>Algoritma Pemrograman (C)</item>
+        <item>5</item>
+        <item>10</item>
+        <item>20</item>
+        <item>40</item>
+        <item>80</item>
+
     </string-array>
 
     <string name="user_name">Dummy Name</string>
@@ -39,5 +39,7 @@
     <string name="title_periode">Periode</string>
     <string name="title_pengajar">Pengajar</string>
     <string name="title_waktu">Waktu</string>
+    <string name="title_jumlah_pengumuman"> Jumlah Pengumuman : </string>
+    <string name="default_spinner_pengumuman"> 10 </string>
 
 </resources>

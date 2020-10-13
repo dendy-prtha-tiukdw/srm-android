@@ -5,6 +5,7 @@ import java.util.List;
 
 import id.ukdw.srmmobile.data.model.api.request.DetailKelasRequest;
 import id.ukdw.srmmobile.data.model.api.request.PengumumanDetailKelasRequest;
+import id.ukdw.srmmobile.data.model.api.request.PengumumanRequest;
 import id.ukdw.srmmobile.data.model.api.request.PesertaKelasRequest;
 import id.ukdw.srmmobile.data.model.api.request.ProfilRequest;
 import id.ukdw.srmmobile.data.model.api.request.SemesterRequest;
@@ -41,8 +42,8 @@ public interface UserApi {
     @POST("pengumuman/list")
     Observable<ResponseWrapper<List<PengumumanDetailKelasResponse>>> getPengumumanDetailKelas (@Body PengumumanDetailKelasRequest request);
 
-    @GET("user/pengumuman")
-    Observable<ResponseWrapper<List<PengumumanResponse>>> getPengumumanList ();
+    @POST("user/pengumuman")
+    Observable<ResponseWrapper<List<PengumumanResponse>>> getPengumumanList (@Body PengumumanRequest request);
 
     @POST("semester/getCurrentSemester")
     Observable<ResponseWrapper<SemesterResponse>> getTanggalSemester (@Body SemesterRequest request);

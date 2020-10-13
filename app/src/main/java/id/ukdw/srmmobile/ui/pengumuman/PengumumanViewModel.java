@@ -5,6 +5,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import java.util.List;
 
 import id.ukdw.srmmobile.data.DataManager;
+import id.ukdw.srmmobile.data.model.api.request.PengumumanRequest;
 import id.ukdw.srmmobile.data.model.api.response.PengumumanResponse;
 import id.ukdw.srmmobile.data.model.api.response.ResponseWrapper;
 import id.ukdw.srmmobile.ui.base.BaseViewModel;
@@ -26,9 +27,9 @@ public class PengumumanViewModel extends BaseViewModel<PengumumanNavigator> {
     public PengumumanViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
         super(dataManager, schedulerProvider, googleSignInClient);
     }
-    public void getListPengumuman(){
+    public void getListPengumuman(String text){
         getDataManager().getUserApi( getDataManager().getCurrentAccessToken(),getDataManager().getCurrentRefreshToken() )
-                .getPengumumanList()
+                .getPengumumanList(new PengumumanRequest( text ) )
                 .subscribeOn( getSchedulerProvider().io() )
                 .observeOn( getSchedulerProvider().ui() )
                 .subscribe( new Observer<ResponseWrapper<List<PengumumanResponse>>>() {

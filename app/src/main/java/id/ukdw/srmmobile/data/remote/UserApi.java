@@ -33,15 +33,6 @@ public interface UserApi {
     @POST("user/updatefcmtoken")
     Observable<ResponseWrapper<Boolean>> updateFcmToken(@Body UpdateFcmRequest request);
 
-    @POST("kelas/detail")
-    Observable<ResponseWrapper<DetailKelasResponse>> detailKelas(@Body DetailKelasRequest request);
-
-    @POST("kelas/mahasiswa/list")
-    Observable<ResponseWrapper<List<PesertaKelasResponse>>> getPesertaKelas (@Body PesertaKelasRequest request);
-
-    @POST("pengumuman/list")
-    Observable<ResponseWrapper<List<PengumumanDetailKelasResponse>>> getPengumumanDetailKelas (@Body PengumumanDetailKelasRequest request);
-
     @POST("user/pengumuman")
     Observable<ResponseWrapper<List<PengumumanResponse>>> getPengumumanList (@Body PengumumanRequest request);
 

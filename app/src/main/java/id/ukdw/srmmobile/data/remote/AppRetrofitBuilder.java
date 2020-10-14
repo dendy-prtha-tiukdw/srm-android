@@ -1,7 +1,5 @@
 package id.ukdw.srmmobile.data.remote;
 
-import android.util.Log;
-
 import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
@@ -14,7 +12,6 @@ import id.ukdw.srmmobile.data.local.prefs.PreferencesHelper;
 import id.ukdw.srmmobile.utils.rx.SchedulerProvider;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -74,5 +71,32 @@ public class AppRetrofitBuilder implements ApiHelper {
                 schedulerProvider);
         interceptors.add(authorizationInterceptor);
         return getRetrofitInstance(interceptors).create(UserApi.class);
+    }
+
+    public KelasApi getKelasApi(String accessToken, String refreshToken){
+        ArrayList<Interceptor> interceptors = new ArrayList<>();
+        AuthorizationInterceptor authorizationInterceptor = new AuthorizationInterceptor( getAuthApi(),
+                mPreferencesHelper,
+                schedulerProvider);
+        interceptors.add( authorizationInterceptor );
+        return getRetrofitInstance(interceptors).create( KelasApi.class );
+    }
+
+    public PengumumanApi getPengumumanApi(String accessToken, String refreshToken){
+        ArrayList<Interceptor> interceptors = new ArrayList<>();
+        AuthorizationInterceptor authorizationInterceptor = new AuthorizationInterceptor( getAuthApi(),
+                mPreferencesHelper,
+                schedulerProvider);
+        interceptors.add( authorizationInterceptor );
+        return getRetrofitInstance(interceptors).create( PengumumanApi.class );
+    }
+
+    public SemesterApi getSemesterApi(String accessToken, String refreshToken){
+        ArrayList<Interceptor> interceptors = new ArrayList<>();
+        AuthorizationInterceptor authorizationInterceptor = new AuthorizationInterceptor( getAuthApi(),
+                mPreferencesHelper,
+                schedulerProvider);
+        interceptors.add( authorizationInterceptor );
+        return getRetrofitInstance(interceptors).create( SemesterApi.class );
     }
 }

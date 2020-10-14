@@ -46,7 +46,7 @@ public class KalenderViewModel extends BaseViewModel<KalenderNavigator> {
 
         SimpleDateFormat df = new SimpleDateFormat( "yyyy/MM/dd", Locale.getDefault() );
         String formattedDate = df.format( jCalendar.getTime() );
-        getDataManager().getUserApi( getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken() )
+        getDataManager().getSemesterApi( getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken() )
                 .getTanggalSemester( new SemesterRequest( formattedDate ) )
                 .subscribeOn( getSchedulerProvider().io() )
                 .observeOn( getSchedulerProvider().ui() )

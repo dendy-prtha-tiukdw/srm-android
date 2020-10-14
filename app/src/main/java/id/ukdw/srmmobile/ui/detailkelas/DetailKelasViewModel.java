@@ -42,7 +42,7 @@ public class DetailKelasViewModel extends BaseViewModel<DetailKelasNavigator> {
     }
 
     public void getDetailKelas(String Matkul, String Group, String Semester, String tahunAjaran) {
-        getDataManager().getUserApi(getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken())
+        getDataManager().getKelasApi(getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken())
                 .detailKelas(new DetailKelasRequest("C", "DESAIN GAME", "Gasal", "2020/2021"))
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
@@ -72,7 +72,7 @@ public class DetailKelasViewModel extends BaseViewModel<DetailKelasNavigator> {
     }
 
     public void getPesertaKelas(String Matkul, String Group, String Semester, String tahunAjaran) {
-        getDataManager().getUserApi(getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken())
+        getDataManager().getKelasApi(getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken())
                 .getPesertaKelas(new PesertaKelasRequest(Group, Matkul, Semester, tahunAjaran))
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())

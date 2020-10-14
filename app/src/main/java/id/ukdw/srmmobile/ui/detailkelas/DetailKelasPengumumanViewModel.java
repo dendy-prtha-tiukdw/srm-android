@@ -19,7 +19,7 @@ public class DetailKelasPengumumanViewModel extends BaseViewModel<DetailKelasPen
     }
 
     public void getDetailKelasListPengumuman (String Matkul, String Group, String Semester, String tahunAjaran){
-        getDataManager().getUserApi( getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken() )
+        getDataManager().getPengumumanApi( getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken() )
                 .getPengumumanDetailKelas( new PengumumanDetailKelasRequest( Group,Matkul,Semester,tahunAjaran ) )
                 .subscribeOn( getSchedulerProvider().io() )
                 .observeOn( getSchedulerProvider().ui() )

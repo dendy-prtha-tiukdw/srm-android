@@ -103,8 +103,7 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
                     showFragmentProfile();
                     break;
                 case R.id.nav_calendar:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new KalenderFragment()).commit();
+                    showFragmentKalender();
                     break;
                 case R.id.nav_signOut:
                     mViewModel.logOut();
@@ -129,6 +128,11 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
     private void showFragmentProfile() {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 ProfileFragment.newInstance()).commit();
+    }
+
+    private void showFragmentKalender(){
+        getSupportFragmentManager().beginTransaction().replace( R.id.fragment_container,
+                KalenderFragment.newInstance()).commit();
     }
 
     @Override

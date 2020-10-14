@@ -3,6 +3,7 @@ package id.ukdw.srmmobile.di.component;
 import dagger.Component;
 import id.ukdw.srmmobile.di.module.FragmentModule;
 import id.ukdw.srmmobile.di.scope.FragmentScope;
+import id.ukdw.srmmobile.ui.calendar.KalenderFragment;
 import id.ukdw.srmmobile.ui.daftarkelas.DaftarKelasFragment;
 import id.ukdw.srmmobile.ui.pengumuman.PengumumanFragment;
 import id.ukdw.srmmobile.ui.profile.ProfileFragment;
@@ -26,4 +27,6 @@ public interface FragmentComponent {
     void inject(ProfileFragment profileFragment);
 
     void inject(PengumumanFragment pengumumanFragment);
+
+    void inject(KalenderFragment kalenderFragment);
 }

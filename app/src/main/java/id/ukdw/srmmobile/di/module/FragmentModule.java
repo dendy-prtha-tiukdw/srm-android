@@ -10,6 +10,7 @@ import dagger.Provides;
 import id.ukdw.srmmobile.ViewModelProviderFactory;
 import id.ukdw.srmmobile.data.DataManager;
 import id.ukdw.srmmobile.ui.base.BaseFragment;
+import id.ukdw.srmmobile.ui.calendar.KalenderViewModel;
 import id.ukdw.srmmobile.ui.daftarkelas.DaftarKelasViewModel;
 import id.ukdw.srmmobile.ui.pengumuman.PengumumanViewModel;
 import id.ukdw.srmmobile.ui.profile.ProfileViewModel;
@@ -52,5 +53,12 @@ public class FragmentModule {
         Supplier<PengumumanViewModel> supplier = () -> new PengumumanViewModel(dataManager, schedulerProvider, googleSignInClient);
         ViewModelProviderFactory<PengumumanViewModel> factory = new ViewModelProviderFactory<>(PengumumanViewModel.class, supplier);
         return new ViewModelProvider(fragment, factory).get(PengumumanViewModel.class);
+    }
+
+    @Provides
+    KalenderViewModel provideKalenderViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
+        Supplier<KalenderViewModel> supplier = () -> new KalenderViewModel(dataManager,schedulerProvider,googleSignInClient);
+        ViewModelProviderFactory<KalenderViewModel> factory = new ViewModelProviderFactory<KalenderViewModel>( KalenderViewModel.class, supplier );
+        return new ViewModelProvider( fragment,factory ).get( KalenderViewModel.class );
     }
 }

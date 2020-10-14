@@ -84,73 +84,7 @@ public class ProfileViewModel extends BaseViewModel<ProfileNavigator> {
                 });
     }
 
-    public void testGoogleCalendar() {
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
 
-        GoogleAccountCredential credential = GoogleAccountCredential
-                .usingOAuth2(getContext(), Arrays.asList(SCOPE_GOOGLE_CALENDAR))
-                .setSelectedAccount(account.getAccount());
-
-        Calendar calendar = new Calendar.Builder(
-                new NetHttpTransport(), JacksonFactory.getDefaultInstance(), credential)
-                .setApplicationName("Google Calendar API Android Quickstart")
-                .build();
-        java.util.Calendar jCalendar = java.util.Calendar.getInstance();
-
-        DateTime now = new DateTime(jCalendar.getTime());
-        jCalendar.add(java.util.Calendar.MONTH, 2);
-        DateTime nextTwoMonth = new DateTime(jCalendar.getTime());
-
-        Observable
-                .fromCallable(() -> {
-                    try {
-                        Events events = calendar.events().list("primary")
-                                .setTimeMin(now)
-                                .setTimeMax(nextTwoMonth)
-                                .setOrderBy("startTime")
-                                .setSingleEvents(true)
-                                .execute();
-                        return events;
-                    } catch (IOException e) {
-                        //e.printStackTrace();
-                        return null;
-                    }
-                })
-                .subscribeOn(getSchedulerProvider().io())
-                .observeOn(getSchedulerProvider().ui())
-                .subscribe(new Observer<Events>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(Events events) {
-                        List<Event> items = events.getItems();
-                        for (Event event : items) {
-                            DateTime start = event.getStart().getDateTime();
-                            if (start == null) {
-                                // All-day events don't have start times, so just use
-                                // the start date.
-                                start = event.getStart().getDate();
-                            }
-
-                            Log.i(TAG, "testGoogleCalendar: " + String.format("%s (%s)", event.getSummary(), start));
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-
-    }
 
 }
 

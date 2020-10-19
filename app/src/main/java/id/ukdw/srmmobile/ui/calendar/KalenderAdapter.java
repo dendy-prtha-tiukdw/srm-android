@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import id.ukdw.srmmobile.R;
@@ -33,7 +35,7 @@ public class KalenderAdapter extends RecyclerView.Adapter<KalenderAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.event.setText( mItemListKalender.get( position ).getNamaEvent() );
-        holder.tanggal.setText( mItemListKalender.get( position ).getTanggal() );
+        holder.tanggal.setText( convertTime( mItemListKalender.get( position ).getTanggal() ) );
     }
 
     @Override
@@ -49,5 +51,21 @@ public class KalenderAdapter extends RecyclerView.Adapter<KalenderAdapter.ViewHo
             event = itemView.findViewById( R.id.judulkalender );
             tanggal = itemView.findViewById( R.id.tanggalKalender );
         }
+    }
+    private String convertTime(String time) {
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+        SimpleDateFormat format1 = new SimpleDateFormat("EEEE-dd-MM-yyyy HH:mm:ss");
+        java.util.Date date = null;
+
+        try {
+            date = format.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        String convertedDate = format1.format(date);
+
+        return convertedDate;
     }
 }

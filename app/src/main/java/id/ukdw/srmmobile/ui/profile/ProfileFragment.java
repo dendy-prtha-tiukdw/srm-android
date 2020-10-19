@@ -60,6 +60,7 @@ public class ProfileFragment extends BaseFragment<FragmentProfilBinding, Profile
     @Override
     public void performDependencyInjection(FragmentComponent buildComponent) {
         buildComponent.inject(this);
+        getBaseActivity().showLoading();
     }
 
     public void onResume() {
@@ -87,5 +88,6 @@ public class ProfileFragment extends BaseFragment<FragmentProfilBinding, Profile
                 .centerCrop()
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(fragmentProfilBinding.fotoProfil);
+        getBaseActivity().hideLoading();
     }
 }

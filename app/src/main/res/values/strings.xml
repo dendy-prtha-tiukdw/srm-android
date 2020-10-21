@@ -30,7 +30,7 @@
     <string name="user_email">Email </string>
     <string name="user_role">Status</string>
     <string name="user_nim">Nomor Induk</string>
-    <string name="user_jenisKelamin">Jenis Kelamin</string>
+    <string name="user_jenisKelamin">Gender</string>
 
     <string name="judul_kelas">Administrasi Sistem</string>
 

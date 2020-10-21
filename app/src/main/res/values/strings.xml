@@ -26,11 +26,11 @@
 
     </string-array>
 
-    <string name="user_name">Dummy Name</string>
-    <string name="user_email">Dummy.Name@ti.ukdw.ac.id</string>
-    <string name="user_role">Mahasiswa</string>
-    <string name="user_nim">71170243</string>
-    <string name="user_jenisKelamin">Laki-Laki</string>
+    <string name="user_name">Nama </string>
+    <string name="user_email">Email </string>
+    <string name="user_role">Status</string>
+    <string name="user_nim">Nomor Induk</string>
+    <string name="user_jenisKelamin">Gender</string>
 
     <string name="judul_kelas">Administrasi Sistem</string>
 

@@ -10,6 +10,7 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/navImgProfile"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_weight="60"
         android:layout_height="0dp"

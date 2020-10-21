@@ -1,7 +1,5 @@
 package id.ukdw.srmmobile.data.remote;
 
-import io.reactivex.Single;
-
 /**
  * Project: srmmobile
  * Package: id.ukdw.srmmobile.data.remote
@@ -17,4 +15,11 @@ public interface ApiHelper {
     AuthApi getAuthApi();
 
     UserApi getUserApi(String accessToken, String refreshToken);
+
+    KelasApi getKelasApi(String accessToken, String refreshtoken);
+
+    PengumumanApi getPengumumanApi(String acessToken, String refreshToken);
+
+    SemesterApi getSemesterApi(String accessToken, String refreshToken);
+
 }

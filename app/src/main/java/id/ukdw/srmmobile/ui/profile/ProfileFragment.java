@@ -60,6 +60,7 @@ public class ProfileFragment extends BaseFragment<FragmentProfilBinding, Profile
     @Override
     public void performDependencyInjection(FragmentComponent buildComponent) {
         buildComponent.inject(this);
+        getBaseActivity().showLoading();
     }
 
     public void onResume() {
@@ -71,15 +72,22 @@ public class ProfileFragment extends BaseFragment<FragmentProfilBinding, Profile
 
     @Override
     public void onGetProfileCompleted(String nama, String nim, String jenisKelamin, String email, String ulrImage) {
-        fragmentProfilBinding.profileName.setText(nama);
-        fragmentProfilBinding.profileNim.setText(nim);
-        fragmentProfilBinding.profileJenisKelamin.setText(jenisKelamin);
-        fragmentProfilBinding.profileEmail.setText(email);
+        if (jenisKelamin.equalsIgnoreCase( "l" )) {
+            jenisKelamin = "Laki-laki";
+        }
+        else {
+            jenisKelamin = "Perempuan";
+        }
+        fragmentProfilBinding.profileName.append(" " +nama);
+        fragmentProfilBinding.profileNim.append(" " +nim);
+        fragmentProfilBinding.profileJenisKelamin.append(" " +jenisKelamin);
+        fragmentProfilBinding.profileEmail.append(" " +email);
         Glide.with(this)
                 .load(ulrImage)
                 .circleCrop()
                 .centerCrop()
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(fragmentProfilBinding.fotoProfil);
+        getBaseActivity().hideLoading();
     }
 }

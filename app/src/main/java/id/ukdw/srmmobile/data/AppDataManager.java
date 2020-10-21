@@ -9,6 +9,9 @@ import id.ukdw.srmmobile.data.local.db.DbHelper;
 import id.ukdw.srmmobile.data.local.prefs.PreferencesHelper;
 import id.ukdw.srmmobile.data.remote.ApiHelper;
 import id.ukdw.srmmobile.data.remote.AuthApi;
+import id.ukdw.srmmobile.data.remote.KelasApi;
+import id.ukdw.srmmobile.data.remote.PengumumanApi;
+import id.ukdw.srmmobile.data.remote.SemesterApi;
 import id.ukdw.srmmobile.data.remote.UserApi;
 
 /**
@@ -181,5 +184,17 @@ public class AppDataManager implements DataManager {
 
     public UserApi getUserApi(String accessToken, String refreshToken) {
         return mApiHelper.getUserApi(accessToken, refreshToken);
+    }
+
+    public KelasApi getKelasApi(String accessToken, String refreshToken){
+        return mApiHelper.getKelasApi( accessToken,refreshToken );
+    }
+
+    public PengumumanApi getPengumumanApi(String acessToken, String refreshToken){
+        return mApiHelper.getPengumumanApi( acessToken,refreshToken );
+    }
+
+    public SemesterApi getSemesterApi(String accessToken, String refreshToken){
+        return mApiHelper.getSemesterApi( accessToken,refreshToken );
     }
 }

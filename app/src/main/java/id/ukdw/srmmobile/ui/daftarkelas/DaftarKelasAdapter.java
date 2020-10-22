@@ -1,6 +1,7 @@
 package id.ukdw.srmmobile.ui.daftarkelas;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,8 @@ public class DaftarKelasAdapter extends RecyclerView.Adapter<DaftarKelasAdapter.
     public void onBindViewHolder(@NonNull DaftarKelasAdapter.ViewHolder holder, int position) {
         holder.judulItem.setText( mItemListKelas.get( position ).getNamaMakul() +" "+ mItemListKelas.get(position).getGroup() );
         holder.detailItem.setText( mItemListKelas.get( position ).getHari() + " : " + mItemListKelas.get(position).getJam() );
+        holder.judulItem.setEllipsize( TextUtils.TruncateAt.MARQUEE );
+        holder.judulItem.setSelected( true );
     }
 
     @Override

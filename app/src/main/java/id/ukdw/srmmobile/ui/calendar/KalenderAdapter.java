@@ -1,6 +1,7 @@
 package id.ukdw.srmmobile.ui.calendar;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,9 @@ public class KalenderAdapter extends RecyclerView.Adapter<KalenderAdapter.ViewHo
             super( itemView );
             event = itemView.findViewById( R.id.judulkalender );
             tanggal = itemView.findViewById( R.id.tanggalKalender );
+            event.setEllipsize( TextUtils.TruncateAt.MARQUEE );
+            event.setSelected( true );
+
         }
     }
     private String convertTime(String time) {

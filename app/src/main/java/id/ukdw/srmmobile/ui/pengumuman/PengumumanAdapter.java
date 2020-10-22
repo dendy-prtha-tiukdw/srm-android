@@ -1,6 +1,7 @@
 package id.ukdw.srmmobile.ui.pengumuman;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,8 @@ public class PengumumanAdapter extends RecyclerView.Adapter<PengumumanAdapter.Vi
             Judul = (TextView) v.findViewById( R.id.groupPengumuman );
             Detail = (TextView) v.findViewById( R.id.detailPengumuman );
             tanggal = (TextView) v.findViewById( R.id.tanggalPengumuman );
+            Judul.setEllipsize( TextUtils.TruncateAt.MARQUEE );
+            Judul.setSelected( true );
         }
     }
 

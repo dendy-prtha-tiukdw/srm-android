@@ -16,5 +16,5 @@ public interface PengumumanApi {
     Observable<ResponseWrapper<List<PengumumanDetailKelasResponse>>> getPengumumanDetailKelas (@Body PengumumanDetailKelasRequest request);
 
     @POST("pengumuman/create")
-    Observable<ResponseWrapper<AddPengumumanResponse>> setAddPengumuman (@Body AddPengumumanRequest request);
+    Observable<ResponseWrapper<String>> setAddPengumuman (@Body AddPengumumanRequest request);
 }

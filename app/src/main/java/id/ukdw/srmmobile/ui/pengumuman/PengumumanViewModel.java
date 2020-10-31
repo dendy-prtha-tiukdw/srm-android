@@ -1,5 +1,7 @@
 package id.ukdw.srmmobile.ui.pengumuman;
 
+import android.util.Log;
+
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 
 import java.util.List;
@@ -24,18 +26,22 @@ import io.reactivex.disposables.Disposable;
  * Description : PengumumanViewModel
  */
 public class PengumumanViewModel extends BaseViewModel<PengumumanNavigator> {
+    private String TAG = PengumumanViewModel.class.getSimpleName();
+
     public PengumumanViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
         super(dataManager, schedulerProvider, googleSignInClient);
     }
-    public void getListPengumuman(String text){
-        getDataManager().getUserApi( getDataManager().getCurrentAccessToken(),getDataManager().getCurrentRefreshToken() )
-                .getPengumumanList(new PengumumanRequest( text ) )
-                .subscribeOn( getSchedulerProvider().io() )
-                .observeOn( getSchedulerProvider().ui() )
-                .subscribe( new Observer<ResponseWrapper<List<PengumumanResponse>>>() {
+
+    public void getListPengumuman(String text) {
+
+        getDataManager().getUserApi(getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken())
+                .getPengumumanList(new PengumumanRequest(text))
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(new Observer<ResponseWrapper<List<PengumumanResponse>>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-
+                        getNavigator().isLoading(true);
                     }
 
                     @Override
@@ -47,14 +53,15 @@ public class PengumumanViewModel extends BaseViewModel<PengumumanNavigator> {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.e(TAG, "onError: " + e.getMessage());
+                        getNavigator().isLoading(false);
                     }
 
                     @Override
                     public void onComplete() {
-
+                        getNavigator().isLoading(false);
                     }
-                } );
+                });
     }
 
 

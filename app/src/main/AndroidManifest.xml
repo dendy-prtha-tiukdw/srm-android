@@ -45,7 +45,14 @@
         </activity>
         <activity
             android:name=".ui.login.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".ui.detailkelas.addpengumumankelas.AddPengumumanKelasActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
         <activity
             android:name=".ui.home.HomeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>

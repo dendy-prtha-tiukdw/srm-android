@@ -45,4 +45,13 @@ public class DetailKelasPengumumanViewModel extends BaseViewModel<DetailKelasPen
                     }
                 } );
     }
+
+    public boolean checkRole(){
+        if (getDataManager().getCurrentUserRole().equalsIgnoreCase( "ROLE_MAHASISWA" )){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
 }

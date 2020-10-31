@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="id.ukdw.srmmobile.ui.detailkelas.addpengumumankelas.AddPengumumanKelasActivity">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="addPengumumanKelasViewModel"
+            type="id.ukdw.srmmobile.ui.detailkelas.addpengumumankelas.AddPengumumanKelasViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#2d2d2d"
+        android:orientation="vertical">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/updatejudulpengumuman"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:background="@color/colorWhite"
+            android:hint="EDIT TITLE"
+            android:singleLine="false"
+            android:layout_marginBottom="20dp"/>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/updateisipengumuman"
+            android:layout_width="match_parent"
+            android:layout_height="492dp"
+            android:background="@color/colorWhite"
+            android:hint="EDIT ISI"
+            android:singleLine="false" />
+
+
+        <Button
+            android:id="@+id/savePengumuman"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="SAVE"
+            android:textSize="16dp" />
+    </LinearLayout>
+</layout>

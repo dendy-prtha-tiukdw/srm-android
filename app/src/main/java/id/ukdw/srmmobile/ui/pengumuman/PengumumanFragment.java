@@ -86,7 +86,7 @@ public class PengumumanFragment extends BaseFragment<FragmentPengumumanBinding, 
     @Override
     public void performDependencyInjection(FragmentComponent buildComponent) {
         buildComponent.inject( this );
-        getBaseActivity().showLoading();
+        //getBaseActivity().showLoading();
         //mViewModel.getListPengumuman(defvalue);
     }
 
@@ -106,7 +106,7 @@ public class PengumumanFragment extends BaseFragment<FragmentPengumumanBinding, 
         getViewDataBinding().recyclerPengumuman.setLayoutManager(new LinearLayoutManager(getActivity()));
         getViewDataBinding().recyclerPengumuman.setAdapter(pengumumanAdapter);
 
-        getBaseActivity().hideLoading();
+        //getBaseActivity().hideLoading();
 
 
     }

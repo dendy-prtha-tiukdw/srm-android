@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class PengumumanDetailKelasResponse {
+    String idPengumuman;
     String namaMatakuliah;
     String namaDosen;
     String group;
@@ -11,6 +12,7 @@ public class PengumumanDetailKelasResponse {
     String semester;
     String pengumuman;
     String tanggalInput;
+    String judulPengumuman;
 
     public PengumumanDetailKelasResponse(String namaMatakuliah, String namaDosen, String group, String tahunAjaran, String semester, String pengumuman, String tanggalInput) {
         this.namaMatakuliah = namaMatakuliah;

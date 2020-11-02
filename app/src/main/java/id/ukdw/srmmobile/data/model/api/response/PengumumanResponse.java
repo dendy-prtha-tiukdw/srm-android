@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class PengumumanResponse {
+    private String idPengumuman;
     private String namaMatakuliah;
     private String namaDosen;
     private String group;
@@ -11,5 +12,6 @@ public class PengumumanResponse {
     private String semester;
     private String pengumuman;
     private String tanggalInput;
+    private String judulPengumuman;
 
 }

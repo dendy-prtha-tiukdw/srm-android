@@ -17,10 +17,9 @@ public class AddPengumumanKelasViewModel extends BaseViewModel<AddPengumumanKela
         super( dataManager, schedulerProvider, googleSignInClient );
     }
 
-    public void addPengumumanKelas(String group, String namaMatkul, String pengumuman, String semester, String tahunAjaran){
-        getDataManager().getPengumumanApi("ya29.A0AfH6SMCImc3IKD-5TSqN1kkcpTUgRj9tf5A6iVKx5k1u1H2O6OtgD1Qg8wMK-hZjcurYT7NlgmGkK5a2nLNNisdCQ96d6gFcws7dreFA5hs8wuPTJMY7chWEVoVtxOU8rh-ssMQlfqcaEaC9WqViKH13Q07q0rZteoCuR4WfqhZp",
-                "1//0g6lIFZmzKmbaCgYIARAAGBASNwF-L9IrfP7ugYs6wo_76Qvme3tt1ZtDF-qh89e20_uwTCQFYnWbDiSMfR1p5v6_SP0rfVZ_Vus" )
-                .setAddPengumuman( new AddPengumumanRequest( group,namaMatkul,pengumuman,semester,tahunAjaran ) )
+    public void addPengumumanKelas(String group,String judulPengumuman, String namaMatkul, String pengumuman, String semester, String tahunAjaran) {
+        getDataManager().getPengumumanApi( getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken() )
+                .setAddPengumuman( new AddPengumumanRequest( group,judulPengumuman, namaMatkul, pengumuman, semester, tahunAjaran ) )
                 .subscribeOn( getSchedulerProvider().io() )
                 .observeOn( getSchedulerProvider().ui() )
                 .subscribe( new Observer<ResponseWrapper<AddPengumumanResponse>>() {
@@ -31,9 +30,10 @@ public class AddPengumumanKelasViewModel extends BaseViewModel<AddPengumumanKela
 
                     @Override
                     public void onNext(ResponseWrapper<AddPengumumanResponse> addPengumumanResponseResponseWrapper) {
-                        System.out.println("test");
-                        AddPengumumanResponse addPengumumanResponse = addPengumumanResponseResponseWrapper.getData();
-                        getNavigator().onSuccessAddPengumuman( addPengumumanResponse.getData() );
+                        System.out.println("TEST MASUK ON NEXT SEBLUM NAVIGATOR");
+                        getNavigator().onSuccessAddPengumuman();
+                        System.out.println("TEST MASUK ON NEXT SESUDAH NAVIGATOR");
+
 
                     }
 

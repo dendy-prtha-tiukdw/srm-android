@@ -62,6 +62,18 @@
                     android:scrollHorizontally="true"/>
 
                 <TextView
+                    android:id="@+id/judulPengumuman"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:text="@string/judul_kelas"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:singleLine="true"
+                    android:scrollHorizontally="true"/>
+
+                <TextView
                     android:id="@+id/detailPengumuman"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -35,7 +35,8 @@ public class DetailKelasPengumumanAdapter extends  RecyclerView.Adapter<DetailKe
 
     @Override
     public void onBindViewHolder(@NonNull DetailKelasPengumumanAdapter.ViewHolder holder, int position) {
-        holder.Judul.setText(listPengumuman.get(position).getNamaMatakuliah() + " " + listPengumuman.get( position ).getGroup());
+        holder.matkul.setText(listPengumuman.get(position).getNamaMatakuliah() + " " + listPengumuman.get( position ).getGroup());
+        holder.Judul.setText( listPengumuman.get( position ).getJudulPengumuman() );
         holder.NamaDosen.setText(listPengumuman.get(position).getNamaDosen());
         holder.tanggal.setText( convertTime( listPengumuman.get( position ).getTanggalInput() )  );
         holder.Detail.setText( listPengumuman.get( position ).getPengumuman() );
@@ -47,12 +48,13 @@ public class DetailKelasPengumumanAdapter extends  RecyclerView.Adapter<DetailKe
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView NamaDosen, Judul, Detail,tanggal;
+        TextView NamaDosen, Judul, Detail,tanggal,matkul;
 
         public ViewHolder(View itemView) {
             super(itemView);
             NamaDosen = (TextView) itemView.findViewById(R.id.NamaDosenPengumumanDetailKelas);
-            Judul = (TextView) itemView.findViewById(R.id.groupPengumumanDetailKelas);
+            Judul = (TextView) itemView.findViewById( R.id.judulPengumumanDetailKelas );
+            matkul = (TextView) itemView.findViewById(R.id.groupPengumumanDetailKelas);
             Detail = (TextView) itemView.findViewById( R.id.detailPengumumanDetailKelas );
             tanggal = (TextView)itemView.findViewById( R.id.tanggalPengumumanDetailKelas );
         }

@@ -48,17 +48,19 @@ public class AddPengumumanKelasActivity extends BaseActivity<ActivityTambahPengu
         String tahunAjaran = intent.getStringExtra( "tahunAjaran" );
         getViewDataBinding().savePengumuman.setOnClickListener( v -> {
             String isiPengumuman = String.valueOf( getViewDataBinding().updateisipengumuman.getText() );
-            mViewModel.addPengumumanKelas( group,matkul,isiPengumuman,semester,tahunAjaran );
+            String judulPengumuman = String.valueOf( getViewDataBinding().updatejudulpengumuman.getText() );
+            mViewModel.addPengumumanKelas( group,judulPengumuman,matkul,isiPengumuman,semester,tahunAjaran );
         } );
 
     }
 
     @Override
-    public void onSuccessAddPengumuman(String data) {
-        Toast.makeText( this, data, Toast.LENGTH_LONG ).show();
+    public void onSuccessAddPengumuman() {
+        System.out.println("TEST MASUK ACTIVITY");
+        Toast.makeText( this, "Saving Pengumuman Succesfull", Toast.LENGTH_LONG ).show();
         Intent movePengumumanKelas = new Intent( AddPengumumanKelasActivity.this, DetailKelasPengumumanActivity.class );
         startActivity( movePengumumanKelas );
-        finish();
+
 
     }
 }

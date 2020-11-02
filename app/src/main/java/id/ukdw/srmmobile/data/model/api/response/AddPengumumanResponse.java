@@ -4,5 +4,6 @@ import lombok.Data;
 
 @Data
 public class AddPengumumanResponse {
-    String data;
+
+    private String data;
 }

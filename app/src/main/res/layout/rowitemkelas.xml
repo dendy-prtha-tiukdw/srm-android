@@ -44,7 +44,9 @@
                     android:text="@string/judul_kelas"
                     android:textColor="@color/colorWhite"
                     android:textStyle="bold"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:singleLine="true"
+                    android:scrollHorizontally="true"/>
                 <TextView
                     android:id="@+id/detailKelas"
                     android:layout_width="wrap_content"

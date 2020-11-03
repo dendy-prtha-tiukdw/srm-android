@@ -6,10 +6,12 @@ import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import id.ukdw.srmmobile.BR;
 import id.ukdw.srmmobile.R;
+import id.ukdw.srmmobile.data.model.api.response.DetailKelasResponse;
 import id.ukdw.srmmobile.data.model.api.response.PengumumanDetailKelasResponse;
 import id.ukdw.srmmobile.databinding.ActivityLihatPengumumanBinding;
 import id.ukdw.srmmobile.di.component.ActivityComponent;
@@ -19,8 +21,12 @@ import id.ukdw.srmmobile.ui.detailkelas.addpengumumankelas.AddPengumumanKelasAct
 public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPengumumanBinding, DetailKelasPengumumanViewModel>
         implements DetailKelasPengumumanNavigator {
 
-    List<PengumumanDetailKelasResponse> pengumumanDetailKelasResponses;
+    List<RecyclerVIewModelPengumumanKelas> itemList;
     private ActivityLihatPengumumanBinding activityLihatPengumumanBinding;
+    public static final String DETAIL_PENGUMUMAN_DATA = "DETAIL_PENGUMUMAN_DATA";
+    public static final String STATE_UPDATE = "UPDATE";
+    public static final String STATE_ADD = "ADD";
+
 
     @Override
     public int getBindingVariable() {
@@ -50,10 +56,11 @@ public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPen
 
         getViewDataBinding().fab.setOnClickListener( v -> {
             Intent intentAddPengumuman = new Intent( DetailKelasPengumumanActivity.this, AddPengumumanKelasActivity.class );
-            intentAddPengumuman.putExtra("namaMakul", matkul);
-            intentAddPengumuman.putExtra("group", group);
-            intentAddPengumuman.putExtra("semester", semester);
-            intentAddPengumuman.putExtra("tahunAjaran", tahunAjaran);
+            intentAddPengumuman.putExtra( "namaMakul", matkul );
+            intentAddPengumuman.putExtra( "group", group );
+            intentAddPengumuman.putExtra( "semester", semester );
+            intentAddPengumuman.putExtra( "tahunAjaran", tahunAjaran );
+            intentAddPengumuman.putExtra( "state", STATE_ADD );
             startActivity( intentAddPengumuman );
             finish();
         } );
@@ -73,12 +80,37 @@ public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPen
     }
 
     @Override
-    public void onGetListDetailKelasPengumuman(List<PengumumanDetailKelasResponse> pengumumanDetailKelasResponses) {
-        this.pengumumanDetailKelasResponses = pengumumanDetailKelasResponses;
-        DetailKelasPengumumanAdapter detailKelasPengumumanAdapter = new DetailKelasPengumumanAdapter( this, pengumumanDetailKelasResponses );
+    public void onGetListDetailKelasPengumuman(List<PengumumanDetailKelasResponse> listPengumumanKelas) {
+        itemList = new ArrayList<>();
+
+        for (PengumumanDetailKelasResponse pengumumanDetailKelasResponses : listPengumumanKelas) {
+            itemList.add( new RecyclerVIewModelPengumumanKelas(
+                            pengumumanDetailKelasResponses.getIdPengumuman(),
+                            pengumumanDetailKelasResponses.getNamaMatakuliah(),
+                            pengumumanDetailKelasResponses.getNamaDosen(),
+                            pengumumanDetailKelasResponses.getGroup(),
+                            pengumumanDetailKelasResponses.getTahunAjaran(),
+                            pengumumanDetailKelasResponses.getSemester(),
+                            pengumumanDetailKelasResponses.getPengumuman(),
+                            pengumumanDetailKelasResponses.getTanggalInput(),
+                            pengumumanDetailKelasResponses.getJudulPengumuman(),
+                            STATE_UPDATE
+                    )
+            );
+        }
+
+//        this.pengumumanDetailKelasResponses = pengumumanDetailKelasResponses;
+        DetailKelasPengumumanAdapter detailKelasPengumumanAdapter = new DetailKelasPengumumanAdapter( this, itemList );
         getViewDataBinding().recyclerPengumumanKelas.setHasFixedSize( true );
         getViewDataBinding().recyclerPengumumanKelas.setLayoutManager( new LinearLayoutManager( this ) );
         getViewDataBinding().recyclerPengumumanKelas.setAdapter( detailKelasPengumumanAdapter );
+
+        detailKelasPengumumanAdapter.setOnItemClickListener( position -> {
+            RecyclerVIewModelPengumumanKelas PengumumanKelas =  itemList.get( position );
+            Intent moveDetailPengumumanKelas = new Intent( DetailKelasPengumumanActivity.this, AddPengumumanKelasActivity.class );
+            moveDetailPengumumanKelas.putExtra( DETAIL_PENGUMUMAN_DATA, PengumumanKelas );
+            startActivity( moveDetailPengumumanKelas );
+        } );
 
     }
 }

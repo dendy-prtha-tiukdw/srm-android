@@ -6,9 +6,9 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardPengumumanKelas"
+        android:id="@+id/cardKelas"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_margin="20dp"
         app:cardCornerRadius="30dp">
 
@@ -21,7 +21,13 @@
                 android:id="@+id/itemImg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#D6811A" />
+                android:background="#000" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-100dp"
+                android:background="@drawable/border_recyclerview" />
         </LinearLayout>
 
         <LinearLayout
@@ -37,17 +43,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tanggalPengumumanDetailKelas"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:paddingLeft="20dp"
-                    android:paddingBottom="15dp"
-                    android:text="Tanggal"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="14sp" />
-
-                <TextView
                     android:id="@+id/groupPengumumanDetailKelas"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -61,34 +56,12 @@
                     android:id="@+id/judulPengumumanDetailKelas"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
                     android:text="@string/judul_kelas"
                     android:textColor="@color/colorWhite"
-                    android:textSize="20dp"
+                    android:textSize="17dp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/detailPengumumanDetailKelas"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Detail Matakuliah"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="17sp" />
-
-                <TextView
-                    android:id="@+id/NamaDosenPengumumanDetailKelas"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:paddingTop="15dp"
-                    android:paddingRight="20dp"
-                    android:text="Nama Dosen"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
-
-
     </androidx.cardview.widget.CardView>
-
 </LinearLayout>

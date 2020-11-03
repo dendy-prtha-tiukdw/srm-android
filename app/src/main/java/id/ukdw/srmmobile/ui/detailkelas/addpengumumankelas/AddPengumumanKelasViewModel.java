@@ -21,9 +21,9 @@ public class AddPengumumanKelasViewModel extends BaseViewModel<AddPengumumanKela
         super(dataManager, schedulerProvider, googleSignInClient);
     }
 
-    public void addPengumumanKelas(String group, String namaMatkul, String pengumuman, String semester, String tahunAjaran) {
+    public void addPengumumanKelas(String group,String judulMatakuliah, String namaMatkul, String pengumuman, String semester, String tahunAjaran) {
         getDataManager().getPengumumanApi(getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken())
-                .setAddPengumuman(new AddPengumumanRequest(group, namaMatkul, pengumuman, semester, tahunAjaran))
+                .setAddPengumuman(new AddPengumumanRequest(group,judulMatakuliah, namaMatkul, pengumuman, semester, tahunAjaran))
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(new Observer<ResponseWrapper<String>>() {

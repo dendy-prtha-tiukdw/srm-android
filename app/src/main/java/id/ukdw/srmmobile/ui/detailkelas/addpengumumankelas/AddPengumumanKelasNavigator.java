@@ -1,5 +1,5 @@
 package id.ukdw.srmmobile.ui.detailkelas.addpengumumankelas;
 
 public interface AddPengumumanKelasNavigator {
-    void onSuccessAddPengumuman();
+    void onSuccessAddPengumuman(String data);
 }

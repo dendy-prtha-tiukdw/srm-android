@@ -17,5 +17,5 @@ import id.ukdw.srmmobile.data.model.api.response.PengumumanResponse;
 
 public interface PengumumanNavigator {
     void onGetListPengumuman(List<PengumumanResponse> pengumumanResponseList);
-
+    void isLoading(boolean flag);
 }

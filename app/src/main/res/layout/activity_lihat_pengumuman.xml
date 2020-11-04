@@ -4,6 +4,7 @@
     tools:context="id.ukdw.srmmobile.ui.detailkelas.DetailKelasPengumumanActivity">
 
     <data>
+
         <import type="android.view.View" />
 
         <variable
@@ -12,14 +13,28 @@
     </data>
 
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="#2D2D2D"
         android:orientation="vertical">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="20dp"
+            android:visibility="invisible"
+            android:src="@drawable/fab_add">
+
+        </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerPengumumanKelas"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/recyclerPengumumanKelas"/>
-    </LinearLayout>
+            android:layout_height="wrap_content" />
+
+
+    </FrameLayout>
 </layout>

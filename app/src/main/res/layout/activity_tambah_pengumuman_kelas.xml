@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="id.ukdw.srmmobile.ui.detailkelas.addpengumumankelas.AddPengumumanKelasActivity">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="addPengumumanKelasViewModel"
+            type="id.ukdw.srmmobile.ui.detailkelas.addpengumumankelas.AddPengumumanKelasViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#2d2d2d"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="40dp"
+            android:clipToPadding="false"
+            android:paddingBottom="10dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true">
+
+                <Button
+                    android:id="@+id/detelePengumuman"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="#BC083B"
+                    android:padding="15dp"
+                    android:text="DELETE"
+                    android:textSize="16dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <EditText
+                    android:id="@+id/updatejudulpengumuman"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="12dp"
+                    android:hint="@string/judul_pengumuan"
+                    android:imeOptions="actionDone"
+                    android:importantForAutofill="no"
+                    android:includeFontPadding="false"
+                    android:inputType="text"
+                    android:textColor="@color/colorWhite"
+                    android:textColorHint="#AFAFAF"
+                    android:textSize="26sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/detelePengumuman"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:layout_editor_absoluteX="8dp" />
+
+                <EditText
+                    android:id="@+id/updateisipengumuman"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="15dp"
+                    android:gravity="top"
+                    android:hint="@string/isi_pengumuman"
+                    android:importantForAutofill="no"
+                    android:includeFontPadding="false"
+                    android:inputType="textImeMultiLine"
+                    android:minHeight="100dp"
+                    android:textColor="@color/colorWhite"
+                    android:textColorHint="#AFAFAF"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/updatejudulpengumuman"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:layout_editor_absoluteX="12dp" />
+
+                <TextView
+                    android:id="@+id/pengumumanKelasTanggalInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:text="@string/tanggal_pengumuman"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/updateisipengumuman"
+                    app:layout_constraintVertical_bias="0.008"
+                    tools:layout_editor_absoluteX="0dp" />
+
+                <TextView
+                    android:id="@+id/pengumumanKelasNamaDosen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:text="@string/namadosen"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pengumumanKelasTanggalInput"
+                    app:layout_constraintVertical_bias="0.12"
+                    tools:layout_editor_absoluteX="0dp" />
+
+                <Button
+                    android:id="@+id/savePengumuman"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@color/colorPrimary"
+                    android:padding="15dp"
+                    android:text="SAVE"
+                    android:visibility="gone"
+                    android:textSize="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/pengumumanKelasNamaDosen" />
+
+                <Button
+                    android:id="@+id/editPengumuman"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@color/colorPrimary"
+                    android:padding="15dp"
+                    android:text="EDIT"
+                    android:textSize="16dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/pengumumanKelasNamaDosen" />
+
+                <Button
+                    android:id="@+id/updatePengumuman"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@color/colorPrimary"
+                    android:padding="15dp"
+                    android:text="UPDATE"
+                    android:textSize="16dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/pengumumanKelasNamaDosen" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
+
+
+    <!--<com.google.android.material.textfield.TextInputEditText-->
+    <!--android:id="@+id/updatejudulpengumuman"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="64dp"-->
+    <!--android:background="@color/colorWhite"-->
+    <!--android:hint="EDIT TITLE"-->
+    <!--android:singleLine="false"-->
+    <!--android:layout_marginBottom="20dp"/>-->
+
+    <!--<com.google.android.material.textfield.TextInputEditText-->
+    <!--android:id="@+id/updateisipengumuman"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="492dp"-->
+    <!--android:background="@color/colorWhite"-->
+    <!--android:hint="EDIT ISI"-->
+    <!--android:singleLine="false" />-->

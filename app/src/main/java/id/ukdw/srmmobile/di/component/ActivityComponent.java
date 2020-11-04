@@ -5,6 +5,7 @@ import id.ukdw.srmmobile.di.module.ActivityModule;
 import id.ukdw.srmmobile.di.scope.ActivityScope;
 import id.ukdw.srmmobile.ui.detailkelas.DetailKelasActivity;
 import id.ukdw.srmmobile.ui.detailkelas.DetailKelasPengumumanActivity;
+import id.ukdw.srmmobile.ui.detailkelas.addpengumumankelas.AddPengumumanKelasActivity;
 import id.ukdw.srmmobile.ui.home.HomeActivity;
 import id.ukdw.srmmobile.ui.login.LoginActivity;
 import id.ukdw.srmmobile.ui.splash.SplashActivity;
@@ -31,4 +32,6 @@ public interface ActivityComponent {
     void inject(DetailKelasActivity detailKelasActivity);
 
     void inject(DetailKelasPengumumanActivity detailKelasPengumumanActivity);
+
+    void inject(AddPengumumanKelasActivity addPengumumanKelasActivity);
 }

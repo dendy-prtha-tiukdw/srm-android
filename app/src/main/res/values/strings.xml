@@ -41,5 +41,8 @@
     <string name="title_waktu">Waktu</string>
     <string name="title_jumlah_pengumuman"> Jumlah Pengumuman : </string>
     <string name="default_spinner_pengumuman"> 10 </string>
+    <string name="judul_pengumuan">Judul Pengumuan</string>
+    <string name="isi_pengumuman">Isi Pengumuman</string>
+    <string name="namadosen">namadosen</string>
 
 </resources>

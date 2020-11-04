@@ -6,7 +6,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 
 import id.ukdw.srmmobile.data.DataManager;
 import id.ukdw.srmmobile.data.model.api.request.AddPengumumanRequest;
+import id.ukdw.srmmobile.data.model.api.request.DeletePengumumanKelasRequest;
 import id.ukdw.srmmobile.data.model.api.request.PengumumanDetailKelasRequest;
+import id.ukdw.srmmobile.data.model.api.request.UpdatePengumumanKelasRequest;
 import id.ukdw.srmmobile.data.model.api.response.AddPengumumanResponse;
 import id.ukdw.srmmobile.data.model.api.response.ResponseWrapper;
 import id.ukdw.srmmobile.ui.base.BaseViewModel;
@@ -50,4 +52,73 @@ public class AddPengumumanKelasViewModel extends BaseViewModel<AddPengumumanKela
                     }
                 });
     }
+
+    public void UpdatePengumumanKelas(String id, String judulPengumumanKelas, String isiPengumumanKelas){
+        getDataManager().getPengumumanApi( getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken() )
+                .setUpdatePengumuman( new UpdatePengumumanKelasRequest( id,judulPengumumanKelas,isiPengumumanKelas ) )
+                .subscribeOn( getSchedulerProvider().io() )
+                .observeOn( getSchedulerProvider().ui() )
+                .subscribe( new Observer<ResponseWrapper<String>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(ResponseWrapper<String> response) {
+                        getNavigator().onSuccessUpdatePengumuman(response.getData());
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                } );
+
+    }
+    public void deletePengumumanKelas(String id){
+        getDataManager().getPengumumanApi( getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken() )
+                .setDeletePengumuman( new DeletePengumumanKelasRequest( id ) )
+                .subscribeOn( getSchedulerProvider().io() )
+                .observeOn( getSchedulerProvider().ui() )
+                .subscribe( new Observer<ResponseWrapper<String>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(ResponseWrapper<String> response) {
+                        getNavigator().onSuccessDeletePengumuman(response.getData());
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                } );
+    }
+
+    public boolean checkRole(){
+        if (getDataManager().getCurrentUserRole().equalsIgnoreCase( "ROLE_MAHASISWA" )){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+
 }

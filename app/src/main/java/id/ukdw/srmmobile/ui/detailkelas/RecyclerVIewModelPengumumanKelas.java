@@ -15,11 +15,11 @@ public class RecyclerVIewModelPengumumanKelas implements Serializable {
     private String pengumuman;
     private String tanggalInput;
     private String judulPengumuman;
-    private String state;
+
 
     public RecyclerVIewModelPengumumanKelas(String idPengumuman, String namaMatakuliah,
                                             String namaDosen, String group, String tahunAjaran, String semester,
-                                            String pengumuman, String tanggalInput, String judulPengumuman, String state) {
+                                            String pengumuman, String tanggalInput, String judulPengumuman) {
         this.idPengumuman = idPengumuman;
         this.namaMatakuliah = namaMatakuliah;
         this.namaDosen = namaDosen;
@@ -29,6 +29,6 @@ public class RecyclerVIewModelPengumumanKelas implements Serializable {
         this.pengumuman = pengumuman;
         this.tanggalInput = tanggalInput;
         this.judulPengumuman = judulPengumuman;
-        this.state = state;
+
     }
 }

@@ -24,7 +24,7 @@ public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPen
     List<RecyclerVIewModelPengumumanKelas> itemList;
     private ActivityLihatPengumumanBinding activityLihatPengumumanBinding;
     public static final String DETAIL_PENGUMUMAN_DATA = "DETAIL_PENGUMUMAN_DATA";
-    public static final String STATE_UPDATE = "UPDATE";
+    public static final String STATE_ON_CLICK = "ONCLICK";
     public static final String STATE_ADD = "ADD";
 
 
@@ -93,8 +93,7 @@ public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPen
                             pengumumanDetailKelasResponses.getSemester(),
                             pengumumanDetailKelasResponses.getPengumuman(),
                             pengumumanDetailKelasResponses.getTanggalInput(),
-                            pengumumanDetailKelasResponses.getJudulPengumuman(),
-                            STATE_UPDATE
+                            pengumumanDetailKelasResponses.getJudulPengumuman()
                     )
             );
         }
@@ -109,6 +108,7 @@ public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPen
             RecyclerVIewModelPengumumanKelas PengumumanKelas =  itemList.get( position );
             Intent moveDetailPengumumanKelas = new Intent( DetailKelasPengumumanActivity.this, AddPengumumanKelasActivity.class );
             moveDetailPengumumanKelas.putExtra( DETAIL_PENGUMUMAN_DATA, PengumumanKelas );
+            moveDetailPengumumanKelas.putExtra( "state",  STATE_ON_CLICK );
             startActivity( moveDetailPengumumanKelas );
         } );
 

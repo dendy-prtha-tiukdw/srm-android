@@ -3,7 +3,9 @@ package id.ukdw.srmmobile.data.remote;
 import java.util.List;
 
 import id.ukdw.srmmobile.data.model.api.request.AddPengumumanRequest;
+import id.ukdw.srmmobile.data.model.api.request.DeletePengumumanKelasRequest;
 import id.ukdw.srmmobile.data.model.api.request.PengumumanDetailKelasRequest;
+import id.ukdw.srmmobile.data.model.api.request.UpdatePengumumanKelasRequest;
 import id.ukdw.srmmobile.data.model.api.response.AddPengumumanResponse;
 import id.ukdw.srmmobile.data.model.api.response.PengumumanDetailKelasResponse;
 import id.ukdw.srmmobile.data.model.api.response.ResponseWrapper;
@@ -17,4 +19,10 @@ public interface PengumumanApi {
 
     @POST("pengumuman/create")
     Observable<ResponseWrapper<String>> setAddPengumuman (@Body AddPengumumanRequest request);
+
+    @POST("pengumuman/update")
+    Observable<ResponseWrapper<String>> setUpdatePengumuman (@Body UpdatePengumumanKelasRequest request);
+
+    @POST("pengumuman/delete")
+    Observable<ResponseWrapper<String>> setDeletePengumuman(@Body DeletePengumumanKelasRequest request);
 }

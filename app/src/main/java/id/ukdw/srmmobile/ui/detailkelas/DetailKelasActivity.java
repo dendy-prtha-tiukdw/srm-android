@@ -25,6 +25,7 @@ import id.ukdw.srmmobile.databinding.ActivityDetailKelasBinding;
 import id.ukdw.srmmobile.di.component.ActivityComponent;
 import id.ukdw.srmmobile.ui.base.BaseActivity;
 import id.ukdw.srmmobile.ui.daftarkelas.RecyclerViewModelKelas;
+import id.ukdw.srmmobile.ui.detailkelas.kegiatanKelas.DetailKelasLihatKegiatanActivity;
 
 public class DetailKelasActivity extends BaseActivity<ActivityDetailKelasBinding, DetailKelasViewModel>
         implements DetailKelasNavigator {
@@ -78,6 +79,15 @@ public class DetailKelasActivity extends BaseActivity<ActivityDetailKelasBinding
         getViewDataBinding().imgSchedule.setOnClickListener(onClick -> {
             handleSchedule();
         });
+
+        getViewDataBinding().btKegiatanDetailKelas.setOnClickListener( v-> {
+            Intent moveKegiatan = new Intent( DetailKelasActivity.this, DetailKelasLihatKegiatanActivity.class );
+            moveKegiatan.putExtra("namaMakul", recyclerViewModelKelas.getNamaMakul());
+            moveKegiatan.putExtra("group", recyclerViewModelKelas.getGroup());
+            moveKegiatan.putExtra("semester", recyclerViewModelKelas.getSemester());
+            moveKegiatan.putExtra("tahunAjaran", recyclerViewModelKelas.getTahunAjaran());
+            startActivity(moveKegiatan);
+        } );
 
     }
 

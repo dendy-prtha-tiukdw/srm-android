@@ -118,11 +118,27 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btPengumumanDetailKelas"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lihat Pengumuman" />
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btPengumumanDetailKelas"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="wrap_content"
+                    android:text="Lihat Pengumuman" />
+
+                <Button
+                    android:id="@+id/btKegiatanDetailKelas"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="wrap_content"
+                    android:text="Lihat Kegiatan" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout

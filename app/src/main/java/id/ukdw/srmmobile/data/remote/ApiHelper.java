@@ -22,4 +22,6 @@ public interface ApiHelper {
 
     SemesterApi getSemesterApi(String accessToken, String refreshToken);
 
+    KegiatanApi getKegiatanApi(String accessToken, String refreshToken);
+
 }

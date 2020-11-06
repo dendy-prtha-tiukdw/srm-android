@@ -44,5 +44,6 @@
     <string name="judul_pengumuan">Judul Pengumuan</string>
     <string name="isi_pengumuman">Isi Pengumuman</string>
     <string name="namadosen">namadosen</string>
+    <string name="deskripsi_kegiatan">Deskripsi kegiatan</string>
 
 </resources>

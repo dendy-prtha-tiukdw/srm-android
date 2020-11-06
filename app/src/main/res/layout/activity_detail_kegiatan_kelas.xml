@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="id.ukdw.srmmobile.ui.detailkelas.addpengumumankelas.AddPengumumanKelasActivity">
+    tools:context="id.ukdw.srmmobile.ui.detailkelas.kegiatanKelas.detailKegiatanKelas.DetailKegiatanKelasActivity">
 
     <data>
 
         <import type="android.view.View" />
 
         <variable
-            name="addPengumumanKelasViewModel"
-            type="id.ukdw.srmmobile.ui.detailkelas.addpengumumankelas.AddPengumumanKelasViewModel" />
+            name="detailKegiatanKelasViewModel"
+            type="id.ukdw.srmmobile.ui.detailkelas.kegiatanKelas.detailKegiatanKelas.DetailKegiatanKelasViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -33,7 +32,7 @@
                 android:animateLayoutChanges="true">
 
                 <Button
-                    android:id="@+id/detelePengumuman"
+                    android:id="@+id/deteleKegiatan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
@@ -49,7 +48,7 @@
 
 
                 <EditText
-                    android:id="@+id/updatejudulpengumuman"
+                    android:id="@+id/updatejudulkegiatan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -65,12 +64,12 @@
                     android:textColorHint="#AFAFAF"
                     android:textSize="26sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/detelePengumuman"
+                    app:layout_constraintTop_toBottomOf="@id/deteleKegiatan"
                     app:layout_constraintVertical_bias="0.0"
                     tools:layout_editor_absoluteX="8dp" />
 
                 <EditText
-                    android:id="@+id/updateisipengumuman"
+                    android:id="@+id/updateisikegiatan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -78,7 +77,7 @@
                     android:layout_marginEnd="12dp"
                     android:layout_marginBottom="15dp"
                     android:gravity="top"
-                    android:hint="@string/isi_pengumuman"
+                    android:hint="@string/deskripsi_kegiatan"
                     android:importantForAutofill="no"
                     android:includeFontPadding="false"
                     android:inputType="textImeMultiLine"
@@ -87,12 +86,12 @@
                     android:textColorHint="#AFAFAF"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/updatejudulpengumuman"
+                    app:layout_constraintTop_toBottomOf="@id/updatejudulkegiatan"
                     app:layout_constraintVertical_bias="0.0"
                     tools:layout_editor_absoluteX="12dp" />
 
                 <TextView
-                    android:id="@+id/pengumumanKelasTanggalInput"
+                    android:id="@+id/kegiatanKelasTanggalInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -101,12 +100,12 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/updateisipengumuman"
+                    app:layout_constraintTop_toBottomOf="@+id/updateisikegiatan"
                     app:layout_constraintVertical_bias="0.008"
                     tools:layout_editor_absoluteX="0dp" />
 
                 <TextView
-                    android:id="@+id/pengumumanKelasNamaDosen"
+                    android:id="@+id/kegiatanKelasNamaDosen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -115,12 +114,12 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/pengumumanKelasTanggalInput"
+                    app:layout_constraintTop_toBottomOf="@+id/kegiatanKelasTanggalInput"
                     app:layout_constraintVertical_bias="0.12"
                     tools:layout_editor_absoluteX="0dp" />
 
                 <Button
-                    android:id="@+id/savePengumuman"
+                    android:id="@+id/saveKegiatan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
@@ -131,10 +130,10 @@
                     android:visibility="gone"
                     android:textSize="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/pengumumanKelasNamaDosen" />
+                    app:layout_constraintTop_toBottomOf="@id/kegiatanKelasNamaDosen" />
 
                 <Button
-                    android:id="@+id/editPengumuman"
+                    android:id="@+id/editKegiatan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
@@ -145,10 +144,10 @@
                     android:textSize="16dp"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/pengumumanKelasNamaDosen" />
+                    app:layout_constraintTop_toBottomOf="@id/kegiatanKelasNamaDosen" />
 
                 <Button
-                    android:id="@+id/updatePengumuman"
+                    android:id="@+id/updateKegiatan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
@@ -159,7 +158,7 @@
                     android:textSize="16dp"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/pengumumanKelasNamaDosen" />
+                    app:layout_constraintTop_toBottomOf="@id/kegiatanKelasNamaDosen" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -169,6 +168,3 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
-
-
-

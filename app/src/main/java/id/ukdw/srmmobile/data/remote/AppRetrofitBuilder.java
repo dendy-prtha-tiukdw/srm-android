@@ -99,4 +99,14 @@ public class AppRetrofitBuilder implements ApiHelper {
         interceptors.add( authorizationInterceptor );
         return getRetrofitInstance(interceptors).create( SemesterApi.class );
     }
+
+    public KegiatanApi getKegiatanApi(String accessToken, String refreshToken){
+        ArrayList<Interceptor> interceptors = new ArrayList<>();
+        AuthorizationInterceptor authorizationInterceptor = new AuthorizationInterceptor( getAuthApi(),
+                mPreferencesHelper,
+                schedulerProvider);
+        interceptors.add( authorizationInterceptor );
+        return getRetrofitInstance(interceptors).create( KegiatanApi.class );
+
+    }
 }

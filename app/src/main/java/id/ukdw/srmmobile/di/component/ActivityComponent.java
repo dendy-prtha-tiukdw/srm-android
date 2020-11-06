@@ -6,6 +6,8 @@ import id.ukdw.srmmobile.di.scope.ActivityScope;
 import id.ukdw.srmmobile.ui.detailkelas.DetailKelasActivity;
 import id.ukdw.srmmobile.ui.detailkelas.DetailKelasPengumumanActivity;
 import id.ukdw.srmmobile.ui.detailkelas.addpengumumankelas.AddPengumumanKelasActivity;
+import id.ukdw.srmmobile.ui.detailkelas.kegiatanKelas.detailKegiatanKelas.DetailKegiatanKelasActivity;
+import id.ukdw.srmmobile.ui.detailkelas.kegiatanKelas.DetailKelasLihatKegiatanActivity;
 import id.ukdw.srmmobile.ui.home.HomeActivity;
 import id.ukdw.srmmobile.ui.login.LoginActivity;
 import id.ukdw.srmmobile.ui.splash.SplashActivity;
@@ -34,4 +36,8 @@ public interface ActivityComponent {
     void inject(DetailKelasPengumumanActivity detailKelasPengumumanActivity);
 
     void inject(AddPengumumanKelasActivity addPengumumanKelasActivity);
+
+    void inject(DetailKelasLihatKegiatanActivity detailKelasLihatKegiatanActivity);
+
+    void inject(DetailKegiatanKelasActivity detailKegiatanKelasActivity);
 }

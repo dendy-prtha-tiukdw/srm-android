@@ -14,8 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.detailkelas.kegiatanKelas.detailKegiatanKelas.DetailKegiatanKelasActivity"></activity>
-        <activity android:name=".ui.detailkelas.kegiatanKelas.DetailKelasLihatKegiatanActivity" /> <!-- [START fcm_default_icon] -->
+        <activity android:name=".ui.kegiatankelas.detailkegiatankelas.DetailKegiatanKelasActivity"></activity>
+        <activity android:name=".ui.kegiatankelas.DetailKelasLihatKegiatanActivity" /> <!-- [START fcm_default_icon] -->
         <!--
  Set custom default icon. This is used when no icon is set for incoming notification messages.
              See README(https://goo.gl/l4GJaQ) for more.
@@ -34,8 +34,7 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="fcm_default_channel" /> <!-- [END fcm_default_channel] -->
-        <activity android:name=".ui.detailkelas.DetailKelasPengumumanActivity" />
-        <activity android:name=".ui.tugaskelas.LihatTugasActivity" />
+        <activity android:name=".ui.pengumumankelas.DetailKelasPengumumanActivity" />
         <activity
             android:name=".ui.splash.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -49,7 +48,7 @@
             android:name=".ui.login.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.detailkelas.addpengumumankelas.AddPengumumanKelasActivity"
+            android:name=".ui.pengumumankelas.detailpengumumankelas.DetailPengumumanKelasActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.home.HomeActivity"

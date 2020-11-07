@@ -4,10 +4,10 @@ import dagger.Component;
 import id.ukdw.srmmobile.di.module.ActivityModule;
 import id.ukdw.srmmobile.di.scope.ActivityScope;
 import id.ukdw.srmmobile.ui.detailkelas.DetailKelasActivity;
-import id.ukdw.srmmobile.ui.detailkelas.DetailKelasPengumumanActivity;
-import id.ukdw.srmmobile.ui.detailkelas.addpengumumankelas.AddPengumumanKelasActivity;
-import id.ukdw.srmmobile.ui.detailkelas.kegiatanKelas.detailKegiatanKelas.DetailKegiatanKelasActivity;
-import id.ukdw.srmmobile.ui.detailkelas.kegiatanKelas.DetailKelasLihatKegiatanActivity;
+import id.ukdw.srmmobile.ui.pengumumankelas.DetailKelasPengumumanActivity;
+import id.ukdw.srmmobile.ui.pengumumankelas.detailpengumumankelas.DetailPengumumanKelasActivity;
+import id.ukdw.srmmobile.ui.kegiatankelas.detailkegiatankelas.DetailKegiatanKelasActivity;
+import id.ukdw.srmmobile.ui.kegiatankelas.DetailKelasLihatKegiatanActivity;
 import id.ukdw.srmmobile.ui.home.HomeActivity;
 import id.ukdw.srmmobile.ui.login.LoginActivity;
 import id.ukdw.srmmobile.ui.splash.SplashActivity;
@@ -35,7 +35,7 @@ public interface ActivityComponent {
 
     void inject(DetailKelasPengumumanActivity detailKelasPengumumanActivity);
 
-    void inject(AddPengumumanKelasActivity addPengumumanKelasActivity);
+    void inject(DetailPengumumanKelasActivity detailPengumumanKelasActivity);
 
     void inject(DetailKelasLihatKegiatanActivity detailKelasLihatKegiatanActivity);
 

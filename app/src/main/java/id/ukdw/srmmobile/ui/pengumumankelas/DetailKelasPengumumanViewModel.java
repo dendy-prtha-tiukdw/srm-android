@@ -1,4 +1,4 @@
-package id.ukdw.srmmobile.ui.detailkelas;
+package id.ukdw.srmmobile.ui.pengumumankelas;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 

@@ -1,4 +1,4 @@
-package id.ukdw.srmmobile.ui.detailkelas.kegiatanKelas;
+package id.ukdw.srmmobile.ui.kegiatankelas;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -15,7 +15,7 @@ import id.ukdw.srmmobile.data.model.api.response.KegiatanDetailKelasResponse;
 import id.ukdw.srmmobile.databinding.ActivityKelasLihatKegiatanBinding;
 import id.ukdw.srmmobile.di.component.ActivityComponent;
 import id.ukdw.srmmobile.ui.base.BaseActivity;
-import id.ukdw.srmmobile.ui.detailkelas.kegiatanKelas.detailKegiatanKelas.DetailKegiatanKelasActivity;
+import id.ukdw.srmmobile.ui.kegiatankelas.detailkegiatankelas.DetailKegiatanKelasActivity;
 
 public class DetailKelasLihatKegiatanActivity extends BaseActivity<ActivityKelasLihatKegiatanBinding, DetailkelasLihatKegiatanViewModel>
         implements DetailKelasLihatKegiatNavigator  {
@@ -59,6 +59,7 @@ public class DetailKelasLihatKegiatanActivity extends BaseActivity<ActivityKelas
     @Override
     public void performDependencyInjection(ActivityComponent buildComponent) {
         buildComponent.inject( this );
+        showLoading();
 
     }
 
@@ -95,5 +96,6 @@ public class DetailKelasLihatKegiatanActivity extends BaseActivity<ActivityKelas
             startActivity( moveDetailKegiatanKelas );
         } );
 
+    hideLoading();
     }
 }

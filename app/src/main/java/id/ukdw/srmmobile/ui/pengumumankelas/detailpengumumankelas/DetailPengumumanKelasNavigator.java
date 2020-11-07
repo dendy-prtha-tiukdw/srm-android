@@ -1,6 +1,6 @@
-package id.ukdw.srmmobile.ui.detailkelas.addpengumumankelas;
+package id.ukdw.srmmobile.ui.pengumumankelas.detailpengumumankelas;
 
-public interface AddPengumumanKelasNavigator {
+public interface DetailPengumumanKelasNavigator {
     void onSuccessAddPengumuman(String data);
     void onSuccessDeletePengumuman(String data);
     void onSuccessUpdatePengumuman(String data);

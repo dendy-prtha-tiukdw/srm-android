@@ -1,4 +1,4 @@
-package id.ukdw.srmmobile.ui.detailkelas;
+package id.ukdw.srmmobile.ui.pengumumankelas;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,12 +11,11 @@ import java.util.List;
 
 import id.ukdw.srmmobile.BR;
 import id.ukdw.srmmobile.R;
-import id.ukdw.srmmobile.data.model.api.response.DetailKelasResponse;
 import id.ukdw.srmmobile.data.model.api.response.PengumumanDetailKelasResponse;
 import id.ukdw.srmmobile.databinding.ActivityLihatPengumumanBinding;
 import id.ukdw.srmmobile.di.component.ActivityComponent;
 import id.ukdw.srmmobile.ui.base.BaseActivity;
-import id.ukdw.srmmobile.ui.detailkelas.addpengumumankelas.AddPengumumanKelasActivity;
+import id.ukdw.srmmobile.ui.pengumumankelas.detailpengumumankelas.DetailPengumumanKelasActivity;
 
 public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPengumumanBinding, DetailKelasPengumumanViewModel>
         implements DetailKelasPengumumanNavigator {
@@ -55,7 +54,7 @@ public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPen
         }
 
         getViewDataBinding().fab.setOnClickListener( v -> {
-            Intent intentAddPengumuman = new Intent( DetailKelasPengumumanActivity.this, AddPengumumanKelasActivity.class );
+            Intent intentAddPengumuman = new Intent( DetailKelasPengumumanActivity.this, DetailPengumumanKelasActivity.class );
             intentAddPengumuman.putExtra( "namaMakul", matkul );
             intentAddPengumuman.putExtra( "group", group );
             intentAddPengumuman.putExtra( "semester", semester );
@@ -71,6 +70,7 @@ public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPen
     @Override
     public void performDependencyInjection(ActivityComponent buildComponent) {
         buildComponent.inject( this );
+        showLoading();
 
     }
 
@@ -98,7 +98,6 @@ public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPen
             );
         }
 
-//        this.pengumumanDetailKelasResponses = pengumumanDetailKelasResponses;
         DetailKelasPengumumanAdapter detailKelasPengumumanAdapter = new DetailKelasPengumumanAdapter( this, itemList );
         getViewDataBinding().recyclerPengumumanKelas.setHasFixedSize( true );
         getViewDataBinding().recyclerPengumumanKelas.setLayoutManager( new LinearLayoutManager( this ) );
@@ -106,11 +105,12 @@ public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPen
 
         detailKelasPengumumanAdapter.setOnItemClickListener( position -> {
             RecyclerVIewModelPengumumanKelas PengumumanKelas =  itemList.get( position );
-            Intent moveDetailPengumumanKelas = new Intent( DetailKelasPengumumanActivity.this, AddPengumumanKelasActivity.class );
+            Intent moveDetailPengumumanKelas = new Intent( DetailKelasPengumumanActivity.this, DetailPengumumanKelasActivity.class );
             moveDetailPengumumanKelas.putExtra( DETAIL_PENGUMUMAN_DATA, PengumumanKelas );
             moveDetailPengumumanKelas.putExtra( "state",  STATE_ON_CLICK );
             startActivity( moveDetailPengumumanKelas );
         } );
 
+    hideLoading();
     }
 }

@@ -1,11 +1,9 @@
 package id.ukdw.srmmobile.ui.detailkelas;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 
@@ -13,7 +11,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import id.ukdw.srmmobile.BR;
@@ -25,7 +22,8 @@ import id.ukdw.srmmobile.databinding.ActivityDetailKelasBinding;
 import id.ukdw.srmmobile.di.component.ActivityComponent;
 import id.ukdw.srmmobile.ui.base.BaseActivity;
 import id.ukdw.srmmobile.ui.daftarkelas.RecyclerViewModelKelas;
-import id.ukdw.srmmobile.ui.detailkelas.kegiatanKelas.DetailKelasLihatKegiatanActivity;
+import id.ukdw.srmmobile.ui.kegiatankelas.DetailKelasLihatKegiatanActivity;
+import id.ukdw.srmmobile.ui.pengumumankelas.DetailKelasPengumumanActivity;
 
 public class DetailKelasActivity extends BaseActivity<ActivityDetailKelasBinding, DetailKelasViewModel>
         implements DetailKelasNavigator {
@@ -56,6 +54,7 @@ public class DetailKelasActivity extends BaseActivity<ActivityDetailKelasBinding
     @Override
     public void performDependencyInjection(ActivityComponent buildComponent) {
         buildComponent.inject(this);
+        showLoading();
 
     }
 
@@ -173,6 +172,7 @@ public class DetailKelasActivity extends BaseActivity<ActivityDetailKelasBinding
 
         activityDetailKelasBinding.txtPeriode.append(" Semester " + detailkelasResponse.getSemester() + " " + detailkelasResponse.getTahunAjaran());
         activityDetailKelasBinding.txtWaktu.append(" " + detailkelasResponse.getHari() + " " + detailkelasResponse.getSesi());
+        hideLoading();
     }
 
     @Override

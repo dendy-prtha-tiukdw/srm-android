@@ -1,6 +1,5 @@
-package id.ukdw.srmmobile.ui.detailkelas.addpengumumankelas;
+package id.ukdw.srmmobile.ui.pengumumankelas.detailpengumumankelas;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,12 +18,12 @@ import id.ukdw.srmmobile.R;
 import id.ukdw.srmmobile.databinding.ActivityTambahPengumumanKelasBinding;
 import id.ukdw.srmmobile.di.component.ActivityComponent;
 import id.ukdw.srmmobile.ui.base.BaseActivity;
-import id.ukdw.srmmobile.ui.detailkelas.DetailKelasPengumumanActivity;
-import id.ukdw.srmmobile.ui.detailkelas.RecyclerVIewModelPengumumanKelas;
+import id.ukdw.srmmobile.ui.pengumumankelas.DetailKelasPengumumanActivity;
+import id.ukdw.srmmobile.ui.pengumumankelas.RecyclerVIewModelPengumumanKelas;
 
 
-public class AddPengumumanKelasActivity extends BaseActivity<ActivityTambahPengumumanKelasBinding, AddPengumumanKelasViewModel>
-        implements AddPengumumanKelasNavigator {
+public class DetailPengumumanKelasActivity extends BaseActivity<ActivityTambahPengumumanKelasBinding, DetailPengumumanKelasViewModel>
+        implements DetailPengumumanKelasNavigator {
     public static final String DETAIL_PENGUMUMAN_DATA = "DETAIL_PENGUMUMAN_DATA";
     public static final String STATE_ON_CLICK = "ONCLICK";
     public static final String STATE_ADD = "ADD";
@@ -48,6 +47,7 @@ public class AddPengumumanKelasActivity extends BaseActivity<ActivityTambahPengu
     @Override
     public void performDependencyInjection(ActivityComponent buildComponent) {
         buildComponent.inject( this );
+
     }
 
     @Override
@@ -62,7 +62,6 @@ public class AddPengumumanKelasActivity extends BaseActivity<ActivityTambahPengu
         }
         getViewDataBinding().updatejudulpengumuman.setInputType( InputType.TYPE_NULL );
         getViewDataBinding().updateisipengumuman.setInputType( InputType.TYPE_NULL );
-        //ISSUE KETIKA OBCLICK NGECRASH KARENA INTENT GETSTRINGEXTRA KAGAK DIISI, CARI CARA NGAKALAINNYA
         Intent intent = getIntent();
         matkul = intent.getStringExtra( "namaMakul" );
         group = intent.getStringExtra( "group" );
@@ -78,6 +77,7 @@ public class AddPengumumanKelasActivity extends BaseActivity<ActivityTambahPengu
             getViewDataBinding().editPengumuman.setVisibility( View.GONE );
             getViewDataBinding().pengumumanKelasNamaDosen.setText( "" );
             getViewDataBinding().pengumumanKelasTanggalInput.setText( "" );
+            hideLoading();
 
             getViewDataBinding().savePengumuman.setOnClickListener( v -> {
                 String isiPengumuman = String.valueOf( getViewDataBinding().updateisipengumuman.getText() );
@@ -93,6 +93,7 @@ public class AddPengumumanKelasActivity extends BaseActivity<ActivityTambahPengu
                 getViewDataBinding().updateisipengumuman.setText( recyclerVIewModelPengumumanKelas.getPengumuman() );
                 getViewDataBinding().pengumumanKelasNamaDosen.setText( recyclerVIewModelPengumumanKelas.getNamaDosen() );
                 getViewDataBinding().pengumumanKelasTanggalInput.setText( convertTime( recyclerVIewModelPengumumanKelas.getTanggalInput() ) );
+                hideLoading();
             }
 
 
@@ -140,10 +141,6 @@ public class AddPengumumanKelasActivity extends BaseActivity<ActivityTambahPengu
             } );
         }
 
-
-        // BUTTON EDIT, UBAH BUTTON EDIT, MENJADI UPDATE, SET VISIBILITY BUTTON DELETE GONE,  AMBIL DARI TEXTINPUT TERBARU DAIR JUDUL DAN ISI, TEMBAK API UPDATE
-
-
     }
 
 
@@ -166,9 +163,8 @@ public class AddPengumumanKelasActivity extends BaseActivity<ActivityTambahPengu
 
     @Override
     public void onSuccessAddPengumuman(String data) {
-        System.out.println( "TEST MASUK ACTIVITY" );
         Toast.makeText( this, "Saving Pengumuman Succesfull", Toast.LENGTH_LONG ).show();
-        Intent movePengumuman = new Intent( AddPengumumanKelasActivity.this, DetailKelasPengumumanActivity.class );
+        Intent movePengumuman = new Intent( DetailPengumumanKelasActivity.this, DetailKelasPengumumanActivity.class );
         movePengumuman.putExtra( "namaMakul", matkul );
         movePengumuman.putExtra( "group", group );
         movePengumuman.putExtra( "semester", semester );
@@ -181,7 +177,7 @@ public class AddPengumumanKelasActivity extends BaseActivity<ActivityTambahPengu
     @Override
     public void onSuccessDeletePengumuman(String data) {
         Toast.makeText( this, "Delete Pengumuman Succesfull", Toast.LENGTH_LONG ).show();
-        Intent movePengumuman = new Intent( AddPengumumanKelasActivity.this, DetailKelasPengumumanActivity.class );
+        Intent movePengumuman = new Intent( DetailPengumumanKelasActivity.this, DetailKelasPengumumanActivity.class );
         movePengumuman.putExtra( "namaMakul", matkul );
         movePengumuman.putExtra( "group", group );
         movePengumuman.putExtra( "semester", semester );
@@ -193,7 +189,7 @@ public class AddPengumumanKelasActivity extends BaseActivity<ActivityTambahPengu
     @Override
     public void onSuccessUpdatePengumuman(String data) {
         Toast.makeText( this, "Update Pengumuman Succesfull", Toast.LENGTH_LONG ).show();
-        Intent movePengumuman = new Intent( AddPengumumanKelasActivity.this, DetailKelasPengumumanActivity.class );
+        Intent movePengumuman = new Intent( DetailPengumumanKelasActivity.this, DetailKelasPengumumanActivity.class );
         movePengumuman.putExtra( "namaMakul", matkul );
         movePengumuman.putExtra( "group", group );
         movePengumuman.putExtra( "semester", semester );

@@ -13,6 +13,8 @@ import id.ukdw.srmmobile.ui.base.BaseActivity;
 import id.ukdw.srmmobile.ui.detailkelas.DetailKelasPengumumanViewModel;
 import id.ukdw.srmmobile.ui.detailkelas.DetailKelasViewModel;
 import id.ukdw.srmmobile.ui.detailkelas.addpengumumankelas.AddPengumumanKelasViewModel;
+import id.ukdw.srmmobile.ui.detailkelas.kegiatanKelas.detailKegiatanKelas.DetailKegiatanKelasViewModel;
+import id.ukdw.srmmobile.ui.detailkelas.kegiatanKelas.DetailkelasLihatKegiatanViewModel;
 import id.ukdw.srmmobile.ui.home.HomeViewModel;
 import id.ukdw.srmmobile.ui.login.LoginViewModel;
 import id.ukdw.srmmobile.ui.splash.SplashViewModel;
@@ -76,6 +78,20 @@ public class ActivityModule {
         Supplier<AddPengumumanKelasViewModel> supplier = () -> new AddPengumumanKelasViewModel(dataManager,schedulerProvider,googleSignInClient);
         ViewModelProviderFactory<AddPengumumanKelasViewModel> factory = new ViewModelProviderFactory<>( AddPengumumanKelasViewModel.class, supplier );
         return new ViewModelProvider( activity, factory ).get( AddPengumumanKelasViewModel.class );
+    }
+
+    @Provides
+    DetailkelasLihatKegiatanViewModel provideDetailKelasLihatKegiatanViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient){
+        Supplier<DetailkelasLihatKegiatanViewModel> supplier = () -> new DetailkelasLihatKegiatanViewModel(dataManager,schedulerProvider,googleSignInClient);
+        ViewModelProviderFactory<DetailkelasLihatKegiatanViewModel> factory = new ViewModelProviderFactory<>( DetailkelasLihatKegiatanViewModel.class, supplier );
+        return new ViewModelProvider( activity,factory ).get( DetailkelasLihatKegiatanViewModel.class );
+    }
+
+    @Provides
+    DetailKegiatanKelasViewModel provideDetailKegiatanKelasViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient){
+        Supplier<DetailKegiatanKelasViewModel> supplier = () -> new DetailKegiatanKelasViewModel(dataManager,schedulerProvider,googleSignInClient);
+        ViewModelProviderFactory<DetailKegiatanKelasViewModel> factory = new ViewModelProviderFactory<>( DetailKegiatanKelasViewModel.class, supplier );
+        return  new ViewModelProvider( activity,factory ).get( DetailKegiatanKelasViewModel.class );
     }
 
 }

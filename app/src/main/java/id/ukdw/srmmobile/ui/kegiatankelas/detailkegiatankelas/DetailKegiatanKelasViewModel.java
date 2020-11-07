@@ -1,4 +1,4 @@
-package id.ukdw.srmmobile.ui.detailkelas.kegiatanKelas.detailKegiatanKelas;
+package id.ukdw.srmmobile.ui.kegiatankelas.detailkegiatankelas;
 
 import android.util.Log;
 

@@ -52,7 +52,6 @@ public class ProfileFragment extends BaseFragment<FragmentProfilBinding, Profile
         super.onViewCreated(view, savedInstanceState);
         fragmentProfilBinding = getViewDataBinding();
         mViewModel.getProfile();
-        //mViewModel.testGoogleCalendar();
     }
 
 

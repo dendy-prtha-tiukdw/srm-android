@@ -1,4 +1,4 @@
-package id.ukdw.srmmobile.ui.detailkelas;
+package id.ukdw.srmmobile.ui.pengumumankelas;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,14 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import id.ukdw.srmmobile.R;
-import id.ukdw.srmmobile.data.model.api.response.PengumumanDetailKelasResponse;
-import id.ukdw.srmmobile.data.model.api.response.PesertaKelasResponse;
-import id.ukdw.srmmobile.ui.daftarkelas.DaftarKelasAdapter;
 
 public class DetailKelasPengumumanAdapter extends RecyclerView.Adapter<DetailKelasPengumumanAdapter.ViewHolder> {
     private Context mContext;
@@ -76,21 +71,4 @@ public class DetailKelasPengumumanAdapter extends RecyclerView.Adapter<DetailKel
         }
     }
 
-
-//    private String convertTime(String time) {
-//
-//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
-//        SimpleDateFormat format1 = new SimpleDateFormat("EEEE-dd-MM-yyyy HH:mm:ss");
-//        java.util.Date date = null;
-//
-//        try {
-//            date = format.parse(time);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//
-//        String convertedDate = format1.format(date);
-//
-//        return convertedDate;
-//    }
 }

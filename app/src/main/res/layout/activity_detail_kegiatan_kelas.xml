@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="id.ukdw.srmmobile.ui.detailkelas.kegiatanKelas.detailKegiatanKelas.DetailKegiatanKelasActivity">
+    tools:context="id.ukdw.srmmobile.ui.kegiatankelas.detailkegiatankelas.DetailKegiatanKelasActivity">
 
     <data>
 
@@ -10,7 +10,7 @@
 
         <variable
             name="detailKegiatanKelasViewModel"
-            type="id.ukdw.srmmobile.ui.detailkelas.kegiatanKelas.detailKegiatanKelas.DetailKegiatanKelasViewModel" />
+            type="id.ukdw.srmmobile.ui.kegiatankelas.detailkegiatankelas.DetailKegiatanKelasViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

@@ -10,11 +10,11 @@ import dagger.Provides;
 import id.ukdw.srmmobile.ViewModelProviderFactory;
 import id.ukdw.srmmobile.data.DataManager;
 import id.ukdw.srmmobile.ui.base.BaseActivity;
-import id.ukdw.srmmobile.ui.detailkelas.DetailKelasPengumumanViewModel;
+import id.ukdw.srmmobile.ui.pengumumankelas.DetailKelasPengumumanViewModel;
 import id.ukdw.srmmobile.ui.detailkelas.DetailKelasViewModel;
-import id.ukdw.srmmobile.ui.detailkelas.addpengumumankelas.AddPengumumanKelasViewModel;
-import id.ukdw.srmmobile.ui.detailkelas.kegiatanKelas.detailKegiatanKelas.DetailKegiatanKelasViewModel;
-import id.ukdw.srmmobile.ui.detailkelas.kegiatanKelas.DetailkelasLihatKegiatanViewModel;
+import id.ukdw.srmmobile.ui.pengumumankelas.detailpengumumankelas.DetailPengumumanKelasViewModel;
+import id.ukdw.srmmobile.ui.kegiatankelas.detailkegiatankelas.DetailKegiatanKelasViewModel;
+import id.ukdw.srmmobile.ui.kegiatankelas.DetailkelasLihatKegiatanViewModel;
 import id.ukdw.srmmobile.ui.home.HomeViewModel;
 import id.ukdw.srmmobile.ui.login.LoginViewModel;
 import id.ukdw.srmmobile.ui.splash.SplashViewModel;
@@ -74,10 +74,10 @@ public class ActivityModule {
     }
 
     @Provides
-    AddPengumumanKelasViewModel provideAddPengumumanKelasViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
-        Supplier<AddPengumumanKelasViewModel> supplier = () -> new AddPengumumanKelasViewModel(dataManager,schedulerProvider,googleSignInClient);
-        ViewModelProviderFactory<AddPengumumanKelasViewModel> factory = new ViewModelProviderFactory<>( AddPengumumanKelasViewModel.class, supplier );
-        return new ViewModelProvider( activity, factory ).get( AddPengumumanKelasViewModel.class );
+    DetailPengumumanKelasViewModel provideAddPengumumanKelasViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
+        Supplier<DetailPengumumanKelasViewModel> supplier = () -> new DetailPengumumanKelasViewModel(dataManager,schedulerProvider,googleSignInClient);
+        ViewModelProviderFactory<DetailPengumumanKelasViewModel> factory = new ViewModelProviderFactory<>( DetailPengumumanKelasViewModel.class, supplier );
+        return new ViewModelProvider( activity, factory ).get( DetailPengumumanKelasViewModel.class );
     }
 
     @Provides

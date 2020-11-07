@@ -1,4 +1,4 @@
-package id.ukdw.srmmobile.ui.detailkelas.addpengumumankelas;
+package id.ukdw.srmmobile.ui.pengumumankelas.detailpengumumankelas;
 
 import android.util.Log;
 
@@ -7,19 +7,17 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import id.ukdw.srmmobile.data.DataManager;
 import id.ukdw.srmmobile.data.model.api.request.AddPengumumanRequest;
 import id.ukdw.srmmobile.data.model.api.request.DeletePengumumanKelasRequest;
-import id.ukdw.srmmobile.data.model.api.request.PengumumanDetailKelasRequest;
 import id.ukdw.srmmobile.data.model.api.request.UpdatePengumumanKelasRequest;
-import id.ukdw.srmmobile.data.model.api.response.AddPengumumanResponse;
 import id.ukdw.srmmobile.data.model.api.response.ResponseWrapper;
 import id.ukdw.srmmobile.ui.base.BaseViewModel;
 import id.ukdw.srmmobile.utils.rx.SchedulerProvider;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-public class AddPengumumanKelasViewModel extends BaseViewModel<AddPengumumanKelasNavigator> {
-    private String TAG = AddPengumumanKelasViewModel.class.getSimpleName();
+public class DetailPengumumanKelasViewModel extends BaseViewModel<DetailPengumumanKelasNavigator> {
+    private String TAG = DetailPengumumanKelasViewModel.class.getSimpleName();
 
-    public AddPengumumanKelasViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
+    public DetailPengumumanKelasViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
         super(dataManager, schedulerProvider, googleSignInClient);
     }
 

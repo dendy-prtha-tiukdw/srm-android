@@ -3,7 +3,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="id.ukdw.srmmobile.ui.detailkelas.addpengumumankelas.AddPengumumanKelasActivity">
+    tools:context="id.ukdw.srmmobile.ui.pengumumankelas.detailpengumumankelas.DetailPengumumanKelasActivity">
 
     <data>
 
@@ -11,7 +11,7 @@
 
         <variable
             name="addPengumumanKelasViewModel"
-            type="id.ukdw.srmmobile.ui.detailkelas.addpengumumankelas.AddPengumumanKelasViewModel" />
+            type="id.ukdw.srmmobile.ui.pengumumankelas.detailpengumumankelas.DetailPengumumanKelasViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

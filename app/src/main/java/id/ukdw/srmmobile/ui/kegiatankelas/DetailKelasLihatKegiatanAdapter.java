@@ -1,4 +1,4 @@
-package id.ukdw.srmmobile.ui.detailkelas.kegiatanKelas;
+package id.ukdw.srmmobile.ui.kegiatankelas;
 
 import android.content.Context;
 import android.view.LayoutInflater;

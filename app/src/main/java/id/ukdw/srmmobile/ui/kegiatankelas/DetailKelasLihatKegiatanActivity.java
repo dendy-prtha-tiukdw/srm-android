@@ -51,6 +51,16 @@ public class DetailKelasLihatKegiatanActivity extends BaseActivity<ActivityKelas
         if (mViewModel.checkRole() == true){
             getViewDataBinding().fabKegiatan.setVisibility( View.VISIBLE );
         }
+        getViewDataBinding().fabKegiatan.setOnClickListener( v->{
+            Intent intentaddKegiatan = new Intent( DetailKelasLihatKegiatanActivity.this,DetailKegiatanKelasActivity.class );
+            intentaddKegiatan.putExtra( "namaMakul", matkul );
+            intentaddKegiatan.putExtra( "group", group );
+            intentaddKegiatan.putExtra( "semester", semester );
+            intentaddKegiatan.putExtra( "tahunAjaran", tahunAjaran );
+            intentaddKegiatan.putExtra( "state", STATE_ADD );
+            startActivity( intentaddKegiatan );
+            finish();
+        } );
 
 
 

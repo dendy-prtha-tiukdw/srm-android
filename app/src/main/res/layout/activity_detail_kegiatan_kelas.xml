@@ -40,8 +40,8 @@
                     android:background="#BC083B"
                     android:padding="15dp"
                     android:text="DELETE"
-                    android:textSize="16dp"
                     android:textColor="@color/colorWhite"
+                    android:textSize="16dp"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -54,13 +54,13 @@
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="28dp"
                     android:layout_marginEnd="12dp"
+                    android:background="@color/black_effective"
                     android:hint="@string/judul_pengumuan"
                     android:imeOptions="actionDone"
                     android:importantForAutofill="no"
                     android:includeFontPadding="false"
                     android:inputType="text"
                     android:textColor="@color/colorWhite"
-                    android:background="@color/black_effective"
                     android:textColorHint="#AFAFAF"
                     android:textSize="26sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -90,18 +90,112 @@
                     app:layout_constraintVertical_bias="0.0"
                     tools:layout_editor_absoluteX="12dp" />
 
+
+                <ImageButton
+                    android:id="@+id/SetTanggalBerakhir"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@mipmap/ic_calendar"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/updateisikegiatan" />
+
+                <TextView
+                    android:id="@+id/kegiatanKelasTanggalDeadline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="116dp"
+                    android:text="@string/tanggal_pengumuman"
+                    android:visibility="gone"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/updateisikegiatan" />
+
+                <TextView
+                    android:id="@+id/jdul"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginStart="12dp"
+                    android:text="kegiatan sudah terlaksana ?"
+                    android:textColor="@color/colorWhite"
+                    android:visibility="gone"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/kegiatanKelasTanggalDeadline"
+                    app:layout_constraintVertical_bias="0.116"
+                    tools:layout_editor_absoluteX="12dp" />
+
+                <RadioGroup
+                    android:id="@+id/statusComplete"
+                    android:layout_width="98dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="12dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/jdul">
+
+                    <RadioButton
+                        android:id="@+id/rbLeft"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:button="@android:color/transparent"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:text="Sudah"
+                        android:checked="false"
+                        android:textColor="@color/colorWhite"
+                        android:background="@drawable/radio_button_left_selector"
+                        android:onClick="onRadioButtonClicked"/>
+
+                    <RadioButton
+                        android:id="@+id/rbRight"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:button="@android:color/transparent"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorWhite"
+                        android:checked="true"
+                        android:text="Belum"
+                        android:background="@drawable/radio_button_right_selector"
+                        android:onClick="onRadioButtonClicked"/>
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/kegiatanKelasTanggalBerakhir"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:text="Tanggal Berakhir Kegiatan : "
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/statusComplete"
+                    app:layout_constraintVertical_bias="0.12"
+                    tools:layout_editor_absoluteX="0dp" />
                 <TextView
                     android:id="@+id/kegiatanKelasTanggalInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="12dp"
-                    android:text="@string/tanggal_pengumuman"
+                    android:text="@string/namadosen"
                     android:textColor="@color/colorWhite"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/updateisikegiatan"
-                    app:layout_constraintVertical_bias="0.008"
+                    app:layout_constraintTop_toBottomOf="@+id/kegiatanKelasTanggalBerakhir"
+                    app:layout_constraintVertical_bias="0.12"
                     tools:layout_editor_absoluteX="0dp" />
 
                 <TextView
@@ -127,8 +221,8 @@
                     android:background="@color/colorPrimary"
                     android:padding="15dp"
                     android:text="SAVE"
-                    android:visibility="gone"
                     android:textSize="16dp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/kegiatanKelasNamaDosen" />
 
@@ -145,6 +239,7 @@
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/kegiatanKelasNamaDosen" />
+
 
                 <Button
                     android:id="@+id/updateKegiatan"

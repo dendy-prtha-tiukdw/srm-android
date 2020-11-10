@@ -9,7 +9,7 @@ public class UpdateKegiatanKelasRequest {
     String judulKegiatan;
     String kegiatan;
     String tanggalBerakhir;
-    String tanngalDibuat;
+    String tanggalDibuat;
 
     public UpdateKegiatanKelasRequest(String idKegiatan, String isComplete, String judulKegiatan, String kegiatan, String tanggalBerakhir, String tanngalDibuat) {
         this.idKegiatan = idKegiatan;
@@ -17,6 +17,6 @@ public class UpdateKegiatanKelasRequest {
         this.judulKegiatan = judulKegiatan;
         this.kegiatan = kegiatan;
         this.tanggalBerakhir = tanggalBerakhir;
-        this.tanngalDibuat = tanngalDibuat;
+        this.tanggalDibuat = tanngalDibuat;
     }
 }

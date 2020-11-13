@@ -54,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:text="Detail Matakuliah"
                     android:textColor="@color/colorWhite"
-                    android:textSize="13sp" />
+                    android:textSize="17sp" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

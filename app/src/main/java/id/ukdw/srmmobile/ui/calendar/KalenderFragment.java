@@ -128,7 +128,7 @@ public class KalenderFragment extends BaseFragment<FragmentKalenderBinding, Kale
     @Override
     public void onGetListEventCalender(List<Event> kalenderEvent) {
         if (kalenderEvent.isEmpty()) {
-            getViewDataBinding().recyclerKalender.setVisibility( View.GONE );
+            getViewDataBinding().recyclerKalender.setVisibility( View.INVISIBLE );
 
         }
         itemlist = new ArrayList<>();
@@ -148,12 +148,10 @@ public class KalenderFragment extends BaseFragment<FragmentKalenderBinding, Kale
             getViewDataBinding().recyclerKalender.setAdapter( kalenderAdapter );
 
             //Log.i(TAG, "testGoogleCalendar: " + String.format("%s (%s)", event.getSummary(), start));
-
-                itemlist.add( new RecyclerViewModelKalender(
-                        event.getSummary(),
-                        Start
-                ) );
-
+            itemlist.add( new RecyclerViewModelKalender(
+                    event.getSummary(),
+                    Start
+            ) );
         }
         getBaseActivity().hideLoading();
 

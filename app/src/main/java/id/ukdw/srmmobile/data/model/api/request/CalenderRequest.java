@@ -3,10 +3,10 @@ package id.ukdw.srmmobile.data.model.api.request;
 import lombok.Data;
 
 @Data
-public class SemesterRequest {
+public class CalenderRequest {
     private String  tanggal;
 
-    public SemesterRequest(String tanggal) {
+    public CalenderRequest(String tanggal) {
         this.tanggal = tanggal;
     }
 }

@@ -20,7 +20,7 @@ public interface ApiHelper {
 
     PengumumanApi getPengumumanApi(String acessToken, String refreshToken);
 
-    SemesterApi getSemesterApi(String accessToken, String refreshToken);
+    CalenderApi getCalenderApi(String accessToken, String refreshToken);
 
     KegiatanApi getKegiatanApi(String accessToken, String refreshToken);
 

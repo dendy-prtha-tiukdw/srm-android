@@ -91,13 +91,13 @@ public class AppRetrofitBuilder implements ApiHelper {
         return getRetrofitInstance(interceptors).create( PengumumanApi.class );
     }
 
-    public SemesterApi getSemesterApi(String accessToken, String refreshToken){
+    public CalenderApi getCalenderApi(String accessToken, String refreshToken){
         ArrayList<Interceptor> interceptors = new ArrayList<>();
         AuthorizationInterceptor authorizationInterceptor = new AuthorizationInterceptor( getAuthApi(),
                 mPreferencesHelper,
                 schedulerProvider);
         interceptors.add( authorizationInterceptor );
-        return getRetrofitInstance(interceptors).create( SemesterApi.class );
+        return getRetrofitInstance(interceptors).create( CalenderApi.class );
     }
 
     public KegiatanApi getKegiatanApi(String accessToken, String refreshToken){

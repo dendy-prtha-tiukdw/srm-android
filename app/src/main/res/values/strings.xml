@@ -45,5 +45,6 @@
     <string name="isi_pengumuman">Isi Pengumuman</string>
     <string name="namadosen">namadosen</string>
     <string name="deskripsi_kegiatan">Deskripsi kegiatan</string>
+    <string name="date_pattern">yyyy-MM-dd</string>
 
 </resources>

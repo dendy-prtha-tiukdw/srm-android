@@ -56,20 +56,5 @@ public class KalenderAdapter extends RecyclerView.Adapter<KalenderAdapter.ViewHo
 
         }
     }
-//    private String convertTime(String time) {
-//
-//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
-//        SimpleDateFormat format1 = new SimpleDateFormat("EEEE-dd-MM-yyyy HH:mm:ss");
-//        java.util.Date date = null;
-//
-//        try {
-//            date = format.parse(time);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//
-//        String convertedDate = format1.format(date);
-//
-//        return convertedDate;
-//    }
+
 }

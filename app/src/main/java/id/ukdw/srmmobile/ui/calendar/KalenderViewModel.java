@@ -33,13 +33,11 @@ import static id.ukdw.srmmobile.utils.AppConstants.SCOPE_GOOGLE_CALENDAR;
 
 public class KalenderViewModel extends BaseViewModel<KalenderNavigator> {
 
-    java.util.Calendar jCalendar = java.util.Calendar.getInstance();
-
     public KalenderViewModel(DataManager dataManager, SchedulerProvider schedulerProvider, GoogleSignInClient googleSignInClient) {
         super( dataManager, schedulerProvider, googleSignInClient );
     }
 
-    public void getListEventCalenderApi( String date) {
+    public void getListEventCalenderApi(String date) {
 
 
         getDataManager().getCalenderApi( getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken() )
@@ -72,58 +70,4 @@ public class KalenderViewModel extends BaseViewModel<KalenderNavigator> {
 
     }
 
-    public void getListEvent(DateTime now1, DateTime then1) {
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount( getContext() );
-
-        GoogleAccountCredential credential = GoogleAccountCredential
-                .usingOAuth2( getContext(), Arrays.asList( SCOPE_GOOGLE_CALENDAR ) )
-                .setSelectedAccount( account.getAccount() );
-
-        Calendar calendar = new Calendar.Builder(
-                new NetHttpTransport(), JacksonFactory.getDefaultInstance(), credential )
-                .setApplicationName( "Google Calendar API Android Quickstart" )
-                .build();
-
-        Observable
-                .fromCallable( () -> {
-                    try {
-                        Events events = calendar.events().list( "primary" )
-                                .setTimeMin( now1 )
-                                .setTimeMax( then1 )
-                                .setOrderBy( "startTime" )
-                                .setSingleEvents( true )
-                                .execute();
-                        return events;
-                    } catch (IOException e) {
-                        //e.printStackTrace();
-                        return null;
-                    }
-                } )
-                .subscribeOn( getSchedulerProvider().io() )
-                .observeOn( getSchedulerProvider().ui() )
-                .subscribe( new Observer<Events>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(Events events) {
-                        List<Event> items = events.getItems();
-                        getNavigator().onGetListEventCalender( items );
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                } );
-
-
-    }
 }

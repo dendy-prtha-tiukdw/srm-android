@@ -26,6 +26,7 @@ public class DaftarKelasFragment extends BaseFragment<FragmentDaftarKelasBinding
         implements DaftarKelasNavigator {
 
     List<RecyclerViewModelKelas> itemList;
+    public static final String STATE_ON_NEXT = "ONNEXT";
 
     public static DaftarKelasFragment newInstance() {
         Bundle args = new Bundle();
@@ -97,7 +98,7 @@ public class DaftarKelasFragment extends BaseFragment<FragmentDaftarKelasBinding
 
         daftarKelasAdapter.setOnItemClickListener(position -> {
             RecyclerViewModelKelas kelas = itemList.get(position);
-            startActivity(DetailKelasActivity.newIntent(getBaseActivity()).putExtra(DETAIL_KELAS_DATA, kelas));
+            startActivity(DetailKelasActivity.newIntent(getBaseActivity()).putExtra(DETAIL_KELAS_DATA, kelas).putExtra( "state", STATE_ON_NEXT ));
         });
         getBaseActivity().hideLoading();
     }

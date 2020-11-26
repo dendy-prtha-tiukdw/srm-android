@@ -48,6 +48,21 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
 
+                <TextView
+                    android:id="@+id/textAtasJudulPengumuman"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:text="isi Pengumuman "
+                    android:textColor="@color/colorWhite"
+                    android:visibility="gone"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detelePengumuman"
+                    app:layout_constraintVertical_bias="0.12"
+                    tools:layout_editor_absoluteX="0dp" />
+
                 <EditText
                     android:id="@+id/updatejudulpengumuman"
                     android:layout_width="match_parent"
@@ -65,9 +80,24 @@
                     android:textColorHint="#AFAFAF"
                     android:textSize="26sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/detelePengumuman"
+                    app:layout_constraintTop_toBottomOf="@id/textAtasJudulPengumuman"
                     app:layout_constraintVertical_bias="0.0"
                     tools:layout_editor_absoluteX="8dp" />
+
+                <TextView
+                    android:id="@+id/textAtasIsiPengumuman"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:text="Isi Pengumuman "
+                    android:textColor="@color/colorWhite"
+                    android:visibility="gone"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/updatejudulpengumuman"
+                    app:layout_constraintVertical_bias="0.12"
+                    tools:layout_editor_absoluteX="0dp" />
 
                 <EditText
                     android:id="@+id/updateisipengumuman"
@@ -87,21 +117,58 @@
                     android:textColorHint="#AFAFAF"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/updatejudulpengumuman"
+                    app:layout_constraintTop_toBottomOf="@id/textAtasIsiPengumuman"
                     app:layout_constraintVertical_bias="0.0"
                     tools:layout_editor_absoluteX="12dp" />
+                <TextView
+                    android:id="@+id/textTanggalBerakhir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="116dp"
+                    android:text="Tanggal Berakhir Pengumuman "
+                    android:visibility="visible"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/updateisipengumuman" />
+                <ImageButton
+                    android:id="@+id/SetTanggalBerakhir"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@mipmap/ic_calendar"
+                    android:visibility="visible"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textTanggalBerakhir" />
+
+                <TextView
+                    android:id="@+id/pengumumanKelasTanggalDeadline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="116dp"
+                    android:text="@string/tanggal_pengumuman"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/SetTanggalBerakhir"
+                    app:layout_constraintTop_toBottomOf="@id/textTanggalBerakhir" />
 
                 <TextView
                     android:id="@+id/pengumumanKelasTanggalInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
+                    android:layout_marginTop="18dp"
                     android:layout_marginEnd="12dp"
                     android:text="@string/tanggal_pengumuman"
                     android:textColor="@color/colorWhite"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/updateisipengumuman"
+                    app:layout_constraintTop_toBottomOf="@+id/SetTanggalBerakhir"
                     app:layout_constraintVertical_bias="0.008"
                     tools:layout_editor_absoluteX="0dp" />
 

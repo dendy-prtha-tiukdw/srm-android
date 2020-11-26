@@ -3,6 +3,7 @@ package id.ukdw.srmmobile.ui.pengumuman;
 import java.util.List;
 
 import id.ukdw.srmmobile.data.model.api.response.PengumumanResponse;
+import id.ukdw.srmmobile.data.model.api.response.UpdateSemingguResponse;
 
 /**
  * Project: srmmobile
@@ -16,6 +17,6 @@ import id.ukdw.srmmobile.data.model.api.response.PengumumanResponse;
  */
 
 public interface PengumumanNavigator {
-    void onGetListPengumuman(List<PengumumanResponse> pengumumanResponseList);
+    void onGetListPengumuman(List<UpdateSemingguResponse> pengumumanResponseList);
     void isLoading(boolean flag);
 }

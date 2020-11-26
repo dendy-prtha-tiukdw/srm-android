@@ -50,18 +50,6 @@
                     />
 
                 <TextView
-                    android:id="@+id/groupPengumuman"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    android:text="@string/judul_kelas"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:singleLine="true"
-                    android:scrollHorizontally="true"/>
-
-                <TextView
                     android:id="@+id/judulPengumuman"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -83,16 +71,6 @@
                     android:padding="10dp"
                     android:textSize="17sp" />
 
-                <TextView
-                    android:id="@+id/NamaDosenPengumuman"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginRight="25dp"
-                    android:text="Nama Dosen"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
 

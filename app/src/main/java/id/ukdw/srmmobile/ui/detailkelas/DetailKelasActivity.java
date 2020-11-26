@@ -28,15 +28,19 @@ import id.ukdw.srmmobile.ui.pengumumankelas.DetailKelasPengumumanActivity;
 public class DetailKelasActivity extends BaseActivity<ActivityDetailKelasBinding, DetailKelasViewModel>
         implements DetailKelasNavigator {
 
+    public static final String STATE_ON_BACK = "ONBACK";
+    public static final String DETAIL_KELAS_DATA = "DETAIL_KELAS_DATA";
     private static final String TAG = DetailKelasActivity.class.getSimpleName();
-    private ActivityDetailKelasBinding activityDetailKelasBinding;
     DetailKelasResponse detailkelasResponse;
     List<PesertaKelasResponse> pesertaKelas;
-
-    public static final String DETAIL_KELAS_DATA = "DETAIL_KELAS_DATA";
+    String matkul;
+    String group;
+    String semester;
+    String tahunAjaran;
+    private ActivityDetailKelasBinding activityDetailKelasBinding;
 
     public static Intent newIntent(Context context) {
-        return new Intent(context, DetailKelasActivity.class);
+        return new Intent( context, DetailKelasActivity.class );
     }
 
 
@@ -53,81 +57,95 @@ public class DetailKelasActivity extends BaseActivity<ActivityDetailKelasBinding
 
     @Override
     public void performDependencyInjection(ActivityComponent buildComponent) {
-        buildComponent.inject(this);
+        buildComponent.inject( this );
         showLoading();
 
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate( savedInstanceState );
         activityDetailKelasBinding = getViewDataBinding();
-        mViewModel.setNavigator(this);
-        mViewModel.setContext(this);
-        RecyclerViewModelKelas recyclerViewModelKelas = (RecyclerViewModelKelas) getIntent().getSerializableExtra(DETAIL_KELAS_DATA);
-        mViewModel.getDetailKelas(recyclerViewModelKelas.getNamaMakul(), recyclerViewModelKelas.getGroup(), recyclerViewModelKelas.getSemester(), recyclerViewModelKelas.getTahunAjaran());
-        mViewModel.getPesertaKelas(recyclerViewModelKelas.getNamaMakul(), recyclerViewModelKelas.getGroup(), recyclerViewModelKelas.getSemester(), recyclerViewModelKelas.getTahunAjaran());
-        getViewDataBinding().btPengumumanDetailKelas.setOnClickListener(v -> {
-            Intent movePengumuman = new Intent(DetailKelasActivity.this, DetailKelasPengumumanActivity.class);
-            movePengumuman.putExtra("namaMakul", recyclerViewModelKelas.getNamaMakul());
-            movePengumuman.putExtra("group", recyclerViewModelKelas.getGroup());
-            movePengumuman.putExtra("semester", recyclerViewModelKelas.getSemester());
-            movePengumuman.putExtra("tahunAjaran", recyclerViewModelKelas.getTahunAjaran());
-            startActivity(movePengumuman);
-        });
-        getViewDataBinding().imgSchedule.setOnClickListener(onClick -> {
-            handleSchedule();
-        });
+        mViewModel.setNavigator( this );
+        mViewModel.setContext( this );
+        Intent intent = getIntent();
+        String state = intent.getStringExtra( "state" );
+        if (state.equalsIgnoreCase( STATE_ON_BACK )) {
+            Intent intent1 = getIntent();
+            matkul = intent1.getStringExtra( "namaMakul" );
+            group = intent1.getStringExtra( "group" );
+            semester = intent1.getStringExtra( "semester" );
+            tahunAjaran = intent1.getStringExtra( "tahunAjaran" );
+            mViewModel.getDetailKelas( matkul,group,semester,tahunAjaran );
+            mViewModel.getPesertaKelas( matkul,group,semester,tahunAjaran );
 
-        getViewDataBinding().btKegiatanDetailKelas.setOnClickListener( v-> {
-            Intent moveKegiatan = new Intent( DetailKelasActivity.this, DetailKelasLihatKegiatanActivity.class );
-            moveKegiatan.putExtra("namaMakul", recyclerViewModelKelas.getNamaMakul());
-            moveKegiatan.putExtra("group", recyclerViewModelKelas.getGroup());
-            moveKegiatan.putExtra("semester", recyclerViewModelKelas.getSemester());
-            moveKegiatan.putExtra("tahunAjaran", recyclerViewModelKelas.getTahunAjaran());
-            startActivity(moveKegiatan);
-        } );
 
+        } else {
+            RecyclerViewModelKelas recyclerViewModelKelas = (RecyclerViewModelKelas) getIntent().getSerializableExtra( DETAIL_KELAS_DATA );
+            mViewModel.getDetailKelas( recyclerViewModelKelas.getNamaMakul(), recyclerViewModelKelas.getGroup(), recyclerViewModelKelas.getSemester(), recyclerViewModelKelas.getTahunAjaran() );
+            mViewModel.getPesertaKelas( recyclerViewModelKelas.getNamaMakul(), recyclerViewModelKelas.getGroup(), recyclerViewModelKelas.getSemester(), recyclerViewModelKelas.getTahunAjaran() );
+            getViewDataBinding().btPengumumanDetailKelas.setOnClickListener( v -> {
+                Intent movePengumuman = new Intent( DetailKelasActivity.this, DetailKelasPengumumanActivity.class );
+                movePengumuman.putExtra( "namaMakul", recyclerViewModelKelas.getNamaMakul() );
+                movePengumuman.putExtra( "group", recyclerViewModelKelas.getGroup() );
+                movePengumuman.putExtra( "semester", recyclerViewModelKelas.getSemester() );
+                movePengumuman.putExtra( "tahunAjaran", recyclerViewModelKelas.getTahunAjaran() );
+                startActivity( movePengumuman );
+            } );
+            getViewDataBinding().imgSchedule.setOnClickListener( onClick -> {
+                handleSchedule();
+            } );
+
+            getViewDataBinding().btKegiatanDetailKelas.setOnClickListener( v -> {
+                Intent moveKegiatan = new Intent( DetailKelasActivity.this, DetailKelasLihatKegiatanActivity.class );
+                moveKegiatan.putExtra( "namaMakul", recyclerViewModelKelas.getNamaMakul() );
+                moveKegiatan.putExtra( "group", recyclerViewModelKelas.getGroup() );
+                moveKegiatan.putExtra( "semester", recyclerViewModelKelas.getSemester() );
+                moveKegiatan.putExtra( "tahunAjaran", recyclerViewModelKelas.getTahunAjaran() );
+                startActivity( moveKegiatan );
+            } );
+
+        }
     }
 
     private void handleSchedule() {
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        dialogBuilder.setMessage("Apakah Anda ingin sistem menjadwalkan perkuliahan untuk minggu depan?");
-        dialogBuilder.setCancelable(true);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder( this );
+        dialogBuilder.setMessage( "Apakah Anda ingin sistem menjadwalkan perkuliahan untuk minggu depan?" );
+        dialogBuilder.setCancelable( true );
 
         dialogBuilder.setPositiveButton(
                 "Ya", (dialog, id) -> {
                     showLoading();
                     if (detailkelasResponse != null) {
-                        String[] hoursPart = detailkelasResponse.getSesi().split("-");
-                        String[] startHoursPart = hoursPart[0].split(":");
-                        String[] endHoursPart = hoursPart[1].split(":");
+                        String[] hoursPart = detailkelasResponse.getSesi().split( "-" );
+                        String[] startHoursPart = hoursPart[0].split( ":" );
+                        String[] endHoursPart = hoursPart[1].split( ":" );
                         // get today and clear time of day
                         Calendar cal = Calendar.getInstance();
-                        cal.set(Calendar.HOUR_OF_DAY, 0); // ! clear would not reset the hour of day !
-                        cal.clear(Calendar.MINUTE);
-                        cal.clear(Calendar.SECOND);
-                        cal.clear(Calendar.MILLISECOND);
+                        cal.set( Calendar.HOUR_OF_DAY, 0 ); // ! clear would not reset the hour of day !
+                        cal.clear( Calendar.MINUTE );
+                        cal.clear( Calendar.SECOND );
+                        cal.clear( Calendar.MILLISECOND );
 
                         // get start of this week in milliseconds
-                        cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
+                        cal.set( Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek() );
 
                         // get start of nexr week in milliseconds
-                        cal.add(Calendar.WEEK_OF_YEAR, 1);
+                        cal.add( Calendar.WEEK_OF_YEAR, 1 );
                         String[] days = new String[]{"minggu", "senin", "selasa", "rabu", "kamis", "jumat", "sabtu"};
                         //loop through the week
                         for (int i = 0; i < days.length; i++) {
                             //check if day is the same.
-                            if (detailkelasResponse.getHari().equalsIgnoreCase(days[cal.get(Calendar.DAY_OF_WEEK) - 1])) {
-                                Log.i(TAG, "Hari:       " + days[cal.get(Calendar.DAY_OF_WEEK) - 1] +
-                                        ", Tanggal:" + cal.get(Calendar.DATE) +
-                                        ", Bulan:" + cal.get(Calendar.MONTH));
+                            if (detailkelasResponse.getHari().equalsIgnoreCase( days[cal.get( Calendar.DAY_OF_WEEK ) - 1] )) {
+                                Log.i( TAG, "Hari:       " + days[cal.get( Calendar.DAY_OF_WEEK ) - 1] +
+                                        ", Tanggal:" + cal.get( Calendar.DATE ) +
+                                        ", Bulan:" + cal.get( Calendar.MONTH ) );
                                 Calendar start = (Calendar) cal.clone();
                                 Calendar end = (Calendar) cal.clone();
-                                start.set(Calendar.HOUR_OF_DAY, Integer.parseInt(startHoursPart[0]));
-                                start.set(Calendar.MINUTE, Integer.parseInt(startHoursPart[1]));
-                                end.set(Calendar.HOUR_OF_DAY, Integer.parseInt(endHoursPart[0]));
-                                end.set(Calendar.MINUTE, Integer.parseInt(endHoursPart[1]));
+                                start.set( Calendar.HOUR_OF_DAY, Integer.parseInt( startHoursPart[0] ) );
+                                start.set( Calendar.MINUTE, Integer.parseInt( startHoursPart[1] ) );
+                                end.set( Calendar.HOUR_OF_DAY, Integer.parseInt( endHoursPart[0] ) );
+                                end.set( Calendar.MINUTE, Integer.parseInt( endHoursPart[1] ) );
 
                                 mViewModel.schedulingClass(
                                         detailkelasResponse.getNamaMatakuliah() + " " + detailkelasResponse.getGroup(),
@@ -139,14 +157,14 @@ public class DetailKelasActivity extends BaseActivity<ActivityDetailKelasBinding
                                 return;
                             }
                             //increase the day
-                            cal.add(Calendar.DAY_OF_WEEK, 1);
+                            cal.add( Calendar.DAY_OF_WEEK, 1 );
                         }
                     }
                     dialog.dismiss();
-                });
+                } );
 
         dialogBuilder.setNegativeButton(
-                "Tidak", (dialog, id) -> dialog.cancel());
+                "Tidak", (dialog, id) -> dialog.cancel() );
 
         AlertDialog alert11 = dialogBuilder.create();
         alert11.show();
@@ -161,32 +179,32 @@ public class DetailKelasActivity extends BaseActivity<ActivityDetailKelasBinding
     @Override
     public void onGetDetailKelasCompleted(DetailKelasResponse detailkelasResponse) {
         this.detailkelasResponse = detailkelasResponse;
-        activityDetailKelasBinding.txtNamaMakul.setText(detailkelasResponse.getNamaMatakuliah() +
-                " " + detailkelasResponse.getGroup());
+        activityDetailKelasBinding.txtNamaMakul.setText( detailkelasResponse.getNamaMatakuliah() +
+                " " + detailkelasResponse.getGroup() );
         for (int i = 0; i < detailkelasResponse.getNamaDosen().size(); i++) {
-            activityDetailKelasBinding.txtPengajar.append(" " + detailkelasResponse.getNamaDosen().get(i));
+            activityDetailKelasBinding.txtPengajar.append( " " + detailkelasResponse.getNamaDosen().get( i ) );
             if (i + 1 < detailkelasResponse.getNamaDosen().size()) {
-                activityDetailKelasBinding.txtPengajar.append("\n");
+                activityDetailKelasBinding.txtPengajar.append( "\n" );
             }
         }
 
-        activityDetailKelasBinding.txtPeriode.append(" Semester " + detailkelasResponse.getSemester() + " " + detailkelasResponse.getTahunAjaran());
-        activityDetailKelasBinding.txtWaktu.append(" " + detailkelasResponse.getHari() + " " + detailkelasResponse.getSesi());
+        activityDetailKelasBinding.txtPeriode.append( " Semester " + detailkelasResponse.getSemester() + " " + detailkelasResponse.getTahunAjaran() );
+        activityDetailKelasBinding.txtWaktu.append( " " + detailkelasResponse.getHari() + " " + detailkelasResponse.getSesi() );
         hideLoading();
     }
 
     @Override
     public void onGetPesertaKelasCompleted(List<PesertaKelasResponse> pesertaKelasResponses) {
         this.pesertaKelas = pesertaKelasResponses;
-        DaftarPesertaKelasAdapter daftarPesertaKelasAdapter = new DaftarPesertaKelasAdapter(this, pesertaKelasResponses);
-        getViewDataBinding().recyclerPesertaKelas.setHasFixedSize(true);
-        getViewDataBinding().recyclerPesertaKelas.setLayoutManager(new LinearLayoutManager(this));
-        getViewDataBinding().recyclerPesertaKelas.setAdapter(daftarPesertaKelasAdapter);
+        DaftarPesertaKelasAdapter daftarPesertaKelasAdapter = new DaftarPesertaKelasAdapter( this, pesertaKelasResponses );
+        getViewDataBinding().recyclerPesertaKelas.setHasFixedSize( true );
+        getViewDataBinding().recyclerPesertaKelas.setLayoutManager( new LinearLayoutManager( this ) );
+        getViewDataBinding().recyclerPesertaKelas.setAdapter( daftarPesertaKelasAdapter );
     }
 
     @Override
     public void onSchedulingClassCompleted() {
-        Toast.makeText(this, "Penjadwalan berhasil", Toast.LENGTH_LONG).show();
+        Toast.makeText( this, "Penjadwalan berhasil", Toast.LENGTH_LONG ).show();
         hideLoading();
     }
 }

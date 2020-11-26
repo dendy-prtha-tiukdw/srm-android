@@ -16,16 +16,17 @@ import java.util.List;
 import id.ukdw.srmmobile.BR;
 import id.ukdw.srmmobile.R;
 import id.ukdw.srmmobile.data.model.api.response.PengumumanResponse;
+import id.ukdw.srmmobile.data.model.api.response.UpdateSemingguResponse;
 import id.ukdw.srmmobile.databinding.FragmentPengumumanBinding;
 import id.ukdw.srmmobile.di.component.FragmentComponent;
 import id.ukdw.srmmobile.ui.base.BaseFragment;
 import id.ukdw.srmmobile.ui.home.HomeActivity;
 
 public class PengumumanFragment extends BaseFragment<FragmentPengumumanBinding, PengumumanViewModel>
-        implements PengumumanNavigator, AdapterView.OnItemSelectedListener {
+        implements PengumumanNavigator {
 
 
-    List<PengumumanResponse> itemList;
+    List<UpdateSemingguResponse> itemList;
     private FragmentPengumumanBinding fragmentPengumumanBinding;
     String defvalue = String.valueOf(R.string.default_spinner_pengumuman);
     private String TAG = PengumumanFragment.class.getSimpleName();
@@ -60,52 +61,33 @@ public class PengumumanFragment extends BaseFragment<FragmentPengumumanBinding, 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Spinner spinner = getViewDataBinding().spinnerPengumuman;
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
-                R.layout.custom_spinner_pengumuman,
-                getResources().getStringArray(R.array.spinnerItems));
-        adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_pengumuman);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
-        if (defvalue != null) {
-            int spinnerPosition = adapter.getPosition(defvalue);
-            spinner.setSelection(spinnerPosition);
-        }
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String text = parent.getItemAtPosition(position).toString();
-        getBaseActivity().showLoading();
-        mViewModel.getListPengumuman(text);
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
 
     @Override
     public void performDependencyInjection(FragmentComponent buildComponent) {
         buildComponent.inject(this);
+        mViewModel.getListPengumuman();
     }
 
     public void onResume() {
         super.onResume();
         // Set title bar
         ((HomeActivity) getActivity())
-                .setActionBarTitle("Pengumuman");
+                .setActionBarTitle("Update perkuliahan");
     }
 
 
     @Override
-    public void onGetListPengumuman(List<PengumumanResponse> pengumumanResponseList) {
+    public void onGetListPengumuman(List<UpdateSemingguResponse> pengumumanResponseList) {
         itemList = pengumumanResponseList;
         PengumumanAdapter pengumumanAdapter = new PengumumanAdapter(getContext(), pengumumanResponseList);
         getViewDataBinding().recyclerPengumuman.setHasFixedSize(true);
         getViewDataBinding().recyclerPengumuman.setLayoutManager(new LinearLayoutManager(getActivity()));
         getViewDataBinding().recyclerPengumuman.setAdapter(pengumumanAdapter);
         getBaseActivity().hideLoading();
+
     }
 
     public void isLoading(boolean flag) {

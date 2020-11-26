@@ -42,6 +42,8 @@ public final class AppConstants {
 
     public static final int RETROFIT_READ_TIMEOUT = 30;
 
+    public static final int RETROFIT_READ_TIMEOUT_SYNCRONIZE = 60;
+
     private AppConstants() {
         // This utility class is not publicly instantiable
     }

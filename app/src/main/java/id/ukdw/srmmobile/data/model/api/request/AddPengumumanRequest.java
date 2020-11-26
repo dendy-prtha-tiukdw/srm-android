@@ -6,17 +6,19 @@ import lombok.Data;
 public class AddPengumumanRequest {
     public String group;
     public String judulPengumuman;
-    public String namaMatkul;
+    public String namaMatakuliah;
     public String pengumuman;
     public String semester;
     public String tahunAjaran;
+    public String tanggalBerakhir;
 
-    public AddPengumumanRequest(String group,String judulPengumuman, String namaMatkul, String pengumuman, String semester, String tahunAjaran) {
+    public AddPengumumanRequest(String group, String judulPengumuman, String namaMatkul, String pengumuman, String semester, String tahunAjaran, String tanggalBerakhir) {
         this.group = group;
         this.judulPengumuman = judulPengumuman;
-        this.namaMatkul = namaMatkul;
+        this.namaMatakuliah = namaMatkul;
         this.pengumuman = pengumuman;
         this.semester = semester;
         this.tahunAjaran = tahunAjaran;
+        this.tanggalBerakhir = tanggalBerakhir;
     }
 }

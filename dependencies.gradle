@@ -28,6 +28,7 @@ ext {
     googleCalendarClientVersion = 'v3-rev411-1.25.0'
     firebaseAnalyticsVersion = '17.5.0'
     firebaseMessangingVersion = '20.2.4'
+    firebaseCrashlyticsVersion = '17.3.0'
 
     //Testing
     jUnitVersion = '4.12'
@@ -67,6 +68,7 @@ ext {
             googleCalendarClient  : [group: 'com.google.apis', name: 'google-api-services-calendar', version: googleCalendarClientVersion],
             firebaseAnalytics     : [group: 'com.google.firebase', name: 'firebase-analytics', version: firebaseAnalyticsVersion],
             firebaseMessaging     : [group: 'com.google.firebase', name: 'firebase-messaging', version: firebaseMessangingVersion],
+            firebaseCrashlytics   : [group: 'com.google.firebase', name: 'firebase-crashlytics', version: firebaseCrashlyticsVersion],
     ]
 
     def testLibs = [
@@ -99,6 +101,7 @@ ext {
             [configuration: "implementation", dependency: libs.googleCalendarClient],
             [configuration: "implementation", dependency: libs.firebaseAnalytics],
             [configuration: "implementation", dependency: libs.firebaseMessaging],
+            [configuration: "implementation", dependency: libs.firebaseCrashlytics],
             [configuration: "compileOnly", dependency: libs.lombokCompile],
             [configuration: "annotationProcessor", dependency: libs.lombokCompiler],
             [configuration: "annotationProcessor", dependency: libs.androidArchCompiler],
@@ -110,5 +113,6 @@ ext {
             [configuration: "androidTestImplementation", dependency: testLibs.testRule],
             [configuration: "androidTestImplementation", dependency: testLibs.uiAutomator],
             [configuration: "androidTestImplementation", dependency: androidxLibs.androidXAnnotation],
+
     ]
 }

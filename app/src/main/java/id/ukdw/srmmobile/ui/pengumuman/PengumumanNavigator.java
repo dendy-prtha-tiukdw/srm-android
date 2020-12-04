@@ -19,4 +19,5 @@ import id.ukdw.srmmobile.data.model.api.response.UpdateSemingguResponse;
 public interface PengumumanNavigator {
     void onGetListPengumuman(List<UpdateSemingguResponse> pengumumanResponseList);
     void isLoading(boolean flag);
+    void onError(String message);
 }

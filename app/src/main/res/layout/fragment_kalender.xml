@@ -35,6 +35,16 @@
                 android:weekDayTextAppearance="@style/CalenderViewWeekCustomText"
                 tools:ignore="Suspicious0dp" />
 
+            <TextView
+                android:id="@+id/jadwalkosong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TIDAK ADA JADWAL PERKULIAHAN"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:visibility="gone"
+                android:textColor="@color/colorWhite"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerKalender"
                 android:layout_width="match_parent"

@@ -107,10 +107,13 @@ public class KalenderFragment extends BaseFragment<FragmentKalenderBinding, Kale
 
     @Override
     public void onGetListCalenderApi(List<CalenderResponse> ListEventCalender) {
-        itemlist = new ArrayList<>();
-        if (ListEventCalender.isEmpty()) {
-            getViewDataBinding().recyclerKalender.setVisibility( View.INVISIBLE );
+        if (ListEventCalender.isEmpty()){
+            getBaseActivity().hideLoading();
+            getViewDataBinding().recyclerKalender.setVisibility( View.GONE );
+            getViewDataBinding().jadwalkosong.setVisibility( View.VISIBLE );
+            getViewDataBinding().jadwalkosong.setGravity( View.TEXT_ALIGNMENT_CENTER );
         }
+        itemlist = new ArrayList<>();
 
         getViewDataBinding().recyclerKalender.setHasFixedSize( true );
         getViewDataBinding().recyclerKalender.setVisibility( View.VISIBLE );

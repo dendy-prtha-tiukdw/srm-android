@@ -10,6 +10,16 @@
         android:layout_height="match_parent"
         android:background="#2D2D2D"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/kelaskosong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/colorWhite"
+            android:text="Akun Anda Saat ini belum teregistrasi kelas"/>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

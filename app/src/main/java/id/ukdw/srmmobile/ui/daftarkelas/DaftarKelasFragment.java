@@ -78,6 +78,10 @@ public class DaftarKelasFragment extends BaseFragment<FragmentDaftarKelasBinding
 
     @Override
     public void updateListDaftarKelas(List<KelasResponse> kelasList) {
+        if (kelasList.isEmpty()){
+            getBaseActivity().hideLoading();
+            getViewDataBinding().kelaskosong.setVisibility( View.VISIBLE );
+        }
         itemList = new ArrayList<>();
 
         for (KelasResponse kelasresponse : kelasList) {

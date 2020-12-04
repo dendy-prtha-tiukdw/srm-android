@@ -35,32 +35,33 @@ public class PengumumanViewModel extends BaseViewModel<PengumumanNavigator> {
 
     public void getListPengumuman() {
 
-        getDataManager().getCalenderApi( getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken() )
+        getDataManager().getCalenderApi(getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken())
                 .getListUpdate()
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
-                .subscribe( new Observer<ResponseWrapper<List<UpdateSemingguResponse>>>() {
+                .subscribe(new Observer<ResponseWrapper<List<UpdateSemingguResponse>>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-
+                        getNavigator().isLoading(true);
                     }
 
                     @Override
                     public void onNext(ResponseWrapper<List<UpdateSemingguResponse>> listResponseWrapper) {
-                        getNavigator().onGetListPengumuman( listResponseWrapper.getData() );
+                        getNavigator().onGetListPengumuman(listResponseWrapper.getData());
 
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.e(TAG, "onError: " + e.getMessage());
+                        getNavigator().onError("Gagal memuat pengumuman");
                     }
 
                     @Override
                     public void onComplete() {
-
+                        getNavigator().isLoading(false);
                     }
-                } );
+                });
     }
 
 

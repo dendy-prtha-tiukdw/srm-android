@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -57,18 +58,15 @@ public class PengumumanFragment extends BaseFragment<FragmentPengumumanBinding, 
         mViewModel.setContext(getBaseActivity());
     }
 
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        mViewModel.getListPengumuman();
     }
-
 
     @Override
     public void performDependencyInjection(FragmentComponent buildComponent) {
         buildComponent.inject(this);
-        mViewModel.getListPengumuman();
     }
 
     public void onResume() {
@@ -77,7 +75,6 @@ public class PengumumanFragment extends BaseFragment<FragmentPengumumanBinding, 
         ((HomeActivity) getActivity())
                 .setActionBarTitle("Update perkuliahan");
     }
-
 
     @Override
     public void onGetListPengumuman(List<UpdateSemingguResponse> pengumumanResponseList) {
@@ -91,12 +88,16 @@ public class PengumumanFragment extends BaseFragment<FragmentPengumumanBinding, 
     }
 
     public void isLoading(boolean flag) {
-        if(flag){
+        if (flag) {
             getBaseActivity().showLoading();
-        }else{
+        } else {
             getBaseActivity().hideLoading();
         }
     }
 
-
+    @Override
+    public void onError(String message) {
+        isLoading(false);
+        Toast.makeText(getBaseActivity(), message, Toast.LENGTH_SHORT).show();
+    }
 }

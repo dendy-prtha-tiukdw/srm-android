@@ -38,8 +38,6 @@ public class KalenderViewModel extends BaseViewModel<KalenderNavigator> {
     }
 
     public void getListEventCalenderApi(String date) {
-
-
         getDataManager().getCalenderApi( getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken() )
                 .getListCalender( new CalenderRequest( date ) )
                 .subscribeOn( getSchedulerProvider().io() )
@@ -47,23 +45,22 @@ public class KalenderViewModel extends BaseViewModel<KalenderNavigator> {
                 .subscribe( new Observer<ResponseWrapper<List<CalenderResponse>>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-
+                        setIsLoading(true);
                     }
 
                     @Override
                     public void onNext(ResponseWrapper<List<CalenderResponse>> listResponseWrapper) {
                         getNavigator().onGetListCalenderApi( listResponseWrapper.getData() );
-
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        setIsLoading(false);
                     }
 
                     @Override
                     public void onComplete() {
-
+                        setIsLoading(false);
                     }
                 } );
 

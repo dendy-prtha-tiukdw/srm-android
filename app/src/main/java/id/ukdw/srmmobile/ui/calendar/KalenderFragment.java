@@ -45,7 +45,7 @@ public class KalenderFragment extends BaseFragment<FragmentKalenderBinding, Kale
     public static KalenderFragment newInstance() {
         Bundle args = new Bundle();
         KalenderFragment fragment = new KalenderFragment();
-        fragment.setArguments( args );
+        fragment.setArguments(args);
         return fragment;
     }
 
@@ -62,39 +62,41 @@ public class KalenderFragment extends BaseFragment<FragmentKalenderBinding, Kale
     @SneakyThrows
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated( view, savedInstanceState );
+        super.onViewCreated(view, savedInstanceState);
         Date today = Calendar.getInstance().getTime();
-        String pattern = getString( R.string.date_pattern);
-        DateFormat df = new SimpleDateFormat( pattern );
-        String todayAsString = df.format( today );
-        mViewModel.getListEventCalenderApi( todayAsString );
+        String pattern = getString(R.string.date_pattern);
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        String todayAsString = sdf.format(today);
+        mViewModel.getListEventCalenderApi(todayAsString);
 
-        getViewDataBinding().calendarView.setOnDateChangeListener( new CalendarView.OnDateChangeListener() {
+        getViewDataBinding().calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @SneakyThrows
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                getViewDataBinding().recyclerKalender.setVisibility(View.GONE);
+                getViewDataBinding().txtEventEmpty.setVisibility(View.GONE);
                 //karna month mulai dari 0
                 month = month + 1;
-                String dateChanged = year + "-" + month + "-" + dayOfMonth;
-                mViewModel.getListEventCalenderApi( dateChanged );
+                String selectedMonth = String.valueOf(month).length() < 2 ? ("0" + month) : "" + month;
+                String selectedDay = String.valueOf(dayOfMonth).length() < 2 ? ("0" + dayOfMonth) : "" + dayOfMonth;
+                String selectedDate = year + "-" + selectedMonth + "-" + selectedDay;
+                mViewModel.getListEventCalenderApi(selectedDate);
             }
-        } );
+        });
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
+        super.onCreate(savedInstanceState);
         fragmentKalenderBinding = getViewDataBinding();
-        mViewModel.setNavigator( this );
-        mViewModel.setContext( getBaseActivity() );
+        mViewModel.setNavigator(this);
+        mViewModel.setContext(getBaseActivity());
 
     }
 
     @Override
     public void performDependencyInjection(FragmentComponent buildComponent) {
-        buildComponent.inject( this );
-        getBaseActivity().showLoading();
-
+        buildComponent.inject(this);
     }
 
     public void onResume() {
@@ -102,30 +104,29 @@ public class KalenderFragment extends BaseFragment<FragmentKalenderBinding, Kale
 
         // Set title bar
         ((HomeActivity) getActivity())
-                .setActionBarTitle( "Kalender" );
+                .setActionBarTitle("Kalender");
     }
 
     @Override
     public void onGetListCalenderApi(List<CalenderResponse> ListEventCalender) {
         itemlist = new ArrayList<>();
         if (ListEventCalender.isEmpty()) {
-            getViewDataBinding().recyclerKalender.setVisibility( View.INVISIBLE );
+            getViewDataBinding().recyclerKalender.setVisibility(View.GONE);
+            getViewDataBinding().txtEventEmpty.setVisibility(View.VISIBLE);
+        }else{
+            getViewDataBinding().recyclerKalender.setHasFixedSize(true);
+            getViewDataBinding().txtEventEmpty.setVisibility(View.GONE);
+            getViewDataBinding().recyclerKalender.setVisibility(View.VISIBLE);
+            KalenderAdapter kalenderAdapter = new KalenderAdapter(getContext(), itemlist);
+            getViewDataBinding().recyclerKalender.setLayoutManager(new LinearLayoutManager(getActivity()));
+            getViewDataBinding().recyclerKalender.setAdapter(kalenderAdapter);
+
+            for (CalenderResponse calenderResponse : ListEventCalender) {
+                itemlist.add(new RecyclerViewModelKalender(
+                        calenderResponse.getSummary(),
+                        calenderResponse.getStart().concat(calenderResponse.getEnd())
+                ));
+            }
         }
-
-        getViewDataBinding().recyclerKalender.setHasFixedSize( true );
-        getViewDataBinding().recyclerKalender.setVisibility( View.VISIBLE );
-        KalenderAdapter kalenderAdapter = new KalenderAdapter( getContext(), itemlist );
-        getViewDataBinding().recyclerKalender.setLayoutManager( new LinearLayoutManager( getActivity() ) );
-        getViewDataBinding().recyclerKalender.setAdapter( kalenderAdapter );
-
-        for (CalenderResponse calenderResponse : ListEventCalender) {
-            itemlist.add( new RecyclerViewModelKalender(
-                    calenderResponse.getSummary(),
-                    calenderResponse.getStart().concat( calenderResponse.getEnd() )
-
-            ) );
-        }
-        getBaseActivity().hideLoading();
-
     }
 }

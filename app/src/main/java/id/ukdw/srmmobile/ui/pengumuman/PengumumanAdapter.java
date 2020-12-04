@@ -18,14 +18,15 @@ import java.util.List;
 
 import id.ukdw.srmmobile.R;
 import id.ukdw.srmmobile.data.model.api.response.PengumumanResponse;
+import id.ukdw.srmmobile.data.model.api.response.UpdateSemingguResponse;
 
 public class PengumumanAdapter extends RecyclerView.Adapter<PengumumanAdapter.ViewHolder> {
 
     private Context mContext;
-    private List<PengumumanResponse> mItemListPengumuman;
+    private List<UpdateSemingguResponse> mItemListPengumuman;
 
 
-    public PengumumanAdapter(Context mContext, List<PengumumanResponse> mItemListPengumuman) {
+    public PengumumanAdapter(Context mContext, List<UpdateSemingguResponse> mItemListPengumuman) {
         this.mContext = mContext;
         this.mItemListPengumuman= mItemListPengumuman;
     }
@@ -39,13 +40,9 @@ public class PengumumanAdapter extends RecyclerView.Adapter<PengumumanAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull PengumumanAdapter.ViewHolder holder, int position) {
-        holder.matkul.setText( mItemListPengumuman.get( position ).getNamaMatakuliah()+" "+ mItemListPengumuman.get( position ).getGroup() );
-        holder.Judul.setText( mItemListPengumuman.get( position ).getJudulPengumuman() );
-        holder.NamaDosen.setText( mItemListPengumuman.get( position ).getNamaDosen() );
-        holder.tanggal.setText( (convertTime( mItemListPengumuman.get( position ).getTanggalInput() )));
-        holder.Detail.setText( mItemListPengumuman.get( position ).getPengumuman() );
-
-
+        holder.Judul.setText( mItemListPengumuman.get( position ).getSummary() );
+        holder.tanggal.setText(  mItemListPengumuman.get( position ).getStart()  );
+        holder.Detail.setText( mItemListPengumuman.get( position ).getDescription() );
     }
 
     @Override
@@ -58,8 +55,6 @@ public class PengumumanAdapter extends RecyclerView.Adapter<PengumumanAdapter.Vi
         TextView NamaDosen, Judul, Detail,tanggal,matkul;
         public ViewHolder(View v) {
             super( v );
-            NamaDosen = (TextView) v.findViewById( R.id.NamaDosenPengumuman );
-            matkul = (TextView) v.findViewById( R.id.groupPengumuman );
             Judul = (TextView) v.findViewById( R.id.judulPengumuman );
             Detail = (TextView) v.findViewById( R.id.detailPengumuman );
             tanggal = (TextView) v.findViewById( R.id.tanggalPengumuman );

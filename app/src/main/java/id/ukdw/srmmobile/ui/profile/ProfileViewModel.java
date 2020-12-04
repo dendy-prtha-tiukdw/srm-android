@@ -84,6 +84,36 @@ public class ProfileViewModel extends BaseViewModel<ProfileNavigator> {
                 });
     }
 
+    public void syncGoogleCalendar(){
+        setIsLoading( true );
+        getDataManager().getCalenderApi( getDataManager().getCurrentAccessToken(), getDataManager().getCurrentAccessToken() )
+                .syncGoogleCalendar()
+                .subscribeOn( getSchedulerProvider().io() )
+                .observeOn( getSchedulerProvider().ui() )
+                .subscribe( new Observer<ResponseWrapper<String>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(ResponseWrapper<String> stringResponseWrapper) {
+                        getNavigator().onSyncGoogleCalendar(stringResponseWrapper.getData());
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                } );
+    }
+
 
 
 }

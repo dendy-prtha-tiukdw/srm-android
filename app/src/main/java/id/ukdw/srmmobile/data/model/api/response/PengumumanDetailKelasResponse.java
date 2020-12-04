@@ -13,8 +13,11 @@ public class PengumumanDetailKelasResponse {
     String pengumuman;
     String tanggalInput;
     String judulPengumuman;
+    String tanggalBerakhir;
 
-    public PengumumanDetailKelasResponse(String namaMatakuliah, String namaDosen, String group, String tahunAjaran, String semester, String pengumuman, String tanggalInput) {
+    public PengumumanDetailKelasResponse(String namaMatakuliah, String namaDosen, String group,
+                                         String tahunAjaran, String semester, String pengumuman,
+                                         String tanggalInput,String tanggalBerakhir) {
         this.namaMatakuliah = namaMatakuliah;
         this.namaDosen = namaDosen;
         this.group = group;
@@ -22,5 +25,6 @@ public class PengumumanDetailKelasResponse {
         this.semester = semester;
         this.pengumuman = pengumuman;
         this.tanggalInput = tanggalInput;
+        this.tanggalBerakhir = tanggalBerakhir;
     }
 }

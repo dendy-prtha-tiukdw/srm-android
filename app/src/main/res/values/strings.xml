@@ -46,5 +46,6 @@
     <string name="namadosen">namadosen</string>
     <string name="deskripsi_kegiatan">Deskripsi kegiatan</string>
     <string name="date_pattern">yyyy-MM-dd</string>
+    <string name="toast_sukses_google_calender">Sinkronisasi Google Calender Berhasil</string>
 
 </resources>

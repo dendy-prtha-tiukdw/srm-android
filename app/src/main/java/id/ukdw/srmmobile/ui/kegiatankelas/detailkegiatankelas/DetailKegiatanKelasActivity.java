@@ -58,6 +58,18 @@ public class DetailKegiatanKelasActivity extends BaseActivity<ActivityDetailKegi
     }
 
     @Override
+    public void onBackPressed() {
+        Intent moveDetailKelas = new Intent( DetailKegiatanKelasActivity.this, DetailKelasLihatKegiatanActivity.class );
+        moveDetailKelas.putExtra( "namaMakul", matkul );
+        moveDetailKelas.putExtra( "group", group );
+        moveDetailKelas.putExtra( "semester", semester );
+        moveDetailKelas.putExtra( "tahunAjaran", tahunAjaran );
+        System.out.println("test" + matkul+group+semester+tahunAjaran);
+        startActivity( moveDetailKelas );
+        finish();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         activityDetailKegiatanKelasBinding = getViewDataBinding();
@@ -87,6 +99,8 @@ public class DetailKegiatanKelasActivity extends BaseActivity<ActivityDetailKegi
             getViewDataBinding().updateisikegiatan.setInputType( InputType.TYPE_TEXT_VARIATION_LONG_MESSAGE );
             getViewDataBinding().updatejudulkegiatan.setInputType( InputType.TYPE_CLASS_TEXT );
             getViewDataBinding().saveKegiatan.setVisibility( View.VISIBLE );
+            getViewDataBinding().textAtasIsiKegiatan.setVisibility( View.VISIBLE );
+            getViewDataBinding().textAtasJudulKegiatan.setVisibility( View.VISIBLE );
             getViewDataBinding().deteleKegiatan.setVisibility( View.GONE );
             getViewDataBinding().editKegiatan.setVisibility( View.GONE );
             getViewDataBinding().kegiatanKelasNamaDosen.setVisibility( View.GONE );
@@ -112,6 +126,10 @@ public class DetailKegiatanKelasActivity extends BaseActivity<ActivityDetailKegi
                 getViewDataBinding().kegiatanKelasNamaDosen.setText( recyclerViewModelKegiatanKelas.getNamaDosen() );
                 getViewDataBinding().kegiatanKelasTanggalInput.setText( recyclerViewModelKegiatanKelas.getTanggalDibuat()  );
                 getViewDataBinding().kegiatanKelasTanggalBerakhir.append( recyclerViewModelKegiatanKelas.getTanggalBerakhir() );
+                matkul = recyclerViewModelKegiatanKelas.getNamaMatakuliah();
+                group = recyclerViewModelKegiatanKelas.getGroup();
+                semester = recyclerViewModelKegiatanKelas.getSemester();
+                tahunAjaran = recyclerViewModelKegiatanKelas.getTahunAjaran();
                 hideLoading();
             }
 
@@ -121,9 +139,12 @@ public class DetailKegiatanKelasActivity extends BaseActivity<ActivityDetailKegi
                 getViewDataBinding().saveKegiatan.setVisibility( View.GONE );
                 getViewDataBinding().deteleKegiatan.setVisibility( View.GONE );
                 getViewDataBinding().editKegiatan.setVisibility( View.GONE );
+                getViewDataBinding().textAtasIsiKegiatan.setVisibility( View.VISIBLE );
+                getViewDataBinding().textAtasJudulKegiatan.setVisibility( View.VISIBLE );
                 getViewDataBinding().updateisikegiatan.setInputType( InputType.TYPE_TEXT_VARIATION_LONG_MESSAGE );
                 getViewDataBinding().updatejudulkegiatan.setInputType( InputType.TYPE_CLASS_TEXT );
                 getViewDataBinding().kegiatanKelasTanggalDeadline.setVisibility( View.VISIBLE );
+                getViewDataBinding().kegiatanKelasTanggalDeadline.setText( recyclerViewModelKegiatanKelas.getTanggalBerakhir() );
                 getViewDataBinding().SetTanggalBerakhir.setVisibility( View.VISIBLE );
                 getViewDataBinding().jdul.setVisibility( View.VISIBLE );
                 getViewDataBinding().statusComplete.setVisibility( View.VISIBLE );
@@ -132,10 +153,6 @@ public class DetailKegiatanKelasActivity extends BaseActivity<ActivityDetailKegi
             } );
 
             getViewDataBinding().updateKegiatan.setOnClickListener( v -> {
-                matkul = recyclerViewModelKegiatanKelas.getNamaMatakuliah();
-                group = recyclerViewModelKegiatanKelas.getGroup();
-                semester = recyclerViewModelKegiatanKelas.getSemester();
-                tahunAjaran = recyclerViewModelKegiatanKelas.getTahunAjaran();
                 String isiKegiatan = String.valueOf( getViewDataBinding().updateisikegiatan.getText() );
                 String judulKegiatan = String.valueOf( getViewDataBinding().updatejudulkegiatan.getText() );
                 String tanggalBerakhir = String.valueOf( getViewDataBinding().kegiatanKelasTanggalDeadline.getText() );
@@ -247,6 +264,7 @@ public class DetailKegiatanKelasActivity extends BaseActivity<ActivityDetailKegi
         moveKegiatan.putExtra( "semester", semester );
         moveKegiatan.putExtra( "tahunAjaran", tahunAjaran );
         startActivity( moveKegiatan );
+        finish();
 
     }
 
@@ -259,6 +277,7 @@ public class DetailKegiatanKelasActivity extends BaseActivity<ActivityDetailKegi
         moveKegiatan.putExtra( "semester", semester );
         moveKegiatan.putExtra( "tahunAjaran", tahunAjaran );
         startActivity( moveKegiatan );
+        finish();
 
     }
 
@@ -271,6 +290,7 @@ public class DetailKegiatanKelasActivity extends BaseActivity<ActivityDetailKegi
         moveKegiatan.putExtra( "semester", semester );
         moveKegiatan.putExtra( "tahunAjaran", tahunAjaran );
         startActivity( moveKegiatan );
+        finish();
 
     }
 }

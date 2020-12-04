@@ -20,12 +20,16 @@ import id.ukdw.srmmobile.ui.pengumumankelas.detailpengumumankelas.DetailPengumum
 public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPengumumanBinding, DetailKelasPengumumanViewModel>
         implements DetailKelasPengumumanNavigator {
 
-    List<RecyclerVIewModelPengumumanKelas> itemList;
-    private ActivityLihatPengumumanBinding activityLihatPengumumanBinding;
     public static final String DETAIL_PENGUMUMAN_DATA = "DETAIL_PENGUMUMAN_DATA";
     public static final String STATE_ON_CLICK = "ONCLICK";
+    public static final String STATE_ON_BACK = "ONBACK";
     public static final String STATE_ADD = "ADD";
-
+    List<RecyclerVIewModelPengumumanKelas> itemList;
+    String matkul;
+    String group;
+    String semester;
+    String tahunAjaran;
+    private ActivityLihatPengumumanBinding activityLihatPengumumanBinding;
 
     @Override
     public int getBindingVariable() {
@@ -37,6 +41,18 @@ public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPen
         return R.layout.activity_lihat_pengumuman;
     }
 
+//    @Override
+//    public void onBackPressed() {
+//        Intent moveDetailKelas = new Intent( DetailKelasPengumumanActivity.this, DetailKelasActivity.class );
+//        moveDetailKelas.putExtra( "state", STATE_ON_BACK );
+//        moveDetailKelas.putExtra( "namaMakul", matkul );
+//        moveDetailKelas.putExtra( "group", group );
+//        moveDetailKelas.putExtra( "semester", semester );
+//        moveDetailKelas.putExtra( "tahunAjaran", tahunAjaran );
+//        startActivity( moveDetailKelas );
+//        finish();
+//    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -44,10 +60,10 @@ public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPen
         mViewModel.setNavigator( this );
         mViewModel.setContext( this );
         Intent intent = getIntent();
-        String matkul = intent.getStringExtra( "namaMakul" );
-        String group = intent.getStringExtra( "group" );
-        String semester = intent.getStringExtra( "semester" );
-        String tahunAjaran = intent.getStringExtra( "tahunAjaran" );
+        matkul = intent.getStringExtra( "namaMakul" );
+        group = intent.getStringExtra( "group" );
+        semester = intent.getStringExtra( "semester" );
+        tahunAjaran = intent.getStringExtra( "tahunAjaran" );
         mViewModel.getDetailKelasListPengumuman( matkul, group, semester, tahunAjaran );
         if (mViewModel.checkRole() == true) {
             getViewDataBinding().fab.setVisibility( View.VISIBLE );
@@ -93,7 +109,8 @@ public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPen
                             pengumumanDetailKelasResponses.getSemester(),
                             pengumumanDetailKelasResponses.getPengumuman(),
                             pengumumanDetailKelasResponses.getTanggalInput(),
-                            pengumumanDetailKelasResponses.getJudulPengumuman()
+                            pengumumanDetailKelasResponses.getJudulPengumuman(),
+                            pengumumanDetailKelasResponses.getTanggalBerakhir()
                     )
             );
         }
@@ -104,13 +121,14 @@ public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPen
         getViewDataBinding().recyclerPengumumanKelas.setAdapter( detailKelasPengumumanAdapter );
 
         detailKelasPengumumanAdapter.setOnItemClickListener( position -> {
-            RecyclerVIewModelPengumumanKelas PengumumanKelas =  itemList.get( position );
+            RecyclerVIewModelPengumumanKelas PengumumanKelas = itemList.get( position );
             Intent moveDetailPengumumanKelas = new Intent( DetailKelasPengumumanActivity.this, DetailPengumumanKelasActivity.class );
             moveDetailPengumumanKelas.putExtra( DETAIL_PENGUMUMAN_DATA, PengumumanKelas );
-            moveDetailPengumumanKelas.putExtra( "state",  STATE_ON_CLICK );
+            moveDetailPengumumanKelas.putExtra( "state", STATE_ON_CLICK );
             startActivity( moveDetailPengumumanKelas );
+            finish();
         } );
 
-    hideLoading();
+        hideLoading();
     }
 }

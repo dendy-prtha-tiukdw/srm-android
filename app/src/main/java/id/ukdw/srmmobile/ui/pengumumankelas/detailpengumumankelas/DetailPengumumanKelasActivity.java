@@ -1,10 +1,15 @@
 package id.ukdw.srmmobile.ui.pengumumankelas.detailpengumumankelas;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.widget.DatePicker;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -12,12 +17,14 @@ import androidx.appcompat.app.AlertDialog;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import id.ukdw.srmmobile.BR;
 import id.ukdw.srmmobile.R;
 import id.ukdw.srmmobile.databinding.ActivityTambahPengumumanKelasBinding;
 import id.ukdw.srmmobile.di.component.ActivityComponent;
 import id.ukdw.srmmobile.ui.base.BaseActivity;
+import id.ukdw.srmmobile.ui.kegiatankelas.detailkegiatankelas.DetailKegiatanKelasActivity;
 import id.ukdw.srmmobile.ui.pengumumankelas.DetailKelasPengumumanActivity;
 import id.ukdw.srmmobile.ui.pengumumankelas.RecyclerVIewModelPengumumanKelas;
 
@@ -32,6 +39,7 @@ public class DetailPengumumanKelasActivity extends BaseActivity<ActivityTambahPe
     String group;
     String tahunAjaran;
     String semester;
+    TextView tanggalBerakhir;
     String state;
 
     @Override
@@ -51,9 +59,21 @@ public class DetailPengumumanKelasActivity extends BaseActivity<ActivityTambahPe
     }
 
     @Override
+    public void onBackPressed() {
+        Intent moveDetailKelas = new Intent( DetailPengumumanKelasActivity.this, DetailKelasPengumumanActivity.class );
+        moveDetailKelas.putExtra( "namaMakul", matkul );
+        moveDetailKelas.putExtra( "group", group );
+        moveDetailKelas.putExtra( "semester", semester );
+        moveDetailKelas.putExtra( "tahunAjaran", tahunAjaran );
+        startActivity( moveDetailKelas );
+        finish();
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         activityAddPengumumanBinding = getViewDataBinding();
+        tanggalBerakhir = getViewDataBinding().pengumumanKelasTanggalDeadline;
         mViewModel.setNavigator( this );
         mViewModel.setContext( this );
         if (mViewModel.checkRole() == true) {
@@ -68,21 +88,31 @@ public class DetailPengumumanKelasActivity extends BaseActivity<ActivityTambahPe
         semester = intent.getStringExtra( "semester" );
         tahunAjaran = intent.getStringExtra( "tahunAjaran" );
         state = intent.getStringExtra( "state" );
+        getViewDataBinding().SetTanggalBerakhir.setOnClickListener( v -> {
+            showDateTimeDialog( tanggalBerakhir );
+        } );
 
         if (state.equalsIgnoreCase( STATE_ADD )) {
             getViewDataBinding().updateisipengumuman.setInputType( InputType.TYPE_TEXT_VARIATION_LONG_MESSAGE );
             getViewDataBinding().updatejudulpengumuman.setInputType( InputType.TYPE_CLASS_TEXT );
             getViewDataBinding().savePengumuman.setVisibility( View.VISIBLE );
+            getViewDataBinding().textTanggalBerakhir.setVisibility( View.VISIBLE );
+            getViewDataBinding().textAtasIsiPengumuman.setVisibility( View.VISIBLE );
+            getViewDataBinding().textAtasJudulPengumuman.setVisibility( View.VISIBLE );
             getViewDataBinding().detelePengumuman.setVisibility( View.GONE );
             getViewDataBinding().editPengumuman.setVisibility( View.GONE );
             getViewDataBinding().pengumumanKelasNamaDosen.setText( "" );
             getViewDataBinding().pengumumanKelasTanggalInput.setText( "" );
+            getViewDataBinding().SetTanggalBerakhir.setVisibility( View.VISIBLE );
+            getViewDataBinding().pengumumanKelasTanggalDeadline.setText( "tanggal berakhir pengumuman" );
+            getViewDataBinding().pengumumanKelasTanggalDeadline.setVisibility( View.VISIBLE );
             hideLoading();
 
             getViewDataBinding().savePengumuman.setOnClickListener( v -> {
                 String isiPengumuman = String.valueOf( getViewDataBinding().updateisipengumuman.getText() );
                 String judulPengumuman = String.valueOf( getViewDataBinding().updatejudulpengumuman.getText() );
-                mViewModel.addPengumumanKelas( group, judulPengumuman, matkul, isiPengumuman, semester, tahunAjaran );
+                String tanggalBerakhir = String.valueOf( getViewDataBinding().pengumumanKelasTanggalDeadline.getText() );
+                mViewModel.addPengumumanKelas( group, judulPengumuman, matkul, isiPengumuman, semester, tahunAjaran,tanggalBerakhir );
             } );
 
         } else {
@@ -92,29 +122,40 @@ public class DetailPengumumanKelasActivity extends BaseActivity<ActivityTambahPe
                 getViewDataBinding().updatejudulpengumuman.setText( recyclerVIewModelPengumumanKelas.getJudulPengumuman() );
                 getViewDataBinding().updateisipengumuman.setText( recyclerVIewModelPengumumanKelas.getPengumuman() );
                 getViewDataBinding().pengumumanKelasNamaDosen.setText( recyclerVIewModelPengumumanKelas.getNamaDosen() );
-                getViewDataBinding().pengumumanKelasTanggalInput.setText( convertTime( recyclerVIewModelPengumumanKelas.getTanggalInput() ) );
+                getViewDataBinding().pengumumanKelasTanggalInput.setText(  recyclerVIewModelPengumumanKelas.getTanggalInput()  );
+                matkul = recyclerVIewModelPengumumanKelas.getNamaMatakuliah();
+                group = recyclerVIewModelPengumumanKelas.getGroup();
+                semester = recyclerVIewModelPengumumanKelas.getSemester();
+                tahunAjaran = recyclerVIewModelPengumumanKelas.getTahunAjaran();
+                getViewDataBinding().pengumumanKelasTanggalDeadline.setText( recyclerVIewModelPengumumanKelas.getTanggalBerakhir() );
                 hideLoading();
             }
 
 
             getViewDataBinding().editPengumuman.setOnClickListener( v -> {
+                getViewDataBinding().SetTanggalBerakhir.setVisibility( View.VISIBLE );
                 getViewDataBinding().updatePengumuman.setVisibility( View.VISIBLE );
                 getViewDataBinding().savePengumuman.setVisibility( View.GONE );
                 getViewDataBinding().detelePengumuman.setVisibility( View.GONE );
                 getViewDataBinding().editPengumuman.setVisibility( View.GONE );
+                getViewDataBinding().textTanggalBerakhir.setVisibility( View.VISIBLE );
+                getViewDataBinding().textAtasIsiPengumuman.setVisibility( View.VISIBLE );
+                getViewDataBinding().textAtasJudulPengumuman.setVisibility( View.VISIBLE );
+                getViewDataBinding().SetTanggalBerakhir.setVisibility( View.VISIBLE );
+                getViewDataBinding().pengumumanKelasTanggalDeadline.setVisibility( View.VISIBLE );
+                getViewDataBinding().pengumumanKelasTanggalDeadline.setText( recyclerVIewModelPengumumanKelas.getTanggalBerakhir() );
                 getViewDataBinding().updateisipengumuman.setInputType( InputType.TYPE_TEXT_VARIATION_LONG_MESSAGE );
                 getViewDataBinding().updatejudulpengumuman.setInputType( InputType.TYPE_CLASS_TEXT );
 
             } );
 
             getViewDataBinding().updatePengumuman.setOnClickListener( v -> {
-                matkul = recyclerVIewModelPengumumanKelas.getNamaMatakuliah();
-                group = recyclerVIewModelPengumumanKelas.getGroup();
-                semester = recyclerVIewModelPengumumanKelas.getSemester();
-                tahunAjaran = recyclerVIewModelPengumumanKelas.getTahunAjaran();
+
                 String isiPengumuman = String.valueOf( getViewDataBinding().updateisipengumuman.getText() );
                 String judulPengumuman = String.valueOf( getViewDataBinding().updatejudulpengumuman.getText() );
-                mViewModel.UpdatePengumumanKelas( recyclerVIewModelPengumumanKelas.getIdPengumuman(), judulPengumuman, isiPengumuman );
+                String tanggalBerakhir = String.valueOf( getViewDataBinding().pengumumanKelasTanggalDeadline.getText() );
+
+                mViewModel.UpdatePengumumanKelas( recyclerVIewModelPengumumanKelas.getIdPengumuman(), judulPengumuman, isiPengumuman,tanggalBerakhir );
             } );
 
             getViewDataBinding().detelePengumuman.setOnClickListener( v -> {
@@ -141,24 +182,37 @@ public class DetailPengumumanKelasActivity extends BaseActivity<ActivityTambahPe
             } );
         }
 
+
+
     }
 
 
-    private String convertTime(String time) {
+    private void showDateTimeDialog(TextView tanggalBerakhir) {
+        final Calendar calendar = Calendar.getInstance();
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                calendar.set( Calendar.YEAR, year );
+                calendar.set( Calendar.MONTH, month );
+                calendar.set( Calendar.DAY_OF_MONTH, dayOfMonth );
 
-        SimpleDateFormat format = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ss.SSSZ" );
-        SimpleDateFormat format1 = new SimpleDateFormat( "EEEE-dd-MM-yyyy HH:mm:ss" );
-        java.util.Date date = null;
+                TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        calendar.set( Calendar.HOUR_OF_DAY, hourOfDay );
+                        calendar.set( Calendar.MINUTE, minute );
 
-        try {
-            date = format.parse( time );
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
 
-        String convertedDate = format1.format( date );
+                        tanggalBerakhir.setText( simpleDateFormat.format( calendar.getTime() ) );
+                    }
+                };
 
-        return convertedDate;
+                new TimePickerDialog( DetailPengumumanKelasActivity.this, timeSetListener, calendar.get( Calendar.HOUR_OF_DAY ), calendar.get( Calendar.MINUTE ), false ).show();
+            }
+        };
+
+        new DatePickerDialog( DetailPengumumanKelasActivity.this, dateSetListener, calendar.get( Calendar.YEAR ), calendar.get( Calendar.MONTH ), calendar.get( Calendar.DAY_OF_MONTH ) ).show();
     }
 
     @Override
@@ -170,6 +224,7 @@ public class DetailPengumumanKelasActivity extends BaseActivity<ActivityTambahPe
         movePengumuman.putExtra( "semester", semester );
         movePengumuman.putExtra( "tahunAjaran", tahunAjaran );
         startActivity( movePengumuman );
+        finish();
 
 
     }
@@ -183,6 +238,7 @@ public class DetailPengumumanKelasActivity extends BaseActivity<ActivityTambahPe
         movePengumuman.putExtra( "semester", semester );
         movePengumuman.putExtra( "tahunAjaran", tahunAjaran );
         startActivity( movePengumuman );
+        finish();
 
     }
 
@@ -195,6 +251,7 @@ public class DetailPengumumanKelasActivity extends BaseActivity<ActivityTambahPe
         movePengumuman.putExtra( "semester", semester );
         movePengumuman.putExtra( "tahunAjaran", tahunAjaran );
         startActivity( movePengumuman );
+        finish();
 
     }
 }

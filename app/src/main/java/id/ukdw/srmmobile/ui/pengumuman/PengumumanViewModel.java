@@ -10,6 +10,7 @@ import id.ukdw.srmmobile.data.DataManager;
 import id.ukdw.srmmobile.data.model.api.request.PengumumanRequest;
 import id.ukdw.srmmobile.data.model.api.response.PengumumanResponse;
 import id.ukdw.srmmobile.data.model.api.response.ResponseWrapper;
+import id.ukdw.srmmobile.data.model.api.response.UpdateSemingguResponse;
 import id.ukdw.srmmobile.ui.base.BaseViewModel;
 import id.ukdw.srmmobile.utils.rx.SchedulerProvider;
 import io.reactivex.Observer;
@@ -32,36 +33,34 @@ public class PengumumanViewModel extends BaseViewModel<PengumumanNavigator> {
         super(dataManager, schedulerProvider, googleSignInClient);
     }
 
-    public void getListPengumuman(String text) {
+    public void getListPengumuman() {
 
-        getDataManager().getUserApi(getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken())
-                .getPengumumanList(new PengumumanRequest(text))
+        getDataManager().getCalenderApi( getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken() )
+                .getListUpdate()
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
-                .subscribe(new Observer<ResponseWrapper<List<PengumumanResponse>>>() {
+                .subscribe( new Observer<ResponseWrapper<List<UpdateSemingguResponse>>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        getNavigator().isLoading(true);
+
                     }
 
                     @Override
-                    public void onNext(ResponseWrapper<List<PengumumanResponse>> listResponseWrapper) {
-                        getNavigator().onGetListPengumuman(listResponseWrapper.getData());
-
+                    public void onNext(ResponseWrapper<List<UpdateSemingguResponse>> listResponseWrapper) {
+                        getNavigator().onGetListPengumuman( listResponseWrapper.getData() );
 
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e(TAG, "onError: " + e.getMessage());
-                        getNavigator().isLoading(false);
+
                     }
 
                     @Override
                     public void onComplete() {
-                        getNavigator().isLoading(false);
+
                     }
-                });
+                } );
     }
 
 

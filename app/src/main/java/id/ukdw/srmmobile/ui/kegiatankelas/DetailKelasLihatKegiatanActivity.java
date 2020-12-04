@@ -104,6 +104,7 @@ public class DetailKelasLihatKegiatanActivity extends BaseActivity<ActivityKelas
             moveDetailKegiatanKelas.putExtra( DETAIL_KEGIATAN_DATA, kegiatanKelas );
             moveDetailKegiatanKelas.putExtra( "state",  STATE_ON_CLICK );
             startActivity( moveDetailKegiatanKelas );
+            finish();
         } );
 
     hideLoading();

@@ -63,6 +63,7 @@
                     android:id="@+id/imgSchedule"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:visibility="invisible"
                     android:layout_weight="0.15"
                     android:src="@mipmap/ic_calendar" />
             </LinearLayout>

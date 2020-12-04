@@ -24,31 +24,12 @@
             android:paddingTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/title_jumlah_pengumuman"
+            android:text="Pengumuman Dan Event untuk 1 Minggu Ke Depan"
+            android:gravity="center"
             android:textColor="#FFF"
             android:textSize="20dp"
             android:textStyle="bold" />
 
-
-        <androidx.cardview.widget.CardView
-            android:layout_marginTop="20dp"
-            android:id="@+id/yourcardid"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:elevation="1dp"
-            android:layout_marginLeft="10dp"
-            app:cardCornerRadius="10dp"
-            android:innerRadius="0dp"
-            android:shape="ring"
-            android:thicknessRatio="1.9">
-        <Spinner
-            android:paddingTop="10dp"
-            android:id="@+id/spinnerPengumuman"
-            android:layout_width="50dp"
-            android:entries="@array/spinnerItems"
-            android:background="@color/colorPrimary"
-            android:layout_height="50dp" />
-        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 

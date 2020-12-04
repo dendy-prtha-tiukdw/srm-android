@@ -3,7 +3,6 @@ package id.ukdw.srmmobile.ui.pengumumankelas.detailpengumumankelas;
 import android.util.Log;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-
 import id.ukdw.srmmobile.data.DataManager;
 import id.ukdw.srmmobile.data.model.api.request.AddPengumumanRequest;
 import id.ukdw.srmmobile.data.model.api.request.DeletePengumumanKelasRequest;
@@ -21,9 +20,9 @@ public class DetailPengumumanKelasViewModel extends BaseViewModel<DetailPengumum
         super(dataManager, schedulerProvider, googleSignInClient);
     }
 
-    public void addPengumumanKelas(String group,String judulMatakuliah, String namaMatkul, String pengumuman, String semester, String tahunAjaran) {
+    public void addPengumumanKelas(String group, String judulMatakuliah, String namaMatkul, String pengumuman, String semester, String tahunAjaran, String tanggalBerakhir) {
         getDataManager().getPengumumanApi(getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken())
-                .setAddPengumuman(new AddPengumumanRequest(group,judulMatakuliah, namaMatkul, pengumuman, semester, tahunAjaran))
+                .setAddPengumuman(new AddPengumumanRequest(group,judulMatakuliah, namaMatkul, pengumuman, semester, tahunAjaran,tanggalBerakhir))
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(new Observer<ResponseWrapper<String>>() {
@@ -51,9 +50,9 @@ public class DetailPengumumanKelasViewModel extends BaseViewModel<DetailPengumum
                 });
     }
 
-    public void UpdatePengumumanKelas(String id, String judulPengumumanKelas, String isiPengumumanKelas){
+    public void UpdatePengumumanKelas(String id, String judulPengumumanKelas, String isiPengumumanKelas, String tanggalBerakhir){
         getDataManager().getPengumumanApi( getDataManager().getCurrentAccessToken(), getDataManager().getCurrentRefreshToken() )
-                .setUpdatePengumuman( new UpdatePengumumanKelasRequest( id,judulPengumumanKelas,isiPengumumanKelas ) )
+                .setUpdatePengumuman( new UpdatePengumumanKelasRequest( id,judulPengumumanKelas,isiPengumumanKelas,tanggalBerakhir ) )
                 .subscribeOn( getSchedulerProvider().io() )
                 .observeOn( getSchedulerProvider().ui() )
                 .subscribe( new Observer<ResponseWrapper<String>>() {

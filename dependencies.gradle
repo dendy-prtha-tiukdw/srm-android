@@ -26,7 +26,7 @@ ext {
     rxjava2Adapter = '2.4.0'
     okhttpLoggingInterceptorVersion = '4.2.1'
     googleCalendarClientVersion = 'v3-rev411-1.25.0'
-    firebaseAnalyticsVersion = '17.5.0'
+    firebaseAnalyticsVersion = '17.3.0'
     firebaseMessangingVersion = '20.2.4'
 
     //Testing
@@ -65,8 +65,9 @@ ext {
             dagger2Compiler       : [group: 'com.google.dagger', name: 'dagger-compiler', version: dagger2Version],
             okhttp3Logging        : [group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: okhttpLoggingInterceptorVersion],
             googleCalendarClient  : [group: 'com.google.apis', name: 'google-api-services-calendar', version: googleCalendarClientVersion],
-            firebaseAnalytics     : [group: 'com.google.firebase', name: 'firebase-analytics', version: firebaseAnalyticsVersion],
             firebaseMessaging     : [group: 'com.google.firebase', name: 'firebase-messaging', version: firebaseMessangingVersion],
+            firebaseCrashlytics   : [group: 'com.google.firebase', name: 'firebase-crashlytics', version: firebaseAnalyticsVersion], //using same ver as analytics
+            firebaseAnalytics     : [group: 'com.google.firebase', name: 'firebase-analytics', version: firebaseAnalyticsVersion],
     ]
 
     def testLibs = [
@@ -99,6 +100,7 @@ ext {
             [configuration: "implementation", dependency: libs.googleCalendarClient],
             [configuration: "implementation", dependency: libs.firebaseAnalytics],
             [configuration: "implementation", dependency: libs.firebaseMessaging],
+            [configuration: "implementation", dependency: libs.firebaseCrashlytics],
             [configuration: "compileOnly", dependency: libs.lombokCompile],
             [configuration: "annotationProcessor", dependency: libs.lombokCompiler],
             [configuration: "annotationProcessor", dependency: libs.androidArchCompiler],
@@ -110,5 +112,6 @@ ext {
             [configuration: "androidTestImplementation", dependency: testLibs.testRule],
             [configuration: "androidTestImplementation", dependency: testLibs.uiAutomator],
             [configuration: "androidTestImplementation", dependency: androidxLibs.androidXAnnotation],
+
     ]
 }

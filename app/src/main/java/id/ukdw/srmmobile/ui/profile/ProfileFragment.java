@@ -3,6 +3,7 @@ package id.ukdw.srmmobile.ui.profile;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -52,6 +53,11 @@ public class ProfileFragment extends BaseFragment<FragmentProfilBinding, Profile
         super.onViewCreated(view, savedInstanceState);
         fragmentProfilBinding = getViewDataBinding();
         mViewModel.getProfile();
+        getViewDataBinding().sycnGoogleCalendar.setOnClickListener( v -> {
+            getBaseActivity().showLoading();
+            mViewModel.syncGoogleCalendar();
+
+        } );
     }
 
 
@@ -88,5 +94,12 @@ public class ProfileFragment extends BaseFragment<FragmentProfilBinding, Profile
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(fragmentProfilBinding.fotoProfil);
         getBaseActivity().hideLoading();
+    }
+
+    @Override
+    public void onSyncGoogleCalendar(String stringResponseWrapper) {
+        getBaseActivity().hideLoading();
+        Toast.makeText( getActivity(), R.string.toast_sukses_google_calender, Toast.LENGTH_LONG ).show();
+
     }
 }

@@ -80,6 +80,16 @@ public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPen
             finish();
         } );
 
+        getViewDataBinding().reconnect.setOnClickListener( v -> {
+            getViewDataBinding().txtEventConnectTimeOut.setVisibility( View.GONE );
+            getViewDataBinding().reconnect.setVisibility( View.GONE );
+            if (mViewModel.checkRole() == true){
+                getViewDataBinding().fab.setVisibility( View.VISIBLE );
+            }
+            mViewModel.getDetailKelasListPengumuman( matkul, group, semester, tahunAjaran );
+            showLoading();
+        } );
+
     }
 
 
@@ -90,13 +100,28 @@ public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPen
 
     }
 
+
+
     @Override
-    public void handleError(Throwable throwable) {
+    public void onGetError() {
+        getViewDataBinding().txtEventConnectTimeOut.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtEventConnectTimeOut1.setVisibility( View.VISIBLE );
+        getViewDataBinding().reconnect.setVisibility( View.VISIBLE );
+        hideLoading();
+    }
+
+    @Override
+    public void onServerError() {
+        getViewDataBinding().txtErrorServerRequest.setVisibility( View.VISIBLE );
+        hideLoading();
 
     }
 
     @Override
     public void onGetListDetailKelasPengumuman(List<PengumumanDetailKelasResponse> listPengumumanKelas) {
+        if (listPengumumanKelas.isEmpty()){
+            getViewDataBinding().txtPengumumanKelasEmpty.setVisibility( View.VISIBLE );
+        }
         itemList = new ArrayList<>();
 
         for (PengumumanDetailKelasResponse pengumumanDetailKelasResponses : listPengumumanKelas) {

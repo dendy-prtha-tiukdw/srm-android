@@ -104,7 +104,8 @@ public class DetailPengumumanKelasActivity extends BaseActivity<ActivityTambahPe
             getViewDataBinding().pengumumanKelasNamaDosen.setText( "" );
             getViewDataBinding().pengumumanKelasTanggalInput.setText( "" );
             getViewDataBinding().SetTanggalBerakhir.setVisibility( View.VISIBLE );
-            getViewDataBinding().pengumumanKelasTanggalDeadline.setText( "tanggal berakhir pengumuman" );
+            getViewDataBinding().pengumumanKelasTanggalDeadline.setText( "tanggal berakhir" );
+            getViewDataBinding().textTanggalBerakhir.setVisibility( View.GONE );
             getViewDataBinding().pengumumanKelasTanggalDeadline.setVisibility( View.VISIBLE );
             hideLoading();
 
@@ -123,6 +124,9 @@ public class DetailPengumumanKelasActivity extends BaseActivity<ActivityTambahPe
                 getViewDataBinding().updateisipengumuman.setText( recyclerVIewModelPengumumanKelas.getPengumuman() );
                 getViewDataBinding().pengumumanKelasNamaDosen.setText( recyclerVIewModelPengumumanKelas.getNamaDosen() );
                 getViewDataBinding().pengumumanKelasTanggalInput.setText(  recyclerVIewModelPengumumanKelas.getTanggalInput()  );
+                getViewDataBinding().SetTanggalBerakhir.setVisibility( View.GONE );
+                getViewDataBinding().textTanggalBerakhir.setVisibility( View.GONE );
+                getViewDataBinding().pengumumanKelasTanggalDeadline.setVisibility( View.GONE );
                 matkul = recyclerVIewModelPengumumanKelas.getNamaMatakuliah();
                 group = recyclerVIewModelPengumumanKelas.getGroup();
                 semester = recyclerVIewModelPengumumanKelas.getSemester();
@@ -133,6 +137,9 @@ public class DetailPengumumanKelasActivity extends BaseActivity<ActivityTambahPe
 
 
             getViewDataBinding().editPengumuman.setOnClickListener( v -> {
+                getViewDataBinding().SetTanggalBerakhir.setVisibility( View.VISIBLE );
+                getViewDataBinding().textTanggalBerakhir.setVisibility( View.VISIBLE );
+                getViewDataBinding().pengumumanKelasTanggalDeadline.setVisibility( View.VISIBLE );
                 getViewDataBinding().SetTanggalBerakhir.setVisibility( View.VISIBLE );
                 getViewDataBinding().updatePengumuman.setVisibility( View.VISIBLE );
                 getViewDataBinding().savePengumuman.setVisibility( View.GONE );

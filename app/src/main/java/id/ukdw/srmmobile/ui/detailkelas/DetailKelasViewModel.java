@@ -90,7 +90,12 @@ public class DetailKelasViewModel extends BaseViewModel<DetailKelasNavigator> {
 
                     @Override
                     public void onError(Throwable e) {
-                        getNavigator().handleError(e);
+                        if (e.getMessage().matches( "failed to connect .*" )){
+                            getNavigator().onGetError(  );
+                        }
+                        else {
+                            getNavigator().onServerError();
+                        }
                     }
 
                     @Override

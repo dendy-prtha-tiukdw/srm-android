@@ -49,6 +49,15 @@ public class DaftarKelasFragment extends BaseFragment<FragmentDaftarKelasBinding
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mViewModel.getListKelas();
+        getViewDataBinding().reconnect.setOnClickListener( v -> {
+            getViewDataBinding().txtEventConnectTimeOut.setVisibility( View.GONE );
+            getViewDataBinding().reconnect.setVisibility( View.GONE );
+            mViewModel.getListKelas();
+            getBaseActivity().showLoading();
+        } );
+
+
     }
 
     @Override
@@ -62,7 +71,7 @@ public class DaftarKelasFragment extends BaseFragment<FragmentDaftarKelasBinding
     public void performDependencyInjection(FragmentComponent buildComponent) {
         buildComponent.inject(this);
         getBaseActivity().showLoading();
-        mViewModel.getListKelas();
+
     }
 
     public void onResume() {
@@ -72,15 +81,10 @@ public class DaftarKelasFragment extends BaseFragment<FragmentDaftarKelasBinding
 
 
     @Override
-    public void handleError(Throwable throwable) {
-
-    }
-
-    @Override
     public void updateListDaftarKelas(List<KelasResponse> kelasList) {
         if (kelasList.isEmpty()){
             getBaseActivity().hideLoading();
-            getViewDataBinding().kelaskosong.setVisibility( View.VISIBLE );
+            getViewDataBinding().txtKelasEmpty.setVisibility( View.VISIBLE );
         }
         itemList = new ArrayList<>();
 
@@ -104,6 +108,21 @@ public class DaftarKelasFragment extends BaseFragment<FragmentDaftarKelasBinding
             RecyclerViewModelKelas kelas = itemList.get(position);
             startActivity(DetailKelasActivity.newIntent(getBaseActivity()).putExtra(DETAIL_KELAS_DATA, kelas).putExtra( "state", STATE_ON_NEXT ));
         });
+        getBaseActivity().hideLoading();
+    }
+
+    @Override
+    public void onGetError() {
+        getViewDataBinding().txtEventConnectTimeOut.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtEventConnectTimeOut1.setVisibility( View.VISIBLE );
+        getViewDataBinding().reconnect.setVisibility( View.VISIBLE );
+        getBaseActivity().hideLoading();
+
+    }
+
+    @Override
+    public void onServerError() {
+        getViewDataBinding().txtErrorServerRequest.setVisibility( View.VISIBLE );
         getBaseActivity().hideLoading();
     }
 }

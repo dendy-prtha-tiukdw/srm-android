@@ -12,14 +12,57 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/kelaskosong"
+            android:id="@+id/txtKelasEmpty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Tidak ada Kelas"
+            android:textColor="@color/colorWhite"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/txtEventConnectTimeOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="koneksi internet terputus"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:textSize="25sp"
+            android:textColor="@color/colorWhite"/>
+
+        <TextView
+            android:id="@+id/txtEventConnectTimeOut1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="mohon cek koneksi internet anda"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:textSize="25sp"
+            android:textColor="@color/colorWhite"/>
+
+        <TextView
+            android:id="@+id/txtErrorServerRequest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="mohon maaf fitur sedang di perbaiki"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/colorWhite"/>
+
+        <Button
+            android:id="@+id/reconnect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coba Lagi"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
             android:visibility="gone"
             android:gravity="center"
-            android:textSize="20sp"
+            android:padding="10dp"
             android:textColor="@color/colorWhite"
-            android:text="Akun Anda Saat ini belum teregistrasi kelas"/>
+            android:background="@color/colorPrimary"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

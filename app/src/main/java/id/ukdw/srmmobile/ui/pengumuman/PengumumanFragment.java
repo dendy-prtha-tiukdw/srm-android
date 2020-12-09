@@ -62,6 +62,12 @@ public class PengumumanFragment extends BaseFragment<FragmentPengumumanBinding, 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mViewModel.getListPengumuman();
+        getViewDataBinding().reconnect.setOnClickListener( v -> {
+            getViewDataBinding().txtEventConnectTimeOut.setVisibility( View.GONE );
+            getViewDataBinding().reconnect.setVisibility( View.GONE );
+            mViewModel.getListPengumuman();
+            getBaseActivity().showLoading();
+        } );
     }
 
     @Override
@@ -78,6 +84,9 @@ public class PengumumanFragment extends BaseFragment<FragmentPengumumanBinding, 
 
     @Override
     public void onGetListPengumuman(List<UpdateSemingguResponse> pengumumanResponseList) {
+        if (pengumumanResponseList.isEmpty()){
+            getViewDataBinding().txtUpdatePerkuliahanEmpty.setVisibility( View.VISIBLE );
+        }
         itemList = pengumumanResponseList;
         PengumumanAdapter pengumumanAdapter = new PengumumanAdapter(getContext(), pengumumanResponseList);
         getViewDataBinding().recyclerPengumuman.setHasFixedSize(true);
@@ -96,8 +105,20 @@ public class PengumumanFragment extends BaseFragment<FragmentPengumumanBinding, 
     }
 
     @Override
-    public void onError(String message) {
-        isLoading(false);
-        Toast.makeText(getBaseActivity(), message, Toast.LENGTH_SHORT).show();
+    public void onGetError() {
+        getViewDataBinding().txtEventConnectTimeOut.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtEventConnectTimeOut1.setVisibility( View.VISIBLE );
+        getViewDataBinding().reconnect.setVisibility( View.VISIBLE );
+        getBaseActivity().hideLoading();
+
     }
+
+    @Override
+    public void onServerError() {
+        getViewDataBinding().txtErrorServerRequest.setVisibility( View.VISIBLE );
+        getBaseActivity().hideLoading();
+
+    }
+
+
 }

@@ -102,4 +102,20 @@ public class ProfileFragment extends BaseFragment<FragmentProfilBinding, Profile
         Toast.makeText( getActivity(), R.string.toast_sukses_google_calender, Toast.LENGTH_LONG ).show();
 
     }
+
+    @Override
+    public void onGetError() {
+        getViewDataBinding().txtEventConnectTimeOut.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtEventConnectTimeOut1.setVisibility( View.VISIBLE );
+        getViewDataBinding().reconnect.setVisibility( View.VISIBLE );
+        getBaseActivity().hideLoading();
+
+    }
+
+    @Override
+    public void onServerError() {
+        getViewDataBinding().txtErrorServerRequest.setVisibility( View.VISIBLE );
+        getBaseActivity().hideLoading();
+
+    }
 }

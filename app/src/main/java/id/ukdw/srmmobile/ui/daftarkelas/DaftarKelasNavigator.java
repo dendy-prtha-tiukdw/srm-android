@@ -16,7 +16,7 @@ import id.ukdw.srmmobile.data.model.api.response.KelasResponse;
  */
 public interface DaftarKelasNavigator {
 
-    void handleError(Throwable throwable);
-
     void updateListDaftarKelas(List<KelasResponse> kelasList);
+    void onGetError();
+    void onServerError();
 }

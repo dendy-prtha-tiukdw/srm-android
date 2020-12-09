@@ -62,6 +62,16 @@ public class DetailKelasLihatKegiatanActivity extends BaseActivity<ActivityKelas
             finish();
         } );
 
+        getViewDataBinding().reconnect.setOnClickListener( v -> {
+            getViewDataBinding().txtEventConnectTimeOut.setVisibility( View.GONE );
+            getViewDataBinding().reconnect.setVisibility( View.GONE );
+            if (mViewModel.checkRole() == true){
+                getViewDataBinding().fabKegiatan.setVisibility( View.VISIBLE );
+            }
+            mViewModel.getDetailKelasListKegiatan( group, matkul, semester, tahunAjaran );
+            showLoading();
+        } );
+
 
 
     }
@@ -75,6 +85,11 @@ public class DetailKelasLihatKegiatanActivity extends BaseActivity<ActivityKelas
 
     @Override
     public void onGetListKegiatanKelas(List<KegiatanDetailKelasResponse> listKegiatanKelas) {
+        if (listKegiatanKelas.isEmpty()){
+            getViewDataBinding().recyclerKegiatanKelas.setVisibility( View.GONE );
+            getViewDataBinding().fabKegiatan.setVisibility( View.GONE );
+            getViewDataBinding().txtKegiatanKelasEmpty.setVisibility( View.VISIBLE );
+        }
         itemList = new ArrayList<>(  );
 
         for(KegiatanDetailKelasResponse kegiatanDetailKelasResponse : listKegiatanKelas){
@@ -108,5 +123,21 @@ public class DetailKelasLihatKegiatanActivity extends BaseActivity<ActivityKelas
         } );
 
     hideLoading();
+    }
+
+    @Override
+    public void onGetError() {
+        getViewDataBinding().txtEventConnectTimeOut.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtEventConnectTimeOut1.setVisibility( View.VISIBLE );
+        getViewDataBinding().reconnect.setVisibility( View.VISIBLE );
+        hideLoading();
+
+    }
+
+    @Override
+    public void onServerError() {
+        getViewDataBinding().txtErrorServerRequest.setVisibility( View.VISIBLE );
+        hideLoading();
+
     }
 }

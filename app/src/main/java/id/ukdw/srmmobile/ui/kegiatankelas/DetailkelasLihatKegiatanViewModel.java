@@ -36,6 +36,12 @@ public class DetailkelasLihatKegiatanViewModel extends BaseViewModel<DetailKelas
 
                     @Override
                     public void onError(Throwable e) {
+                        if (e.getMessage().matches( "failed to connect .*" )){
+                            getNavigator().onGetError(  );
+                        }
+                        else {
+                            getNavigator().onServerError();
+                        }
 
                     }
 

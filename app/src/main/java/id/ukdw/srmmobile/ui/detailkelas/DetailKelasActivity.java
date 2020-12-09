@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 
@@ -82,30 +83,40 @@ public class DetailKelasActivity extends BaseActivity<ActivityDetailKelasBinding
 
         } else {
             RecyclerViewModelKelas recyclerViewModelKelas = (RecyclerViewModelKelas) getIntent().getSerializableExtra( DETAIL_KELAS_DATA );
-            mViewModel.getDetailKelas( recyclerViewModelKelas.getNamaMakul(), recyclerViewModelKelas.getGroup(), recyclerViewModelKelas.getSemester(), recyclerViewModelKelas.getTahunAjaran() );
-            mViewModel.getPesertaKelas( recyclerViewModelKelas.getNamaMakul(), recyclerViewModelKelas.getGroup(), recyclerViewModelKelas.getSemester(), recyclerViewModelKelas.getTahunAjaran() );
-            getViewDataBinding().btPengumumanDetailKelas.setOnClickListener( v -> {
-                Intent movePengumuman = new Intent( DetailKelasActivity.this, DetailKelasPengumumanActivity.class );
-                movePengumuman.putExtra( "namaMakul", recyclerViewModelKelas.getNamaMakul() );
-                movePengumuman.putExtra( "group", recyclerViewModelKelas.getGroup() );
-                movePengumuman.putExtra( "semester", recyclerViewModelKelas.getSemester() );
-                movePengumuman.putExtra( "tahunAjaran", recyclerViewModelKelas.getTahunAjaran() );
-                startActivity( movePengumuman );
-            } );
-            getViewDataBinding().imgSchedule.setOnClickListener( onClick -> {
-                handleSchedule();
-            } );
+            matkul = recyclerViewModelKelas.getNamaMakul();
+            group = recyclerViewModelKelas.getGroup();
+            semester = recyclerViewModelKelas.getSemester();
+            tahunAjaran = recyclerViewModelKelas.getTahunAjaran();
+            mViewModel.getDetailKelas( matkul, group, semester,tahunAjaran );
+            mViewModel.getPesertaKelas( matkul, group, semester,tahunAjaran );
 
-            getViewDataBinding().btKegiatanDetailKelas.setOnClickListener( v -> {
-                Intent moveKegiatan = new Intent( DetailKelasActivity.this, DetailKelasLihatKegiatanActivity.class );
-                moveKegiatan.putExtra( "namaMakul", recyclerViewModelKelas.getNamaMakul() );
-                moveKegiatan.putExtra( "group", recyclerViewModelKelas.getGroup() );
-                moveKegiatan.putExtra( "semester", recyclerViewModelKelas.getSemester() );
-                moveKegiatan.putExtra( "tahunAjaran", recyclerViewModelKelas.getTahunAjaran() );
-                startActivity( moveKegiatan );
-            } );
 
         }
+        getViewDataBinding().btPengumumanDetailKelas.setOnClickListener( v -> {
+            Intent movePengumuman = new Intent( DetailKelasActivity.this, DetailKelasPengumumanActivity.class );
+            movePengumuman.putExtra( "namaMakul", matkul );
+            movePengumuman.putExtra( "group", group );
+            movePengumuman.putExtra( "semester", semester );
+            movePengumuman.putExtra( "tahunAjaran", tahunAjaran );
+            startActivity( movePengumuman );
+        } );
+
+        getViewDataBinding().btKegiatanDetailKelas.setOnClickListener( v -> {
+            Intent moveKegiatan = new Intent( DetailKelasActivity.this, DetailKelasLihatKegiatanActivity.class );
+            moveKegiatan.putExtra( "namaMakul", matkul );
+            moveKegiatan.putExtra( "group", group );
+            moveKegiatan.putExtra( "semester", semester );
+            moveKegiatan.putExtra( "tahunAjaran", tahunAjaran );
+            startActivity( moveKegiatan );
+        } );
+
+        getViewDataBinding().reconnect.setOnClickListener( v -> {
+            getViewDataBinding().txtEventConnectTimeOut.setVisibility( View.GONE );
+            getViewDataBinding().reconnect.setVisibility( View.GONE );
+            mViewModel.getDetailKelas( matkul, group, semester,tahunAjaran );
+            mViewModel.getPesertaKelas( matkul, group, semester,tahunAjaran );
+            showLoading();
+        } );
     }
 
     private void handleSchedule() {
@@ -172,11 +183,6 @@ public class DetailKelasActivity extends BaseActivity<ActivityDetailKelasBinding
 
 
     @Override
-    public void handleError(Throwable throwable) {
-
-    }
-
-    @Override
     public void onGetDetailKelasCompleted(DetailKelasResponse detailkelasResponse) {
         this.detailkelasResponse = detailkelasResponse;
         activityDetailKelasBinding.txtNamaMakul.setText( detailkelasResponse.getNamaMatakuliah() +
@@ -195,6 +201,10 @@ public class DetailKelasActivity extends BaseActivity<ActivityDetailKelasBinding
 
     @Override
     public void onGetPesertaKelasCompleted(List<PesertaKelasResponse> pesertaKelasResponses) {
+        if (pesertaKelasResponses.isEmpty()){
+            getViewDataBinding().recyclerPesertaKelas.setVisibility( View.GONE );
+            getViewDataBinding().txtPesertaEmpty.setVisibility( View.VISIBLE );
+        }
         this.pesertaKelas = pesertaKelasResponses;
         DaftarPesertaKelasAdapter daftarPesertaKelasAdapter = new DaftarPesertaKelasAdapter( this, pesertaKelasResponses );
         getViewDataBinding().recyclerPesertaKelas.setHasFixedSize( true );
@@ -206,5 +216,21 @@ public class DetailKelasActivity extends BaseActivity<ActivityDetailKelasBinding
     public void onSchedulingClassCompleted() {
         Toast.makeText( this, "Penjadwalan berhasil", Toast.LENGTH_LONG ).show();
         hideLoading();
+    }
+
+    @Override
+    public void onGetError() {
+        getViewDataBinding().txtEventConnectTimeOut.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtEventConnectTimeOut1.setVisibility( View.VISIBLE );
+        getViewDataBinding().reconnect.setVisibility( View.VISIBLE );
+        hideLoading();
+
+    }
+
+    @Override
+    public void onServerError() {
+        getViewDataBinding().txtErrorServerRequest.setVisibility( View.VISIBLE );
+        hideLoading();
+
     }
 }

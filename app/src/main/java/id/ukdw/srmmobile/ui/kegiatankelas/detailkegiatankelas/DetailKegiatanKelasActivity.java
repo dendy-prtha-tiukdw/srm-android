@@ -121,6 +121,8 @@ public class DetailKegiatanKelasActivity extends BaseActivity<ActivityDetailKegi
             RecyclerViewModelKegiatanKelas recyclerViewModelKegiatanKelas = (RecyclerViewModelKegiatanKelas) getIntent().getSerializableExtra( DETAIL_KEGIATAN_DATA );
 
             if (state.equalsIgnoreCase( STATE_ON_CLICK )) {
+                getViewDataBinding().SetTanggalBerakhir.setVisibility( View.GONE );
+                getViewDataBinding().kegiatanKelasTanggalDeadline.setVisibility( View.GONE );
                 getViewDataBinding().updatejudulkegiatan.setText( recyclerViewModelKegiatanKelas.getJudulKegiatan() );
                 getViewDataBinding().updateisikegiatan.setText( recyclerViewModelKegiatanKelas.getIsiKegiatan() );
                 getViewDataBinding().kegiatanKelasNamaDosen.setText( recyclerViewModelKegiatanKelas.getNamaDosen() );

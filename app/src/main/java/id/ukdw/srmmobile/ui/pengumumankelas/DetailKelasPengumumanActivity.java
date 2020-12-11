@@ -41,17 +41,7 @@ public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPen
         return R.layout.activity_lihat_pengumuman;
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        Intent moveDetailKelas = new Intent( DetailKelasPengumumanActivity.this, DetailKelasActivity.class );
-//        moveDetailKelas.putExtra( "state", STATE_ON_BACK );
-//        moveDetailKelas.putExtra( "namaMakul", matkul );
-//        moveDetailKelas.putExtra( "group", group );
-//        moveDetailKelas.putExtra( "semester", semester );
-//        moveDetailKelas.putExtra( "tahunAjaran", tahunAjaran );
-//        startActivity( moveDetailKelas );
-//        finish();
-//    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +55,7 @@ public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPen
         semester = intent.getStringExtra( "semester" );
         tahunAjaran = intent.getStringExtra( "tahunAjaran" );
         mViewModel.getDetailKelasListPengumuman( matkul, group, semester, tahunAjaran );
-        if (mViewModel.checkRole() == true) {
+        if (mViewModel.checkRole()) {
             getViewDataBinding().fab.setVisibility( View.VISIBLE );
         }
 
@@ -81,9 +71,10 @@ public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPen
         } );
 
         getViewDataBinding().reconnect.setOnClickListener( v -> {
-            getViewDataBinding().txtEventConnectTimeOut.setVisibility( View.GONE );
+            getViewDataBinding().containerError.setVisibility( View.GONE );
+            getViewDataBinding().recyclerPengumumanKelas.setVisibility( View.VISIBLE );
             getViewDataBinding().reconnect.setVisibility( View.GONE );
-            if (mViewModel.checkRole() == true){
+            if (mViewModel.checkRole()){
                 getViewDataBinding().fab.setVisibility( View.VISIBLE );
             }
             mViewModel.getDetailKelasListPengumuman( matkul, group, semester, tahunAjaran );
@@ -100,19 +91,22 @@ public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPen
 
     }
 
-
-
     @Override
     public void onGetError() {
-        getViewDataBinding().txtEventConnectTimeOut.setVisibility( View.VISIBLE );
-        getViewDataBinding().txtEventConnectTimeOut1.setVisibility( View.VISIBLE );
-        getViewDataBinding().reconnect.setVisibility( View.VISIBLE );
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtListPengumumanError.setText( R.string.error_koneksi );
+        getViewDataBinding().fab.setVisibility( View.GONE );
+        getViewDataBinding().recyclerPengumumanKelas.setVisibility( View.GONE );
         hideLoading();
     }
 
     @Override
     public void onServerError() {
-        getViewDataBinding().txtErrorServerRequest.setVisibility( View.VISIBLE );
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtListPengumumanError.setText( R.string.error_komunikasi_server );
+        getViewDataBinding().reconnect.setVisibility( View.GONE );
+        getViewDataBinding().fab.setVisibility( View.GONE );
+        getViewDataBinding().recyclerPengumumanKelas.setVisibility( View.GONE );
         hideLoading();
 
     }

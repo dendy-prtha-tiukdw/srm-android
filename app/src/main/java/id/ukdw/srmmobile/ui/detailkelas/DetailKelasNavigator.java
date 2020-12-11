@@ -12,7 +12,7 @@ public interface DetailKelasNavigator {
 
     void onGetPesertaKelasCompleted(List<PesertaKelasResponse> pesertaKelasResponses);
 
-    void onSchedulingClassCompleted();
+
 
     void onGetError();
 

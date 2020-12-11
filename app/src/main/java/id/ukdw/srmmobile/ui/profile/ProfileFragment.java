@@ -1,7 +1,6 @@
 package id.ukdw.srmmobile.ui.profile;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -58,6 +57,12 @@ public class ProfileFragment extends BaseFragment<FragmentProfilBinding, Profile
             mViewModel.syncGoogleCalendar();
 
         } );
+        getViewDataBinding().reconnect.setOnClickListener( v -> {
+            getViewDataBinding().containerError.setVisibility( View.GONE );
+            getViewDataBinding().containerSuccess.setVisibility( View.VISIBLE );
+            mViewModel.getProfile();
+            getBaseActivity().showLoading();
+        } );
     }
 
 
@@ -72,7 +77,7 @@ public class ProfileFragment extends BaseFragment<FragmentProfilBinding, Profile
         super.onResume();
         // Set title bar
         ((HomeActivity) getActivity())
-                .setActionBarTitle("Profil");
+                .setActionBarTitle(getString( R.string.titlebar_profile));
     }
 
     @Override
@@ -105,17 +110,18 @@ public class ProfileFragment extends BaseFragment<FragmentProfilBinding, Profile
 
     @Override
     public void onGetError() {
-        getViewDataBinding().txtEventConnectTimeOut.setVisibility( View.VISIBLE );
-        getViewDataBinding().txtEventConnectTimeOut1.setVisibility( View.VISIBLE );
-        getViewDataBinding().reconnect.setVisibility( View.VISIBLE );
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtUpdatePerkuliahanError.setText( R.string.error_koneksi );
+        getViewDataBinding().containerSuccess.setVisibility( View.GONE );
         getBaseActivity().hideLoading();
-
     }
 
     @Override
     public void onServerError() {
-        getViewDataBinding().txtErrorServerRequest.setVisibility( View.VISIBLE );
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtUpdatePerkuliahanError.setText( R.string.error_komunikasi_server );
+        getViewDataBinding().reconnect.setVisibility( View.GONE );
+        getViewDataBinding().containerSuccess.setVisibility( View.GONE );
         getBaseActivity().hideLoading();
-
     }
 }

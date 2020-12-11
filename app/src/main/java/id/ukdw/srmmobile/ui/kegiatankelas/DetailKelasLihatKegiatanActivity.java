@@ -63,7 +63,8 @@ public class DetailKelasLihatKegiatanActivity extends BaseActivity<ActivityKelas
         } );
 
         getViewDataBinding().reconnect.setOnClickListener( v -> {
-            getViewDataBinding().txtEventConnectTimeOut.setVisibility( View.GONE );
+            getViewDataBinding().containerError.setVisibility( View.GONE );
+            getViewDataBinding().recyclerKegiatanKelas.setVisibility( View.VISIBLE );
             getViewDataBinding().reconnect.setVisibility( View.GONE );
             if (mViewModel.checkRole() == true){
                 getViewDataBinding().fabKegiatan.setVisibility( View.VISIBLE );
@@ -127,16 +128,21 @@ public class DetailKelasLihatKegiatanActivity extends BaseActivity<ActivityKelas
 
     @Override
     public void onGetError() {
-        getViewDataBinding().txtEventConnectTimeOut.setVisibility( View.VISIBLE );
-        getViewDataBinding().txtEventConnectTimeOut1.setVisibility( View.VISIBLE );
-        getViewDataBinding().reconnect.setVisibility( View.VISIBLE );
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtListKegiatanError.setText( R.string.error_koneksi );
+        getViewDataBinding().fabKegiatan.setVisibility( View.GONE );
+        getViewDataBinding().recyclerKegiatanKelas.setVisibility( View.GONE );
         hideLoading();
 
     }
 
     @Override
     public void onServerError() {
-        getViewDataBinding().txtErrorServerRequest.setVisibility( View.VISIBLE );
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtListKegiatanError.setText( R.string.error_komunikasi_server );
+        getViewDataBinding().reconnect.setVisibility( View.GONE );
+        getViewDataBinding().fabKegiatan.setVisibility( View.GONE );
+        getViewDataBinding().recyclerKegiatanKelas.setVisibility( View.GONE );
         hideLoading();
 
     }

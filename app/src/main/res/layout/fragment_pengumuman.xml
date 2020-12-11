@@ -24,7 +24,7 @@
             android:paddingTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pengumuman Dan Event untuk 1 Minggu Ke Depan"
+            android:text="@string/title_text_update_perkuliahan"
             android:gravity="center"
             android:textColor="#FFF"
             android:textSize="20dp"
@@ -43,56 +43,45 @@
             android:id="@+id/txtUpdatePerkuliahanEmpty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tidak ada Pengumuman atau Kegiatan Kelas untuk minggu depan"
+            android:text="@string/update_perkuliahan_empty"
             android:textColor="@color/colorWhite"
             android:visibility="gone" />
 
-
-
-        <TextView
-            android:id="@+id/txtEventConnectTimeOut"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="koneksi internet terputus"
-            android:visibility="gone"
-            android:layout_gravity="center"
-            android:textSize="25sp"
-            android:textColor="@color/colorWhite"/>
-
-        <TextView
-            android:id="@+id/txtEventConnectTimeOut1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="mohon cek koneksi internet anda"
-            android:visibility="gone"
-            android:layout_gravity="center"
-            android:textSize="25sp"
-            android:textColor="@color/colorWhite"/>
-
-        <TextView
-            android:id="@+id/txtErrorServerRequest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="mohon maaf fitur sedang di perbaiki"
-            android:visibility="gone"
-            android:layout_gravity="center"
-            android:textSize="20sp"
-            android:textColor="@color/colorWhite"/>
-
-        <Button
-            android:id="@+id/reconnect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Coba Lagi"
-            android:textSize="20sp"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            android:visibility="gone"
+        <LinearLayout
+            android:id="@+id/containerError"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
             android:gravity="center"
-            android:padding="10dp"
-            android:textColor="@color/colorWhite"
-            android:background="@color/colorPrimary"/>
+            android:background="#2D2D2D"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/txtUpdatePerkuliahanError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="25sp"
+                android:textColor="@color/colorWhite"/>
+
+            <Button
+                android:id="@+id/reconnect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_reconnect"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorPrimary"/>
+
+        </LinearLayout>
 
 
     </LinearLayout>
+
+
 </layout>

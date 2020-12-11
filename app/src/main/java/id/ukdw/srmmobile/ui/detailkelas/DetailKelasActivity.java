@@ -111,76 +111,12 @@ public class DetailKelasActivity extends BaseActivity<ActivityDetailKelasBinding
         } );
 
         getViewDataBinding().reconnect.setOnClickListener( v -> {
-            getViewDataBinding().txtEventConnectTimeOut.setVisibility( View.GONE );
-            getViewDataBinding().reconnect.setVisibility( View.GONE );
+            getViewDataBinding().containerError.setVisibility( View.GONE );
             mViewModel.getDetailKelas( matkul, group, semester,tahunAjaran );
             mViewModel.getPesertaKelas( matkul, group, semester,tahunAjaran );
             showLoading();
         } );
     }
-
-    private void handleSchedule() {
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder( this );
-        dialogBuilder.setMessage( "Apakah Anda ingin sistem menjadwalkan perkuliahan untuk minggu depan?" );
-        dialogBuilder.setCancelable( true );
-
-        dialogBuilder.setPositiveButton(
-                "Ya", (dialog, id) -> {
-                    showLoading();
-                    if (detailkelasResponse != null) {
-                        String[] hoursPart = detailkelasResponse.getSesi().split( "-" );
-                        String[] startHoursPart = hoursPart[0].split( ":" );
-                        String[] endHoursPart = hoursPart[1].split( ":" );
-                        // get today and clear time of day
-                        Calendar cal = Calendar.getInstance();
-                        cal.set( Calendar.HOUR_OF_DAY, 0 ); // ! clear would not reset the hour of day !
-                        cal.clear( Calendar.MINUTE );
-                        cal.clear( Calendar.SECOND );
-                        cal.clear( Calendar.MILLISECOND );
-
-                        // get start of this week in milliseconds
-                        cal.set( Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek() );
-
-                        // get start of nexr week in milliseconds
-                        cal.add( Calendar.WEEK_OF_YEAR, 1 );
-                        String[] days = new String[]{"minggu", "senin", "selasa", "rabu", "kamis", "jumat", "sabtu"};
-                        //loop through the week
-                        for (int i = 0; i < days.length; i++) {
-                            //check if day is the same.
-                            if (detailkelasResponse.getHari().equalsIgnoreCase( days[cal.get( Calendar.DAY_OF_WEEK ) - 1] )) {
-                                Log.i( TAG, "Hari:       " + days[cal.get( Calendar.DAY_OF_WEEK ) - 1] +
-                                        ", Tanggal:" + cal.get( Calendar.DATE ) +
-                                        ", Bulan:" + cal.get( Calendar.MONTH ) );
-                                Calendar start = (Calendar) cal.clone();
-                                Calendar end = (Calendar) cal.clone();
-                                start.set( Calendar.HOUR_OF_DAY, Integer.parseInt( startHoursPart[0] ) );
-                                start.set( Calendar.MINUTE, Integer.parseInt( startHoursPart[1] ) );
-                                end.set( Calendar.HOUR_OF_DAY, Integer.parseInt( endHoursPart[0] ) );
-                                end.set( Calendar.MINUTE, Integer.parseInt( endHoursPart[1] ) );
-
-                                mViewModel.schedulingClass(
-                                        detailkelasResponse.getNamaMatakuliah() + " " + detailkelasResponse.getGroup(),
-                                        "",
-                                        detailkelasResponse.getNamaMatakuliah(),
-                                        start.getTime(),
-                                        end.getTime()
-                                );
-                                return;
-                            }
-                            //increase the day
-                            cal.add( Calendar.DAY_OF_WEEK, 1 );
-                        }
-                    }
-                    dialog.dismiss();
-                } );
-
-        dialogBuilder.setNegativeButton(
-                "Tidak", (dialog, id) -> dialog.cancel() );
-
-        AlertDialog alert11 = dialogBuilder.create();
-        alert11.show();
-    }
-
 
     @Override
     public void onGetDetailKelasCompleted(DetailKelasResponse detailkelasResponse) {
@@ -212,24 +148,21 @@ public class DetailKelasActivity extends BaseActivity<ActivityDetailKelasBinding
         getViewDataBinding().recyclerPesertaKelas.setAdapter( daftarPesertaKelasAdapter );
     }
 
-    @Override
-    public void onSchedulingClassCompleted() {
-        Toast.makeText( this, "Penjadwalan berhasil", Toast.LENGTH_LONG ).show();
-        hideLoading();
-    }
 
     @Override
     public void onGetError() {
-        getViewDataBinding().txtEventConnectTimeOut.setVisibility( View.VISIBLE );
-        getViewDataBinding().txtEventConnectTimeOut1.setVisibility( View.VISIBLE );
-        getViewDataBinding().reconnect.setVisibility( View.VISIBLE );
+        getViewDataBinding().recyclerPesertaKelas.setVisibility( View.GONE );
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtDetailKelasError.setText( R.string.error_komunikasi_server );
         hideLoading();
 
     }
 
     @Override
     public void onServerError() {
-        getViewDataBinding().txtErrorServerRequest.setVisibility( View.VISIBLE );
+        getViewDataBinding().recyclerPesertaKelas.setVisibility( View.GONE );
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtDetailKelasError.setVisibility( View.VISIBLE );
         hideLoading();
 
     }

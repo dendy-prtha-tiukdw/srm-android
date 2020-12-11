@@ -56,8 +56,11 @@ public class KalenderViewModel extends BaseViewModel<KalenderNavigator> {
 
                     @Override
                     public void onError(Throwable e) {
+                        System.out.println("LEEWAAATT GAKKKKK   ");
 
-                        if (e.getMessage().matches( "failed to connect .*" )){
+                        System.out.println("tes : " + e.getMessage());
+
+                        if (e.getMessage().matches( "Unable to resolve host .*" )){
                             getNavigator().onGetError(  );
                         }
                         else {

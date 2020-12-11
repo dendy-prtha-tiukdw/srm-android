@@ -3,7 +3,6 @@ package id.ukdw.srmmobile.ui.calendar;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CalendarView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -52,6 +51,7 @@ public class KalenderFragment extends BaseFragment<FragmentKalenderBinding, Kale
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getViewDataBinding().containerError.setVisibility( View.GONE );
         Date today = Calendar.getInstance().getTime();
         String pattern = getString(R.string.date_pattern);
         SimpleDateFormat sdf = new SimpleDateFormat(pattern);
@@ -75,8 +75,8 @@ public class KalenderFragment extends BaseFragment<FragmentKalenderBinding, Kale
         });
 
         getViewDataBinding().reconnect.setOnClickListener( v -> {
-            getViewDataBinding().txtEventConnectTimeOut.setVisibility( View.GONE );
-            getViewDataBinding().reconnect.setVisibility( View.GONE );
+            getViewDataBinding().containerError.setVisibility( View.GONE );
+            getViewDataBinding().recyclerKalender.setVisibility( View.VISIBLE );
             mViewModel.getListEventCalenderApi( selectedDate );
             getViewDataBinding().pbLoading.show();
         } );
@@ -101,7 +101,7 @@ public class KalenderFragment extends BaseFragment<FragmentKalenderBinding, Kale
 
         // Set title bar
         ((HomeActivity) getActivity())
-                .setActionBarTitle("Kalender");
+                .setActionBarTitle(getString( R.string.titlebar_kalender));
     }
 
     @Override
@@ -130,15 +130,18 @@ public class KalenderFragment extends BaseFragment<FragmentKalenderBinding, Kale
 
     @Override
     public void onGetError() {
-        getViewDataBinding().txtEventConnectTimeOut.setVisibility( View.VISIBLE );
-        getViewDataBinding().txtEventConnectTimeOut1.setVisibility( View.VISIBLE );
-        getViewDataBinding().reconnect.setVisibility( View.VISIBLE );
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().recyclerKalender.setVisibility( View.GONE );
+        getViewDataBinding().txtKalenderError.setText( R.string.error_koneksi );
         getViewDataBinding().pbLoading.hide();
     }
 
     @Override
     public void onServerError() {
-        getViewDataBinding().txtErrorServerRequest.setVisibility( View.VISIBLE );
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().recyclerKalender.setVisibility( View.GONE );
+        getViewDataBinding().txtKalenderError.setText( R.string.error_komunikasi_server );
+        getViewDataBinding().reconnect.setVisibility( View.GONE );
         getViewDataBinding().pbLoading.hide();
     }
 }

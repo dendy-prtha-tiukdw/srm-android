@@ -47,5 +47,24 @@
     <string name="deskripsi_kegiatan">Deskripsi kegiatan</string>
     <string name="date_pattern">yyyy-MM-dd</string>
     <string name="toast_sukses_google_calender">Sinkronisasi Google Calender Berhasil</string>
+    <string name="titlebar_kalender">Kalender</string>
+    <string name="titlebar_daftarkelas">Daftar Kelas</string>
+    <string name="error_koneksi">terdapat masalah koneksi \ncek koneksi dan coba lagi</string>
+    <string name="error_komunikasi_server">fitur sedang diperbaiki</string>
+    <string name="titlebar_update_perkuliahan">Update perkuliahan</string>
+    <string name="event_kalendar_fragment_empty">Tidak ada kegiatan</string>
+    <string name="button_reconnect">Coba Lagi</string>
+    <string name="update_perkuliahan_empty">Tidak ada Pengumuman atau Kegiatan Kelas untuk minggu depan</string>
+    <string name="title_text_update_perkuliahan">Pengumuman Dan Event untuk 1 Minggu Ke Depan</string>
+    <string name="daftar_kelas_empty">Tidak ada Kelas</string>
+    <string name="button_sync_google_calendar_profile">SYNC GOOGLE CALENDAR</string>
+    <string name="titlebar_profile">Profil</string>
+    <string name="pengumuman_kelas_empty">Tidak ada Pengumuman Kelas</string>
+    <string name="list_kegiatan_empty">Tidak ada Kegiatan Kelas</string>
+    <string name="perserta_kelas_empty">Peserta Kelas Belum terigistrasi</string>
+    <string name="judul_peserta_mata_kuliah">Peserta matakuliah :</string>
+    <string name="button_lihat_kegiatan">Lihat Kegiatan</string>
+    <string name="button_lihat_pengumuman">Lihat Pengumuman</string>
+    <string name="nama_matkul_detail_kelas">Nama Makul</string>
 
 </resources>

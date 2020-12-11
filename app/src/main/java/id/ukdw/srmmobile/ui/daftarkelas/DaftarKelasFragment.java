@@ -45,18 +45,17 @@ public class DaftarKelasFragment extends BaseFragment<FragmentDaftarKelasBinding
         return R.layout.fragment_daftar_kelas;
     }
 
-    @Nullable
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getViewDataBinding().containerError.setVisibility( View.GONE );
         mViewModel.getListKelas();
         getViewDataBinding().reconnect.setOnClickListener( v -> {
-            getViewDataBinding().txtEventConnectTimeOut.setVisibility( View.GONE );
-            getViewDataBinding().reconnect.setVisibility( View.GONE );
+            getViewDataBinding().containerError.setVisibility( View.GONE );
+            getViewDataBinding().containerSuccess.setVisibility( View.VISIBLE );
             mViewModel.getListKelas();
             getBaseActivity().showLoading();
         } );
-
 
     }
 
@@ -76,7 +75,7 @@ public class DaftarKelasFragment extends BaseFragment<FragmentDaftarKelasBinding
 
     public void onResume() {
         super.onResume();
-        ((HomeActivity) getBaseActivity()).setActionBarTitle("Daftar Kelas");
+        ((HomeActivity) getBaseActivity()).setActionBarTitle(getString( R.string.titlebar_daftarkelas));
     }
 
 
@@ -113,16 +112,16 @@ public class DaftarKelasFragment extends BaseFragment<FragmentDaftarKelasBinding
 
     @Override
     public void onGetError() {
-        getViewDataBinding().txtEventConnectTimeOut.setVisibility( View.VISIBLE );
-        getViewDataBinding().txtEventConnectTimeOut1.setVisibility( View.VISIBLE );
-        getViewDataBinding().reconnect.setVisibility( View.VISIBLE );
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtDaftarKelasError.setText( R.string.error_koneksi );
         getBaseActivity().hideLoading();
-
     }
 
     @Override
     public void onServerError() {
-        getViewDataBinding().txtErrorServerRequest.setVisibility( View.VISIBLE );
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtDaftarKelasError.setText( R.string.error_komunikasi_server );
+        getViewDataBinding().reconnect.setVisibility( View.GONE );
         getBaseActivity().hideLoading();
     }
 }

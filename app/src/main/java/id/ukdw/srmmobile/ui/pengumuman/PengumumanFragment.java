@@ -1,12 +1,7 @@
 package id.ukdw.srmmobile.ui.pengumuman;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +11,6 @@ import java.util.List;
 
 import id.ukdw.srmmobile.BR;
 import id.ukdw.srmmobile.R;
-import id.ukdw.srmmobile.data.model.api.response.PengumumanResponse;
 import id.ukdw.srmmobile.data.model.api.response.UpdateSemingguResponse;
 import id.ukdw.srmmobile.databinding.FragmentPengumumanBinding;
 import id.ukdw.srmmobile.di.component.FragmentComponent;
@@ -29,7 +23,6 @@ public class PengumumanFragment extends BaseFragment<FragmentPengumumanBinding, 
 
     List<UpdateSemingguResponse> itemList;
     private FragmentPengumumanBinding fragmentPengumumanBinding;
-    String defvalue = String.valueOf(R.string.default_spinner_pengumuman);
     private String TAG = PengumumanFragment.class.getSimpleName();
 
     public static PengumumanFragment newInstance() {
@@ -61,10 +54,11 @@ public class PengumumanFragment extends BaseFragment<FragmentPengumumanBinding, 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getViewDataBinding().containerError.setVisibility( View.GONE );
         mViewModel.getListPengumuman();
         getViewDataBinding().reconnect.setOnClickListener( v -> {
-            getViewDataBinding().txtEventConnectTimeOut.setVisibility( View.GONE );
-            getViewDataBinding().reconnect.setVisibility( View.GONE );
+            getViewDataBinding().containerError.setVisibility( View.GONE );
+            getViewDataBinding().recyclerPengumuman.setVisibility( View.VISIBLE );
             mViewModel.getListPengumuman();
             getBaseActivity().showLoading();
         } );
@@ -79,7 +73,7 @@ public class PengumumanFragment extends BaseFragment<FragmentPengumumanBinding, 
         super.onResume();
         // Set title bar
         ((HomeActivity) getActivity())
-                .setActionBarTitle("Update perkuliahan");
+                .setActionBarTitle(getString( R.string.titlebar_update_perkuliahan));
     }
 
     @Override
@@ -106,18 +100,19 @@ public class PengumumanFragment extends BaseFragment<FragmentPengumumanBinding, 
 
     @Override
     public void onGetError() {
-        getViewDataBinding().txtEventConnectTimeOut.setVisibility( View.VISIBLE );
-        getViewDataBinding().txtEventConnectTimeOut1.setVisibility( View.VISIBLE );
-        getViewDataBinding().reconnect.setVisibility( View.VISIBLE );
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtUpdatePerkuliahanError.setText( R.string.error_koneksi );
+        getViewDataBinding().recyclerPengumuman.setVisibility( View.GONE );
         getBaseActivity().hideLoading();
-
     }
 
     @Override
     public void onServerError() {
-        getViewDataBinding().txtErrorServerRequest.setVisibility( View.VISIBLE );
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtUpdatePerkuliahanError.setText( R.string.error_komunikasi_server );
+        getViewDataBinding().reconnect.setVisibility( View.GONE );
+        getViewDataBinding().recyclerPengumuman.setVisibility( View.GONE );
         getBaseActivity().hideLoading();
-
     }
 
 

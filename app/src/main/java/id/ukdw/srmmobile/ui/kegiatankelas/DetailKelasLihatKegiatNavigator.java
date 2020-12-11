@@ -6,4 +6,8 @@ import id.ukdw.srmmobile.data.model.api.response.KegiatanDetailKelasResponse;
 
 public interface DetailKelasLihatKegiatNavigator {
     void onGetListKegiatanKelas(List<KegiatanDetailKelasResponse> kegiatanDetailKelasResponses);
+
+    void onGetError();
+
+    void onServerError();
 }

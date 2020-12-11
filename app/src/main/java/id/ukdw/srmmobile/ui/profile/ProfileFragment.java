@@ -1,7 +1,6 @@
 package id.ukdw.srmmobile.ui.profile;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -58,6 +57,12 @@ public class ProfileFragment extends BaseFragment<FragmentProfilBinding, Profile
             mViewModel.syncGoogleCalendar();
 
         } );
+        getViewDataBinding().reconnect.setOnClickListener( v -> {
+            getViewDataBinding().containerError.setVisibility( View.GONE );
+            getViewDataBinding().containerSuccess.setVisibility( View.VISIBLE );
+            mViewModel.getProfile();
+            getBaseActivity().showLoading();
+        } );
     }
 
 
@@ -72,7 +77,7 @@ public class ProfileFragment extends BaseFragment<FragmentProfilBinding, Profile
         super.onResume();
         // Set title bar
         ((HomeActivity) getActivity())
-                .setActionBarTitle("Profil");
+                .setActionBarTitle(getString( R.string.titlebar_profile));
     }
 
     @Override
@@ -101,5 +106,22 @@ public class ProfileFragment extends BaseFragment<FragmentProfilBinding, Profile
         getBaseActivity().hideLoading();
         Toast.makeText( getActivity(), R.string.toast_sukses_google_calender, Toast.LENGTH_LONG ).show();
 
+    }
+
+    @Override
+    public void onGetError() {
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtUpdatePerkuliahanError.setText( R.string.error_koneksi );
+        getViewDataBinding().containerSuccess.setVisibility( View.GONE );
+        getBaseActivity().hideLoading();
+    }
+
+    @Override
+    public void onServerError() {
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtUpdatePerkuliahanError.setText( R.string.error_komunikasi_server );
+        getViewDataBinding().reconnect.setVisibility( View.GONE );
+        getViewDataBinding().containerSuccess.setVisibility( View.GONE );
+        getBaseActivity().hideLoading();
     }
 }

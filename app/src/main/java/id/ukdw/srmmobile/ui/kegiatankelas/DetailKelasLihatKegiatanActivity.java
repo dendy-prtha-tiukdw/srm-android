@@ -62,6 +62,17 @@ public class DetailKelasLihatKegiatanActivity extends BaseActivity<ActivityKelas
             finish();
         } );
 
+        getViewDataBinding().reconnect.setOnClickListener( v -> {
+            getViewDataBinding().containerError.setVisibility( View.GONE );
+            getViewDataBinding().recyclerKegiatanKelas.setVisibility( View.VISIBLE );
+            getViewDataBinding().reconnect.setVisibility( View.GONE );
+            if (mViewModel.checkRole() == true){
+                getViewDataBinding().fabKegiatan.setVisibility( View.VISIBLE );
+            }
+            mViewModel.getDetailKelasListKegiatan( group, matkul, semester, tahunAjaran );
+            showLoading();
+        } );
+
 
 
     }
@@ -75,6 +86,11 @@ public class DetailKelasLihatKegiatanActivity extends BaseActivity<ActivityKelas
 
     @Override
     public void onGetListKegiatanKelas(List<KegiatanDetailKelasResponse> listKegiatanKelas) {
+        if (listKegiatanKelas.isEmpty()){
+            getViewDataBinding().recyclerKegiatanKelas.setVisibility( View.GONE );
+            getViewDataBinding().fabKegiatan.setVisibility( View.GONE );
+            getViewDataBinding().txtKegiatanKelasEmpty.setVisibility( View.VISIBLE );
+        }
         itemList = new ArrayList<>(  );
 
         for(KegiatanDetailKelasResponse kegiatanDetailKelasResponse : listKegiatanKelas){
@@ -108,5 +124,26 @@ public class DetailKelasLihatKegiatanActivity extends BaseActivity<ActivityKelas
         } );
 
     hideLoading();
+    }
+
+    @Override
+    public void onGetError() {
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtListKegiatanError.setText( R.string.error_koneksi );
+        getViewDataBinding().fabKegiatan.setVisibility( View.GONE );
+        getViewDataBinding().recyclerKegiatanKelas.setVisibility( View.GONE );
+        hideLoading();
+
+    }
+
+    @Override
+    public void onServerError() {
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtListKegiatanError.setText( R.string.error_komunikasi_server );
+        getViewDataBinding().reconnect.setVisibility( View.GONE );
+        getViewDataBinding().fabKegiatan.setVisibility( View.GONE );
+        getViewDataBinding().recyclerKegiatanKelas.setVisibility( View.GONE );
+        hideLoading();
+
     }
 }

@@ -74,7 +74,12 @@ public class ProfileViewModel extends BaseViewModel<ProfileNavigator> {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e(TAG, "onError: " + e.getMessage());
+                        if (e.getMessage().matches( "Unable to resolve host .*" )){
+                            getNavigator().onGetError(  );
+                        }
+                        else {
+                            getNavigator().onServerError();
+                        }
                     }
 
                     @Override

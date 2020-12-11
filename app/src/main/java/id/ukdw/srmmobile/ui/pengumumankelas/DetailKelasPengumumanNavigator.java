@@ -6,7 +6,9 @@ import id.ukdw.srmmobile.data.model.api.response.PengumumanDetailKelasResponse;
 
 public interface DetailKelasPengumumanNavigator {
 
-    void handleError(Throwable throwable);
+    void onGetError();
+
+    void onServerError();
 
     void onGetListDetailKelasPengumuman (List<PengumumanDetailKelasResponse> pengumumanDetailKelasResponses);
 }

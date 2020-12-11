@@ -16,4 +16,6 @@ public interface ProfileNavigator {
 
     void onGetProfileCompleted(String nama, String nim, String jenisKelamin,String email, String ulrImage);
     void onSyncGoogleCalendar(String stringResponseWrapper);
+    void onGetError();
+    void onServerError();
 }

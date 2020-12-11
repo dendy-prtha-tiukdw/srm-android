@@ -45,10 +45,18 @@ public class DaftarKelasFragment extends BaseFragment<FragmentDaftarKelasBinding
         return R.layout.fragment_daftar_kelas;
     }
 
-    @Nullable
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getViewDataBinding().containerError.setVisibility( View.GONE );
+        mViewModel.getListKelas();
+        getViewDataBinding().reconnect.setOnClickListener( v -> {
+            getViewDataBinding().containerError.setVisibility( View.GONE );
+            getViewDataBinding().containerSuccess.setVisibility( View.VISIBLE );
+            mViewModel.getListKelas();
+            getBaseActivity().showLoading();
+        } );
+
     }
 
     @Override
@@ -62,22 +70,21 @@ public class DaftarKelasFragment extends BaseFragment<FragmentDaftarKelasBinding
     public void performDependencyInjection(FragmentComponent buildComponent) {
         buildComponent.inject(this);
         getBaseActivity().showLoading();
-        mViewModel.getListKelas();
+
     }
 
     public void onResume() {
         super.onResume();
-        ((HomeActivity) getBaseActivity()).setActionBarTitle("Daftar Kelas");
+        ((HomeActivity) getBaseActivity()).setActionBarTitle(getString( R.string.titlebar_daftarkelas));
     }
 
-
-    @Override
-    public void handleError(Throwable throwable) {
-
-    }
 
     @Override
     public void updateListDaftarKelas(List<KelasResponse> kelasList) {
+        if (kelasList.isEmpty()){
+            getBaseActivity().hideLoading();
+            getViewDataBinding().txtKelasEmpty.setVisibility( View.VISIBLE );
+        }
         itemList = new ArrayList<>();
 
         for (KelasResponse kelasresponse : kelasList) {
@@ -100,6 +107,21 @@ public class DaftarKelasFragment extends BaseFragment<FragmentDaftarKelasBinding
             RecyclerViewModelKelas kelas = itemList.get(position);
             startActivity(DetailKelasActivity.newIntent(getBaseActivity()).putExtra(DETAIL_KELAS_DATA, kelas).putExtra( "state", STATE_ON_NEXT ));
         });
+        getBaseActivity().hideLoading();
+    }
+
+    @Override
+    public void onGetError() {
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtDaftarKelasError.setText( R.string.error_koneksi );
+        getBaseActivity().hideLoading();
+    }
+
+    @Override
+    public void onServerError() {
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtDaftarKelasError.setText( R.string.error_komunikasi_server );
+        getViewDataBinding().reconnect.setVisibility( View.GONE );
         getBaseActivity().hideLoading();
     }
 }

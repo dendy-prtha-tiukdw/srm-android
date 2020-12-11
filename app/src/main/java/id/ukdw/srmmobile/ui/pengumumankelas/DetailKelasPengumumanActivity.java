@@ -41,17 +41,7 @@ public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPen
         return R.layout.activity_lihat_pengumuman;
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        Intent moveDetailKelas = new Intent( DetailKelasPengumumanActivity.this, DetailKelasActivity.class );
-//        moveDetailKelas.putExtra( "state", STATE_ON_BACK );
-//        moveDetailKelas.putExtra( "namaMakul", matkul );
-//        moveDetailKelas.putExtra( "group", group );
-//        moveDetailKelas.putExtra( "semester", semester );
-//        moveDetailKelas.putExtra( "tahunAjaran", tahunAjaran );
-//        startActivity( moveDetailKelas );
-//        finish();
-//    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +55,7 @@ public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPen
         semester = intent.getStringExtra( "semester" );
         tahunAjaran = intent.getStringExtra( "tahunAjaran" );
         mViewModel.getDetailKelasListPengumuman( matkul, group, semester, tahunAjaran );
-        if (mViewModel.checkRole() == true) {
+        if (mViewModel.checkRole()) {
             getViewDataBinding().fab.setVisibility( View.VISIBLE );
         }
 
@@ -80,6 +70,17 @@ public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPen
             finish();
         } );
 
+        getViewDataBinding().reconnect.setOnClickListener( v -> {
+            getViewDataBinding().containerError.setVisibility( View.GONE );
+            getViewDataBinding().recyclerPengumumanKelas.setVisibility( View.VISIBLE );
+            getViewDataBinding().reconnect.setVisibility( View.GONE );
+            if (mViewModel.checkRole()){
+                getViewDataBinding().fab.setVisibility( View.VISIBLE );
+            }
+            mViewModel.getDetailKelasListPengumuman( matkul, group, semester, tahunAjaran );
+            showLoading();
+        } );
+
     }
 
 
@@ -91,12 +92,30 @@ public class DetailKelasPengumumanActivity extends BaseActivity<ActivityLihatPen
     }
 
     @Override
-    public void handleError(Throwable throwable) {
+    public void onGetError() {
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtListPengumumanError.setText( R.string.error_koneksi );
+        getViewDataBinding().fab.setVisibility( View.GONE );
+        getViewDataBinding().recyclerPengumumanKelas.setVisibility( View.GONE );
+        hideLoading();
+    }
+
+    @Override
+    public void onServerError() {
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtListPengumumanError.setText( R.string.error_komunikasi_server );
+        getViewDataBinding().reconnect.setVisibility( View.GONE );
+        getViewDataBinding().fab.setVisibility( View.GONE );
+        getViewDataBinding().recyclerPengumumanKelas.setVisibility( View.GONE );
+        hideLoading();
 
     }
 
     @Override
     public void onGetListDetailKelasPengumuman(List<PengumumanDetailKelasResponse> listPengumumanKelas) {
+        if (listPengumumanKelas.isEmpty()){
+            getViewDataBinding().txtPengumumanKelasEmpty.setVisibility( View.VISIBLE );
+        }
         itemList = new ArrayList<>();
 
         for (PengumumanDetailKelasResponse pengumumanDetailKelasResponses : listPengumumanKelas) {

@@ -1,28 +1,18 @@
 package id.ukdw.srmmobile.ui.calendar;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CalendarView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.google.api.client.util.DateTime;
-import com.google.api.services.calendar.model.Event;
-
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
 
 import id.ukdw.srmmobile.BR;
 import id.ukdw.srmmobile.R;
@@ -30,10 +20,7 @@ import id.ukdw.srmmobile.data.model.api.response.CalenderResponse;
 import id.ukdw.srmmobile.databinding.FragmentKalenderBinding;
 import id.ukdw.srmmobile.di.component.FragmentComponent;
 import id.ukdw.srmmobile.ui.base.BaseFragment;
-import id.ukdw.srmmobile.ui.daftarkelas.DaftarKelasAdapter;
-import id.ukdw.srmmobile.ui.daftarkelas.DaftarKelasFragment;
 import id.ukdw.srmmobile.ui.home.HomeActivity;
-import id.ukdw.srmmobile.ui.home.HomeViewModel;
 import lombok.SneakyThrows;
 
 public class KalenderFragment extends BaseFragment<FragmentKalenderBinding, KalenderViewModel>
@@ -41,6 +28,7 @@ public class KalenderFragment extends BaseFragment<FragmentKalenderBinding, Kale
 
     List<RecyclerViewModelKalender> itemlist;
     FragmentKalenderBinding fragmentKalenderBinding;
+    String selectedDate;
 
     public static KalenderFragment newInstance() {
         Bundle args = new Bundle();
@@ -63,6 +51,7 @@ public class KalenderFragment extends BaseFragment<FragmentKalenderBinding, Kale
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getViewDataBinding().containerError.setVisibility( View.GONE );
         Date today = Calendar.getInstance().getTime();
         String pattern = getString(R.string.date_pattern);
         SimpleDateFormat sdf = new SimpleDateFormat(pattern);
@@ -75,14 +64,22 @@ public class KalenderFragment extends BaseFragment<FragmentKalenderBinding, Kale
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 getViewDataBinding().recyclerKalender.setVisibility(View.GONE);
                 getViewDataBinding().txtEventEmpty.setVisibility(View.GONE);
+                getViewDataBinding().pbLoading.show();
                 //karna month mulai dari 0
                 month = month + 1;
                 String selectedMonth = String.valueOf(month).length() < 2 ? ("0" + month) : "" + month;
                 String selectedDay = String.valueOf(dayOfMonth).length() < 2 ? ("0" + dayOfMonth) : "" + dayOfMonth;
-                String selectedDate = year + "-" + selectedMonth + "-" + selectedDay;
+                selectedDate = year + "-" + selectedMonth + "-" + selectedDay;
                 mViewModel.getListEventCalenderApi(selectedDate);
             }
         });
+
+        getViewDataBinding().reconnect.setOnClickListener( v -> {
+            getViewDataBinding().containerError.setVisibility( View.GONE );
+            getViewDataBinding().recyclerKalender.setVisibility( View.VISIBLE );
+            mViewModel.getListEventCalenderApi( selectedDate );
+            getViewDataBinding().pbLoading.show();
+        } );
     }
 
     @Override
@@ -104,11 +101,12 @@ public class KalenderFragment extends BaseFragment<FragmentKalenderBinding, Kale
 
         // Set title bar
         ((HomeActivity) getActivity())
-                .setActionBarTitle("Kalender");
+                .setActionBarTitle(getString( R.string.titlebar_kalender));
     }
 
     @Override
     public void onGetListCalenderApi(List<CalenderResponse> ListEventCalender) {
+        getViewDataBinding().pbLoading.hide();
         itemlist = new ArrayList<>();
         if (ListEventCalender.isEmpty()) {
             getViewDataBinding().recyclerKalender.setVisibility(View.GONE);
@@ -128,5 +126,22 @@ public class KalenderFragment extends BaseFragment<FragmentKalenderBinding, Kale
                 ));
             }
         }
+    }
+
+    @Override
+    public void onGetError() {
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().recyclerKalender.setVisibility( View.GONE );
+        getViewDataBinding().txtKalenderError.setText( R.string.error_koneksi );
+        getViewDataBinding().pbLoading.hide();
+    }
+
+    @Override
+    public void onServerError() {
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().recyclerKalender.setVisibility( View.GONE );
+        getViewDataBinding().txtKalenderError.setText( R.string.error_komunikasi_server );
+        getViewDataBinding().reconnect.setVisibility( View.GONE );
+        getViewDataBinding().pbLoading.hide();
     }
 }

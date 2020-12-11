@@ -7,11 +7,14 @@ import id.ukdw.srmmobile.data.model.api.response.PesertaKelasResponse;
 
 public interface DetailKelasNavigator {
 
-    void handleError(Throwable throwable);
 
     void onGetDetailKelasCompleted(DetailKelasResponse detailkelasResponse);
 
     void onGetPesertaKelasCompleted(List<PesertaKelasResponse> pesertaKelasResponses);
 
-    void onSchedulingClassCompleted();
+
+
+    void onGetError();
+
+    void onServerError();
 }

@@ -53,8 +53,12 @@ public class PengumumanViewModel extends BaseViewModel<PengumumanNavigator> {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e(TAG, "onError: " + e.getMessage());
-                        getNavigator().onError("Gagal memuat pengumuman");
+                        if (e.getMessage().matches( "Unable to resolve host .*" )){
+                            getNavigator().onGetError(  );
+                        }
+                        else {
+                            getNavigator().onServerError();
+                        }
                     }
 
                     @Override

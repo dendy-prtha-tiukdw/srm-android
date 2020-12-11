@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 
@@ -82,98 +83,39 @@ public class DetailKelasActivity extends BaseActivity<ActivityDetailKelasBinding
 
         } else {
             RecyclerViewModelKelas recyclerViewModelKelas = (RecyclerViewModelKelas) getIntent().getSerializableExtra( DETAIL_KELAS_DATA );
-            mViewModel.getDetailKelas( recyclerViewModelKelas.getNamaMakul(), recyclerViewModelKelas.getGroup(), recyclerViewModelKelas.getSemester(), recyclerViewModelKelas.getTahunAjaran() );
-            mViewModel.getPesertaKelas( recyclerViewModelKelas.getNamaMakul(), recyclerViewModelKelas.getGroup(), recyclerViewModelKelas.getSemester(), recyclerViewModelKelas.getTahunAjaran() );
-            getViewDataBinding().btPengumumanDetailKelas.setOnClickListener( v -> {
-                Intent movePengumuman = new Intent( DetailKelasActivity.this, DetailKelasPengumumanActivity.class );
-                movePengumuman.putExtra( "namaMakul", recyclerViewModelKelas.getNamaMakul() );
-                movePengumuman.putExtra( "group", recyclerViewModelKelas.getGroup() );
-                movePengumuman.putExtra( "semester", recyclerViewModelKelas.getSemester() );
-                movePengumuman.putExtra( "tahunAjaran", recyclerViewModelKelas.getTahunAjaran() );
-                startActivity( movePengumuman );
-            } );
-            getViewDataBinding().imgSchedule.setOnClickListener( onClick -> {
-                handleSchedule();
-            } );
+            matkul = recyclerViewModelKelas.getNamaMakul();
+            group = recyclerViewModelKelas.getGroup();
+            semester = recyclerViewModelKelas.getSemester();
+            tahunAjaran = recyclerViewModelKelas.getTahunAjaran();
+            mViewModel.getDetailKelas( matkul, group, semester,tahunAjaran );
+            mViewModel.getPesertaKelas( matkul, group, semester,tahunAjaran );
 
-            getViewDataBinding().btKegiatanDetailKelas.setOnClickListener( v -> {
-                Intent moveKegiatan = new Intent( DetailKelasActivity.this, DetailKelasLihatKegiatanActivity.class );
-                moveKegiatan.putExtra( "namaMakul", recyclerViewModelKelas.getNamaMakul() );
-                moveKegiatan.putExtra( "group", recyclerViewModelKelas.getGroup() );
-                moveKegiatan.putExtra( "semester", recyclerViewModelKelas.getSemester() );
-                moveKegiatan.putExtra( "tahunAjaran", recyclerViewModelKelas.getTahunAjaran() );
-                startActivity( moveKegiatan );
-            } );
 
         }
-    }
+        getViewDataBinding().btPengumumanDetailKelas.setOnClickListener( v -> {
+            Intent movePengumuman = new Intent( DetailKelasActivity.this, DetailKelasPengumumanActivity.class );
+            movePengumuman.putExtra( "namaMakul", matkul );
+            movePengumuman.putExtra( "group", group );
+            movePengumuman.putExtra( "semester", semester );
+            movePengumuman.putExtra( "tahunAjaran", tahunAjaran );
+            startActivity( movePengumuman );
+        } );
 
-    private void handleSchedule() {
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder( this );
-        dialogBuilder.setMessage( "Apakah Anda ingin sistem menjadwalkan perkuliahan untuk minggu depan?" );
-        dialogBuilder.setCancelable( true );
+        getViewDataBinding().btKegiatanDetailKelas.setOnClickListener( v -> {
+            Intent moveKegiatan = new Intent( DetailKelasActivity.this, DetailKelasLihatKegiatanActivity.class );
+            moveKegiatan.putExtra( "namaMakul", matkul );
+            moveKegiatan.putExtra( "group", group );
+            moveKegiatan.putExtra( "semester", semester );
+            moveKegiatan.putExtra( "tahunAjaran", tahunAjaran );
+            startActivity( moveKegiatan );
+        } );
 
-        dialogBuilder.setPositiveButton(
-                "Ya", (dialog, id) -> {
-                    showLoading();
-                    if (detailkelasResponse != null) {
-                        String[] hoursPart = detailkelasResponse.getSesi().split( "-" );
-                        String[] startHoursPart = hoursPart[0].split( ":" );
-                        String[] endHoursPart = hoursPart[1].split( ":" );
-                        // get today and clear time of day
-                        Calendar cal = Calendar.getInstance();
-                        cal.set( Calendar.HOUR_OF_DAY, 0 ); // ! clear would not reset the hour of day !
-                        cal.clear( Calendar.MINUTE );
-                        cal.clear( Calendar.SECOND );
-                        cal.clear( Calendar.MILLISECOND );
-
-                        // get start of this week in milliseconds
-                        cal.set( Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek() );
-
-                        // get start of nexr week in milliseconds
-                        cal.add( Calendar.WEEK_OF_YEAR, 1 );
-                        String[] days = new String[]{"minggu", "senin", "selasa", "rabu", "kamis", "jumat", "sabtu"};
-                        //loop through the week
-                        for (int i = 0; i < days.length; i++) {
-                            //check if day is the same.
-                            if (detailkelasResponse.getHari().equalsIgnoreCase( days[cal.get( Calendar.DAY_OF_WEEK ) - 1] )) {
-                                Log.i( TAG, "Hari:       " + days[cal.get( Calendar.DAY_OF_WEEK ) - 1] +
-                                        ", Tanggal:" + cal.get( Calendar.DATE ) +
-                                        ", Bulan:" + cal.get( Calendar.MONTH ) );
-                                Calendar start = (Calendar) cal.clone();
-                                Calendar end = (Calendar) cal.clone();
-                                start.set( Calendar.HOUR_OF_DAY, Integer.parseInt( startHoursPart[0] ) );
-                                start.set( Calendar.MINUTE, Integer.parseInt( startHoursPart[1] ) );
-                                end.set( Calendar.HOUR_OF_DAY, Integer.parseInt( endHoursPart[0] ) );
-                                end.set( Calendar.MINUTE, Integer.parseInt( endHoursPart[1] ) );
-
-                                mViewModel.schedulingClass(
-                                        detailkelasResponse.getNamaMatakuliah() + " " + detailkelasResponse.getGroup(),
-                                        "",
-                                        detailkelasResponse.getNamaMatakuliah(),
-                                        start.getTime(),
-                                        end.getTime()
-                                );
-                                return;
-                            }
-                            //increase the day
-                            cal.add( Calendar.DAY_OF_WEEK, 1 );
-                        }
-                    }
-                    dialog.dismiss();
-                } );
-
-        dialogBuilder.setNegativeButton(
-                "Tidak", (dialog, id) -> dialog.cancel() );
-
-        AlertDialog alert11 = dialogBuilder.create();
-        alert11.show();
-    }
-
-
-    @Override
-    public void handleError(Throwable throwable) {
-
+        getViewDataBinding().reconnect.setOnClickListener( v -> {
+            getViewDataBinding().containerError.setVisibility( View.GONE );
+            mViewModel.getDetailKelas( matkul, group, semester,tahunAjaran );
+            mViewModel.getPesertaKelas( matkul, group, semester,tahunAjaran );
+            showLoading();
+        } );
     }
 
     @Override
@@ -195,6 +137,10 @@ public class DetailKelasActivity extends BaseActivity<ActivityDetailKelasBinding
 
     @Override
     public void onGetPesertaKelasCompleted(List<PesertaKelasResponse> pesertaKelasResponses) {
+        if (pesertaKelasResponses.isEmpty()){
+            getViewDataBinding().recyclerPesertaKelas.setVisibility( View.GONE );
+            getViewDataBinding().txtPesertaEmpty.setVisibility( View.VISIBLE );
+        }
         this.pesertaKelas = pesertaKelasResponses;
         DaftarPesertaKelasAdapter daftarPesertaKelasAdapter = new DaftarPesertaKelasAdapter( this, pesertaKelasResponses );
         getViewDataBinding().recyclerPesertaKelas.setHasFixedSize( true );
@@ -202,9 +148,22 @@ public class DetailKelasActivity extends BaseActivity<ActivityDetailKelasBinding
         getViewDataBinding().recyclerPesertaKelas.setAdapter( daftarPesertaKelasAdapter );
     }
 
+
     @Override
-    public void onSchedulingClassCompleted() {
-        Toast.makeText( this, "Penjadwalan berhasil", Toast.LENGTH_LONG ).show();
+    public void onGetError() {
+        getViewDataBinding().recyclerPesertaKelas.setVisibility( View.GONE );
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtDetailKelasError.setText( R.string.error_komunikasi_server );
         hideLoading();
+
+    }
+
+    @Override
+    public void onServerError() {
+        getViewDataBinding().recyclerPesertaKelas.setVisibility( View.GONE );
+        getViewDataBinding().containerError.setVisibility( View.VISIBLE );
+        getViewDataBinding().txtDetailKelasError.setVisibility( View.VISIBLE );
+        hideLoading();
+
     }
 }

@@ -49,6 +49,12 @@ public class DaftarKelasViewModel extends BaseViewModel<DaftarKelasNavigator> {
 
                     @Override
                     public void onError(Throwable e) {
+                        if (e.getMessage().matches( "Unable to resolve host .*" )){
+                            getNavigator().onGetError(  );
+                        }
+                        else {
+                            getNavigator().onServerError();
+                        }
 
                     }
 

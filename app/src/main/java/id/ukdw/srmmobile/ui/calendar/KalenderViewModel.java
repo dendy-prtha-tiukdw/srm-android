@@ -51,16 +51,27 @@ public class KalenderViewModel extends BaseViewModel<KalenderNavigator> {
                     @Override
                     public void onNext(ResponseWrapper<List<CalenderResponse>> listResponseWrapper) {
                         getNavigator().onGetListCalenderApi( listResponseWrapper.getData() );
+
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        setIsLoading(false);
+                        System.out.println("LEEWAAATT GAKKKKK   ");
+
+                        System.out.println("tes : " + e.getMessage());
+
+                        if (e.getMessage().matches( "Unable to resolve host .*" )){
+                            getNavigator().onGetError(  );
+                        }
+                        else {
+                            getNavigator().onServerError();
+                        }
+//
                     }
 
                     @Override
                     public void onComplete() {
-                        setIsLoading(false);
+
                     }
                 } );
 

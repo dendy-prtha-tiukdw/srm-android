@@ -46,9 +46,9 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                     public void onSubscribe(Disposable d) {
                         setIsLoading(true);
                     }
-
                     @Override
-                    public void onNext(ResponseWrapper<LoginResponse> loginResponseResponseWrapper) {
+                    public void onNext(
+                            ResponseWrapper<LoginResponse> loginResponseResponseWrapper) {
                         LoginResponse loginResponse = loginResponseResponseWrapper.getData();
                         getDataManager().updateUserInfo(
                                 loginResponse.getAccessToken(),
@@ -64,13 +64,10 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                         getFcmToken();
                         getNavigator().openHomeActivity();
                     }
-
                     @Override
                     public void onError(Throwable e) {
                         getNavigator().handleError(e);
-
                     }
-
                     @Override
                     public void onComplete() {
                         setIsLoading(false);

@@ -46,16 +46,15 @@ public class AuthorizationInterceptor implements Interceptor {
     @NotNull
     @Override
     public Response intercept(@NotNull Chain chain) throws IOException {
-        Request request = chain.request().newBuilder().addHeader(HttpHeaders.AUTHORIZATION, "Bearer " + mPreferencesHelper.getCurrentAccessToken()).build();
-        // try the request
+        Request request = chain.request().newBuilder().addHeader(HttpHeaders.AUTHORIZATION,
+                "Bearer " + mPreferencesHelper.getCurrentAccessToken()).build();
         Response response = chain.proceed(request);
 
-        //warning for infinite loop
-        //will change to code 401 latter
         if (response.code() == HttpStatus.UNAUTHORIZED.value()) {
             Log.w(TAG, "intercept: access token already outdated. Refreshing it now.");
             ResponseWrapper<RefreshAccessTokenResponse> refreshResponse = authApi
-                    .refreshAccessTokenPost(new RefreshAccessTokenRequest(mPreferencesHelper.getCurrentRefreshToken()))
+                    .refreshAccessTokenPost(new RefreshAccessTokenRequest(
+                            mPreferencesHelper.getCurrentRefreshToken()))
                     .blockingLast();
             mPreferencesHelper.setCurrentAccessToken(refreshResponse.getData().getAccessToken());
             mPreferencesHelper.setCurrentIdToken(refreshResponse.getData().getIdToken());
@@ -63,7 +62,6 @@ public class AuthorizationInterceptor implements Interceptor {
                     "Bearer " + mPreferencesHelper.getCurrentAccessToken()).build();
             response = chain.proceed(request);
         }
-
         return response;
     }
 }
